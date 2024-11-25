@@ -1,2 +1,2 @@
-# Project_InnerSight-
+# Project_InnerSight
 VR Team Project
