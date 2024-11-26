@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
+using Unity.XR.CoreUtils;
 
 namespace InnerSight_Seti
 {
@@ -30,7 +31,7 @@ namespace InnerSight_Seti
         private TextMeshProUGUI timeText;
 
         // 클래스
-        private Player player;
+        private PlayerSetting player;
         #endregion
 
         // 라이프 사이클
@@ -39,7 +40,7 @@ namespace InnerSight_Seti
         {
             // 참조
             player = GetComponentInParent<UIManager>().Player;
-            player.SetDeviceUI(this);
+            //player.SetDeviceUI(this);
 
             // 초기화
             widgetPanel = transform.GetChild(0).GetChild(0).gameObject;
@@ -48,11 +49,13 @@ namespace InnerSight_Seti
             timeText = widgetPanel.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
             collText = widgetPanel.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
 
-            // 대리자 등록
-            OnDevice += UpdateWon;
+
 
             // 최초 갱신
             UpdateDeviceUI();
+
+            // 대리자 등록
+            OnDevice += UpdateWon;
         }
 
         private void LateUpdate()

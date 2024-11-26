@@ -36,7 +36,7 @@ namespace InnerSight_Seti
         private GraphicRaycaster raycaster;
 
         // 클래스 컴포넌트
-        private Player player;
+        private PlayerSetting player;
         private Inventory inventory;
         private NPC_Merchant tradeNPC;
         #endregion
@@ -130,7 +130,7 @@ namespace InnerSight_Seti
 
         public void UseQuick(KeyValuePair<ItemKey, ItemValue> pair)
         {
-            player.PlayerUse.UseItem(pair);
+            //player.PlayerUse.UseItem(pair);
         }
 
         // NPC와의 거래 - 아이템 판매
@@ -297,8 +297,8 @@ namespace InnerSight_Seti
                 itemPhantom = null;
                 thisSlot = null;
 
-                if (itemKey != null)
-                    player.PlayerUse.UseItem(ItemData(itemKey));   // 사용
+                /*if (itemKey != null)
+                    player.PlayerUse.UseItem(ItemData(itemKey));   // 사용*/
             }
 
             else return;
@@ -333,7 +333,10 @@ namespace InnerSight_Seti
             if (thisSlot != null)
             {
                 if (initialSlot == thisSlot)
-                    SameSelect(thisSlot);
+                {
+
+                    //SameSelect(thisSlot);
+                }
 
                 else
                 {

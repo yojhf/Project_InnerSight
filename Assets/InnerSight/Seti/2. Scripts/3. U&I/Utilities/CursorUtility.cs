@@ -13,6 +13,7 @@ namespace InnerSight_Seti
 
         // 복합 변수
         private Vector2 cursorPosition;
+        private PlayerSetting playerSetting;
 
         // 클래스 컴포넌트
         private readonly Player player;
@@ -28,6 +29,11 @@ namespace InnerSight_Seti
         public CursorUtility(Player player)
         {
             this.player = player;
+        }
+
+        public CursorUtility(PlayerSetting playerSetting)
+        {
+            this.playerSetting = playerSetting;
         }
         #endregion
 

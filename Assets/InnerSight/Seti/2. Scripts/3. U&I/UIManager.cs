@@ -1,3 +1,4 @@
+using Unity.XR.CoreUtils;
 using UnityEngine;
 
 namespace InnerSight_Seti
@@ -10,13 +11,13 @@ namespace InnerSight_Seti
         // 필드
         #region Variables
         // 클래스
-        [SerializeField] private Player player;
+        [SerializeField] private PlayerSetting player;
         [SerializeField] private PlayerUse playerUse;
         #endregion
 
         // 속성
         #region Properties
-        public Player Player => player;
+        public PlayerSetting Player => player;
         public PlayerUse PlayerUse => playerUse;
         #endregion
     }

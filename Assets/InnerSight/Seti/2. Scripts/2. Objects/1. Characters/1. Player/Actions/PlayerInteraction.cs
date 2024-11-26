@@ -17,14 +17,14 @@ namespace InnerSight_Seti
         [SerializeField] private GameObject pointerPrefab;
 
         // 클래스 컴포넌트
-        private Player player;
+        private PlayerSetting player;
         #endregion
 
         // 라이프 사이클
         #region Life Cycle
         private void Start()
         {
-            player = GetComponent<Player>();
+            player = GetComponent<PlayerSetting>();
         }
         #endregion
 

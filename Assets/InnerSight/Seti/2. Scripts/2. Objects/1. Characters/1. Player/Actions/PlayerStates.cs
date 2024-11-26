@@ -20,6 +20,7 @@ namespace InnerSight_Seti
         public bool isKeepGoing;            // KeepGoing 기능 활성화 플래그
         public bool isShopEnter;            // 상점 입장 여부 판정
         public bool? isBoard;               // 라이딩기어 탑승 및 타입 판정 nullable 플래그, true = 보드, false = 부츠, null = 기본
+        private PlayerSetting playerSetting;
 
         // 클래스 컴포넌트
         private readonly Player player;
@@ -36,6 +37,11 @@ namespace InnerSight_Seti
         {
             this.player = player;
             currentColl = initialColl;
+        }
+
+        public PlayerStates(PlayerSetting playerSetting)
+        {
+            this.playerSetting = playerSetting;
         }
         #endregion
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using Unity.XR.CoreUtils;
 
 namespace InnerSight_Seti
 {
@@ -9,7 +10,7 @@ namespace InnerSight_Seti
     {
         // 필드
         #region Variables
-        private Player player;
+        private PlayerSetting player;
 
         // UI 제어 필드
         private IEnumerator beforeDialogueCor;
@@ -35,7 +36,7 @@ namespace InnerSight_Seti
             initialScale = dialogueScaler.localScale;
             dialogueScaler.localScale = Vector3.zero;
 
-            player.SetDialogueUI(this);
+            //player.SetDialogueUI(this);
         }
         #endregion
 

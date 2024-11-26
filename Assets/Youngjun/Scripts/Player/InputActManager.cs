@@ -1,11 +1,11 @@
 using MyFPS;
 using UnityEngine.InputSystem;
 using UnityEngine;
+using InnerSight_Seti;
 
 public class InputActManager : MonoBehaviour
 {
     public static InputActManager Instance;
-
 
     public InputActionProperty leftAction;
     public InputActionProperty rightAction;
@@ -57,6 +57,8 @@ public class InputActManager : MonoBehaviour
 
         return _jump;
     }
+
+
 
 
 }
