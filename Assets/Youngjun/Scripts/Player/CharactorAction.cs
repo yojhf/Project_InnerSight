@@ -1,4 +1,5 @@
 using InnerSight_Seti;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,12 +7,14 @@ namespace Noah
 {
     public class CharactorAction : MonoBehaviour
     {
+        private PlayerSetting playerSetting;
         InputActManager inputActManager;
+
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
+            playerSetting = GetComponent<PlayerSetting>();
             inputActManager = GetComponent<InputActManager>();
-
         }
 
         // Update is called once per frame
