@@ -7,10 +7,13 @@ namespace MyVRSample
 {
     public class InGameUIManager : MonoBehaviour
     {
+        public static InGameUIManager instance;
+
         //public GameObject gameMenu;
         public GameObject inventory;
         public Transform head;
 
+        public float xOffset = 0f;
         public float yOffset = 1.36f;
         public float distance = 1.5f;
 
@@ -22,7 +25,12 @@ namespace MyVRSample
         //public ContinuousTurnProvider continuousTurn;
         //public Dropdown dropDown;
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+        private void Awake()
+        {
+            instance = this;
+        }
+
         void Start()
         {
 
@@ -63,7 +71,7 @@ namespace MyVRSample
             // show set
             if (inventory.activeSelf)
             {
-                inventory.transform.position = head.position + new Vector3(head.forward.x, yOffset, head.forward.z).normalized * distance;
+                inventory.transform.position = head.position + new Vector3(head.forward.x + xOffset, yOffset, head.forward.z).normalized * distance;
 
                 inventory.transform.LookAt(new Vector3(head.position.x, inventory.transform.position.y, head.position.z));
 

@@ -13,6 +13,7 @@ public class PlayerSetting : MonoBehaviour
     public PlayerUse PlayerUse => playerUse;
     public PlayerTrade PlayerTrade => playerTrade;
     public CursorUtility CursorUtility => cursorUtility;
+    public PlayerInteraction PlayerInteraction => playerInteraction;
 
     private void Awake()
     {

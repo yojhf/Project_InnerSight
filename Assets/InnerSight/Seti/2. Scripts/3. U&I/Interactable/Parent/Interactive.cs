@@ -10,7 +10,7 @@ namespace InnerSight_Seti
         protected virtual void Start()
         {
             player = FindFirstObjectByType<Player>();
-            headRoot = player.transform.Find("Head_Root");
+            headRoot = Camera.main.transform;
         }
 
         protected virtual void LateUpdate()

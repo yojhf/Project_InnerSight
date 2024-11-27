@@ -11,7 +11,7 @@ namespace InnerSight_Seti
         // 필드
         #region Variables
         // 인벤토리 클래스
-        private InventoryManager inventoryManager;
+        public InventoryManager inventoryManager;
 
         // 퀵슬롯
         private Button[] quickSlots;
@@ -28,6 +28,11 @@ namespace InnerSight_Seti
         public void OnQuickSlot2DownStarted(InputAction.CallbackContext _) => quickSlots[1].onClick.Invoke();
         public void OnQuickSlot3DownStarted(InputAction.CallbackContext _) => quickSlots[2].onClick.Invoke();
         #endregion
+
+        private void Awake()
+        {
+            //inventoryManager = GetComponent<InventoryManager>();
+        }
 
         // 메서드
         #region Methods

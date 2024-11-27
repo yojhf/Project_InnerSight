@@ -11,7 +11,7 @@ public class InputActManager : MonoBehaviour
     public InputActionProperty rightAction;
     public InputActionProperty leftSelect;
     public InputActionProperty rightSelect;
-    public InputActionProperty jump;
+    public InputActionProperty storage;
 
     private void Awake()
     {
@@ -51,11 +51,11 @@ public class InputActManager : MonoBehaviour
         return R_act > 0.1f;
     }
 
-    public bool IsJump()
+    public bool IsStorage()
     {
-        bool _jump = jump.action.WasPressedThisFrame();
+        bool _storage = storage.action.WasPressedThisFrame();
 
-        return _jump;
+        return _storage;
     }
 
 

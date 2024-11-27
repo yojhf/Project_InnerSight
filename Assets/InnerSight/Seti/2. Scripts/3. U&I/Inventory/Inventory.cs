@@ -14,6 +14,7 @@ namespace InnerSight_Seti
         private InventoryManager inventoryManager;
 
         // 인벤토리 요소
+        [SerializeField]
         private GameObject invenPanel;
         private TextMeshProUGUI[] invenSlotsCountTexts;
         public Button[] invenSlots;
@@ -35,7 +36,7 @@ namespace InnerSight_Seti
             // 컴포넌트 초기화
             inventoryManager = GetComponentInParent<InventoryManager>();
             invenRect = GetComponent<RectTransform>();
-            invenPanel = transform.GetChild(0).gameObject;
+            //invenPanel = transform.GetChild(0).gameObject;
             invenSlots = invenPanel.GetComponentsInChildren<Button>();
             invenSlotsCountTexts = GetComponentsInChildren<TextMeshProUGUI>();
         }

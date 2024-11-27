@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine.InputSystem.XR;
 
 namespace InnerSight_Seti
 {
@@ -37,6 +38,7 @@ namespace InnerSight_Seti
 
         // 클래스 컴포넌트
         private PlayerSetting player;
+        [SerializeField]
         private Inventory inventory;
         private NPC_Merchant tradeNPC;
         #endregion
@@ -45,7 +47,11 @@ namespace InnerSight_Seti
         #region Properties
         public float PhantomDepth { get; set; }
         public int? SelectedSlotIndex => selectedSlotIndex;
-        public bool IsSelected => isSelected;
+        public bool IsSelected
+        {
+            get { return isSelected; }
+            set { isSelected = value; }
+        }
         public bool IsOpenInventory { get; private set; }
         public bool IsOnTrade { get; set; }
         public Button ThisSlot => thisSlot;
@@ -60,7 +66,7 @@ namespace InnerSight_Seti
 
             // 초기화
             UIManager UIManager = GetComponent<UIManager>();
-            UIManager.PlayerUse.SetInventory(this);
+            //UIManager.PlayerUse.SetInventory(this);
             player = UIManager.Player;
 
             eventSystem = FindAnyObjectByType<EventSystem>();
@@ -234,7 +240,7 @@ namespace InnerSight_Seti
             // 아이템 선택 플래그를 true
             isSelected = true;
 
-            StartCoroutine(DetectSlot());
+            //StartCoroutine(DetectSlot());
 
             if (thisSlot != null)
             {
@@ -250,10 +256,11 @@ namespace InnerSight_Seti
 
             else
             {
-                StopCoroutine(DetectSlot());
+                //StopCoroutine(DetectSlot());
                 return;
             }
         }
+
 
         // WhichSelect에서 인벤토리로 확인했을 때 호출되는 메서드
         private void SelectInven(int invenIndex)
@@ -396,6 +403,20 @@ namespace InnerSight_Seti
             // 역할이 끝나면 종료
             yield break;
         }
+
+
+        #endregion
+
+
+        #region VR
+        // VR
+        public void XR_WhichSelect()
+        {
+            WhichSelect();
+        }
+
+
+
         #endregion
     }
 }
