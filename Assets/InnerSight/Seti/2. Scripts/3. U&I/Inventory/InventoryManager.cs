@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
+using UnityEngine.XR.Interaction.Toolkit.UI;
 
 namespace InnerSight_Seti
 {
@@ -35,7 +36,7 @@ namespace InnerSight_Seti
         [SerializeField]
         private Button thisSlot;
         //private EventSystem eventSystem;
-        //private GraphicRaycaster raycaster;
+        private TrackedDeviceGraphicRaycaster raycaster;
 
         // 클래스 컴포넌트
         private PlayerSetting player;
@@ -369,24 +370,38 @@ namespace InnerSight_Seti
         }
 
         // 슬롯을 감지하는 반복기 (XR 버전)
-        public IEnumerator DetectSlotXR(XRRayInteractor rayInteractor)
+        public IEnumerator DetectSlot(XRRayInteractor rayInteractor)
         {
             // 다시 클릭할 때까지 계속 반복
             while (IsSelected)
             {
-                // XRRayInteractor로부터 현재 상호작용하고 있는 오브젝트 정보 가져오기
-                thisSlot = null;
-
-                // 선택된 인터랙터블이 있는지 확인
-                if (rayInteractor.interactablesSelected.Count > 0)
+                // 레이 인터랙터가 UI에 히트를 가했는지 확인
+                if (rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit hit))
                 {
-                    // 현재 선택된 첫 번째 인터랙터블을 가져옴
-                    var currentTarget = rayInteractor.interactablesSelected[0].transform.gameObject;
+                    // 히트 지점의 월드 좌표를 스크린 좌표로 변환
+                    Vector3 screenPosition = Camera.main.WorldToScreenPoint(hit.point);
 
-                    // 선택된 오브젝트가 슬롯(Button)인지 확인
-                    if (currentTarget.TryGetComponent<Button>(out var slot))
+                    // EventSystem으로부터 포인터 정보를 받음
+                    PointerEventData pointerData = new(EventSystem.current)
                     {
-                        thisSlot = slot;  // 선택된 슬롯을 갱신
+                        position = (Vector2)screenPosition
+                    };
+
+                    // 그를 기반으로 GraphicRaycaster 시행
+                    List<RaycastResult> results = new();
+                    raycaster.Raycast(pointerData, results);
+
+                    // 현재의 슬롯을 감지
+                    thisSlot = null;
+                    foreach (RaycastResult result in results)
+                    {
+                        // 감지한 UGUI가 텍스트박스라면 무시
+                        if (result.gameObject.GetComponent<TextMeshProUGUI>())
+                            continue;
+
+                        // Button UI 획득을 시도해보고 잡히면 선택
+                        if (result.gameObject.TryGetComponent<Button>(out var slot))
+                            thisSlot = slot;
                     }
                 }
 
