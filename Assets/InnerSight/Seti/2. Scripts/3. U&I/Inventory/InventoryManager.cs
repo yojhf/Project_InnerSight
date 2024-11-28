@@ -256,9 +256,13 @@ namespace InnerSight_Seti
 
             if (thisSlot != null)
             {
+                Debug.Log("selectinven");
+
+
                 // 슬롯이 인벤토리에 있는 경우
                 if (Array.Exists(inventory.invenSlots, slot => slot == thisSlot))
                 {
+                  
                     initialSlot = thisSlot;
                     selectedSlotIndex = Array.IndexOf(inventory.invenSlots, thisSlot);
                     SelectInven((int)selectedSlotIndex);
@@ -268,9 +272,9 @@ namespace InnerSight_Seti
 
             else
             {
-                XR_Detect();
+                
                 //StartCoroutine(DetectSlotXR(player.rayInteractor));
-                //StartCoroutine(DetectSlot(player.rayInteractor));
+                StopCoroutine(Detect(player.rayInteractor));
                 return;
             }
         }
@@ -279,6 +283,8 @@ namespace InnerSight_Seti
         // WhichSelect에서 인벤토리로 확인했을 때 호출되는 메서드
         private void SelectInven(int invenIndex)
         {
+
+
             // 선택한 아이템의 키를 읽을 변수
             ItemKey selectedItemKey = null;
 
@@ -336,7 +342,7 @@ namespace InnerSight_Seti
         // 허상 아이템을 잡아두는 반복기
         public IEnumerator PhantomUpdate(ItemKey selectedItemKey)
         {
-            while (isSelected)
+            while (IsSelected)
             {
                 // cursorUtility의 이벤트 핸들러를 통해 Vector2 CursorPosition을 Vector3 변수에 입력
                 Vector3 mousePosition = player.rayInteractor.transform.position;
@@ -359,7 +365,6 @@ namespace InnerSight_Seti
             {
                 if (initialSlot == thisSlot)
                 {
-
                     //SameSelect(thisSlot);
                 }
 
@@ -372,9 +377,11 @@ namespace InnerSight_Seti
 
                 Destroy(itemPhantom);
                 phantomCor = null;
+                Debug.Log("co1");
                 yield break;
             }
 
+            Debug.Log("co2");
             // 플레이어가 적절한 위치에서 드래그를 해제하면 해당 아이템을 실체화
             DropItem(ItemData(selectedItemKey));
 
@@ -522,17 +529,19 @@ namespace InnerSight_Seti
 
                     //raycaster.Raycast(pointerData, results);
 
-                    //// 현재의 슬롯을 감지
-                    ////thisSlot = null;
+                    // 현재의 슬롯을 감지
+
 
                     //Debug.Log(pointerData);
                     //Debug.Log("11 / " + results.Count);
 
+                    thisSlot = null;
+
                     foreach (var result in results)
                     {
                         // 감지한 UGUI가 텍스트박스라면 무시
-                        //if (result.gameObject.GetComponent<TextMeshProUGUI>())
-                        //    continue;
+                        if (result.gameObject.GetComponent<TextMeshProUGUI>())
+                            continue;
 
                         //Button UI 획득을 시도해보고 잡히면 선택
                         if (ComponentUtility.TryGetComponentInChildren<Button>(re.gameObject.transform, out var slot))
@@ -543,8 +552,11 @@ namespace InnerSight_Seti
                 }
                 else
                 {
+
+
                     Debug.Log("레이가 유효한 히트를 감지하지 못했습니다.");
                 }
+
 
                 // EventSystem으로부터 포인터 정보를 받고
                 //PointerEventData pointerData = new(eventSystem)
