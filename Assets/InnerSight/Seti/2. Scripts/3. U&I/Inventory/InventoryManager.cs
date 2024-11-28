@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
+using UnityEngine.XR.Interaction.Toolkit.UI;
 
 namespace InnerSight_Seti
 {
@@ -34,8 +35,10 @@ namespace InnerSight_Seti
         private Button initialSlot;
         [SerializeField]
         private Button thisSlot;
-        //private EventSystem eventSystem;
+        private EventSystem eventSystem;
         //private GraphicRaycaster raycaster;
+
+        private TrackedDeviceGraphicRaycaster raycaster;
 
         // 클래스 컴포넌트
         private PlayerSetting player;
@@ -70,7 +73,8 @@ namespace InnerSight_Seti
             //UIManager.PlayerUse.SetInventory(this);
             player = UIManager.Player;
 
-            //eventSystem = FindAnyObjectByType<EventSystem>();
+            eventSystem = FindAnyObjectByType<EventSystem>();
+            raycaster = GetComponentInChildren<TrackedDeviceGraphicRaycaster>();
             //raycaster = GetComponentInChildren<GraphicRaycaster>();
             inventory = GetComponentInChildren<Inventory>();
 
@@ -236,12 +240,17 @@ namespace InnerSight_Seti
         // 어떤 슬롯을 선택했는지 확인하는 메서드
         private void WhichSelect()
         {
+            if (!player.rayInteractor.gameObject.activeSelf)
+                return;
+
             if (IsOnTrade) return;
 
             // 아이템 선택 플래그를 true
             isSelected = true;
 
-            //StartCoroutine(DetectSlotXR());
+            XR_Detect();
+            //StartCoroutine(DetectSlot(player.rayInteractor));
+            //StartCoroutine(DetectSlotXR(player.rayInteractor));
 
             if (thisSlot != null)
             {
@@ -257,7 +266,9 @@ namespace InnerSight_Seti
 
             else
             {
-                //StopCoroutine(DetectSlotXR());
+                XR_Detect();
+                //StartCoroutine(DetectSlotXR(player.rayInteractor));
+                //StartCoroutine(DetectSlot(player.rayInteractor));
                 return;
             }
         }
@@ -399,7 +410,7 @@ namespace InnerSight_Seti
         }
 
         // 슬롯을 감지하는 반복기 (PC 버전)
-        /*public IEnumerator DetectSlot()
+        public IEnumerator DetectSlot()
         {
             // 다시 클릭할 때까지 계속 반복
             while (IsSelected)
@@ -408,10 +419,12 @@ namespace InnerSight_Seti
                 PointerEventData pointerData = new(eventSystem)
                 {
                     position = Mouse.current.position.ReadValue()
+                  
                 };
 
                 // 그를 기반으로 GraphicRaycaster 시행
                 List<RaycastResult> results = new();
+
                 raycaster.Raycast(pointerData, results);
 
                 // 현재의 슬롯을 감지
@@ -423,9 +436,11 @@ namespace InnerSight_Seti
                         continue;
 
                     // Button UI 획득을 시도해보고 잡히면 선택
-                    if (result.gameObject.TryGetComponent<Button>(out var slot))
+                    if (result.gameObject.TryGetComponent<Button>(out var slot))                     
                         thisSlot = slot;
+
                 }
+
 
                 // 이 반복기를 매 프레임 반복하고
                 yield return null;
@@ -433,7 +448,7 @@ namespace InnerSight_Seti
 
             // 역할이 끝나면 종료
             yield break;
-        }*/
+        }
         #endregion
 
 
@@ -444,7 +459,79 @@ namespace InnerSight_Seti
             WhichSelect();
         }
 
+        void XR_Detect()
+        {
+            if (player.rayInteractor == null || eventSystem == null)
+            {
+                Debug.LogWarning("XRRayInteractor 또는 EventSystem이 설정되지 않았습니다.");
+                return;
+            }
 
+            StartCoroutine(Detect(player.rayInteractor));
+        }
+
+        public IEnumerator Detect(XRRayInteractor rayInteractor)
+        {
+            // 다시 클릭할 때까지 계속 반복
+            while (IsSelected)
+            {
+                if (rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit hit))
+                {
+                    // PointerEventData를 생성하고 히트 지점을 기준으로 설정
+                    PointerEventData pointerData = new(eventSystem)
+                    {
+                        position = Camera.main.WorldToScreenPoint(hit.point) // 히트 지점을 스크린 좌표로 변환
+                    };
+
+                    // 그를 기반으로 GraphicRaycaster 시행
+                    List<RaycastResult> results = new();
+
+                    raycaster.Raycast(pointerData, results);
+
+                    // 현재의 슬롯을 감지
+                    thisSlot = null;
+
+                    Debug.Log(pointerData);
+                    Debug.Log("11 / " + results);
+
+                    foreach (RaycastResult result in results)
+                    {
+                        Debug.Log("22" + result);
+                        // 감지한 UGUI가 텍스트박스라면 무시
+                        if (result.gameObject.GetComponent<TextMeshProUGUI>())
+                            continue;
+
+                        // Button UI 획득을 시도해보고 잡히면 선택
+                        if (result.gameObject.TryGetComponent<Button>(out var slot))
+                        {
+                            Debug.Log("aa");
+                            thisSlot = slot;
+                        }
+
+
+                    }
+                }
+                else
+                {
+                    Debug.Log("레이가 유효한 히트를 감지하지 못했습니다.");
+                }
+
+                // EventSystem으로부터 포인터 정보를 받고
+                //PointerEventData pointerData = new(eventSystem)
+                //{
+                //    //position = Mouse.current.position.ReadValue()
+                //    position = Mouse.current.position.ReadValue()
+                //};
+
+
+
+                // 이 반복기를 매 프레임 반복하고
+                yield return null;
+            }
+
+            // 역할이 끝나면 종료
+            yield break;
+        }
 
         #endregion
     }

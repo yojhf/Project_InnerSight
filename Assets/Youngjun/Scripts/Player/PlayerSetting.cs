@@ -1,5 +1,6 @@
 using InnerSight_Seti;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 
 public class PlayerSetting : MonoBehaviour
@@ -15,6 +16,8 @@ public class PlayerSetting : MonoBehaviour
     public CursorUtility CursorUtility => cursorUtility;
     public PlayerInteraction PlayerInteraction => playerInteraction;
 
+    public XRRayInteractor rayInteractor;
+        
     private void Awake()
     {
         playerStates = new(this);
@@ -24,15 +27,5 @@ public class PlayerSetting : MonoBehaviour
         playerTrade = GetComponent<PlayerTrade>();
         playerInteraction = GetComponent<PlayerInteraction>();
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -38,8 +38,6 @@ namespace Noah
             {
                 Debug.Log("storage");
                 playerSetting.PlayerInteraction.ThisIsMine();
-  
-
             }
         }
 
