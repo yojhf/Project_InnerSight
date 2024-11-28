@@ -35,14 +35,7 @@ namespace InnerSight_Seti
         private Button initialSlot;
         [SerializeField]
         private Button thisSlot;
-<<<<<<< HEAD
         private EventSystem eventSystem;
-        //private GraphicRaycaster raycaster;
-=======
-        //private EventSystem eventSystem;
-        private TrackedDeviceGraphicRaycaster raycaster;
->>>>>>> 847c3c95cdd1f5357198bca54da5a017ebcdb164
-
         private TrackedDeviceGraphicRaycaster raycaster;
 
         // 클래스 컴포넌트
