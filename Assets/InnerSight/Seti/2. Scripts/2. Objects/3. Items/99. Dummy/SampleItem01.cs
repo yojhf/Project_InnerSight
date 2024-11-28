@@ -4,7 +4,8 @@ namespace InnerSight_Seti
 {
     public class SampleItem01 : MonoBehaviour, IInteractable
     {
-        private readonly int itemID = 0; // 고유한 ID로 데이터베이스 내 아이템 참조
+        [SerializeField]
+        private int itemID = 0; // 고유한 ID로 데이터베이스 내 아이템 참조
         private ItemKey itemData;
         public ItemDatabase itemDatabase; // 데이터베이스 참조
 
