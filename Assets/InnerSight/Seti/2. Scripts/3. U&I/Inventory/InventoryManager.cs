@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine.InputSystem.XR;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 namespace InnerSight_Seti
 {
@@ -32,11 +34,12 @@ namespace InnerSight_Seti
         private Button initialSlot;
         [SerializeField]
         private Button thisSlot;
-        private EventSystem eventSystem;
-        private GraphicRaycaster raycaster;
+        //private EventSystem eventSystem;
+        //private GraphicRaycaster raycaster;
 
         // 클래스 컴포넌트
         private PlayerSetting player;
+        [SerializeField]
         private Inventory inventory;
         private NPC_Merchant tradeNPC;
         #endregion
@@ -45,7 +48,11 @@ namespace InnerSight_Seti
         #region Properties
         public float PhantomDepth { get; set; }
         public int? SelectedSlotIndex => selectedSlotIndex;
-        public bool IsSelected => isSelected;
+        public bool IsSelected
+        {
+            get { return isSelected; }
+            set { isSelected = value; }
+        }
         public bool IsOpenInventory { get; private set; }
         public bool IsOnTrade { get; set; }
         public Button ThisSlot => thisSlot;
@@ -60,11 +67,11 @@ namespace InnerSight_Seti
 
             // 초기화
             UIManager UIManager = GetComponent<UIManager>();
-            UIManager.PlayerUse.SetInventory(this);
+            //UIManager.PlayerUse.SetInventory(this);
             player = UIManager.Player;
 
-            eventSystem = FindAnyObjectByType<EventSystem>();
-            raycaster = GetComponentInChildren<GraphicRaycaster>();
+            //eventSystem = FindAnyObjectByType<EventSystem>();
+            //raycaster = GetComponentInChildren<GraphicRaycaster>();
             inventory = GetComponentInChildren<Inventory>();
 
             PhantomDepth = 1;
@@ -234,7 +241,7 @@ namespace InnerSight_Seti
             // 아이템 선택 플래그를 true
             isSelected = true;
 
-            StartCoroutine(DetectSlot());
+            //StartCoroutine(DetectSlotXR());
 
             if (thisSlot != null)
             {
@@ -250,10 +257,11 @@ namespace InnerSight_Seti
 
             else
             {
-                StopCoroutine(DetectSlot());
+                //StopCoroutine(DetectSlotXR());
                 return;
             }
         }
+
 
         // WhichSelect에서 인벤토리로 확인했을 때 호출되는 메서드
         private void SelectInven(int invenIndex)
@@ -360,8 +368,38 @@ namespace InnerSight_Seti
             yield break;
         }
 
-        // 슬롯을 감지하는 반복기
-        public IEnumerator DetectSlot()
+        // 슬롯을 감지하는 반복기 (XR 버전)
+        public IEnumerator DetectSlotXR(XRRayInteractor rayInteractor)
+        {
+            // 다시 클릭할 때까지 계속 반복
+            while (IsSelected)
+            {
+                // XRRayInteractor로부터 현재 상호작용하고 있는 오브젝트 정보 가져오기
+                thisSlot = null;
+
+                // 선택된 인터랙터블이 있는지 확인
+                if (rayInteractor.interactablesSelected.Count > 0)
+                {
+                    // 현재 선택된 첫 번째 인터랙터블을 가져옴
+                    var currentTarget = rayInteractor.interactablesSelected[0].transform.gameObject;
+
+                    // 선택된 오브젝트가 슬롯(Button)인지 확인
+                    if (currentTarget.TryGetComponent<Button>(out var slot))
+                    {
+                        thisSlot = slot;  // 선택된 슬롯을 갱신
+                    }
+                }
+
+                // 이 반복기를 매 프레임 반복하고
+                yield return null;
+            }
+
+            // 역할이 끝나면 종료
+            yield break;
+        }
+
+        // 슬롯을 감지하는 반복기 (PC 버전)
+        /*public IEnumerator DetectSlot()
         {
             // 다시 클릭할 때까지 계속 반복
             while (IsSelected)
@@ -395,7 +433,19 @@ namespace InnerSight_Seti
 
             // 역할이 끝나면 종료
             yield break;
+        }*/
+        #endregion
+
+
+        #region VR
+        // VR
+        public void XR_WhichSelect()
+        {
+            WhichSelect();
         }
+
+
+
         #endregion
     }
 }
