@@ -2543,6 +2543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d3c73952c6fb042a0533d599ff7aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rayInteractor: {fileID: 1396204958}
 --- !u!114 &767673270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4024,6 +4025,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 767673281}
   m_SourcePrefab: {fileID: 100100000, guid: 930617953e4e9864a93b073accb28355, type: 3}
+--- !u!114 &1396204958 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1563545637653574034, guid: 930617953e4e9864a93b073accb28355, type: 3}
+  m_PrefabInstance: {fileID: 1396204957}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6803edce0201f574f923fd9d10e5b30a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1412673055
 GameObject:
   m_ObjectHideFlags: 0

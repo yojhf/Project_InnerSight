@@ -55,7 +55,7 @@ namespace InnerSight_Seti
             StartCoroutine(Walking(walkDirection, walkSpeed));
         }*/
 
-        public override void Trade(Player player)
+        public override void Trade(PlayerSetting player)
         {
             base.Trade(player);
 

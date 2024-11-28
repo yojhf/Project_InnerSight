@@ -13,13 +13,13 @@ namespace InnerSight_Seti
         private readonly List<ItemForTrade> tradableItems = new();
 
         // 클래스 컴포넌트
-        private Player player;
+        private PlayerSetting player;
         private ShopBag shopBag;
         #endregion
 
         // 속성
         #region Properties
-        public Player Player => player;
+        public PlayerSetting Player => player;
         public ShopBag ShopBag => shopBag;
         #endregion
 
@@ -27,7 +27,7 @@ namespace InnerSight_Seti
         #region Life Cycle
         private void Start()
         {
-            player = GetComponent<Player>();
+            player = GetComponent<PlayerSetting>();
         }
         #endregion
 

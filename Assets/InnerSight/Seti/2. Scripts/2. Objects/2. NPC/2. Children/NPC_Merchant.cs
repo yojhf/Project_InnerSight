@@ -95,7 +95,7 @@ namespace InnerSight_Seti
         }
 
         // 최종 거래 메서드
-        public virtual void Trade(Player player)
+        public virtual void Trade(PlayerSetting player)
         {
             // NPC마다 개성 있는 대사를 주자!
 
@@ -118,7 +118,7 @@ namespace InnerSight_Seti
         }
 
         // 플레이어에게 구매한 아이템을 주는 메서드
-        protected void GiveItems(Player player)
+        protected void GiveItems(PlayerSetting player)
         {
             InventoryManager playerInven = player.PlayerUse.InventoryManager;
 
@@ -140,7 +140,7 @@ namespace InnerSight_Seti
         }
 
         // 플레이어의 아이템 판매 시작
-        protected virtual void TradeStart(Player player)
+        protected virtual void TradeStart(PlayerSetting player)
         {
             InventoryManager inven = player.PlayerUse.InventoryManager;
 
@@ -153,7 +153,7 @@ namespace InnerSight_Seti
 
             // 인벤토리를 열고
             inven.IsOnTrade = true;
-            player.control.Player.Inventory.Disable();
+            //player.control.Player.Inventory.Disable();
             if (!inven.IsOpenInventory) inven.ForTrade(true);
 
             // 판매용 UI를 열고
@@ -177,7 +177,7 @@ namespace InnerSight_Seti
         }
 
         // 거래 종료
-        protected void TradeEnd(Player player)
+        protected void TradeEnd(PlayerSetting player)
         {
             InventoryManager inven = player.PlayerUse.InventoryManager;
 
@@ -189,7 +189,7 @@ namespace InnerSight_Seti
             // 인벤토리를 다시 닫고
             if (inven.Inventory.invenDict.Count != 0)
                 inven.ForTrade(false);
-            player.control.Player.Inventory.Enable();
+            //player.control.Player.Inventory.Enable();
             inven.IsOnTrade = false;
 
             // 장바구니를 다시 연다
