@@ -3946,6 +3946,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Origin (VR)_Pro
       objectReference: {fileID: 0}
+    - target: {fileID: 1188927113730981079, guid: 930617953e4e9864a93b073accb28355, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563545637653574034, guid: 930617953e4e9864a93b073accb28355, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1787375356569375443, guid: 930617953e4e9864a93b073accb28355, type: 3}
       propertyPath: storage.m_Reference
       value: 
@@ -4591,6 +4599,7 @@ GameObject:
   - component: {fileID: 1808254715}
   - component: {fileID: 1808254718}
   - component: {fileID: 1808254717}
+  - component: {fileID: 1808254720}
   - component: {fileID: 1808254719}
   m_Layer: 5
   m_Name: WorldSpace
@@ -4684,6 +4693,23 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
+--- !u!114 &1808254720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808254714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &1893873075
 GameObject:
   m_ObjectHideFlags: 0
@@ -20106,6 +20132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a86a51acaeb7ce94699efb2bbc0a0236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemID: 0
   itemDatabase: {fileID: 11400000, guid: 526437a0b8e0d6a4999c7f004dc606c7, type: 2}
 --- !u!114 &4502023091548868021
 MonoBehaviour:
@@ -20119,6 +20146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a86a51acaeb7ce94699efb2bbc0a0236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemID: 0
   itemDatabase: {fileID: 11400000, guid: 526437a0b8e0d6a4999c7f004dc606c7, type: 2}
 --- !u!114 &4502023092652014868
 MonoBehaviour:
@@ -20132,6 +20160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a86a51acaeb7ce94699efb2bbc0a0236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemID: 0
   itemDatabase: {fileID: 11400000, guid: 526437a0b8e0d6a4999c7f004dc606c7, type: 2}
 --- !u!224 &4514767987086866296
 RectTransform:
