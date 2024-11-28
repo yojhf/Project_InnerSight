@@ -97,7 +97,10 @@ namespace InnerSight_Seti
 
             // 기존 아이템 참조 저장
             var firstItem = CollectionUtility.FirstOrDefault(invenDict.Keys, key => invenDict[key].itemIndex == firstIndex);
-            var secondItem = CollectionUtility.FirstOrDefault(invenDict.Keys, key => invenDict[key].itemIndex == secondIndex);
+            var secondItem = CollectionUtility.FirstOrNull(invenDict.Keys, key => invenDict[key].itemIndex == secondIndex);
+
+            if (secondItem == null)
+                return;
 
             // 첫 번째 슬롯과 두 번째 슬롯을 교환
             if (firstItem != null)

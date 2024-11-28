@@ -208,9 +208,13 @@ namespace InnerSight_Seti
             // 먼저 허상 아이템을 제거한 뒤
             Destroy(itemPhantom);
 
+            Debug.Log("asd");
+
             // 허상 아이템의 위치에 진짜 아이템을 생성하고
             float yRot = UnityEngine.Random.Range(0, 360);
             Instantiate(selectedItem.Key.itemPrefab, itemPhantom.transform.position, Quaternion.Euler(0, yRot, 0));
+
+            Debug.Log("11");
 
             // 허상 아이템 저장 변수를 비운 다음
             itemPhantom = null;
@@ -252,9 +256,13 @@ namespace InnerSight_Seti
 
             if (thisSlot != null)
             {
+                Debug.Log("selectinven");
+
+
                 // 슬롯이 인벤토리에 있는 경우
                 if (Array.Exists(inventory.invenSlots, slot => slot == thisSlot))
                 {
+                  
                     initialSlot = thisSlot;
                     selectedSlotIndex = Array.IndexOf(inventory.invenSlots, thisSlot);
                     SelectInven((int)selectedSlotIndex);
@@ -264,9 +272,9 @@ namespace InnerSight_Seti
 
             else
             {
-                XR_Detect();
+                
                 //StartCoroutine(DetectSlotXR(player.rayInteractor));
-                //StartCoroutine(DetectSlot(player.rayInteractor));
+                StopCoroutine(Detect(player.rayInteractor));
                 return;
             }
         }
@@ -275,6 +283,8 @@ namespace InnerSight_Seti
         // WhichSelect에서 인벤토리로 확인했을 때 호출되는 메서드
         private void SelectInven(int invenIndex)
         {
+
+
             // 선택한 아이템의 키를 읽을 변수
             ItemKey selectedItemKey = null;
 
@@ -291,11 +301,15 @@ namespace InnerSight_Seti
             // 해당 키가 존재할 때에만
             if (selectedItemKey == null) return;
 
-            // 허상 아이템을 생성하여 드랍할 위치를 선정하는 반복기 호출
-            itemPhantom = Instantiate(selectedItemKey.itemPhantomPrefab, cursorPosition, Quaternion.identity);
 
+            Debug.Log("1111");
+            // 허상 아이템을 생성하여 드랍할 위치를 선정하는 반복기 호출
+            itemPhantom = Instantiate(selectedItemKey.itemPhantomPrefab, player.rayInteractor.transform.position, Quaternion.identity);
+            Debug.Log("222");
             phantomCor = PhantomUpdate(selectedItemKey);
             StartCoroutine(phantomCor);
+
+            Debug.Log("333");
         }
 
         // 같은 슬롯에 아이템을 두었다면 사용
@@ -328,19 +342,19 @@ namespace InnerSight_Seti
         // 허상 아이템을 잡아두는 반복기
         public IEnumerator PhantomUpdate(ItemKey selectedItemKey)
         {
-            while (isSelected)
+            while (IsSelected)
             {
                 // cursorUtility의 이벤트 핸들러를 통해 Vector2 CursorPosition을 Vector3 변수에 입력
-                Vector3 mousePosition = player.CursorUtility.CursorPosition;
+                Vector3 mousePosition = player.rayInteractor.transform.position;
 
-                // 적절한 깊이값 설정
-                mousePosition.z = PhantomDepth;
+                //// 적절한 깊이값 설정
+                //mousePosition.z = PhantomDepth;
 
-                // 마우스 포인터의 위치를 월드 좌표로 변환
-                Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+                //// 마우스 포인터의 위치를 월드 좌표로 변환
+                //Vector3 worldPosition = Camera.main.WorldToScreenPoint(mousePosition);
 
                 // 허상 아이템의 transform.position을 해당 좌표와 동기화
-                itemPhantom.transform.position = worldPosition;
+                itemPhantom.transform.position = mousePosition;
 
                 // 본 반복기를 매 프레임 실행
                 yield return null;
@@ -351,7 +365,6 @@ namespace InnerSight_Seti
             {
                 if (initialSlot == thisSlot)
                 {
-
                     //SameSelect(thisSlot);
                 }
 
@@ -364,9 +377,11 @@ namespace InnerSight_Seti
 
                 Destroy(itemPhantom);
                 phantomCor = null;
+                Debug.Log("co1");
                 yield break;
             }
 
+            Debug.Log("co2");
             // 플레이어가 적절한 위치에서 드래그를 해제하면 해당 아이템을 실체화
             DropItem(ItemData(selectedItemKey));
 
@@ -470,9 +485,15 @@ namespace InnerSight_Seti
 
 
         #region VR
+        
         // VR
         public void XR_WhichSelect()
         {
+            if (IsSelected == true)
+            {
+                return;
+            }
+
             WhichSelect();
         }
 
@@ -489,49 +510,53 @@ namespace InnerSight_Seti
 
         public IEnumerator Detect(XRRayInteractor rayInteractor)
         {
+
+            // 그를 기반으로 GraphicRaycaster 시행
+            List<RaycastResult> results = new();
+
             // 다시 클릭할 때까지 계속 반복
             while (IsSelected)
             {
-                if (rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit hit))
+                if (rayInteractor.TryGetCurrentUIRaycastResult(out var re))
                 {
-                    // PointerEventData를 생성하고 히트 지점을 기준으로 설정
-                    PointerEventData pointerData = new(eventSystem)
-                    {
-                        position = Camera.main.WorldToScreenPoint(hit.point) // 히트 지점을 스크린 좌표로 변환
-                    };
+                    results.Add(re);
+                    //// PointerEventData를 생성하고 히트 지점을 기준으로 설정
+                    //PointerEventData pointerData = new(eventSystem)
+                    //{
+                    //    position = (Vector2)Camera.main.WorldToScreenPoint(hit.point) // 히트 지점을 스크린 좌표로 변환
+                    //};
 
-                    // 그를 기반으로 GraphicRaycaster 시행
-                    List<RaycastResult> results = new();
 
-                    raycaster.Raycast(pointerData, results);
+                    //raycaster.Raycast(pointerData, results);
 
                     // 현재의 슬롯을 감지
+
+
+                    //Debug.Log(pointerData);
+                    //Debug.Log("11 / " + results.Count);
+
                     thisSlot = null;
 
-                    Debug.Log(pointerData);
-                    Debug.Log("11 / " + results);
-
-                    foreach (RaycastResult result in results)
+                    foreach (var result in results)
                     {
-                        Debug.Log("22" + result);
                         // 감지한 UGUI가 텍스트박스라면 무시
                         if (result.gameObject.GetComponent<TextMeshProUGUI>())
                             continue;
 
-                        // Button UI 획득을 시도해보고 잡히면 선택
-                        if (result.gameObject.TryGetComponent<Button>(out var slot))
+                        //Button UI 획득을 시도해보고 잡히면 선택
+                        if (ComponentUtility.TryGetComponentInChildren<Button>(re.gameObject.transform, out var slot))
                         {
-                            Debug.Log("aa");
                             thisSlot = slot;
                         }
-
-
                     }
                 }
                 else
                 {
+
+
                     Debug.Log("레이가 유효한 히트를 감지하지 못했습니다.");
                 }
+
 
                 // EventSystem으로부터 포인터 정보를 받고
                 //PointerEventData pointerData = new(eventSystem)
