@@ -5223,6 +5223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisSlot: {fileID: 0}
+  inventory: {fileID: 7342240801358126651}
 --- !u!4 &2190005055073811940
 Transform:
   m_ObjectHideFlags: 0
@@ -19661,6 +19662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6325b85ec87fd6f43845827b88873bf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invenPanel: {fileID: 5570248910417614132}
   invenSlots: []
   invenRect: {fileID: 0}
   emptySlotSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
@@ -21005,6 +21007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fca660d3b71675c4691d87db34266299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryManager: {fileID: 0}
 --- !u!4 &7983443725630197582
 Transform:
   m_ObjectHideFlags: 0

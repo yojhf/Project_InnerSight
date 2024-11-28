@@ -70,8 +70,8 @@ namespace InnerSight_Seti
             //UIManager.PlayerUse.SetInventory(this);
             player = UIManager.Player;
 
-            eventSystem = FindAnyObjectByType<EventSystem>();
-            raycaster = GetComponentInChildren<GraphicRaycaster>();
+            //eventSystem = FindAnyObjectByType<EventSystem>();
+            //raycaster = GetComponentInChildren<GraphicRaycaster>();
             inventory = GetComponentInChildren<Inventory>();
 
             PhantomDepth = 1;
