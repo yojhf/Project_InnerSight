@@ -391,16 +391,21 @@ namespace InnerSight_Seti
                     List<RaycastResult> results = new();
                     raycaster.Raycast(pointerData, results);
 
+                    Debug.Log(results);
+
                     // 현재의 슬롯을 감지
                     thisSlot = null;
                     foreach (RaycastResult result in results)
                     {
-                        // 감지한 UGUI가 텍스트박스라면 무시
+                        /*// 감지한 UGUI가 텍스트박스라면 무시
                         if (result.gameObject.GetComponent<TextMeshProUGUI>())
                             continue;
 
                         // Button UI 획득을 시도해보고 잡히면 선택
                         if (result.gameObject.TryGetComponent<Button>(out var slot))
+                            thisSlot = slot;*/
+
+                        if (ComponentUtility.TryGetComponentInChildren<Button>(result.gameObject.transform, out var slot))
                             thisSlot = slot;
                     }
                 }
