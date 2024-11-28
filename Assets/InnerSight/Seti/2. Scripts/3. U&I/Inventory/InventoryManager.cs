@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 namespace InnerSight_Seti
 {
@@ -33,8 +34,8 @@ namespace InnerSight_Seti
         private Button initialSlot;
         [SerializeField]
         private Button thisSlot;
-        private EventSystem eventSystem;
-        private GraphicRaycaster raycaster;
+        //private EventSystem eventSystem;
+        //private GraphicRaycaster raycaster;
 
         // 클래스 컴포넌트
         private PlayerSetting player;
@@ -240,7 +241,7 @@ namespace InnerSight_Seti
             // 아이템 선택 플래그를 true
             isSelected = true;
 
-            //StartCoroutine(DetectSlot());
+            //StartCoroutine(DetectSlotXR());
 
             if (thisSlot != null)
             {
@@ -256,7 +257,7 @@ namespace InnerSight_Seti
 
             else
             {
-                //StopCoroutine(DetectSlot());
+                //StopCoroutine(DetectSlotXR());
                 return;
             }
         }
@@ -367,8 +368,38 @@ namespace InnerSight_Seti
             yield break;
         }
 
-        // 슬롯을 감지하는 반복기
-        public IEnumerator DetectSlot()
+        // 슬롯을 감지하는 반복기 (XR 버전)
+        public IEnumerator DetectSlotXR(XRRayInteractor rayInteractor)
+        {
+            // 다시 클릭할 때까지 계속 반복
+            while (IsSelected)
+            {
+                // XRRayInteractor로부터 현재 상호작용하고 있는 오브젝트 정보 가져오기
+                thisSlot = null;
+
+                // 선택된 인터랙터블이 있는지 확인
+                if (rayInteractor.interactablesSelected.Count > 0)
+                {
+                    // 현재 선택된 첫 번째 인터랙터블을 가져옴
+                    var currentTarget = rayInteractor.interactablesSelected[0].transform.gameObject;
+
+                    // 선택된 오브젝트가 슬롯(Button)인지 확인
+                    if (currentTarget.TryGetComponent<Button>(out var slot))
+                    {
+                        thisSlot = slot;  // 선택된 슬롯을 갱신
+                    }
+                }
+
+                // 이 반복기를 매 프레임 반복하고
+                yield return null;
+            }
+
+            // 역할이 끝나면 종료
+            yield break;
+        }
+
+        // 슬롯을 감지하는 반복기 (PC 버전)
+        /*public IEnumerator DetectSlot()
         {
             // 다시 클릭할 때까지 계속 반복
             while (IsSelected)
@@ -402,9 +433,7 @@ namespace InnerSight_Seti
 
             // 역할이 끝나면 종료
             yield break;
-        }
-
-
+        }*/
         #endregion
 
 
