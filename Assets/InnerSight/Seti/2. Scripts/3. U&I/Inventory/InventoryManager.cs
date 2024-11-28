@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.XR.Interaction.Toolkit.UI;
 
 namespace InnerSight_Seti
 {
@@ -34,7 +35,8 @@ namespace InnerSight_Seti
         [SerializeField]
         private Button thisSlot;
         private EventSystem eventSystem;
-        private GraphicRaycaster raycaster;
+        //private GraphicRaycaster raycaster;
+        private TrackedDeviceGraphicRaycaster raycaster;
 
         // 클래스 컴포넌트
         private PlayerSetting player;
@@ -70,7 +72,8 @@ namespace InnerSight_Seti
             player = UIManager.Player;
 
             eventSystem = FindAnyObjectByType<EventSystem>();
-            raycaster = GetComponentInChildren<GraphicRaycaster>();
+            //raycaster = GetComponentInChildren<GraphicRaycaster>();
+            raycaster = GetComponentInChildren<TrackedDeviceGraphicRaycaster>();
             inventory = GetComponentInChildren<Inventory>();
 
             PhantomDepth = 1;
@@ -381,6 +384,8 @@ namespace InnerSight_Seti
 
                 // 그를 기반으로 GraphicRaycaster 시행
                 List<RaycastResult> results = new();
+
+
                 raycaster.Raycast(pointerData, results);
 
                 // 현재의 슬롯을 감지
