@@ -448,7 +448,7 @@ MonoBehaviour:
   storage:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Storage
       m_Type: 0
       m_ExpectedControlType: 
       m_Id: e9575e58-7a67-4f70-8b14-43cf69791467
