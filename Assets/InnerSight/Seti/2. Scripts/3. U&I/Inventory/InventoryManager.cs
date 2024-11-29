@@ -243,12 +243,11 @@ namespace InnerSight_Seti
 
             if (IsOnTrade) return;
 
-            Debug.Log("11");
-
             // 아이템 선택 플래그를 true
             IsSelected = true;
 
             XR_Detect();
+
             Debug.Log(thisSlot);
 
             //StartCoroutine(DetectSlot(player.rayInteractor));
@@ -273,8 +272,6 @@ namespace InnerSight_Seti
                 StopCoroutine(Detect(player.rayInteractor));
                 return;
             }
-
-            Debug.Log("22");
 
         }
 
@@ -356,6 +353,9 @@ namespace InnerSight_Seti
                 yield return null;
             }
 
+            // 플레이어가 적절한 위치에서 드래그를 해제하면 해당 아이템을 실체화
+            DropItem(ItemData(selectedItemKey));
+
             // 다른 슬롯에 두었다면 종료
             if (thisSlot != null)
             {
@@ -375,8 +375,7 @@ namespace InnerSight_Seti
                 yield break;
             }
 
-            // 플레이어가 적절한 위치에서 드래그를 해제하면 해당 아이템을 실체화
-            DropItem(ItemData(selectedItemKey));
+
 
             // 이 반복기를 기억하는 변수를 비우고
             phantomCor = null;
@@ -512,30 +511,30 @@ namespace InnerSight_Seti
         {
 
             // 그를 기반으로 GraphicRaycaster 시행
-            List<RaycastResult> results = new();
+
 
             // 다시 클릭할 때까지 계속 반복
             while (IsSelected)
             {
+                List<RaycastResult> results = new();
+
                 if (rayInteractor.TryGetCurrentUIRaycastResult(out var re))
                 {
-
-
-
                     //if (!results.Contains(re))
                     //{
 
                     //}
 
 
-                    //// PointerEventData를 생성하고 히트 지점을 기준으로 설정
-                    //PointerEventData pointerData = new(eventSystem)
-                    //{
-                    //    position = (Vector2)Camera.main.WorldToScreenPoint(hit.point) // 히트 지점을 스크린 좌표로 변환
-                    //};
+                    // PointerEventData를 생성하고 히트 지점을 기준으로 설정
+                    PointerEventData pointerData = new(eventSystem)
+                    {
+                        position = (Vector2)Camera.main.WorldToScreenPoint(rayInteractor.rayEndPoint) // 히트 지점을 스크린 좌표로 변환
+                    };
 
+                    results.Add(re);
 
-                    //raycaster.Raycast(pointerData, results);
+                    raycaster.Raycast(pointerData, results);
 
                     // 현재의 슬롯을 감지
 
@@ -544,7 +543,7 @@ namespace InnerSight_Seti
                     //Debug.Log("11 / " + results.Count);
 
 
-                    results.Add(re);
+                    //results.Add(re);
                     thisSlot = null;
 
                     foreach (var result in results)
@@ -566,7 +565,7 @@ namespace InnerSight_Seti
                 }
                 else
                 {
-                    
+                    thisSlot = null;
                     Debug.Log("레이가 유효한 히트를 감지하지 못했습니다.");
                 }
 
