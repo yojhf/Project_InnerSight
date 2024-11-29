@@ -11,10 +11,9 @@ namespace InnerSight_Seti
         // 필드
         #region Variables
         // Dictionary를 사용해 상호작용 오브젝트와 UI를 관리
-        private readonly Dictionary<GameObject, GameObject> interactables = new();
+        private readonly List<GameObject> interactables = new();
 
-        // 상호작용 UI 프리팹
-        [SerializeField] private GameObject pointerPrefab;
+        [SerializeField] private GameObject rightHand;
 
         // 클래스 컴포넌트
         private PlayerSetting player;
@@ -38,7 +37,7 @@ namespace InnerSight_Seti
         // 상호작용이 가능한 오브젝트 줍기, UI 제거 및 리스트 최신화
         public void ThisIsMine()
         {
-            GameObject closestObject = MathUtility.MinDistance(this.transform.gameObject, interactables);
+            GameObject closestObject = MathUtility.MinDisObject(rightHand, interactables);
 
             // 상호작용 대상이 실제로 존재하면
             if (closestObject != null)
@@ -57,9 +56,6 @@ namespace InnerSight_Seti
 
                 // 해당 오브젝트 줍기
                 Destroy(closestObject);
-
-                // UI 오브젝트 제거
-                Destroy(interactables[closestObject]);
                 
                 // Dictionary에서 해당 오브젝트와 UI 제거
                 interactables.Remove(closestObject);
@@ -73,43 +69,10 @@ namespace InnerSight_Seti
             if (other.gameObject.GetComponent<IInteractable>() == null) return;
 
             // 해당 오브젝트가 이미 리스트에 있는지 확인
-            if (!interactables.ContainsKey(other.gameObject))
+            if (!interactables.Contains(other.gameObject))
             {
-                // 상호작용 가능한 오브젝트와 대응하는 UI 오브젝트 생성 및 추가
-                GameObject pointerInstance = Instantiate(pointerPrefab, other.transform.position, Quaternion.identity);
-                interactables.Add(other.gameObject, pointerInstance);
-            }
-        }
-
-        // 상호작용 화살표 유지 메서드
-        private void TakeALook()
-        {
-            foreach (KeyValuePair<GameObject, GameObject> pair in interactables)
-            {
-                GameObject interactableObject = pair.Key;
-                GameObject pointerObject = pair.Value;
-
-                // 리스트의 모든 오브젝트와 그에 대응하는 UI 위치 업데이트
-                if (interactableObject != null && pointerObject != null)
-                    pointerObject.transform.position = interactableObject.transform.position + Vector3.up;
-            }
-        }
-
-
-        // "쓰레기네." 상호작용 화살표 제거 메서드
-        private void Sucks(Collider other)
-        {
-            // 인터페이스로 상호작용 가능한 오브젝트만 구별
-            if (other.gameObject.GetComponent<IInteractable>() == null) return;
-
-            // 해당 오브젝트가 리스트에 있는지 확인
-            if (interactables.ContainsKey(other.gameObject))
-            {
-                // UI 오브젝트 제거
-                Destroy(interactables[other.gameObject]);
-
-                // Dictionary에서 해당 오브젝트와 UI 제거
-                interactables.Remove(other.gameObject);
+                // 상호작용 가능한 오브젝트 추가
+                interactables.Add(other.gameObject);
             }
         }
         #endregion
@@ -122,14 +85,8 @@ namespace InnerSight_Seti
             player.PlayerTrade.CheckInShop(other);
         }
 
-        private void OnTriggerStay(Collider _)
-        {
-            TakeALook();
-        }
-
         private void OnTriggerExit(Collider other)
         {
-            Sucks(other);
             player.PlayerTrade.CheckOutShop(other);
         }
         #endregion

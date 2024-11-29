@@ -119,9 +119,15 @@ namespace InnerSight_Seti
             if (IsOpenInventory) ShowItem(IsOpenInventory = false);
         }
         public void OnInventoryStarted(InputAction.CallbackContext _) => ShowItem(IsOpenInventory = !IsOpenInventory);
-        public void OnCursorClickStarted(InputAction.CallbackContext _) => WhichSelect();
+        public void OnCursorClickStarted(InputAction.CallbackContext _)
+        {
 
-        public void OnCursorClickCanceled(InputAction.CallbackContext _) => isSelected = false;
+        }
+
+        public void OnCursorClickCanceled(InputAction.CallbackContext _)
+        {
+
+        }
         #endregion
 
         // 메서드
@@ -244,14 +250,11 @@ namespace InnerSight_Seti
             if (IsOnTrade) yield break;
 
             // 아이템 선택 플래그를 true
-            IsSelected = true;
+            //IsSelected = true;
 
-            XR_Detect();
             StartCoroutine(FindInitialSlot(player.rayInteractor));
             while (initialSlot == null) yield return null;
-
-            //StartCoroutine(DetectSlot(player.rayInteractor));
-            //StartCoroutine(DetectSlotXR(player.rayInteractor));
+            XR_Detect();
 
             if (initialSlot != null)
             {
@@ -260,17 +263,8 @@ namespace InnerSight_Seti
                 {
                     selectedSlotIndex = Array.IndexOf(inventory.invenSlots, initialSlot);
                     SelectInven((int)selectedSlotIndex);
-                    initialSlot = null;
                 }
-
                 selectedSlotIndex = null;
-            }
-            else
-            {
-                
-                //StartCoroutine(DetectSlotXR(player.rayInteractor));
-                StopCoroutine(Detect(player.rayInteractor));
-                yield break;
             }
         }
 
@@ -293,6 +287,7 @@ namespace InnerSight_Seti
         {
             // 해당 키가 존재할 때에만
             if (selectedItemKey == null) return;
+            if (itemPhantom != null) return;
 
             // 허상 아이템을 생성하여 드랍할 위치를 선정하는 반복기 호출
             itemPhantom = Instantiate(selectedItemKey.itemPhantomPrefab, player.rayInteractor.transform.position, Quaternion.identity);
@@ -342,9 +337,6 @@ namespace InnerSight_Seti
                 yield return null;
             }
 
-            // 플레이어가 적절한 위치에서 드래그를 해제하면 해당 아이템을 실체화
-            DropItem(ItemData(selectedItemKey));
-
             // 다른 슬롯에 두었다면 종료
             if (thisSlot != null)
             {
@@ -363,13 +355,16 @@ namespace InnerSight_Seti
                 }
                 
                 Destroy(itemPhantom);
+                initialSlot = null;
                 phantomCor = null;
                 yield break;
             }
 
+            // 플레이어가 적절한 위치에서 드래그를 해제하면 해당 아이템을 실체화
+            DropItem(ItemData(selectedItemKey));
 
-
-            // 이 반복기를 기억하는 변수를 비우고
+            // 변수 초기화
+            initialSlot = null;
             phantomCor = null;
 
             // 작동 중인 코루틴 정지
@@ -381,7 +376,7 @@ namespace InnerSight_Seti
             int count = 0;
 
             // 다시 클릭할 때까지 계속 반복
-            while (!initialSlot || count > 10)
+            while (count < 50)
             {
                 if (rayInteractor.TryGetCurrentUIRaycastResult(out var re))
                 {
@@ -389,6 +384,7 @@ namespace InnerSight_Seti
                     if (ComponentUtility.TryGetComponentInChildren<Button>(re.gameObject.transform, out var slot))
                     {
                         initialSlot = slot;
+                        yield break;
                     }
                 }
                 count++;
@@ -413,10 +409,6 @@ namespace InnerSight_Seti
 
         public void XR_WhichSelect()
         {
-            //if (IsSelected)
-            //    return;
-
-
             StartCoroutine(WhichSelect());
         }
 
@@ -432,20 +424,23 @@ namespace InnerSight_Seti
             StartCoroutine(Detect(player.rayInteractor));
         }
 
+        // 현재 슬롯 갱신 반복기
         public IEnumerator Detect(XRRayInteractor rayInteractor)
         {
-
             // 그를 기반으로 GraphicRaycaster 시행
             List<RaycastResult> results = new();
+
+            IsSelected = true;
 
             // 다시 클릭할 때까지 계속 반복
             while (IsSelected)
             {
+                thisSlot = null;
                 if (rayInteractor.TryGetCurrentUIRaycastResult(out var re))
                 {
-                    results.Add(re);
-                    thisSlot = null;
-
+                    if (!results.Contains(re))
+                        results.Add(re);
+                    
                     foreach (var result in results)
                     {
                         //Button UI 획득을 시도해보고 잡히면 선택
@@ -460,104 +455,103 @@ namespace InnerSight_Seti
                 yield return null;
             }
 
-            thisSlot = null;
             results.Clear();
 
             // 역할이 끝나면 종료
             yield break;
         }
         #endregion
-
-        #region Dummy_Seti
-        /*// 슬롯을 감지하는 반복기 (XR 버전)
-        public IEnumerator DetectSlot(XRRayInteractor rayInteractor)
-        {
-            // 다시 클릭할 때까지 계속 반복
-            while (IsSelected)
-            {
-                // 레이 인터랙터가 UI에 히트를 가했는지 확인
-                if (rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit hit))
-                {
-                    // 히트 지점의 월드 좌표를 스크린 좌표로 변환
-                    Vector3 screenPosition = Camera.main.WorldToScreenPoint(hit.point);
-
-                    // EventSystem으로부터 포인터 정보를 받음
-                    PointerEventData pointerData = new(EventSystem.current)
-                    {
-                        position = (Vector2)screenPosition
-                    };
-
-                    // 그를 기반으로 GraphicRaycaster 시행
-                    List<RaycastResult> results = new();
-                    raycaster.Raycast(pointerData, results);
-
-                    Debug.Log(results);
-
-                    // 현재의 슬롯을 감지
-                    thisSlot = null;
-                    foreach (RaycastResult result in results)
-                    {
-                        *//*// 감지한 UGUI가 텍스트박스라면 무시
-                        if (result.gameObject.GetComponent<TextMeshProUGUI>())
-                            continue;
-
-                        // Button UI 획득을 시도해보고 잡히면 선택
-                        if (result.gameObject.TryGetComponent<Button>(out var slot))
-                            thisSlot = slot;*//*
-
-                        if (ComponentUtility.TryGetComponentInChildren<Button>(result.gameObject.transform, out var slot))
-                            thisSlot = slot;
-                    }
-                }
-
-                // 이 반복기를 매 프레임 반복하고
-                yield return null;
-            }
-
-            // 역할이 끝나면 종료
-            yield break;
-        }
-
-        // 슬롯을 감지하는 반복기 (PC 버전)
-        public IEnumerator DetectSlot()
-        {
-            // 다시 클릭할 때까지 계속 반복
-            while (IsSelected)
-            {
-                // EventSystem으로부터 포인터 정보를 받고
-                PointerEventData pointerData = new(eventSystem)
-                {
-                    position = Mouse.current.position.ReadValue()
-
-                };
-
-                // 그를 기반으로 GraphicRaycaster 시행
-                List<RaycastResult> results = new();
-
-                raycaster.Raycast(pointerData, results);
-
-                // 현재의 슬롯을 감지
-                thisSlot = null;
-                foreach (RaycastResult result in results)
-                {
-                    // 감지한 UGUI가 텍스트박스라면 무시
-                    if (result.gameObject.GetComponent<TextMeshProUGUI>())
-                        continue;
-
-                    // Button UI 획득을 시도해보고 잡히면 선택
-                    if (result.gameObject.TryGetComponent<Button>(out var slot))
-                        thisSlot = slot;
-
-                }
-
-
-                // 이 반복기를 매 프레임 반복하고
-                yield return null;
-            }
-
-            // 역할이 끝나면 종료
-            yield break;
-        }*/
-        #endregion
     }
 }
+
+#region Dummy_Seti
+/*// 슬롯을 감지하는 반복기 (XR 버전)
+public IEnumerator DetectSlot(XRRayInteractor rayInteractor)
+{
+    // 다시 클릭할 때까지 계속 반복
+    while (IsSelected)
+    {
+        // 레이 인터랙터가 UI에 히트를 가했는지 확인
+        if (rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit hit))
+        {
+            // 히트 지점의 월드 좌표를 스크린 좌표로 변환
+            Vector3 screenPosition = Camera.main.WorldToScreenPoint(hit.point);
+
+            // EventSystem으로부터 포인터 정보를 받음
+            PointerEventData pointerData = new(EventSystem.current)
+            {
+                position = (Vector2)screenPosition
+            };
+
+            // 그를 기반으로 GraphicRaycaster 시행
+            List<RaycastResult> results = new();
+            raycaster.Raycast(pointerData, results);
+
+            Debug.Log(results);
+
+            // 현재의 슬롯을 감지
+            thisSlot = null;
+            foreach (RaycastResult result in results)
+            {
+                *//*// 감지한 UGUI가 텍스트박스라면 무시
+                if (result.gameObject.GetComponent<TextMeshProUGUI>())
+                    continue;
+
+                // Button UI 획득을 시도해보고 잡히면 선택
+                if (result.gameObject.TryGetComponent<Button>(out var slot))
+                    thisSlot = slot;*//*
+
+                if (ComponentUtility.TryGetComponentInChildren<Button>(result.gameObject.transform, out var slot))
+                    thisSlot = slot;
+            }
+        }
+
+        // 이 반복기를 매 프레임 반복하고
+        yield return null;
+    }
+
+    // 역할이 끝나면 종료
+    yield break;
+}
+
+// 슬롯을 감지하는 반복기 (PC 버전)
+public IEnumerator DetectSlot()
+{
+    // 다시 클릭할 때까지 계속 반복
+    while (IsSelected)
+    {
+        // EventSystem으로부터 포인터 정보를 받고
+        PointerEventData pointerData = new(eventSystem)
+        {
+            position = Mouse.current.position.ReadValue()
+
+        };
+
+        // 그를 기반으로 GraphicRaycaster 시행
+        List<RaycastResult> results = new();
+
+        raycaster.Raycast(pointerData, results);
+
+        // 현재의 슬롯을 감지
+        thisSlot = null;
+        foreach (RaycastResult result in results)
+        {
+            // 감지한 UGUI가 텍스트박스라면 무시
+            if (result.gameObject.GetComponent<TextMeshProUGUI>())
+                continue;
+
+            // Button UI 획득을 시도해보고 잡히면 선택
+            if (result.gameObject.TryGetComponent<Button>(out var slot))
+                thisSlot = slot;
+
+        }
+
+
+        // 이 반복기를 매 프레임 반복하고
+        yield return null;
+    }
+
+    // 역할이 끝나면 종료
+    yield break;
+}*/
+#endregion
