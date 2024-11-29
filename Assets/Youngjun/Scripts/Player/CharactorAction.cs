@@ -48,7 +48,7 @@ namespace Noah
             }
             else 
             {
-                inventoryManager.IsSelected = false;
+                inventoryManager.ResetData();
             }
         }
 
