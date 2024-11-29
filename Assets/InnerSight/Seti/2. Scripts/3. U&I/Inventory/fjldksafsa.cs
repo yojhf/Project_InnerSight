@@ -1,4 +1,28 @@
+using System.Collections.Generic;
 using System;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
+using UnityEngine.XR.Interaction.Toolkit.UI;
+
+public class fjldksafsa : MonoBehaviour
+{
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
+
+
+/*using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,40 +36,40 @@ using UnityEngine.XR.Interaction.Toolkit.UI;
 
 namespace InnerSight_Seti
 {
-    // í”Œë ˆì´ì–´ì˜ ì¸ë²¤í† ë¦¬ì™€ í€µìŠ¬ë¡¯ì„ ìš´ì˜í•˜ëŠ” í´ë˜ìŠ¤
+    // ÇÃ·¹ÀÌ¾îÀÇ ÀÎº¥Åä¸®¿Í Äü½½·ÔÀ» ¿î¿µÇÏ´Â Å¬·¡½º
     public class InventoryManager : MonoBehaviour
     {
-        // í•„ë“œ
+        // ÇÊµå
         #region Variables
-        // ì»¨íŠ¸ë¡¤ ì œì–´ íšë“
+        // ÄÁÆ®·Ñ Á¦¾î È¹µæ
         private Control control;
 
-        // í—ˆìƒ ì•„ì´í…œ ê´€ë ¨ í•„ë“œ
+        // Çã»ó ¾ÆÀÌÅÛ °ü·Ã ÇÊµå
         private GameObject itemPhantom;
         private IEnumerator phantomCor;
         private Vector3 cursorPosition = Vector3.zero;
 
-        // ë‹¨ìˆœ ë³€ìˆ˜
-        private int? selectedSlotIndex = null;  // ìŠ¬ë¡¯ ì¸ë±ìŠ¤, ì¸ë²¤í† ë¦¬ë‚˜ í€µìŠ¬ë¡¯ì˜ ìŠ¬ë¡¯ì„ ì„ íƒí–ˆë‹¤ë©´ ê°’ì´ ì¡´ì¬í•˜ê³  ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ null
+        // ´Ü¼ø º¯¼ö
+        private int? selectedSlotIndex = null;  // ½½·Ô ÀÎµ¦½º, ÀÎº¥Åä¸®³ª Äü½½·ÔÀÇ ½½·ÔÀ» ¼±ÅÃÇß´Ù¸é °ªÀÌ Á¸ÀçÇÏ°í ±×·¸Áö ¾ÊÀ¸¸é null
 
-        // ë¶ˆë¦¬ì–¸ ë³€ìˆ˜
-        private bool isSelected = false;        // ì•„ì´í…œ ì„ íƒ ìƒíƒœ íŒì •
+        // ºÒ¸®¾ğ º¯¼ö
+        private bool isSelected = false;        // ¾ÆÀÌÅÛ ¼±ÅÃ »óÅÂ ÆÇÁ¤
 
-        // ì»´í¬ë„ŒíŠ¸
+        // ÄÄÆ÷³ÍÆ®
         private Button initialSlot;
         [SerializeField]
         private Button thisSlot;
         private EventSystem eventSystem;
         private TrackedDeviceGraphicRaycaster raycaster;
 
-        // í´ë˜ìŠ¤ ì»´í¬ë„ŒíŠ¸
+        // Å¬·¡½º ÄÄÆ÷³ÍÆ®
         private PlayerSetting player;
         [SerializeField]
         private Inventory inventory;
         private NPC_Merchant tradeNPC;
         #endregion
 
-        // ì†ì„±
+        // ¼Ó¼º
         #region Properties
         public float PhantomDepth { get; set; }
         public int? SelectedSlotIndex => selectedSlotIndex;
@@ -60,13 +84,13 @@ namespace InnerSight_Seti
         public Inventory Inventory => inventory;
         #endregion
 
-        // ë¼ì´í”„ ì‚¬ì´í´
+        // ¶óÀÌÇÁ »çÀÌÅ¬
         #region Life Cycle
         private void Awake()
         {
             control = new();
 
-            // ì´ˆê¸°í™”
+            // ÃÊ±âÈ­
             UIManager UIManager = GetComponent<UIManager>();
             //UIManager.PlayerUse.SetInventory(this);
             player = UIManager.Player;
@@ -81,15 +105,15 @@ namespace InnerSight_Seti
 
         private void OnEnable()
         {
-            // ì¸ë²¤í† ë¦¬ ê´€ë ¨ ì´ë²¤íŠ¸ í•¸ë“¤ëŸ¬ êµ¬ë…
+            // ÀÎº¥Åä¸® °ü·Ã ÀÌº¥Æ® ÇÚµé·¯ ±¸µ¶
             control.Player.Inventory.started += OnInventoryStarted;
             control.Player.CursorClick.started += OnCursorClickStarted;
             control.Player.CursorClick.canceled += OnCursorClickCanceled;
 
-            // ì‹¤í–‰ì·¨ì†Œ ì´ë²¤íŠ¸ í•¸ë“¤ëŸ¬ êµ¬ë…
+            // ½ÇÇàÃë¼Ò ÀÌº¥Æ® ÇÚµé·¯ ±¸µ¶
             control.UI.Cancel.started += OnCancelStarted;
 
-            // ì»¨íŠ¸ë¡¤ ì œì–´ í™œì„±í™”
+            // ÄÁÆ®·Ñ Á¦¾î È°¼ºÈ­
             control.Player.CursorClick.Enable();
             control.Player.Inventory.Enable();
             control.UI.Cancel.Enable();
@@ -97,22 +121,22 @@ namespace InnerSight_Seti
 
         private void OnDisable()
         {
-            // ì»¨íŠ¸ë¡¤ ì œì–´ ë¹„í™œì„±í™”
+            // ÄÁÆ®·Ñ Á¦¾î ºñÈ°¼ºÈ­
             control.UI.Cancel.Disable();
             control.Player.Inventory.Disable();
             control.Player.CursorClick.Disable();
 
-            // ì‹¤í–‰ì·¨ì†Œ ì´ë²¤íŠ¸ í•¸ë“¤ëŸ¬ êµ¬ë… í•´ì œ
+            // ½ÇÇàÃë¼Ò ÀÌº¥Æ® ÇÚµé·¯ ±¸µ¶ ÇØÁ¦
             control.UI.Cancel.started -= OnCancelStarted;
 
-            // ì¸ë²¤í† ë¦¬ ê´€ë ¨ ì´ë²¤íŠ¸ í•¸ë“¤ëŸ¬ êµ¬ë… í•´ì œ
+            // ÀÎº¥Åä¸® °ü·Ã ÀÌº¥Æ® ÇÚµé·¯ ±¸µ¶ ÇØÁ¦
             control.Player.Inventory.started -= OnInventoryStarted;
             control.Player.CursorClick.started -= OnCursorClickStarted;
             control.Player.CursorClick.canceled -= OnCursorClickCanceled;
         }
         #endregion
 
-        // ì´ë²¤íŠ¸ í•¸ë“¤ëŸ¬
+        // ÀÌº¥Æ® ÇÚµé·¯
         #region Event Handlers
         public void OnCancelStarted(InputAction.CallbackContext _)
         {
@@ -124,9 +148,9 @@ namespace InnerSight_Seti
         public void OnCursorClickCanceled(InputAction.CallbackContext _) => isSelected = false;
         #endregion
 
-        // ë©”ì„œë“œ
+        // ¸Ş¼­µå
         #region Methods
-        // ì•„ì´í…œ ì •ë³´ë¥¼ ìº¡ìŠí™”
+        // ¾ÆÀÌÅÛ Á¤º¸¸¦ Ä¸½¶È­
         public KeyValuePair<ItemKey, ItemValue> ItemData(ItemKey itemKey)
         {
             return new KeyValuePair<ItemKey, ItemValue>(itemKey, inventory.invenDict[itemKey]);
@@ -142,7 +166,7 @@ namespace InnerSight_Seti
             //player.PlayerUse.UseItem(pair);
         }
 
-        // NPCì™€ì˜ ê±°ë˜ - ì•„ì´í…œ íŒë§¤
+        // NPC¿ÍÀÇ °Å·¡ - ¾ÆÀÌÅÛ ÆÇ¸Å
         public void UseInven(KeyValuePair<ItemKey, ItemValue> pair)
         {
             tradeNPC.TradeSetItem(pair.Key);
@@ -151,20 +175,20 @@ namespace InnerSight_Seti
 
         public void ForTrade(bool isOpen) => ShowItem(IsOpenInventory = isOpen);
 
-        // ì•„ì´í…œ ìš´ìš©ìœ¼ë¡œ ì¸ë²¤í† ë¦¬ê°€ ë¹„ê²Œ ë˜ë©´ í˜¸ì¶œë˜ëŠ” ë©”ì„œë“œ
+        // ¾ÆÀÌÅÛ ¿î¿ëÀ¸·Î ÀÎº¥Åä¸®°¡ ºñ°Ô µÇ¸é È£ÃâµÇ´Â ¸Ş¼­µå
         public void EmptySignal()
         {
             //player.CursorUtility.CursorSwitch(false);
             ShowItem(IsOpenInventory = false);
         }
 
-        // ì¸ë²¤í† ë¦¬ ê°œí
+        // ÀÎº¥Åä¸® °³Æó
         public void ShowItem(bool isOpen)
         {
-            float scaleX = isOpen? 1.3f : 0;
+            float scaleX = isOpen ? 1.3f : 0;
             inventory.invenRect.localScale = new(scaleX, 1.3f, 1.3f);
 
-            // NPCì™€ ê±°ë˜ ì¤‘ì¼ ë•Œë§Œ ì‹¤í–‰í•˜ëŠ” ë¡œì§
+            // NPC¿Í °Å·¡ ÁßÀÏ ¶§¸¸ ½ÇÇàÇÏ´Â ·ÎÁ÷
             if (IsOnTrade)
             {
                 if (isOpen)
@@ -183,59 +207,59 @@ namespace InnerSight_Seti
             //player.CursorUtility.CursorSwitch(isOpen);
         }
 
-        // PlayerInteraction í´ë˜ìŠ¤ë¡œë¶€í„° íšë“í•œ ì•„ì´í…œì„ ì¸ë²¤í† ë¦¬ì— ì €ì¥í•˜ëŠ” ë©”ì„œë“œ
+        // PlayerInteraction Å¬·¡½º·ÎºÎÅÍ È¹µæÇÑ ¾ÆÀÌÅÛÀ» ÀÎº¥Åä¸®¿¡ ÀúÀåÇÏ´Â ¸Ş¼­µå
         public void AddItem(ItemKey itemKey, int count)
         {
-            // í˜„ì¬ ì¸ë²¤í† ë¦¬ì— í•´ë‹¹ ì•„ì´í…œì´ ìˆìœ¼ë©´
+            // ÇöÀç ÀÎº¥Åä¸®¿¡ ÇØ´ç ¾ÆÀÌÅÛÀÌ ÀÖÀ¸¸é
             if (inventory.invenDict.ContainsKey(itemKey))
             {
-                // ê°œìˆ˜ë¥¼ ëŠ˜ë¦°ë‹¤
+                // °³¼ö¸¦ ´Ã¸°´Ù
                 inventory.invenDict[itemKey].Count(count);
                 inventory.CountItem(ItemData(itemKey), inventory.invenDict[itemKey].itemIndex);
             }
 
-            // í˜„ì¬ ì¸ë²¤í† ë¦¬ì— í•´ë‹¹ ì•„ì´í…œì´ ì—†ìœ¼ë©´
+            // ÇöÀç ÀÎº¥Åä¸®¿¡ ÇØ´ç ¾ÆÀÌÅÛÀÌ ¾øÀ¸¸é
             else
             {
-                // ìƒˆ ìŠ¬ë¡¯ì„ ìƒì„±í•´ì„œ ì•„ì´í…œ í• ë‹¹
+                // »õ ½½·ÔÀ» »ı¼ºÇØ¼­ ¾ÆÀÌÅÛ ÇÒ´ç
                 inventory.MakeSlot(itemKey);
             }
         }
 
-        // ì•„ì´í…œì„ ë–¨ì–´ëœ¨ë¦¬ëŠ” ë©”ì„œë“œ
+        // ¾ÆÀÌÅÛÀ» ¶³¾î¶ß¸®´Â ¸Ş¼­µå
         public void DropItem(KeyValuePair<ItemKey, ItemValue> selectedItem)
         {
-            // ë¨¼ì € í—ˆìƒ ì•„ì´í…œì„ ì œê±°í•œ ë’¤
+            // ¸ÕÀú Çã»ó ¾ÆÀÌÅÛÀ» Á¦°ÅÇÑ µÚ
             Destroy(itemPhantom);
 
-            // í—ˆìƒ ì•„ì´í…œì˜ ìœ„ì¹˜ì— ì§„ì§œ ì•„ì´í…œì„ ìƒì„±í•˜ê³ 
+            // Çã»ó ¾ÆÀÌÅÛÀÇ À§Ä¡¿¡ ÁøÂ¥ ¾ÆÀÌÅÛÀ» »ı¼ºÇÏ°í
             float yRot = UnityEngine.Random.Range(0, 360);
             Instantiate(selectedItem.Key.itemPrefab, itemPhantom.transform.position, Quaternion.Euler(0, yRot, 0));
 
-            // í—ˆìƒ ì•„ì´í…œ ì €ì¥ ë³€ìˆ˜ë¥¼ ë¹„ìš´ ë‹¤ìŒ
+            // Çã»ó ¾ÆÀÌÅÛ ÀúÀå º¯¼ö¸¦ ºñ¿î ´ÙÀ½
             itemPhantom = null;
 
-            // ìˆ˜ëŸ‰ ê°±ì‹ 
+            // ¼ö·® °»½Å
             DecreaseItem(selectedItem);
         }
 
-        // ì•„ì´í…œ ìˆ˜ëŸ‰ ê´€ë¦¬ ë©”ì„œë“œ
+        // ¾ÆÀÌÅÛ ¼ö·® °ü¸® ¸Ş¼­µå
         public void DecreaseItem(KeyValuePair<ItemKey, ItemValue> selectedItem)
         {
-            // ì•„ì´í…œì˜ ìˆ˜ëŸ‰ì„ ê°ì†Œì‹œí‚¨ë‹¤
+            // ¾ÆÀÌÅÛÀÇ ¼ö·®À» °¨¼Ò½ÃÅ²´Ù
             if (inventory.invenDict.ContainsKey(selectedItem.Key))
                 inventory.invenDict[selectedItem.Key].Count(-1);
 
-            // ì•„ì´í…œì´ ì•„ì§ ì‚¬ìš© ê°€ëŠ¥í•˜ë‹¤ë©´ ìˆ˜ëŸ‰ë§Œ ê°ì†Œì‹œí‚¤ê³ 
+            // ¾ÆÀÌÅÛÀÌ ¾ÆÁ÷ »ç¿ë °¡´ÉÇÏ´Ù¸é ¼ö·®¸¸ °¨¼Ò½ÃÅ°°í
             if (inventory.invenDict[selectedItem.Key].IsUsable())
                 inventory.CountItem(selectedItem, selectedItem.Value.itemIndex);
 
-            // ë” ì´ìƒ ì•„ì´í…œì´ ì—†ë‹¤ë©´ ìŠ¬ë¡¯ ì œê±°
+            // ´õ ÀÌ»ó ¾ÆÀÌÅÛÀÌ ¾ø´Ù¸é ½½·Ô Á¦°Å
             else inventory.TakeSlot(selectedItem.Key);
         }
 
         #region SelectSlot
-        // ì–´ë–¤ ìŠ¬ë¡¯ì„ ì„ íƒí–ˆëŠ”ì§€ í™•ì¸í•˜ëŠ” ë©”ì„œë“œ
+        // ¾î¶² ½½·ÔÀ» ¼±ÅÃÇß´ÂÁö È®ÀÎÇÏ´Â ¸Ş¼­µå
         private IEnumerator WhichSelect()
         {
             if (!player.rayInteractor.gameObject.activeSelf)
@@ -243,7 +267,7 @@ namespace InnerSight_Seti
 
             if (IsOnTrade) yield break;
 
-            // ì•„ì´í…œ ì„ íƒ í”Œë˜ê·¸ë¥¼ true
+            // ¾ÆÀÌÅÛ ¼±ÅÃ ÇÃ·¡±×¸¦ true
             IsSelected = true;
 
             XR_Detect();
@@ -255,7 +279,7 @@ namespace InnerSight_Seti
 
             if (initialSlot != null)
             {
-                // ìŠ¬ë¡¯ì´ ì¸ë²¤í† ë¦¬ì— ìˆëŠ” ê²½ìš°
+                // ½½·ÔÀÌ ÀÎº¥Åä¸®¿¡ ÀÖ´Â °æ¿ì
                 if (Array.Exists(inventory.invenSlots, slot => slot == initialSlot))
                 {
                     selectedSlotIndex = Array.IndexOf(inventory.invenSlots, initialSlot);
@@ -267,7 +291,7 @@ namespace InnerSight_Seti
             }
             else
             {
-                
+
                 //StartCoroutine(DetectSlotXR(player.rayInteractor));
                 StopCoroutine(Detect(player.rayInteractor));
                 yield break;
@@ -275,49 +299,49 @@ namespace InnerSight_Seti
         }
 
 
-        // WhichSelectì—ì„œ ì¸ë²¤í† ë¦¬ë¡œ í™•ì¸í–ˆì„ ë•Œ í˜¸ì¶œë˜ëŠ” ë©”ì„œë“œ
+        // WhichSelect¿¡¼­ ÀÎº¥Åä¸®·Î È®ÀÎÇßÀ» ¶§ È£ÃâµÇ´Â ¸Ş¼­µå
         private void SelectInven(int invenIndex)
         {
-            // ì„ íƒí•œ ì•„ì´í…œì˜ í‚¤ë¥¼ ì½ì„ ë³€ìˆ˜
+            // ¼±ÅÃÇÑ ¾ÆÀÌÅÛÀÇ Å°¸¦ ÀĞÀ» º¯¼ö
             ItemKey selectedItemKey = null;
 
-            // ì„ íƒí•œ ì•„ì´í…œê³¼ ì¼ì¹˜í•˜ëŠ” í‚¤ë¥¼ ì°¾ê³ 
+            // ¼±ÅÃÇÑ ¾ÆÀÌÅÛ°ú ÀÏÄ¡ÇÏ´Â Å°¸¦ Ã£°í
             selectedItemKey = CollectionUtility.FirstOrNull(inventory.invenDict.Keys, key => inventory.invenDict[key].itemIndex == invenIndex);
             if (selectedItemKey != null)
-                // í—ˆìƒ ì•„ì´í…œ ìƒì„±
+                // Çã»ó ¾ÆÀÌÅÛ »ı¼º
                 GenItemPhantom(selectedItemKey);
-        }   
+        }
 
-        // í—ˆìƒ ì•„ì´í…œì„ ìƒì„±í•˜ëŠ” ë©”ì„œë“œ
+        // Çã»ó ¾ÆÀÌÅÛÀ» »ı¼ºÇÏ´Â ¸Ş¼­µå
         private void GenItemPhantom(ItemKey selectedItemKey)
         {
-            // í•´ë‹¹ í‚¤ê°€ ì¡´ì¬í•  ë•Œì—ë§Œ
+            // ÇØ´ç Å°°¡ Á¸ÀçÇÒ ¶§¿¡¸¸
             if (selectedItemKey == null) return;
 
-            // í—ˆìƒ ì•„ì´í…œì„ ìƒì„±í•˜ì—¬ ë“œëí•  ìœ„ì¹˜ë¥¼ ì„ ì •í•˜ëŠ” ë°˜ë³µê¸° í˜¸ì¶œ
+            // Çã»ó ¾ÆÀÌÅÛÀ» »ı¼ºÇÏ¿© µå¶øÇÒ À§Ä¡¸¦ ¼±Á¤ÇÏ´Â ¹İº¹±â È£Ãâ
             itemPhantom = Instantiate(selectedItemKey.itemPhantomPrefab, player.rayInteractor.transform.position, Quaternion.identity);
             phantomCor = PhantomUpdate(selectedItemKey);
             StartCoroutine(phantomCor);
         }
 
-        // ê°™ì€ ìŠ¬ë¡¯ì— ì•„ì´í…œì„ ë‘ì—ˆë‹¤ë©´ ì‚¬ìš©
+        // °°Àº ½½·Ô¿¡ ¾ÆÀÌÅÛÀ» µÎ¾ú´Ù¸é »ç¿ë
         private void SameSelect(Button thisSlot)
         {
-            // ì´ì œ ì¸ë²¤í† ë¦¬ì—ì„œ ì œìë¦¬ ë²„íŠ¼ì´ë¼ë©´ ì•„ì´í…œì„ ì‚¬ìš©í•˜ë„ë¡ ë°”ê¾¼ë‹¤
+            // ÀÌÁ¦ ÀÎº¥Åä¸®¿¡¼­ Á¦ÀÚ¸® ¹öÆ°ÀÌ¶ó¸é ¾ÆÀÌÅÛÀ» »ç¿ëÇÏµµ·Ï ¹Ù²Û´Ù
             if (initialSlot == thisSlot)
             {
-                // í•´ë‹¹ ìŠ¬ë¡¯ì˜ ì•„ì´í…œì„ ì°¾ê³ 
+                // ÇØ´ç ½½·ÔÀÇ ¾ÆÀÌÅÛÀ» Ã£°í
                 var itemKey = CollectionUtility.FirstOrNull(inventory.invenDict.Keys,
                     key => inventory.invenDict[key].itemIndex == Array.IndexOf(inventory.invenSlots, thisSlot));
 
-                StopCoroutine(phantomCor);  // í—ˆìƒ ì•„ì´í…œ ë™ê¸°í™” ì½”ë£¨í‹´ì„ ê°•ì œ ì¢…ë£Œí•˜ê³ 
-                Destroy(itemPhantom);       // í—ˆìƒ ì•„ì´í…œì„ ì œê±°í•œ ë’¤
+                StopCoroutine(phantomCor);  // Çã»ó ¾ÆÀÌÅÛ µ¿±âÈ­ ÄÚ·çÆ¾À» °­Á¦ Á¾·áÇÏ°í
+                Destroy(itemPhantom);       // Çã»ó ¾ÆÀÌÅÛÀ» Á¦°ÅÇÑ µÚ
                 itemPhantom = null;
                 phantomCor = null;
                 thisSlot = null;
 
-                /*if (itemKey != null)
-                    player.PlayerUse.UseItem(ItemData(itemKey));   // ì‚¬ìš©*/
+                *//*if (itemKey != null)
+                    player.PlayerUse.UseItem(ItemData(itemKey));   // »ç¿ë*//*
             }
 
             else return;
@@ -325,24 +349,24 @@ namespace InnerSight_Seti
         #endregion
         #endregion
 
-        // ê¸°íƒ€ ìœ í‹¸ë¦¬í‹°
+        // ±âÅ¸ À¯Æ¿¸®Æ¼
         #region Utilities
-        // í—ˆìƒ ì•„ì´í…œì„ ì¡ì•„ë‘ëŠ” ë°˜ë³µê¸°
+        // Çã»ó ¾ÆÀÌÅÛÀ» Àâ¾ÆµÎ´Â ¹İº¹±â
         public IEnumerator PhantomUpdate(ItemKey selectedItemKey)
         {
             while (IsSelected)
             {
-                // cursorUtilityì˜ ì´ë²¤íŠ¸ í•¸ë“¤ëŸ¬ë¥¼ í†µí•´ Vector2 CursorPositionì„ Vector3 ë³€ìˆ˜ì— ì…ë ¥
+                // cursorUtilityÀÇ ÀÌº¥Æ® ÇÚµé·¯¸¦ ÅëÇØ Vector2 CursorPositionÀ» Vector3 º¯¼ö¿¡ ÀÔ·Â
                 Vector3 mousePosition = player.rayInteractor.transform.position;
 
-                // í—ˆìƒ ì•„ì´í…œì˜ transform.positionì„ í•´ë‹¹ ì¢Œí‘œì™€ ë™ê¸°í™”
+                // Çã»ó ¾ÆÀÌÅÛÀÇ transform.positionÀ» ÇØ´ç ÁÂÇ¥¿Í µ¿±âÈ­
                 itemPhantom.transform.position = mousePosition;
 
-                // ë³¸ ë°˜ë³µê¸°ë¥¼ ë§¤ í”„ë ˆì„ ì‹¤í–‰
+                // º» ¹İº¹±â¸¦ ¸Å ÇÁ·¹ÀÓ ½ÇÇà
                 yield return null;
             }
 
-            // ë‹¤ë¥¸ ìŠ¬ë¡¯ì— ë‘ì—ˆë‹¤ë©´ ì¢…ë£Œ
+            // ´Ù¸¥ ½½·Ô¿¡ µÎ¾ú´Ù¸é Á¾·á
             if (thisSlot != null)
             {
                 if (initialSlot == thisSlot)
@@ -358,19 +382,19 @@ namespace InnerSight_Seti
                     if (secondItem != null)
                         inventory.SwapInvenSlots(firstIndex, secondIndex, secondItem);
                 }
-                
+
                 Destroy(itemPhantom);
                 phantomCor = null;
                 yield break;
             }
 
-            // í”Œë ˆì´ì–´ê°€ ì ì ˆí•œ ìœ„ì¹˜ì—ì„œ ë“œë˜ê·¸ë¥¼ í•´ì œí•˜ë©´ í•´ë‹¹ ì•„ì´í…œì„ ì‹¤ì²´í™”
+            // ÇÃ·¹ÀÌ¾î°¡ ÀûÀıÇÑ À§Ä¡¿¡¼­ µå·¡±×¸¦ ÇØÁ¦ÇÏ¸é ÇØ´ç ¾ÆÀÌÅÛÀ» ½ÇÃ¼È­
             DropItem(ItemData(selectedItemKey));
 
-            // ì´ ë°˜ë³µê¸°ë¥¼ ê¸°ì–µí•˜ëŠ” ë³€ìˆ˜ë¥¼ ë¹„ìš°ê³ 
+            // ÀÌ ¹İº¹±â¸¦ ±â¾ïÇÏ´Â º¯¼ö¸¦ ºñ¿ì°í
             phantomCor = null;
 
-            // ì‘ë™ ì¤‘ì¸ ì½”ë£¨í‹´ ì •ì§€
+            // ÀÛµ¿ ÁßÀÎ ÄÚ·çÆ¾ Á¤Áö
             yield break;
         }
 
@@ -378,22 +402,22 @@ namespace InnerSight_Seti
         {
             int count = 0;
 
-            // ë‹¤ì‹œ í´ë¦­í•  ë•Œê¹Œì§€ ê³„ì† ë°˜ë³µ
+            // ´Ù½Ã Å¬¸¯ÇÒ ¶§±îÁö °è¼Ó ¹İº¹
             while (!initialSlot || count > 10)
             {
                 if (rayInteractor.TryGetCurrentUIRaycastResult(out var re))
                 {
-                    //Button UI íšë“ì„ ì‹œë„í•´ë³´ê³  ì¡íˆë©´ ì„ íƒ
+                    //Button UI È¹µæÀ» ½ÃµµÇØº¸°í ÀâÈ÷¸é ¼±ÅÃ
                     if (ComponentUtility.TryGetComponentInChildren<Button>(re.gameObject.transform, out var slot))
                     {
                         initialSlot = slot;
                     }
                 }
                 count++;
-                // ì´ ë°˜ë³µê¸°ë¥¼ ë§¤ í”„ë ˆì„ ë°˜ë³µí•˜ê³ 
+                // ÀÌ ¹İº¹±â¸¦ ¸Å ÇÁ·¹ÀÓ ¹İº¹ÇÏ°í
                 yield return null;
             }
-            // ì—­í• ì´ ëë‚˜ë©´ ì¢…ë£Œ
+            // ¿ªÇÒÀÌ ³¡³ª¸é Á¾·á
             yield break;
         }
         #endregion
@@ -423,7 +447,7 @@ namespace InnerSight_Seti
 
             if (player.rayInteractor == null || eventSystem == null)
             {
-                Debug.LogWarning("XRRayInteractor ë˜ëŠ” EventSystemì´ ì„¤ì •ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
+                Debug.LogWarning("XRRayInteractor ¶Ç´Â EventSystemÀÌ ¼³Á¤µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
                 return;
             }
 
@@ -433,10 +457,10 @@ namespace InnerSight_Seti
         public IEnumerator Detect(XRRayInteractor rayInteractor)
         {
 
-            // ê·¸ë¥¼ ê¸°ë°˜ìœ¼ë¡œ GraphicRaycaster ì‹œí–‰
+            // ±×¸¦ ±â¹İÀ¸·Î GraphicRaycaster ½ÃÇà
             List<RaycastResult> results = new();
 
-            // ë‹¤ì‹œ í´ë¦­í•  ë•Œê¹Œì§€ ê³„ì† ë°˜ë³µ
+            // ´Ù½Ã Å¬¸¯ÇÒ ¶§±îÁö °è¼Ó ¹İº¹
             while (IsSelected)
             {
                 if (rayInteractor.TryGetCurrentUIRaycastResult(out var re))
@@ -446,7 +470,7 @@ namespace InnerSight_Seti
 
                     foreach (var result in results)
                     {
-                        //Button UI íšë“ì„ ì‹œë„í•´ë³´ê³  ì¡íˆë©´ ì„ íƒ
+                        //Button UI È¹µæÀ» ½ÃµµÇØº¸°í ÀâÈ÷¸é ¼±ÅÃ
                         if (ComponentUtility.TryGetComponentInChildren<Button>(result.gameObject.transform, out var slot))
                         {
                             thisSlot = slot;
@@ -454,52 +478,52 @@ namespace InnerSight_Seti
                     }
                 }
 
-                // ì´ ë°˜ë³µê¸°ë¥¼ ë§¤ í”„ë ˆì„ ë°˜ë³µí•˜ê³ 
+                // ÀÌ ¹İº¹±â¸¦ ¸Å ÇÁ·¹ÀÓ ¹İº¹ÇÏ°í
                 yield return null;
             }
 
             thisSlot = null;
             results.Clear();
 
-            // ì—­í• ì´ ëë‚˜ë©´ ì¢…ë£Œ
+            // ¿ªÇÒÀÌ ³¡³ª¸é Á¾·á
             yield break;
         }
         #endregion
 
         #region Dummy_Seti
-        /*// ìŠ¬ë¡¯ì„ ê°ì§€í•˜ëŠ” ë°˜ë³µê¸° (XR ë²„ì „)
+        *//*// ½½·ÔÀ» °¨ÁöÇÏ´Â ¹İº¹±â (XR ¹öÀü)
         public IEnumerator DetectSlot(XRRayInteractor rayInteractor)
         {
-            // ë‹¤ì‹œ í´ë¦­í•  ë•Œê¹Œì§€ ê³„ì† ë°˜ë³µ
+            // ´Ù½Ã Å¬¸¯ÇÒ ¶§±îÁö °è¼Ó ¹İº¹
             while (IsSelected)
             {
-                // ë ˆì´ ì¸í„°ë™í„°ê°€ UIì— íˆíŠ¸ë¥¼ ê°€í–ˆëŠ”ì§€ í™•ì¸
+                // ·¹ÀÌ ÀÎÅÍ·¢ÅÍ°¡ UI¿¡ È÷Æ®¸¦ °¡Çß´ÂÁö È®ÀÎ
                 if (rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit hit))
                 {
-                    // íˆíŠ¸ ì§€ì ì˜ ì›”ë“œ ì¢Œí‘œë¥¼ ìŠ¤í¬ë¦° ì¢Œí‘œë¡œ ë³€í™˜
+                    // È÷Æ® ÁöÁ¡ÀÇ ¿ùµå ÁÂÇ¥¸¦ ½ºÅ©¸° ÁÂÇ¥·Î º¯È¯
                     Vector3 screenPosition = Camera.main.WorldToScreenPoint(hit.point);
 
-                    // EventSystemìœ¼ë¡œë¶€í„° í¬ì¸í„° ì •ë³´ë¥¼ ë°›ìŒ
+                    // EventSystemÀ¸·ÎºÎÅÍ Æ÷ÀÎÅÍ Á¤º¸¸¦ ¹ŞÀ½
                     PointerEventData pointerData = new(EventSystem.current)
                     {
                         position = (Vector2)screenPosition
                     };
 
-                    // ê·¸ë¥¼ ê¸°ë°˜ìœ¼ë¡œ GraphicRaycaster ì‹œí–‰
+                    // ±×¸¦ ±â¹İÀ¸·Î GraphicRaycaster ½ÃÇà
                     List<RaycastResult> results = new();
                     raycaster.Raycast(pointerData, results);
 
                     Debug.Log(results);
 
-                    // í˜„ì¬ì˜ ìŠ¬ë¡¯ì„ ê°ì§€
+                    // ÇöÀçÀÇ ½½·ÔÀ» °¨Áö
                     thisSlot = null;
                     foreach (RaycastResult result in results)
                     {
-                        *//*// ê°ì§€í•œ UGUIê°€ í…ìŠ¤íŠ¸ë°•ìŠ¤ë¼ë©´ ë¬´ì‹œ
+                        *//*// °¨ÁöÇÑ UGUI°¡ ÅØ½ºÆ®¹Ú½º¶ó¸é ¹«½Ã
                         if (result.gameObject.GetComponent<TextMeshProUGUI>())
                             continue;
 
-                        // Button UI íšë“ì„ ì‹œë„í•´ë³´ê³  ì¡íˆë©´ ì„ íƒ
+                        // Button UI È¹µæÀ» ½ÃµµÇØº¸°í ÀâÈ÷¸é ¼±ÅÃ
                         if (result.gameObject.TryGetComponent<Button>(out var slot))
                             thisSlot = slot;*//*
 
@@ -508,54 +532,54 @@ namespace InnerSight_Seti
                     }
                 }
 
-                // ì´ ë°˜ë³µê¸°ë¥¼ ë§¤ í”„ë ˆì„ ë°˜ë³µí•˜ê³ 
+                // ÀÌ ¹İº¹±â¸¦ ¸Å ÇÁ·¹ÀÓ ¹İº¹ÇÏ°í
                 yield return null;
             }
 
-            // ì—­í• ì´ ëë‚˜ë©´ ì¢…ë£Œ
+            // ¿ªÇÒÀÌ ³¡³ª¸é Á¾·á
             yield break;
         }
 
-        // ìŠ¬ë¡¯ì„ ê°ì§€í•˜ëŠ” ë°˜ë³µê¸° (PC ë²„ì „)
+        // ½½·ÔÀ» °¨ÁöÇÏ´Â ¹İº¹±â (PC ¹öÀü)
         public IEnumerator DetectSlot()
         {
-            // ë‹¤ì‹œ í´ë¦­í•  ë•Œê¹Œì§€ ê³„ì† ë°˜ë³µ
+            // ´Ù½Ã Å¬¸¯ÇÒ ¶§±îÁö °è¼Ó ¹İº¹
             while (IsSelected)
             {
-                // EventSystemìœ¼ë¡œë¶€í„° í¬ì¸í„° ì •ë³´ë¥¼ ë°›ê³ 
+                // EventSystemÀ¸·ÎºÎÅÍ Æ÷ÀÎÅÍ Á¤º¸¸¦ ¹Ş°í
                 PointerEventData pointerData = new(eventSystem)
                 {
                     position = Mouse.current.position.ReadValue()
 
                 };
 
-                // ê·¸ë¥¼ ê¸°ë°˜ìœ¼ë¡œ GraphicRaycaster ì‹œí–‰
+                // ±×¸¦ ±â¹İÀ¸·Î GraphicRaycaster ½ÃÇà
                 List<RaycastResult> results = new();
 
                 raycaster.Raycast(pointerData, results);
 
-                // í˜„ì¬ì˜ ìŠ¬ë¡¯ì„ ê°ì§€
+                // ÇöÀçÀÇ ½½·ÔÀ» °¨Áö
                 thisSlot = null;
                 foreach (RaycastResult result in results)
                 {
-                    // ê°ì§€í•œ UGUIê°€ í…ìŠ¤íŠ¸ë°•ìŠ¤ë¼ë©´ ë¬´ì‹œ
+                    // °¨ÁöÇÑ UGUI°¡ ÅØ½ºÆ®¹Ú½º¶ó¸é ¹«½Ã
                     if (result.gameObject.GetComponent<TextMeshProUGUI>())
                         continue;
 
-                    // Button UI íšë“ì„ ì‹œë„í•´ë³´ê³  ì¡íˆë©´ ì„ íƒ
+                    // Button UI È¹µæÀ» ½ÃµµÇØº¸°í ÀâÈ÷¸é ¼±ÅÃ
                     if (result.gameObject.TryGetComponent<Button>(out var slot))
                         thisSlot = slot;
 
                 }
 
 
-                // ì´ ë°˜ë³µê¸°ë¥¼ ë§¤ í”„ë ˆì„ ë°˜ë³µí•˜ê³ 
+                // ÀÌ ¹İº¹±â¸¦ ¸Å ÇÁ·¹ÀÓ ¹İº¹ÇÏ°í
                 yield return null;
             }
 
-            // ì—­í• ì´ ëë‚˜ë©´ ì¢…ë£Œ
+            // ¿ªÇÒÀÌ ³¡³ª¸é Á¾·á
             yield break;
-        }*/
+        }*//*
         #endregion
     }
-}
+}*/
