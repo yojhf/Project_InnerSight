@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit.Locomotion.Turning;
+using InnerSight_Seti;
 
 namespace MyVRSample
 {
@@ -10,6 +11,7 @@ namespace MyVRSample
         public static InGameUIManager instance;
 
         //public GameObject gameMenu;
+        public InventoryManager InventoryManager { get; private set; }
         public GameObject inventory;
         public Transform head;
 
@@ -33,7 +35,7 @@ namespace MyVRSample
 
         void Start()
         {
-
+            InventoryManager = GetComponent<InventoryManager>();
         }
 
         // Update is called once per frame
@@ -66,7 +68,8 @@ namespace MyVRSample
 
         void Toggle_Inven()
         {
-            inventory.SetActive(!inventory.activeSelf);
+            //inventory.SetActive(!inventory.activeSelf);
+            InventoryManager.ShowItem(InventoryManager.IsOpenInventory = !InventoryManager.IsOpenInventory);
 
             // show set
             if (inventory.activeSelf)

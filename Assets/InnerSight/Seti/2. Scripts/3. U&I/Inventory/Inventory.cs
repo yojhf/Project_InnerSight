@@ -35,7 +35,7 @@ namespace InnerSight_Seti
         {
             // 컴포넌트 초기화
             inventoryManager = GetComponentInParent<InventoryManager>();
-            invenRect = GetComponent<RectTransform>();
+            invenRect = transform.GetChild(0).GetChild(0).GetComponent<RectTransform>();
             //invenPanel = transform.GetChild(0).gameObject;
             invenSlots = invenPanel.GetComponentsInChildren<Button>();
             invenSlotsCountTexts = GetComponentsInChildren<TextMeshProUGUI>();
@@ -85,8 +85,8 @@ namespace InnerSight_Seti
             invenDict.Remove(selectedItemKey);
 
             // 만약 아이템을 전부 다 썼다면 인벤토리를 자동으로 비활성화
-            if (invenDict.Count == 0)
-                inventoryManager.EmptySignal();
+            //if (invenDict.Count == 0)
+            //    inventoryManager.EmptySignal();
         }
 
         // 두 아이템의 슬롯을 교환하는 메서드
