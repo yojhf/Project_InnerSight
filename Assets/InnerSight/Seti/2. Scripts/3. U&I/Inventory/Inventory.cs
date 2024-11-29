@@ -90,17 +90,13 @@ namespace InnerSight_Seti
         }
 
         // 두 아이템의 슬롯을 교환하는 메서드
-        public void SwapInvenSlots(int firstIndex, int secondIndex)
+        public void SwapInvenSlots(int firstIndex, int secondIndex, ItemKey secondItem)
         {
             if (firstIndex == secondIndex)
                 return;
 
             // 기존 아이템 참조 저장
             var firstItem = CollectionUtility.FirstOrDefault(invenDict.Keys, key => invenDict[key].itemIndex == firstIndex);
-            var secondItem = CollectionUtility.FirstOrNull(invenDict.Keys, key => invenDict[key].itemIndex == secondIndex);
-
-            if (secondItem == null)
-                return;
 
             // 첫 번째 슬롯과 두 번째 슬롯을 교환
             if (firstItem != null)
