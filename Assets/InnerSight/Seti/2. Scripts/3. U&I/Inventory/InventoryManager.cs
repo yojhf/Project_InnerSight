@@ -450,8 +450,6 @@ namespace InnerSight_Seti
             // 다시 클릭할 때까지 계속 반복
             while (IsSelected)
             {
-
-
                 if (rayInteractor.TryGetCurrentUIRaycastResult(out var re))
                 {
                     results.Add(re);

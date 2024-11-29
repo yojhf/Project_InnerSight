@@ -9,6 +9,8 @@ namespace InnerSight_Seti
         private ItemKey itemData;
         public ItemDatabase itemDatabase; // 데이터베이스 참조
 
+        public int ItemId => itemID;
+
         private void Start()
         {
             // ID를 사용해서 ItemDatabase에서 아이템 데이터를 가져옴
