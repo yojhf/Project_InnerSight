@@ -29,6 +29,8 @@ namespace Noah
             LeftSelect();
             RightAct();
             RightSelect();
+
+            LeftStorageAct();
         }
 
 
@@ -44,11 +46,11 @@ namespace Noah
         {
             if (inputActManager.IsLeftAct())
             {
-                GetBackStoeage();
+                //GetBackStoeage();
             }
             else 
             {
-                inventoryManager.ResetData();
+      
             }
         }
 
@@ -59,6 +61,18 @@ namespace Noah
 
             }
 
+        }
+
+        void LeftStorageAct()
+        {
+            if (inputActManager.IsLeftStorage())
+            {
+                GetBackStoeage();
+            }
+            if (inputActManager.IsLeftStorageRl())
+            {
+                inventoryManager.ResetData();
+            }
         }
 
         void RightAct()
