@@ -40,15 +40,15 @@ public class InputActManager : MonoBehaviour
     }
     public bool IsLeftSelect()
     {
-        float R_act = leftSelect.action.ReadValue<float>();
+        float L_Select = leftSelect.action.ReadValue<float>();
 
-        return R_act > 0.1f;
+        return L_Select > 0.1f;
     }
     public bool IsRightSelect()
     {
-        float R_act = rightSelect.action.ReadValue<float>();
+        float R_Select = rightSelect.action.ReadValue<float>();
 
-        return R_act > 0.1f;
+        return R_Select > 0.1f;
     }
 
     public bool IsStorage()
@@ -56,6 +56,20 @@ public class InputActManager : MonoBehaviour
         bool _storage = storage.action.WasPressedThisFrame();
 
         return _storage;
+    }
+
+    public bool IsLeftStorage()
+    {
+        bool left_storage = leftAction.action.WasPressedThisFrame();
+
+        return left_storage;
+    }
+
+    public bool IsLeftStorageRl()
+    {
+        bool left_storage = leftAction.action.WasReleasedThisFrame();
+
+        return left_storage;
     }
 
 

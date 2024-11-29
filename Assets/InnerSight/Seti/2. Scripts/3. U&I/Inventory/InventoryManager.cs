@@ -243,14 +243,16 @@ namespace InnerSight_Seti
 
             if (IsOnTrade) return;
 
+            Debug.Log("11");
+
             // 아이템 선택 플래그를 true
             IsSelected = true;
 
             XR_Detect();
+            Debug.Log(thisSlot);
+
             //StartCoroutine(DetectSlot(player.rayInteractor));
             //StartCoroutine(DetectSlotXR(player.rayInteractor));
-
-            Debug.Log(thisSlot);
 
             if (thisSlot != null)
             {
@@ -271,6 +273,9 @@ namespace InnerSight_Seti
                 StopCoroutine(Detect(player.rayInteractor));
                 return;
             }
+
+            Debug.Log("22");
+
         }
 
 
@@ -351,9 +356,6 @@ namespace InnerSight_Seti
                 yield return null;
             }
 
-            // 플레이어가 적절한 위치에서 드래그를 해제하면 해당 아이템을 실체화
-            DropItem(ItemData(selectedItemKey));
-
             // 다른 슬롯에 두었다면 종료
             if (thisSlot != null)
             {
@@ -373,7 +375,8 @@ namespace InnerSight_Seti
                 yield break;
             }
 
-
+            // 플레이어가 적절한 위치에서 드래그를 해제하면 해당 아이템을 실체화
+            DropItem(ItemData(selectedItemKey));
 
             // 이 반복기를 기억하는 변수를 비우고
             phantomCor = null;
@@ -479,15 +482,15 @@ namespace InnerSight_Seti
         // VR
 
         public void ResetData()
-        { 
+        {
             IsSelected = false;
             //thisSlot = null;
         }
 
         public void XR_WhichSelect()
         {
-            if (IsSelected)
-                return;
+            //if (IsSelected)
+            //    return;
 
 
             WhichSelect();
@@ -516,10 +519,12 @@ namespace InnerSight_Seti
             {
                 if (rayInteractor.TryGetCurrentUIRaycastResult(out var re))
                 {
-                    results.Add(re);
+
+
+
                     //if (!results.Contains(re))
                     //{
-       
+
                     //}
 
 
@@ -538,6 +543,8 @@ namespace InnerSight_Seti
                     //Debug.Log(pointerData);
                     //Debug.Log("11 / " + results.Count);
 
+
+                    results.Add(re);
                     thisSlot = null;
 
                     foreach (var result in results)
@@ -547,7 +554,7 @@ namespace InnerSight_Seti
                             continue;
 
                         //Button UI 획득을 시도해보고 잡히면 선택
-                        if (ComponentUtility.TryGetComponentInChildren<Button>(re.gameObject.transform, out var slot))
+                        if (ComponentUtility.TryGetComponentInChildren<Button>(result.gameObject.transform, out var slot))
                         {
                             thisSlot = slot;
                         }
@@ -559,8 +566,7 @@ namespace InnerSight_Seti
                 }
                 else
                 {
-                    //thisSlot = null;
-
+                    
                     Debug.Log("레이가 유효한 히트를 감지하지 못했습니다.");
                 }
 
@@ -568,7 +574,7 @@ namespace InnerSight_Seti
                 yield return null;
             }
 
-
+            //thisSlot = null;
 
             // 역할이 끝나면 종료
             yield break;
