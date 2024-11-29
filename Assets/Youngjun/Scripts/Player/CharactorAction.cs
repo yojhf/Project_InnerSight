@@ -36,7 +36,6 @@ namespace Noah
         {
             if (inputActManager.IsStorage() && inputActManager.IsRightSelect())
             {
-                Debug.Log("storage");
                 playerSetting.PlayerInteraction.ThisIsMine();
             }
         }
@@ -46,7 +45,6 @@ namespace Noah
             if (inputActManager.IsLeftAct())
             {
                 GetBackStoeage();
-                Debug.Log("LeftAct");
             }
             else 
             {
@@ -58,7 +56,7 @@ namespace Noah
         {
             if (inputActManager.IsLeftSelect())
             {
-                Debug.Log("LeftSelect");
+
             }
 
         }
@@ -67,14 +65,14 @@ namespace Noah
         {
             if (inputActManager.IsRightAct())
             {
-                Debug.Log("RightAct");
+
             }
         }
         void RightSelect()
         {
             if (inputActManager.IsRightSelect())
             {
-                Debug.Log("RightSelect");
+
                 
             }
         }
