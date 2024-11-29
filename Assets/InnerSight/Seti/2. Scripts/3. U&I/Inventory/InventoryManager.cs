@@ -342,6 +342,9 @@ namespace InnerSight_Seti
                 yield return null;
             }
 
+            // 플레이어가 적절한 위치에서 드래그를 해제하면 해당 아이템을 실체화
+            DropItem(ItemData(selectedItemKey));
+
             // 다른 슬롯에 두었다면 종료
             if (thisSlot != null)
             {
@@ -364,8 +367,7 @@ namespace InnerSight_Seti
                 yield break;
             }
 
-            // 플레이어가 적절한 위치에서 드래그를 해제하면 해당 아이템을 실체화
-            DropItem(ItemData(selectedItemKey));
+
 
             // 이 반복기를 기억하는 변수를 비우고
             phantomCor = null;

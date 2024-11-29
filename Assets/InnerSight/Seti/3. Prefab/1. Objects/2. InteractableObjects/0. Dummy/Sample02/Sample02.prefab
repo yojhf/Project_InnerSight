@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5552737178692897715}
   - component: {fileID: 70192577211477958}
   - component: {fileID: 6448983201647163714}
-  - component: {fileID: 7484144269731991695}
+  - component: {fileID: 3227164553120016253}
   - component: {fileID: -7294462878168108022}
   m_Layer: 0
   m_Name: Sample02
@@ -138,7 +138,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &7484144269731991695
+--- !u!114 &3227164553120016253
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,9 +147,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1453821419900159809}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e6955fc44f0f714c8c27226d7382537, type: 3}
+  m_Script: {fileID: 11500000, guid: a86a51acaeb7ce94699efb2bbc0a0236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemID: 1
   itemDatabase: {fileID: 11400000, guid: 526437a0b8e0d6a4999c7f004dc606c7, type: 2}
 --- !u!114 &-7294462878168108022
 MonoBehaviour:
