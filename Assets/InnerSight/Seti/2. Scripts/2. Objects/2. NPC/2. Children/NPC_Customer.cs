@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,6 +11,7 @@ namespace InnerSight_Seti
         SHOWING,
         ENTERING,
         BROWSING,
+        CHECKING,
         PURCHASING,
         EXITING,
         DISABLE
@@ -37,7 +39,13 @@ namespace InnerSight_Seti
 
         // 쇼핑
         private Transform centerOfShop;
-        private List<Item> shopItems;
+        private List<Item> shopItems = new();
+        private Item thisItem;
+        private int currentIndex;
+        private bool isThisItem = false;
+        
+        [SerializeField]
+        private float checkDelay = 3f;
         #endregion
 
         // 라이프 사이클
@@ -59,6 +67,7 @@ namespace InnerSight_Seti
         private void OnEnable()
         {
             AIBehaviour(NPC_Behaviour.SHOWING);
+            currentIndex = 0;
         }
         #endregion
 
@@ -98,10 +107,11 @@ namespace InnerSight_Seti
                     break;
 
                 case NPC_Behaviour.BROWSING:
-                    // 둘러보기
-                    // 상점 내부 순회
-                    // ItemID 확인
-                    // 일치하는 게 있으면 PURCHASING
+                    BrowsingShop();
+                    break;
+
+                case NPC_Behaviour.CHECKING:
+                    StartCoroutine(CheckID());
                     break;
 
                 case NPC_Behaviour.PURCHASING:
@@ -123,20 +133,28 @@ namespace InnerSight_Seti
             {
                 switch (npcState)
                 {
-                    case NPC_Behaviour.OUTSIDE:
-                        AIBehaviour(NPC_Behaviour.DISABLE);
-                        break;
-
                     case NPC_Behaviour.SHOWING:
                         AIBehaviour(NPC_Behaviour.ENTERING);
                         break;
 
                     case NPC_Behaviour.ENTERING:
-                        AIBehaviour(NPC_Behaviour.EXITING);
+                        AIBehaviour(NPC_Behaviour.BROWSING);
                         break;
 
                     case NPC_Behaviour.EXITING:
                         AIBehaviour(NPC_Behaviour.OUTSIDE);
+                        break;
+
+                    case NPC_Behaviour.OUTSIDE:
+                        AIBehaviour(NPC_Behaviour.DISABLE);
+                        break;
+
+                    case NPC_Behaviour.BROWSING:
+                        AIBehaviour(NPC_Behaviour.CHECKING);
+                        break;
+
+                    case NPC_Behaviour.PURCHASING:
+                        AIBehaviour(NPC_Behaviour.EXITING);
                         break;
                 }
             }
@@ -145,13 +163,31 @@ namespace InnerSight_Seti
         // 상점 둘러보기
         void BrowsingShop()
         {
+            // thisItem 지정
+            Debug.Log(currentIndex);
+            Debug.Log(shopItems.Count);
 
+            thisItem = shopItems[currentIndex];
+
+            agent.SetDestination(FrontOfItem(thisItem.transform));
+
+            currentIndex++;
         }
 
         // ID 확인
-        bool CheckID()
+        IEnumerator CheckID()
         {
-            return (NPC_wannaItem);
+            float timeStamp = Time.time;
+            while (timeStamp + checkDelay > Time.time)
+            {
+                yield return null;
+            }
+            isThisItem = (NPC_wannaItem.ItemId == thisItem.ItemId);
+
+            if (isThisItem) AIBehaviour(NPC_Behaviour.PURCHASING);
+            else AIBehaviour(NPC_Behaviour.BROWSING);
+
+            yield break;
         }
 
         Vector3 FrontOfItem(Transform itemTransform)
@@ -165,6 +201,7 @@ namespace InnerSight_Seti
         #region Event Methods
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log("호출");
             if (other.CompareTag("Shop"))
             {
                 centerOfShop = other.transform.GetChild(0);
