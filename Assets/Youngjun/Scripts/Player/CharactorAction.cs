@@ -33,7 +33,6 @@ namespace Noah
             LeftStorageAct();
         }
 
-
         void OnStorage()
         {
             if (inputActManager.IsStorage() && inputActManager.IsRightSelect())
@@ -63,18 +62,6 @@ namespace Noah
 
         }
 
-        void LeftStorageAct()
-        {
-            if (inputActManager.IsLeftStorage())
-            {
-                GetBackStoeage();
-            }
-            if (inputActManager.IsLeftStorageRl())
-            {
-                inventoryManager.ResetData();
-            }
-        }
-
         void RightAct()
         {
             if (inputActManager.IsRightAct())
@@ -91,7 +78,28 @@ namespace Noah
             }
         }
 
+        void LeftStorageAct()
+        {
+            if (inputActManager.IsLeftStorage())
+            {
+                // 오브젝트 필드로 꺼냄
+                GetBackStoeage();
+            }
+            if (inputActManager.IsLeftStorageRl())
+            {
+                // 인벤토리에서 오브젝트 꺼낸 후 데이터 리셋
+                inventoryManager.ResetData();
 
+            }
+        }
+
+        void LeftSelectInput()
+        {
+            if (inputActManager.IsLeftSelectReleased())
+            { 
+                
+            }
+        }
 
         #region 상호작용
         void GetBackStoeage()

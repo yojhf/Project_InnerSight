@@ -659,7 +659,7 @@ GameObject:
   - component: {fileID: 3525233582988473188}
   - component: {fileID: 478586860174498717}
   - component: {fileID: 7190294254034732169}
-  - component: {fileID: 2163097880712379489}
+  - component: {fileID: 3402675750306759063}
   m_Layer: 0
   m_Name: XR Origin (VR)_Pro
   m_TagString: Untagged
@@ -893,6 +893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3739a0e190d90c64c9b24d57c8933703, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactables: []
   rightHand: {fileID: 7824457595161168445}
 --- !u!114 &478586860174498717
 MonoBehaviour:
@@ -919,8 +920,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryManager: {fileID: 6509012894415179967}
---- !u!135 &2163097880712379489
-SphereCollider:
+--- !u!136 &3402675750306759063
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -937,9 +938,11 @@ SphereCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 5
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Height: 1.52
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.84, z: 0}
 --- !u!1 &622592906607747112
 GameObject:
   m_ObjectHideFlags: 0

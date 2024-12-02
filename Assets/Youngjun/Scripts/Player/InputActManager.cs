@@ -72,7 +72,33 @@ public class InputActManager : MonoBehaviour
         return left_storage;
     }
 
+    public bool IsRightStorage()
+    {
+        bool right_storage = rightAction.action.WasPressedThisFrame();
 
+        return right_storage;
+    }
+
+    public bool IsRightStorageRl()
+    {
+        bool right_storage = rightAction.action.WasReleasedThisFrame();
+
+        return right_storage;
+    }
+
+    public bool IsLeftSelectPress()
+    {
+        bool leftPr = leftSelect.action.WasPressedThisFrame();
+
+        return leftPr;
+    }
+
+    public bool IsLeftSelectReleased()
+    {
+        bool leftRl = leftSelect.action.WasReleasedThisFrame();
+
+        return leftRl;
+    }
 
 
 }

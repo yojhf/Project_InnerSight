@@ -11,8 +11,7 @@ namespace InnerSight_Seti
         // 필드
         #region Variables
         // Dictionary를 사용해 상호작용 오브젝트와 UI를 관리
-        [SerializeField]
-        private List<GameObject> interactables = new();
+        public List<GameObject> interactables = new();
 
         [SerializeField] private GameObject rightHand;
 
@@ -90,9 +89,6 @@ namespace InnerSight_Seti
             // 해당 오브젝트가 리스트에 있는지 확인
             if (interactables.Contains(other.gameObject))
             {
-                // UI 오브젝트 제거
-                Destroy(other.gameObject);
-
                 // List에서 해당 오브젝트 제거
                 interactables.Remove(other.gameObject);
             }
