@@ -9,9 +9,19 @@ namespace Noah
     public class CharactorAction : MonoBehaviour
     {
         private PlayerSetting playerSetting;
-        
+        private bool isGrap = false;
+
+        public bool IsGrap 
+        {
+            get { return isGrap; }
+            set { isGrap = value; }
+
+        }
+
         InputActManager inputActManager;
         InventoryManager inventoryManager;
+
+
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -31,6 +41,9 @@ namespace Noah
             RightSelect();
 
             LeftStorageAct();
+
+            LeftSelectInputUp();
+            RightSelectInputUp();
         }
 
         void OnStorage()
@@ -93,11 +106,41 @@ namespace Noah
             }
         }
 
-        void LeftSelectInput()
+        // 哭率 Select ButtonDown
+        void LeftSelectInputDown()
+        {
+            if (inputActManager.IsLeftSelectPress())
+            {
+                IsGrap = true;
+            }
+        }
+
+        // 坷弗率 Select ButtonDown
+        void RightSelectInputDown()
+        {
+            if (inputActManager.IsRightSelectPress())
+            {
+                IsGrap = true;
+            }
+        }
+
+        // 哭率 Select ButtonUp
+        void LeftSelectInputUp()
         {
             if (inputActManager.IsLeftSelectReleased())
-            { 
-                
+            {
+                IsGrap = false;
+
+
+            }
+        }
+
+        // 坷弗率 Select ButtonUp
+        void RightSelectInputUp()
+        {
+            if (inputActManager.IsRightSelectReleased())
+            {
+                IsGrap = false;
             }
         }
 

@@ -2172,7 +2172,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1717897175840808370, guid: 930617953e4e9864a93b073accb28355, type: 3}
   m_PrefabInstance: {fileID: 1396204957}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1315880713}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b9d3c73952c6fb042a0533d599ff7aa0, type: 3}
@@ -3149,6 +3149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 520422ed1c5c9cc469a308f948de454d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1315880713}
   items: []
   keyId: 1
 --- !u!1 &1299541899
@@ -3425,6 +3426,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 1
   itemDatabase: {fileID: 11400000, guid: 50f373a17d1c5db4c98ee94b4230fcb0, type: 2}
+--- !u!1 &1315880713 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 578730659060604946, guid: 930617953e4e9864a93b073accb28355, type: 3}
+  m_PrefabInstance: {fileID: 1396204957}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1396204957
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5701,20 +5707,20 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 617245718}
+  - {fileID: 1048752731}
+  - {fileID: 2069616795}
+  - {fileID: 1741257926}
+  - {fileID: 1871621013}
   - {fileID: 1895781265}
   - {fileID: 378564607}
+  - {fileID: 1416707928}
   - {fileID: 498261135}
+  - {fileID: 1867135581}
   - {fileID: 436208810}
   - {fileID: 1299541900}
-  - {fileID: 270754144}
   - {fileID: 780477962}
+  - {fileID: 270754144}
   - {fileID: 1444950109}
-  - {fileID: 1416707928}
-  - {fileID: 1867135581}
-  - {fileID: 1048752731}
-  - {fileID: 1741257926}
-  - {fileID: 2069616795}
-  - {fileID: 1871621013}
   m_Father: {fileID: 1223056879}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2019856105
