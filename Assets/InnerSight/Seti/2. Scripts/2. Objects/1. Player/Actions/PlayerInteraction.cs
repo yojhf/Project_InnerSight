@@ -47,9 +47,6 @@ namespace InnerSight_Seti
                 {
                     ItemKey itemData = interactable.GetItemData();
 
-                    Debug.Log(player.PlayerUse);
-                    Debug.Log(player.PlayerUse.InventoryManager);
-
                     // 인벤토리에 더하는 메서드 호출
                     player.PlayerUse.InventoryManager.AddItem(itemData, 1);
                 }

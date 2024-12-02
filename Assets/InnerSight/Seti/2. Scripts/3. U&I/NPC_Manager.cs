@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace InnerSight_Seti
@@ -9,30 +11,87 @@ namespace InnerSight_Seti
     {
         // 필드
         #region Variables
-        [SerializeField] private GameObject NPC_Customer_Prefab;
-        [SerializeField] private Transform frontOfPlayer;
-        [SerializeField] private Transform enterPoint;
-        [SerializeField] private Transform exitPoint;
+        [SerializeField] private Database_NPC database_NPC;
+        public Transform Point_Entrance;
+        public Transform Point_Enable;
+        public Transform Point_Disable;
 
-        private NPC_Customer NPC_Customer;
-        private GameObject customer;
+        // 풀링
+        private Queue<GameObject> Pool_NPC = new();
+        [SerializeField] int NPCPoolSize = 100;
+
+        // NPC 생성 주기
+        bool isGenerating = false;
+        [SerializeField] int NPC_GenMaxTime = 5;
         #endregion
 
         // 라이프 사이클
         #region Life Cycle
-        private void Awake()
+        private void Update()
         {
-            GenNPC();
+            if (isGenerating) return;
+            StartCoroutine(GenNPC());
         }
         #endregion
 
         // 메서드
         #region Methods
-        void GenNPC()
+        // NPC 생성
+        IEnumerator GenNPC()
         {
-            customer = Instantiate(NPC_Customer_Prefab, enterPoint.position, Quaternion.identity);
-            NPC_Customer = customer.GetComponent<NPC_Customer>();
-            NPC_Customer.SetFrontOfPlayer(frontOfPlayer);
+            isGenerating = true;
+
+            float popPeriod = Random.Range(NPC_GenMaxTime / 2f, NPC_GenMaxTime);
+            float timeStamp = Time.time;
+
+            while (popPeriod + timeStamp > Time.time)
+            {
+                yield return null;
+            }
+
+            Pool_Pop();
+            isGenerating = false;
+
+            yield break;
+        }
+
+        // 퇴장한 NPC를 풀로 되돌리는 메서드
+        void Pool_Push(GameObject NPC)
+        {
+            if (Pool_NPC.Count < NPCPoolSize)
+            {
+                Pool_NPC.Enqueue(NPC);
+            }
+
+            else NPC_Destroy(NPC);
+        }
+
+        // 풀에서 NPC를 꺼내 소환하는 메서드
+        void Pool_Pop()
+        {
+            if (Pool_NPC.Count > 0)
+            {
+                Pool_NPC.Dequeue();
+            }
+
+            else NPC_Instantiate();
+        }
+
+        // NPC 생성 메서드
+        void NPC_Instantiate()
+        {
+            // Database_NPC에서 임의의 NPC 뽑기
+            int popID = Random.Range(0, database_NPC.NPC_List.Count);
+            GameObject popNPC = database_NPC.NPC_List[popID].NPC_Prefab;    // 프리팹
+
+            GameObject customer = Instantiate(popNPC, Point_Enable.position, Quaternion.identity);  // 실제 오브젝트
+            customer.GetComponent<NPC_Customer>().SetBehaviour(this);
+        }
+
+        // NPC 파괴 메서드
+        void NPC_Destroy(GameObject NPC)
+        {
+            Destroy(NPC);
         }
         #endregion
     }

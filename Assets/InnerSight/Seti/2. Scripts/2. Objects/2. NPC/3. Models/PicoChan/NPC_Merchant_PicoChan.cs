@@ -37,7 +37,7 @@ namespace InnerSight_Seti
         }
 
         // AI 행동 루틴을 규정하는 메서드
-        protected override void AIBehaviour()
+        protected override void AIBehaviour(NPC_Behaviour npcBehaviour)
         {
             // 행동 루틴의 영역
             /*1.호객을 하거나, 낮잠을 자는 등 자유로운 행동 루틴을 따르다가
