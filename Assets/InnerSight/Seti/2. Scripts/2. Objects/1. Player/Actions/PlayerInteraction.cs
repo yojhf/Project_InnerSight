@@ -37,25 +37,28 @@ namespace InnerSight_Seti
         // 상호작용이 가능한 오브젝트 줍기, UI 제거 및 리스트 최신화
         public void ThisIsMine()
         {
-            GameObject closestObject = MathUtility.MinDisObject(rightHand, interactables);
-
-            // 상호작용 대상이 실제로 존재하면
-            if (closestObject != null)
+            if (rightHand != null || interactables != null)
             {
-                // 인터페이스로부터 itemData 가져오기
-                if (closestObject.TryGetComponent<IInteractable>(out var interactable))
+                GameObject closestObject = MathUtility.MinDisObject(rightHand, interactables);
+
+                // 상호작용 대상이 실제로 존재하면
+                if (closestObject != null)
                 {
-                    ItemKey itemData = interactable.GetItemData();
+                    // 인터페이스로부터 itemData 가져오기
+                    if (closestObject.TryGetComponent<IInteractable>(out var interactable))
+                    {
+                        ItemKey itemData = interactable.GetItemData();
 
-                    // 인벤토리에 더하는 메서드 호출
-                    player.PlayerUse.InventoryManager.AddItem(itemData, 1);
+                        // 인벤토리에 더하는 메서드 호출
+                        player.PlayerUse.InventoryManager.AddItem(itemData, 1);
+                    }
+
+                    // 해당 오브젝트 줍기
+                    Destroy(closestObject);
+
+                    // Dictionary에서 해당 오브젝트와 UI 제거
+                    interactables.Remove(closestObject);
                 }
-
-                // 해당 오브젝트 줍기
-                Destroy(closestObject);
-                
-                // Dictionary에서 해당 오브젝트와 UI 제거
-                interactables.Remove(closestObject);
             }
         }
 
