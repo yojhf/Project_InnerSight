@@ -35,14 +35,15 @@ public class MixObject : MonoBehaviour
                 {
                     itemKey = item;
                 }
+                else
+                { 
+                    // 실패 시 나오는 아이템
+                }
             }
 
-            Debug.Log(itemKey.itemID);
+            ResetMix();
 
-
-            //ResetMix();
-
-            //Instantiate(item.GetPrefab(), spwanPos.position, Quaternion.identity);
+            Instantiate(itemKey.GetPrefab(), spwanPos.position, Quaternion.identity);
 
             //int id = CollectionUtility.FirstOrNull(itemDataBase.itemList, key => key.itemID == mixObjectNum).itemID;
 
