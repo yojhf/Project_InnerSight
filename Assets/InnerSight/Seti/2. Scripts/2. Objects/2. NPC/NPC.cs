@@ -5,7 +5,7 @@ namespace InnerSight_Seti
     public abstract class NPC : MonoBehaviour
     {
         public abstract void Interaction();
-        protected abstract void AIBehaviour();
+        protected abstract void AIBehaviour(NPC_Behaviour npcBehaviour);
     }
 }
 

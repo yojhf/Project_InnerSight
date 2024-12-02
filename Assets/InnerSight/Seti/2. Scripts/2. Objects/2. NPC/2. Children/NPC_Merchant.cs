@@ -71,7 +71,7 @@ namespace InnerSight_Seti
         }
 
         // AI 행동 루틴을 규정하는 메서드
-        protected override void AIBehaviour()
+        protected override void AIBehaviour(NPC_Behaviour npcBehaviour)
         {
 
         }
