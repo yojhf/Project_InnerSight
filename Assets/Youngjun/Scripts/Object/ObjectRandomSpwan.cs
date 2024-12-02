@@ -24,7 +24,7 @@ public class ObjectRandomSpwan : MonoBehaviour
     {
         RandomSpwan();
 
-        StartCoroutine(ReSpwanObject());
+        //StartCoroutine(ReSpwanObject());
     }
 
     Vector3 RandomPos()

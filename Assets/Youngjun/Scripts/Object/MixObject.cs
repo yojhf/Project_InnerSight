@@ -6,20 +6,19 @@ using UnityEngine;
 public class MixObject : MonoBehaviour
 {
     public ItemDatabase itemDataBase;
+    public PlayerSetting playerSetting;
     public int failItemKey;
 
     [SerializeField] private int mixCount = 2;
     private Transform spwanPos;
-    public List<SampleItem01> objects = new List<SampleItem01>();
+    public List<Item> objects = new List<Item>();
     private bool isCanMix = false;
-
 
     ItemKey itemKey;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         spwanPos = transform.GetChild(0);
-
     }
 
 
@@ -31,26 +30,6 @@ public class MixObject : MonoBehaviour
 
             int mixObjectNum = objects[0].ItemId + objects[1].ItemId;
 
-
-            //foreach (var item in itemDataBase.itemList)
-            //{
-            //    if (item.itemID == mixObjectNum)
-            //    {
-            //        itemKey = item;
-
-            //        ResetMix();
-
-            //        Instantiate(itemKey.GetPrefab(), spwanPos.position, Quaternion.identity);
-
-            //        break;
-            //    }
-            //    else
-            //    {
-            //        continue;
-            //    }
-            //}
-
-
             var itemKey = itemDataBase.itemList.FirstOrDefault(item => item.itemID == mixObjectNum);
 
             if (itemKey != null)
@@ -60,9 +39,10 @@ public class MixObject : MonoBehaviour
             }
             else
             {
+                var failItem = itemDataBase.itemList.FirstOrDefault(item => item.itemID == failItemKey);
 
-
-                Debug.Log("No matching item found.");
+                ResetMix();
+                Instantiate(failItem.GetPrefab(), spwanPos.position, Quaternion.identity);
             }
 
         }
@@ -75,12 +55,14 @@ public class MixObject : MonoBehaviour
             Destroy(objects[i].gameObject);
         }
 
+        playerSetting.PlayerInteraction.interactables.Clear();
+
         objects.Clear();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        SampleItem01 obj = collision.transform.GetComponent<SampleItem01>();
+        Item obj = collision.transform.GetComponent<Item>();
 
         if (obj != null)
         {
@@ -100,7 +82,7 @@ public class MixObject : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        SampleItem01 obj = collision.transform.GetComponent<SampleItem01>();
+        Item obj = collision.transform.GetComponent<Item>();
 
         if (obj != null)
         {
