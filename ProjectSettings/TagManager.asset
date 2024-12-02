@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - LeftHand
   - RightHand
+  - Grabbable
   layers:
   - Default
   - TransparentFX
