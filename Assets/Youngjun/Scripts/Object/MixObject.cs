@@ -1,11 +1,12 @@
 using InnerSight_Seti;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class MixObject : MonoBehaviour
 {
     public ItemDatabase itemDataBase;
+    public int failItemKey;
 
     [SerializeField] private int mixCount = 2;
     private Transform spwanPos;
@@ -18,6 +19,7 @@ public class MixObject : MonoBehaviour
     void Start()
     {
         spwanPos = transform.GetChild(0);
+
     }
 
 
@@ -29,28 +31,39 @@ public class MixObject : MonoBehaviour
 
             int mixObjectNum = objects[0].ItemId + objects[1].ItemId;
 
-            foreach (var item in itemDataBase.itemList)
+
+            //foreach (var item in itemDataBase.itemList)
+            //{
+            //    if (item.itemID == mixObjectNum)
+            //    {
+            //        itemKey = item;
+
+            //        ResetMix();
+
+            //        Instantiate(itemKey.GetPrefab(), spwanPos.position, Quaternion.identity);
+
+            //        break;
+            //    }
+            //    else
+            //    {
+            //        continue;
+            //    }
+            //}
+
+
+            var itemKey = itemDataBase.itemList.FirstOrDefault(item => item.itemID == mixObjectNum);
+
+            if (itemKey != null)
             {
-                if (item.itemID == mixObjectNum)
-                {
-                    itemKey = item;
-                }
-                else
-                { 
-                    // 실패 시 나오는 아이템
-                }
+                ResetMix();
+                Instantiate(itemKey.GetPrefab(), spwanPos.position, Quaternion.identity);
             }
-
-            ResetMix();
-
-            Instantiate(itemKey.GetPrefab(), spwanPos.position, Quaternion.identity);
-
-            //int id = CollectionUtility.FirstOrNull(itemDataBase.itemList, key => key.itemID == mixObjectNum).itemID;
+            else
+            {
 
 
-
-
-
+                Debug.Log("No matching item found.");
+            }
 
         }
     }
@@ -82,6 +95,16 @@ public class MixObject : MonoBehaviour
 
                 MixAble();
             }
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        SampleItem01 obj = collision.transform.GetComponent<SampleItem01>();
+
+        if (obj != null)
+        {
+            objects.Remove(obj);      
         }
     }
 }
