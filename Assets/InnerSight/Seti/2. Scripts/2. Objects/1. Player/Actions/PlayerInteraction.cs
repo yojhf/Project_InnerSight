@@ -11,7 +11,8 @@ namespace InnerSight_Seti
         // 필드
         #region Variables
         // Dictionary를 사용해 상호작용 오브젝트와 UI를 관리
-        private readonly List<GameObject> interactables = new();
+        [SerializeField]
+        private List<GameObject> interactables = new();
 
         [SerializeField] private GameObject rightHand;
 
@@ -37,6 +38,8 @@ namespace InnerSight_Seti
         // 상호작용이 가능한 오브젝트 줍기, UI 제거 및 리스트 최신화
         public void ThisIsMine()
         {
+            Debug.Log("ThisIsMine");
+
             if (rightHand != null || interactables != null)
             {
                 GameObject closestObject = MathUtility.MinDisObject(rightHand, interactables);
@@ -48,6 +51,8 @@ namespace InnerSight_Seti
                     if (closestObject.TryGetComponent<IInteractable>(out var interactable))
                     {
                         ItemKey itemData = interactable.GetItemData();
+
+                        Debug.Log(itemData);
 
                         // 인벤토리에 더하는 메서드 호출
                         player.PlayerUse.InventoryManager.AddItem(itemData, 1);
@@ -75,6 +80,23 @@ namespace InnerSight_Seti
                 interactables.Add(other.gameObject);
             }
         }
+
+        // "쓰레기네." 상호작용 화살표 제거 메서드
+        private void Sucks(Collider other)
+        {
+            // 인터페이스로 상호작용 가능한 오브젝트만 구별
+            if (other.gameObject.GetComponent<IInteractable>() == null) return;
+
+            // 해당 오브젝트가 리스트에 있는지 확인
+            if (interactables.Contains(other.gameObject))
+            {
+                // UI 오브젝트 제거
+                Destroy(other.gameObject);
+
+                // List에서 해당 오브젝트 제거
+                interactables.Remove(other.gameObject);
+            }
+        }
         #endregion
 
         // 이벤트 메서드
@@ -87,6 +109,7 @@ namespace InnerSight_Seti
 
         private void OnTriggerExit(Collider other)
         {
+            Sucks(other);
             player.PlayerTrade.CheckOutShop(other);
         }
         #endregion
