@@ -6,6 +6,7 @@ using static UnityEngine.GraphicsBuffer;
 public class MixObject : MonoBehaviour
 {
     public ItemDatabase itemDataBase;
+    public ItemKey failItemKey;
 
     [SerializeField] private int mixCount = 2;
     private Transform spwanPos;
@@ -35,10 +36,12 @@ public class MixObject : MonoBehaviour
                 {
                     itemKey = item;
                 }
-                else
-                { 
-                    // 실패 시 나오는 아이템
-                }
+                //else
+                //{
+                //    // 실패 시 나오는 아이템
+                    
+                //    break;
+                //}
             }
 
             ResetMix();
