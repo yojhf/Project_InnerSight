@@ -607,7 +607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &632548710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -775,7 +775,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &817882323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1052,15 +1052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemDataBase: {fileID: 11400000, guid: 50f373a17d1c5db4c98ee94b4230fcb0, type: 2}
-  failItemKey:
-    itemID: 0
-    itemName: 
-    itemNameKor: 
-    itemPrice: 0
-    itemSellPrice: 0
-    itemImage: {fileID: 0}
-    itemPrefab: {fileID: 0}
-    itemPhantomPrefab: {fileID: 0}
+  failItemKey: 999
   mixCount: 2
   objects: []
 --- !u!54 &1028504342
@@ -1550,7 +1542,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1520663852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1707,7 +1699,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &2019856107
 MeshRenderer:
   m_ObjectHideFlags: 0
