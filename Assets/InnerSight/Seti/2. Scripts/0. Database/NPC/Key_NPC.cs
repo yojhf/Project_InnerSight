@@ -12,5 +12,6 @@ namespace InnerSight_Seti
         public string NPC_Name;
         public string NPC_Description;
         public GameObject NPC_Prefab;
+        public GameObject NPC_Item_Want;
     }
 }

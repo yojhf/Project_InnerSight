@@ -12,12 +12,12 @@ namespace InnerSight_Seti
         // 필드
         #region Variables
         [SerializeField] private Database_NPC database_NPC;
-        public Transform Point_Entrance;
-        public Transform Point_Enable;
-        public Transform Point_Disable;
+        public Transform point_Disable;
+        public Transform point_Enable;
+        public Transform[] points_Behaviour; 
 
         // 풀링
-        private Queue<GameObject> Pool_NPC = new();
+        private readonly Queue<GameObject> NPC_Pool = new();
         [SerializeField] int NPCPoolSize = 100;
 
         // NPC 생성 주기
@@ -31,6 +31,17 @@ namespace InnerSight_Seti
         {
             if (isGenerating) return;
             StartCoroutine(GenNPC());
+        }
+
+        private void Awake()
+        {
+            // points만 빼고 자식 트랜스폼을 전부 배열로 가져오기
+            var allPoints = transform.Find("Points").GetComponentsInChildren<Transform>();
+            List<Transform> filteredPoints = new();
+            foreach (var point in allPoints)
+                if (point != transform.Find("Points").transform)
+                    filteredPoints.Add(point);
+            points_Behaviour = filteredPoints.ToArray();
         }
         #endregion
 
@@ -56,11 +67,13 @@ namespace InnerSight_Seti
         }
 
         // 퇴장한 NPC를 풀로 되돌리는 메서드
-        void Pool_Push(GameObject NPC)
+        public void Pool_Push(GameObject NPC)
         {
-            if (Pool_NPC.Count < NPCPoolSize)
+            if (NPC_Pool.Count < NPCPoolSize)
             {
-                Pool_NPC.Enqueue(NPC);
+                NPC.SetActive(false);
+                NPC.transform.position = point_Disable.position;
+                NPC_Pool.Enqueue(NPC);
             }
 
             else NPC_Destroy(NPC);
@@ -69,9 +82,11 @@ namespace InnerSight_Seti
         // 풀에서 NPC를 꺼내 소환하는 메서드
         void Pool_Pop()
         {
-            if (Pool_NPC.Count > 0)
+            if (NPC_Pool.Count > 0)
             {
-                Pool_NPC.Dequeue();
+                GameObject popNPC = NPC_Pool.Dequeue();
+                popNPC.transform.position = point_Enable.position;
+                popNPC.SetActive(true);
             }
 
             else NPC_Instantiate();
@@ -84,8 +99,10 @@ namespace InnerSight_Seti
             int popID = Random.Range(0, database_NPC.NPC_List.Count);
             GameObject popNPC = database_NPC.NPC_List[popID].NPC_Prefab;    // 프리팹
 
-            GameObject customer = Instantiate(popNPC, Point_Enable.position, Quaternion.identity);  // 실제 오브젝트
-            customer.GetComponent<NPC_Customer>().SetBehaviour(this);
+            Instantiate(popNPC,
+                        point_Enable.position,
+                        Quaternion.identity,
+                        transform.Find("NPC_Pool"));       // 실제 오브젝트
         }
 
         // NPC 파괴 메서드

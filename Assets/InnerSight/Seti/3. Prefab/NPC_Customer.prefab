@@ -5911,6 +5911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 304d59f86390d8a47bc2a2582d2a549f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcDatabase: {fileID: 11400000, guid: 316908c012b294842a4f38e23ab9edf4, type: 2}
 --- !u!195 &819241669475138640
 NavMeshAgent:
   m_ObjectHideFlags: 0
