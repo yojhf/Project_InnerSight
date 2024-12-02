@@ -1,6 +1,7 @@
 using InnerSight_Seti;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 public class MixObject : MonoBehaviour

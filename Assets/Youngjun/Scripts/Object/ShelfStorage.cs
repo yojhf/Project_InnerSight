@@ -1,78 +1,101 @@
 using InnerSight_Seti;
 using NUnit.Framework;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class ShelfStorage : MonoBehaviour
+namespace Noah
 {
-    public List<Transform> items = new List<Transform>();
-    public int keyId = 1;
-
-    private bool isStroage = false;
-    Transform item;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class ShelfStorage : MonoBehaviour
     {
-        item = transform.GetChild(0);
-        AddListItems();
-    }
+        public GameObject player;
+        public List<Transform> items = new List<Transform>();
+        public int keyId = 1;
 
-    void AddListItems()
-    {
-        for (int i = 0; i < item.childCount; i++)
+        private bool isStroage = false;
+
+        GameObject grapItem;
+        Transform item;
+
+        PlayerSetting playerSetting;
+        CharactorAction charactorAction;
+
+        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        void Start()
         {
-            items.Add(item.GetChild(i));
+            playerSetting = player.GetComponent<PlayerSetting>();
+            charactorAction = player.GetComponent<CharactorAction>();
+
+            item = transform.GetChild(0);
+            AddListItems();
         }
-    }
 
-    void AddObject()
-    {
-        if (isStroage)
+        void AddListItems()
         {
-            isStroage = false;
-
-            foreach (var item in items)
+            for (int i = 0; i < item.childCount; i++)
             {
-                if (item.GetComponent<MeshRenderer>().enabled == true)
+                items.Add(item.GetChild(i));
+            }
+        }
+
+        public void AddObject()
+        {
+            if (isStroage)
+            {
+                isStroage = false;
+
+                playerSetting.PlayerInteraction.interactables.Clear();
+
+                Destroy(grapItem);
+
+                foreach (var item in items)
                 {
-                    continue;
-                }
-                else
-                {
-                    item.GetComponent<MeshRenderer>().enabled = true;
-                    break;
+                    if (item.GetComponent<MeshRenderer>().enabled == true)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        item.GetComponent<MeshRenderer>().enabled = true;
+                        break;
+                    }
                 }
             }
         }
-    }
 
-    void RemoveObject()
-    {
-        items[items.Count - 1].GetComponent<MeshRenderer>().enabled = false;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Item item = collision.transform.GetComponent<Item>();
-
-        if (item != null)
+        void RemoveObject()
         {
-            if (item.ItemId == keyId)
-            {
-                Debug.Log("aaaa");
-                isStroage = true;
+            items[items.Count - 1].GetComponent<MeshRenderer>().enabled = false;
+        }
 
+        private void OnCollisionEnter(Collision collision)
+        {
+            Item item = collision.transform.GetComponent<Item>();
+
+            if (item != null)
+            {
+                if (item.ItemId == keyId)
+                {
+                    isStroage = true;
+                    grapItem = collision.gameObject;
+
+
+                    if (!charactorAction.IsGrap)
+                    {
+                        AddObject();
+                    }           
+                }
             }
         }
-    }
-    private void OnCollisionExit(Collision collision)
-    {
-        Item item = collision.transform.GetComponent<Item>();
-
-        if (item != null)
+        private void OnCollisionExit(Collision collision)
         {
-            isStroage = false;
-        }
-    }
+            Item item = collision.transform.GetComponent<Item>();
 
+            if (item != null)
+            {
+                isStroage = false;
+            }
+        }
+
+    }
 }

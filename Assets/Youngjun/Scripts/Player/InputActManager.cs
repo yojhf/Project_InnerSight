@@ -100,5 +100,19 @@ public class InputActManager : MonoBehaviour
         return leftRl;
     }
 
+    public bool IsRightSelectPress()
+    {
+        bool rightPr = rightSelect.action.WasPressedThisFrame();
+
+        return rightPr;
+    }
+
+    public bool IsRightSelectReleased()
+    {
+        bool rightRl = rightSelect.action.WasReleasedThisFrame();
+
+        return rightRl;
+    }
+
 
 }
