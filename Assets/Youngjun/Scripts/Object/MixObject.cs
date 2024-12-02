@@ -1,10 +1,11 @@
 using InnerSight_Seti;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class MixObject : MonoBehaviour
 {
-    public GameObject testPrefab;
+    public ItemDatabase itemDataBase;
 
     [SerializeField] private int mixCount = 2;
     private Transform spwanPos;
@@ -28,9 +29,28 @@ public class MixObject : MonoBehaviour
 
             int mixObjectNum = objects[0].ItemId + objects[1].ItemId;
 
-            ResetMix();
+            foreach (var item in itemDataBase.itemList)
+            {
+                if (item.itemID == mixObjectNum)
+                {
+                    itemKey = item;
+                }
+            }
 
-            Instantiate(testPrefab, spwanPos.position, Quaternion.identity);
+            Debug.Log(itemKey.itemID);
+
+
+            //ResetMix();
+
+            //Instantiate(item.GetPrefab(), spwanPos.position, Quaternion.identity);
+
+            //int id = CollectionUtility.FirstOrNull(itemDataBase.itemList, key => key.itemID == mixObjectNum).itemID;
+
+
+
+
+
+
         }
     }
 

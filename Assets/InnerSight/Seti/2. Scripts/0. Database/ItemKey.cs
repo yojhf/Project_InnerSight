@@ -16,5 +16,12 @@ namespace InnerSight_Seti
         public Sprite itemImage;
         public GameObject itemPrefab;
         public GameObject itemPhantomPrefab;
+
+        #region VR 팀프로젝트
+        public GameObject GetPrefab()
+        {
+            return itemPrefab;
+        }
+        #endregion
     }
 }
