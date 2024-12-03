@@ -14,6 +14,9 @@ namespace Noah
         public int keyId = 1;
 
         private bool isStroage = false;
+        private bool isCanBuy = false;
+
+        public bool IsCanBuy => isCanBuy;
 
         GameObject grapItem;
         Transform item;
@@ -47,8 +50,6 @@ namespace Noah
             {
                 isStroage = false;
 
-                Debug.Log("11");
-
                 playerSetting.PlayerInteraction.interactables.Clear();
 
                 Destroy(colItem);
@@ -68,20 +69,38 @@ namespace Noah
             }
         }
 
-        void RemoveObject()
+        public void RemoveObject()
         {
-            for (int i = items.Count; i >= 0; i--)
+            if (items[0].GetComponent<MeshRenderer>().enabled == false)
             {
-                if (items[i].GetComponent<MeshRenderer>().enabled == false)
+                isCanBuy = false;
+            }
+            else
+            {
+                isCanBuy = true;
+            }
+
+            if (isCanBuy)
+            {
+                for (int i = items.Count - 1; i >= 0; i--)
                 {
-                    continue;
-                }
-                else
-                {
-                    items[i].GetComponent<MeshRenderer>().enabled = false;
-                    break;
+                    if (items[i].GetComponent<MeshRenderer>().enabled == false)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        items[i].GetComponent<MeshRenderer>().enabled = false;
+                        break;
+                    }
                 }
             }
+            else
+            {
+                Debug.Log("재고부족");
+                return;
+            }
+
             
         }
 
@@ -89,34 +108,15 @@ namespace Noah
         // Test
         IEnumerator Test()
         { 
-            yield return new WaitForSeconds(3f);
-
             while (true)
             {
                 RemoveObject();
 
-                yield return null;
+                yield return new WaitForSeconds(1f);
             }
 
 
         }
-
-        //private void OnTriggerEnter(Collider other)
-        //{
-        //    Item item = other.transform.GetComponent<Item>();
-
-        //    if (item != null)
-        //    {
-        //        if (item.ItemId == keyId)
-        //        {
-        //            isStroage = true;
-
-        //            //grapItem = collision.gameObject;
-        //            AddObject(other.gameObject);
-
-        //        }
-        //    }
-        //}
 
         private void OnTriggerStay(Collider other)
         {
@@ -132,7 +132,6 @@ namespace Noah
                     AddObject(other.gameObject);
 
                 }
-
             }
         }
 
@@ -145,33 +144,5 @@ namespace Noah
                 isStroage = false;
             }
         }
-
-        //private void OnCollisionEnter(Collision collision)
-        //{
-        //    Item item = collision.transform.GetComponent<Item>();
-
-        //    if (item != null)
-        //    {
-        //        if (item.ItemId == keyId)
-        //        {
-        //            isStroage = true;
-
-        //            //grapItem = collision.gameObject;
-
-        //            AddObject(collision.gameObject);
-
-        //        }
-        //    }
-        //}
-        //private void OnCollisionExit(Collision collision)
-        //{
-        //    Item item = collision.transform.GetComponent<Item>();
-
-        //    if (item != null)
-        //    {
-        //        isStroage = false;
-        //    }
-        //}
-
     }
 }
