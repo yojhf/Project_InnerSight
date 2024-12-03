@@ -17,14 +17,14 @@ MonoBehaviour:
     NPC_Name: "\uD53C\uCF54\uC9F1"
     NPC_Description: "\uC0D8\uD50C NPC"
     NPC_Prefab: {fileID: 6175976094131026889, guid: 2f3859b68da94924aa582bf0b6e55c3c, type: 3}
-    NPC_Item_Want: {fileID: 7788683104666110795, guid: b2fb3fe5ec71327458016ccaf0634e26, type: 3}
+    NPC_Item_Want: {fileID: 8393993608532121644, guid: aa7bf105a41da2e4e875dab62e5409ac, type: 3}
   - NPC_ID: 1
     NPC_Name: "\uD53C\uCF54\uC9F1"
     NPC_Description: "\uC0D8\uD50C NPC"
     NPC_Prefab: {fileID: 6175976094131026889, guid: 8bb24fc1e0ebcf44787242ec717c594f, type: 3}
-    NPC_Item_Want: {fileID: 8393993608532121644, guid: 87aba3225365ef84db2f13d6c3b6d6a9, type: 3}
+    NPC_Item_Want: {fileID: 1453821419900159809, guid: f01cd4e4853f2fe449628196562a23db, type: 3}
   - NPC_ID: 2
     NPC_Name: "\uD53C\uCF54\uC9F1"
     NPC_Description: "\uC0D8\uD50C NPC"
     NPC_Prefab: {fileID: 6175976094131026889, guid: 30bc99f165667c049b636420041f6c24, type: 3}
-    NPC_Item_Want: {fileID: 1453821419900159809, guid: 2de10e22dbdb15f45b845748cc1dfb28, type: 3}
+    NPC_Item_Want: {fileID: 4572603651608261006, guid: 949316c8179bfa34aad6204aacd0a663, type: 3}

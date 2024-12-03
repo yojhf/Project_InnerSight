@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace InnerSight_Seti
 {
     public class PlayerStats : Singleton<PlayerStats>
@@ -25,13 +27,15 @@ namespace InnerSight_Seti
         // 데이사이클 초기화
         public void InitializeDays()
         {
+            CurrentGold += RevenueGold;
             RevenueGold = 0;
         }
 
         // 돈 버는 메서드
         public void EarnGold(int amount)
         {
-            CurrentGold += amount;
+            RevenueGold += amount;
+            CurrentRevenue();
         }
 
         // 돈 쓰는 메서드
@@ -46,6 +50,11 @@ namespace InnerSight_Seti
                 CurrentGold -= amount;
                 return true;
             }
+        }
+
+        public void CurrentRevenue()
+        {
+            Debug.Log(RevenueGold);
         }
         #endregion
     }

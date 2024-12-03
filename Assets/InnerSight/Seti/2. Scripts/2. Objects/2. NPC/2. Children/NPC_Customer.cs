@@ -1,3 +1,4 @@
+using Noah;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,8 +41,8 @@ namespace InnerSight_Seti
 
         // 쇼핑
         private Transform centerOfShop;
-        private List<Item> shopItems = new();
-        private Item thisItem;
+        private List<ShelfStorage> shopItems = new();
+        private ShelfStorage thisItem;
         private int currentIndex;
         private bool isThisItem = false;
         
@@ -51,6 +52,13 @@ namespace InnerSight_Seti
 
         // 라이프 사이클
         #region Life Cycle
+        private void Start()
+        {
+            NPC_wannaItem = npcDatabase.NPC_List.
+                            Find(key => key.NPC_ID == NPC_ID).
+                            NPC_Item_Want.GetComponent<Item>();
+        }
+
         private void Update()
         {
             AIStateChange();
@@ -60,9 +68,6 @@ namespace InnerSight_Seti
         {
             npcManager = FindFirstObjectByType<NPC_Manager>();
             agent = GetComponent<NavMeshAgent>();
-            NPC_wannaItem = npcDatabase.NPC_List.
-                            Find(key => key.NPC_ID == NPC_ID).
-                            NPC_Item_Want.GetComponent<Item>();
         }
 
         private void OnEnable()
@@ -116,6 +121,17 @@ namespace InnerSight_Seti
                     break;
 
                 case NPC_Behaviour.PURCHASING:
+                    thisItem.RemoveObject();
+                    AIBehaviour(NPC_Behaviour.EXITING);
+                    if (!thisItem.IsCanBuy)
+                    {
+                        AIBehaviour(NPC_Behaviour.BROWSING);
+                    }
+                    else
+                    {
+                        Debug.Log(PlayerStats.Instance);
+                        PlayerStats.Instance.EarnGold(NPC_wannaItem.GetItemData().itemPrice);
+                    }
                     break;
 
                 case NPC_Behaviour.DISABLE:
@@ -153,10 +169,6 @@ namespace InnerSight_Seti
                     case NPC_Behaviour.BROWSING:
                         AIBehaviour(NPC_Behaviour.CHECKING);
                         break;
-
-                    case NPC_Behaviour.PURCHASING:
-                        AIBehaviour(NPC_Behaviour.EXITING);
-                        break;
                 }
             }
         }
@@ -165,7 +177,7 @@ namespace InnerSight_Seti
         void BrowsingShop()
         {
             // thisItem 지정
-            thisItem = shopItems[currentIndex];
+            thisItem = shopItems[currentIndex % shopItems.Count];
             agent.SetDestination(FrontOfItem(thisItem.transform));
             currentIndex++;
         }
@@ -178,7 +190,7 @@ namespace InnerSight_Seti
             {
                 yield return null;
             }
-            isThisItem = (NPC_wannaItem.ItemId == thisItem.ItemId);
+            isThisItem = (NPC_wannaItem.ItemId == thisItem.keyId);
 
             if (isThisItem) AIBehaviour(NPC_Behaviour.PURCHASING);
             else AIBehaviour(NPC_Behaviour.BROWSING);
@@ -200,7 +212,7 @@ namespace InnerSight_Seti
             if (other.CompareTag("Shop"))
             {
                 centerOfShop = other.transform.GetChild(0);
-                shopItems.AddRange(other.transform.GetComponentsInChildren<Item>());
+                shopItems.AddRange(other.transform.GetComponentsInChildren<ShelfStorage>());
             }
         }
 

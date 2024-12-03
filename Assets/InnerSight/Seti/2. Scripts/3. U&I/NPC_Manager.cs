@@ -52,7 +52,7 @@ namespace InnerSight_Seti
         {
             isGenerating = true;
 
-            float popPeriod = Random.Range(NPC_GenMaxTime / 5f, NPC_GenMaxTime);
+            float popPeriod = Random.Range(NPC_GenMaxTime / 3f, NPC_GenMaxTime);
             float timeStamp = Time.time;
 
             while (popPeriod + timeStamp > Time.time)
