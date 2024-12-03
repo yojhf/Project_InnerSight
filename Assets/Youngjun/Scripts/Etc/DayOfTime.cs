@@ -28,12 +28,14 @@ public class DayOfTime : MonoBehaviour
     {
         // 경과 시간 계산
         _timeElapsed = Time.deltaTime;
+        _timeAngle = Time.time;
 
         //_timeAngle += Time.deltaTime;
         float dayProgress = (_timeElapsed / dayDuration) % 1; // 하루 진행 비율 (0~1)
+        float dayAngle = (_timeAngle / dayDuration) % 1;
 
         // 태양의 각도 업데이트
-        float sunAngle = dayProgress * 360f; // 하루 동안 360도 회전
+        float sunAngle = dayAngle * 360f; // 하루 동안 360도 회전
         sun.transform.rotation = Quaternion.Euler(sunAngle - 90f, 170f, 0f); // 태양 회전
 
         // 가상 시간 업데이트

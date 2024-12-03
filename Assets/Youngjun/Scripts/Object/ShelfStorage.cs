@@ -68,6 +68,10 @@ namespace Noah
             items[items.Count - 1].GetComponent<MeshRenderer>().enabled = false;
         }
 
+
+        // Test
+
+
         private void OnCollisionEnter(Collision collision)
         {
             Item item = collision.transform.GetComponent<Item>();

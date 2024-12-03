@@ -34,16 +34,22 @@ namespace Noah
         // Update is called once per frame
         void Update()
         {
+            // Button 업데이트 
             OnStorage();
             LeftAct();
             LeftSelect();
             RightAct();
             RightSelect();
 
+            // Active Button 한번만 반응(왼쪽)
             LeftStorageAct();
 
+            // Select Button 한번만 반응
+            LeftSelectInputDown();
+            RightSelectInputDown();
             LeftSelectInputUp();
             RightSelectInputUp();
+
         }
 
         void OnStorage()
@@ -130,8 +136,6 @@ namespace Noah
             if (inputActManager.IsLeftSelectReleased())
             {
                 IsGrap = false;
-
-
             }
         }
 
