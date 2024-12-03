@@ -5,6 +5,7 @@ using UnityEngine;
 namespace BKPureNature
 {
     [ExecuteInEditMode]
+
 public class BK_EnvironmentManager : MonoBehaviour
 {
     public Light directionalLight;
@@ -155,3 +156,4 @@ public class BK_EnvironmentManager : MonoBehaviour
     }
 }
 }
+
