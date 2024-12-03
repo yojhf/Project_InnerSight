@@ -97,7 +97,7 @@ namespace InnerSight_Seti
                     break;
 
                 case NPC_Behaviour.EXITING:
-                    targetPoint = npcManager.points_Behaviour[0].position;
+                    targetPoint = npcManager.points_Behaviour[2].position;
                     agent.SetDestination(targetPoint);
                     break;
 
@@ -164,13 +164,8 @@ namespace InnerSight_Seti
         void BrowsingShop()
         {
             // thisItem 지정
-            Debug.Log(currentIndex);
-            Debug.Log(shopItems.Count);
-
             thisItem = shopItems[currentIndex];
-
             agent.SetDestination(FrontOfItem(thisItem.transform));
-
             currentIndex++;
         }
 
@@ -201,7 +196,6 @@ namespace InnerSight_Seti
         #region Event Methods
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("호출");
             if (other.CompareTag("Shop"))
             {
                 centerOfShop = other.transform.GetChild(0);
