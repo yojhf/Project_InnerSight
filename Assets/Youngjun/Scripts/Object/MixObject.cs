@@ -13,6 +13,7 @@ public class MixObject : MonoBehaviour
     [SerializeField] private int mixCount = 2;
     private Transform spwanPos;
     public List<Item> objects = new List<Item>();
+
     private bool isCanMix = false;
 
     ItemKey itemKey;

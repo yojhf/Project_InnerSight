@@ -1,7 +1,26 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<<< HEAD:Assets/InnerSight/Yoon/Scenes/YC_PlayScene_01.unity.meta
 guid: 819fb21b6b094db09cc125feeabf6c2e
+========
+guid: 671de769d531b124ab4d4dd5f10bb15f
+folderAsset: yes
+>>>>>>>> 75b7ffabd61240620e295180a0e21ae9a0d4d981:Assets/InnerSight/Yoon/MyAssets.meta
+=======
+guid: 819fb21b6b094db09cc125feeabf6c2e
+>>>>>>> 75b7ffabd61240620e295180a0e21ae9a0d4d981
 DefaultImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+<<<<<<< HEAD
+=======
+AssetOrigin:
+  serializedVersion: 1
+  productId: 299314
+  packageName: 'Pure Nature 2 : Oasis Desert'
+  packageVersion: 1.0
+  assetPath: Assets/BK/PureNature_Oasis/Scenes/Scene_Oasis_Day.unity
+  uploadId: 705225
+>>>>>>> 75b7ffabd61240620e295180a0e21ae9a0d4d981
