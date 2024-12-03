@@ -20,6 +20,7 @@ namespace InnerSight_Seti
     /// <summary>
     /// 손님 NPC의 행동논리를 정의하는 클래스
     /// </summary>
+    /// 미구현: 상품 인덱스 셔플
     public class NPC_Customer : NPC
     {
         // 필드
