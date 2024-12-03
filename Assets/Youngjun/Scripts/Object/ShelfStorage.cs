@@ -1,5 +1,6 @@
 using InnerSight_Seti;
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -28,6 +29,8 @@ namespace Noah
 
             item = transform.GetChild(0);
             AddListItems();
+
+            //StartCoroutine(Test());
         }
 
         void AddListItems()
@@ -38,15 +41,17 @@ namespace Noah
             }
         }
 
-        public void AddObject()
+        public void AddObject(GameObject colItem)
         {
-            if (isStroage)
+            if (isStroage && !charactorAction.IsGrap)
             {
                 isStroage = false;
 
+                Debug.Log("11");
+
                 playerSetting.PlayerInteraction.interactables.Clear();
 
-                Destroy(grapItem);
+                Destroy(colItem);
 
                 foreach (var item in items)
                 {
@@ -65,41 +70,108 @@ namespace Noah
 
         void RemoveObject()
         {
-            items[items.Count - 1].GetComponent<MeshRenderer>().enabled = false;
+            for (int i = items.Count; i >= 0; i--)
+            {
+                if (items[i].GetComponent<MeshRenderer>().enabled == false)
+                {
+                    continue;
+                }
+                else
+                {
+                    items[i].GetComponent<MeshRenderer>().enabled = false;
+                    break;
+                }
+            }
+            
         }
 
 
         // Test
-        //void I
+        IEnumerator Test()
+        { 
+            yield return new WaitForSeconds(3f);
 
-        private void OnCollisionEnter(Collision collision)
+            while (true)
+            {
+                RemoveObject();
+
+                yield return null;
+            }
+
+
+        }
+
+        //private void OnTriggerEnter(Collider other)
+        //{
+        //    Item item = other.transform.GetComponent<Item>();
+
+        //    if (item != null)
+        //    {
+        //        if (item.ItemId == keyId)
+        //        {
+        //            isStroage = true;
+
+        //            //grapItem = collision.gameObject;
+        //            AddObject(other.gameObject);
+
+        //        }
+        //    }
+        //}
+
+        private void OnTriggerStay(Collider other)
         {
-            Item item = collision.transform.GetComponent<Item>();
+            Item item = other.transform.GetComponent<Item>();
 
             if (item != null)
             {
                 if (item.ItemId == keyId)
                 {
                     isStroage = true;
-                    grapItem = collision.gameObject;
 
+                    //grapItem = collision.gameObject;
+                    AddObject(other.gameObject);
 
-                    if (!charactorAction.IsGrap)
-                    {
-                        AddObject();
-                    }           
                 }
+
             }
         }
-        private void OnCollisionExit(Collision collision)
+
+        private void OnTriggerExit(Collider other)
         {
-            Item item = collision.transform.GetComponent<Item>();
+            Item item = other.transform.GetComponent<Item>();
 
             if (item != null)
             {
                 isStroage = false;
             }
         }
+
+        //private void OnCollisionEnter(Collision collision)
+        //{
+        //    Item item = collision.transform.GetComponent<Item>();
+
+        //    if (item != null)
+        //    {
+        //        if (item.ItemId == keyId)
+        //        {
+        //            isStroage = true;
+
+        //            //grapItem = collision.gameObject;
+
+        //            AddObject(collision.gameObject);
+
+        //        }
+        //    }
+        //}
+        //private void OnCollisionExit(Collision collision)
+        //{
+        //    Item item = collision.transform.GetComponent<Item>();
+
+        //    if (item != null)
+        //    {
+        //        isStroage = false;
+        //    }
+        //}
 
     }
 }
