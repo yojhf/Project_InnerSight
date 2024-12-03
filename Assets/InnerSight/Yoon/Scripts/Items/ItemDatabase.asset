@@ -18,8 +18,8 @@ MonoBehaviour:
     itemNameKor: "\uACF0\uD321\uC774 \uD540 \uBE75"
     itemPrice: 0
     itemSellPrice: 0
-    itemImage: {fileID: 21300000, guid: ec4dc9ab8e3f02e41a618d4363f134a6, type: 3}
-    itemPrefab: {fileID: 8393993608532121644, guid: e23fd5e5cbaec614582012c4d3d4d21d, type: 3}
+    itemImage: {fileID: -486078964, guid: c0d526cdda4646345b37add8644184ce, type: 3}
+    itemPrefab: {fileID: 1506883322925213008, guid: 492893c20d48d334fbff6c3a8138af87, type: 3}
     itemPhantomPrefab: {fileID: 8393993608532121644, guid: 758b21fb5fb87254ab6f4e284dda92a2, type: 3}
   - itemID: 1002
     itemName: Dried mushroom
