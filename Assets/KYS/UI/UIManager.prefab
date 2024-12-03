@@ -2316,6 +2316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisSlot: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!1 &4340080721411778533
 GameObject:
   m_ObjectHideFlags: 0
@@ -4373,6 +4374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6325b85ec87fd6f43845827b88873bf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invenPanel: {fileID: 0}
   invenSlots: []
   invenRect: {fileID: 0}
   emptySlotSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
