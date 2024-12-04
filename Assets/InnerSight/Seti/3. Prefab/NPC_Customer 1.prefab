@@ -5935,7 +5935,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NPC_ID: 1
   npcDatabase: {fileID: 11400000, guid: 316908c012b294842a4f38e23ab9edf4, type: 2}
-  checkDelay: 2
+  checkDelay: 1
 --- !u!1 &6234267377318937777
 GameObject:
   m_ObjectHideFlags: 0
