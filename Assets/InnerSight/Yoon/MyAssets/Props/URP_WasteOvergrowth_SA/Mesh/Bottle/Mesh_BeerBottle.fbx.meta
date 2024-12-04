@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: 45fed21f12dc80841aba7eefe4614c13
+AssetOrigin:
+  serializedVersion: 1
+  productId: 290387
+  packageName: WasteOvergrowth - Comprehensive Trash and Waste Pack
+  packageVersion: 1.0
+  assetPath: Assets/URP_WasteOvergrowth_SA/Mesh/Bottle/Mesh_BeerBottle.fbx
+  uploadId: 683873
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -16,8 +23,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -35,7 +40,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -90,7 +95,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.001
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
@@ -107,10 +112,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 290387
-  packageName: WasteOvergrowth - Comprehensive Trash and Waste Pack
-  packageVersion: 1.0
-  assetPath: Assets/URP_WasteOvergrowth_SA/Mesh/Bottle/Mesh_BeerBottle.fbx
-  uploadId: 683873
