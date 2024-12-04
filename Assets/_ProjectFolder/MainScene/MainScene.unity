@@ -24433,6 +24433,7 @@ GameObject:
   - component: {fileID: 3422257063657555361}
   - component: {fileID: 3422257063657555362}
   - component: {fileID: 3422257063657555363}
+  - component: {fileID: 3422257063657555364}
   m_Layer: 0
   m_Name: House
   m_TagString: Shop
@@ -25489,6 +25490,33 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 5633c086b81697044bc74c9ff840d0e2, type: 2}
   m_BuildHeightMesh: 0
+--- !u!54 &3422257063657555364
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150304789746174820}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!33 &3425811160585100280
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -25677,7 +25705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1274465573}
   items: []
-  keyId: 1
+  keyId: 2
 --- !u!1 &4018541161423398536
 GameObject:
   m_ObjectHideFlags: 0
@@ -25698,7 +25726,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &4018541161423398537
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -25866,7 +25894,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &4018541161651583553
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -26265,7 +26293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1274465573}
   items: []
-  keyId: 1
+  keyId: 3
 --- !u!4 &4186131879365048742
 Transform:
   m_ObjectHideFlags: 0
