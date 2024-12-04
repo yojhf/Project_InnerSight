@@ -12,7 +12,6 @@ namespace InnerSight_Seti
         public string itemName;
         public string itemNameKor;
         public int itemPrice;
-        public int itemSellPrice;
         public Sprite itemImage;
         public GameObject itemPrefab;
         public GameObject itemPhantomPrefab;

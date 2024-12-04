@@ -43,11 +43,16 @@ namespace InnerSight_Seti
         private Transform centerOfShop;
         private List<ShelfStorage> shopItems = new();
         private ShelfStorage thisItem;
+        [SerializeField]
         private int currentIndex;
+        [SerializeField]
+        private int whichDir;           // 순회 방향: -1: 반시계, 0: 바로, 1: 시계
         private bool isThisItem = false;
-        
         [SerializeField]
         private float checkDelay = 3f;
+
+        // n차 순회 처리용 불리언
+        private bool isFirst;
         #endregion
 
         // 라이프 사이클
@@ -77,7 +82,9 @@ namespace InnerSight_Seti
         private void OnEnable()
         {
             AIBehaviour(NPC_Behaviour.SHOWING);
+            whichDir = Random.Range(-1, 2);
             currentIndex = 0;
+            isFirst = true;
         }
         #endregion
 
@@ -179,10 +186,35 @@ namespace InnerSight_Seti
         // 상점 둘러보기
         void BrowsingShop()
         {
-            // thisItem 지정
+            switch (whichDir)
+            {
+                case 0:
+                    if (isFirst)
+                    {
+                        ShelfStorage isItem = CollectionUtility.FirstOrDefault(
+                                          shopItems, item => NPC_wannaItem.itemID == item.keyId);
+                        currentIndex = shopItems.IndexOf(isItem);
+                        isFirst = false;
+                        whichDir = (currentIndex <= shopItems.Count / 2f) ? 1 : -1;
+                    }
+                    break;
+                case 1:
+                    if (isFirst)
+                    {
+                        isFirst = false;
+                        break;
+                    }
+                    currentIndex++;
+                    break;
+                case -1:
+                    if (currentIndex <= 0)
+                        currentIndex += shopItems.Count;
+                    currentIndex--;
+                    break;
+            }
+
             thisItem = shopItems[currentIndex % shopItems.Count];
             agent.SetDestination(FrontOfItem(thisItem.transform));
-            currentIndex++;
         }
 
         // ID 확인
