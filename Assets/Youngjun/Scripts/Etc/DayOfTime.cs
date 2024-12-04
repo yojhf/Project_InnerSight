@@ -18,6 +18,8 @@ public class DayOfTime : MonoBehaviour
     public int startHour = 9;
     public int startMinute = 0;
 
+    public System.DateTime VirtualDateTime => virtualDateTime;
+
     void Start()
     {
         // 가상 시간을 초기화
