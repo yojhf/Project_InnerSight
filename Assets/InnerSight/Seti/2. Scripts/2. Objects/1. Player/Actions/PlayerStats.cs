@@ -4,12 +4,11 @@ namespace InnerSight_Seti
 {
     public class PlayerStats : Singleton<PlayerStats>
     {
-        // 필드
-
         // 속성
         #region Properties
         public int CurrentGold { get; private set; }    // 현재 소지금
         public int RevenueGold { get; private set; }    // 당일 매상
+        public StatsUI StatsUI { get; private set; }    // 소지금 및 매상 표시
         #endregion
 
         // 라이프 사이클
@@ -35,7 +34,7 @@ namespace InnerSight_Seti
         public void EarnGold(int amount)
         {
             RevenueGold += amount;
-            CurrentRevenue();
+            StatsUI.SetRevenueGold();
         }
 
         // 돈 쓰는 메서드
@@ -48,13 +47,15 @@ namespace InnerSight_Seti
             else
             {
                 CurrentGold -= amount;
+                StatsUI.SetCurrentGold();
                 return true;
             }
         }
 
-        public void CurrentRevenue()
+        public void SetStatsUI(StatsUI statsUI)
         {
-            Debug.Log(RevenueGold);
+            StatsUI = statsUI;
+            InitializeDays();
         }
         #endregion
     }
