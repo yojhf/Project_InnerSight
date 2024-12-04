@@ -247,7 +247,7 @@ namespace InnerSight_Seti
             if (other.CompareTag("Shop"))
             {
                 centerOfShop = other.transform.GetChild(0);
-                shopItems.AddRange(other.transform.GetComponentsInChildren<ShelfStorage>());
+                shopItems.AddRange(other.transform.GetChild(2).GetComponentsInChildren<ShelfStorage>());
             }
         }
 

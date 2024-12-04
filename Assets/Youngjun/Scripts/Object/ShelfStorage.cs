@@ -30,7 +30,7 @@ namespace Noah
             playerSetting = player.GetComponent<PlayerSetting>();
             charactorAction = player.GetComponent<CharactorAction>();
 
-            item = transform.GetChild(0);
+            item = transform;
             AddListItems();
 
             //StartCoroutine(Test());
