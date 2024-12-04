@@ -31,7 +31,7 @@ namespace InnerSight_Seti
         private int NPC_ID;
         [SerializeField]
         private Database_NPC npcDatabase;
-        private Item NPC_wannaItem;
+        private ItemKey NPC_wannaItem;
 
         // NPC ±â´É
         private NavMeshAgent agent;
@@ -54,9 +54,13 @@ namespace InnerSight_Seti
         #region Life Cycle
         private void Start()
         {
-            NPC_wannaItem = npcDatabase.NPC_List.
-                            Find(key => key.NPC_ID == NPC_ID).
-                            NPC_Item_Want.GetComponent<Item>();
+            Item wannaItem = npcDatabase.NPC_List.
+                             Find(key => key.NPC_ID == NPC_ID).
+                             NPC_Item_Want.GetComponent<Item>();
+            int wannaItemID = wannaItem.ItemId;
+            NPC_wannaItem = wannaItem.
+                            itemDatabase.
+                            itemList.Find(key => key.itemID == wannaItemID);
         }
 
         private void Update()
@@ -122,15 +126,14 @@ namespace InnerSight_Seti
 
                 case NPC_Behaviour.PURCHASING:
                     thisItem.RemoveObject();
-                    AIBehaviour(NPC_Behaviour.EXITING);
                     if (!thisItem.IsCanBuy)
                     {
                         AIBehaviour(NPC_Behaviour.BROWSING);
                     }
                     else
                     {
-                        Debug.Log(PlayerStats.Instance);
-                        PlayerStats.Instance.EarnGold(NPC_wannaItem.GetItemData().itemPrice);
+                        PlayerStats.Instance.EarnGold(NPC_wannaItem.itemPrice);
+                        AIBehaviour(NPC_Behaviour.EXITING);
                     }
                     break;
 
@@ -190,7 +193,7 @@ namespace InnerSight_Seti
             {
                 yield return null;
             }
-            isThisItem = (NPC_wannaItem.ItemId == thisItem.keyId);
+            isThisItem = (NPC_wannaItem.itemID == thisItem.keyId);
 
             if (isThisItem) AIBehaviour(NPC_Behaviour.PURCHASING);
             else AIBehaviour(NPC_Behaviour.BROWSING);
