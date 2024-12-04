@@ -10,9 +10,13 @@ namespace InnerSight_Seti
     {
         // 필드
         #region Variables
+        // 컴포넌트
         private TextMeshProUGUI timeCount;
         private TextMeshProUGUI currentGold;
         private TextMeshProUGUI revenueGold;
+
+        // 클래스
+        private DayOfTime dayCycle;
         #endregion
 
         // 라이프 사이클
@@ -21,12 +25,17 @@ namespace InnerSight_Seti
         {
             // 세팅
             PlayerStats.Instance.SetStatsUI(this);
-
+            dayCycle = FindFirstObjectByType<DayOfTime>();
             timeCount = transform.GetChild(0).Find("TimeCount").GetComponent<TextMeshProUGUI>();
             currentGold = transform.GetChild(0).Find("CurrentGold").GetComponent<TextMeshProUGUI>();
             revenueGold = transform.GetChild(0).Find("RevenueGold").GetComponent<TextMeshProUGUI>();
             SetCurrentGold();
             SetRevenueGold();
+        }
+
+        private void Update()
+        {
+            //SetTime();
         }
         #endregion
 
@@ -40,6 +49,11 @@ namespace InnerSight_Seti
         public void SetRevenueGold()
         {
             revenueGold.text = PlayerStats.Instance.RevenueGold.ToString("N0");
+        }
+
+        private void SetTime()
+        {
+            timeCount.text = dayCycle.VirtualDateTime.ToString("yyyy년 MM월 dd일 HH시:mm분");
         }
         #endregion
     }
