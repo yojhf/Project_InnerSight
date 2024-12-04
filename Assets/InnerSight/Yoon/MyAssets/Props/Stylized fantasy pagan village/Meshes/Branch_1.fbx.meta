@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: c51cb65e468f4aa4ca01ded3c255c885
+AssetOrigin:
+  serializedVersion: 1
+  productId: 302012
+  packageName: Stylized fantasy pagan village Demo
+  packageVersion: 1.0
+  assetPath: Assets/Charttyp/Stylized fantasy pagan village/Meshes/Branch_1.fbx
+  uploadId: 707078
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -16,8 +23,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -35,7 +40,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.5
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -90,7 +95,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.005
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
@@ -107,10 +112,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 302012
-  packageName: Stylized fantasy pagan village Demo
-  packageVersion: 1.0
-  assetPath: Assets/Charttyp/Stylized fantasy pagan village/Meshes/Branch_1.fbx
-  uploadId: 707078
