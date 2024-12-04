@@ -181,8 +181,8 @@ namespace InnerSight_Seti
         {
             InventoryManager inven = player.PlayerUse.InventoryManager;
 
-            foreach (var item in tradeDict)
-                sellCost += item.Key.itemSellPrice * item.Value.itemCount;
+            /*foreach (var item in tradeDict)
+                sellCost += item.Key.itemSellPrice * item.Value.itemCount;*/
 
             player.playerStates.EarnColl(sellCost);
 
