@@ -7252,7 +7252,7 @@ GameObject:
   - component: {fileID: 1028504341}
   - component: {fileID: 1028504342}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: MakeItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14528,7 +14528,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1960729283}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: SpwanPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

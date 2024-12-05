@@ -939,7 +939,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 0.45
   m_Height: 1.52
   m_Direction: 1
   m_Center: {x: 0, y: 0.84, z: 0}
@@ -9926,6 +9926,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4970075540488048279}
     m_Modifications:
+    - target: {fileID: 7318686238498852856, guid: 1968aa18161ebbb479ecc375cebb1d23, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8294039352189569119, guid: 1968aa18161ebbb479ecc375cebb1d23, type: 3}
       propertyPath: m_Name
       value: StatsCanvas
@@ -9992,11 +9996,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9098091272630944395, guid: 1968aa18161ebbb479ecc375cebb1d23, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -0.229
       objectReference: {fileID: 0}
     - target: {fileID: 9098091272630944395, guid: 1968aa18161ebbb479ecc375cebb1d23, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.156
       objectReference: {fileID: 0}
     - target: {fileID: 9098091272630944395, guid: 1968aa18161ebbb479ecc375cebb1d23, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

@@ -57,7 +57,10 @@ public class MixObject : MonoBehaviour
             Destroy(objects[i].gameObject);
         }
 
-        playerSetting.PlayerInteraction.interactables.Clear();
+        if (playerSetting.PlayerInteraction.interactables.Count != 0)
+        {
+            playerSetting.PlayerInteraction.interactables.Clear();
+        }
 
         objects.Clear();
     }

@@ -25,7 +25,7 @@ MonoBehaviour:
     itemNameKor: "\uB9C8\uB978 \uBC84\uC12F"
     itemPrice: 0
     itemImage: {fileID: 21300000, guid: d297c34a60866d64db62dbf52d8a5855, type: 2}
-    itemPrefab: {fileID: 4565204891323459743, guid: 439f9d02ebe15fd458107bb23ccd384c, type: 3}
+    itemPrefab: {fileID: 7592718591074432620, guid: 439f9d02ebe15fd458107bb23ccd384c, type: 3}
     itemPhantomPrefab: {fileID: 4565204891323459743, guid: 4ffb8402b2761a24d9c07177192b37bd, type: 3}
   - itemID: 1003
     itemName: Rotten fruit
@@ -96,7 +96,7 @@ MonoBehaviour:
     itemPrice: 0
     itemImage: {fileID: 21300000, guid: f9eb7e73092ae2642abb6e7c123d3895, type: 2}
     itemPrefab: {fileID: 6794183208863677722, guid: a0226cd9dfbca0a4089a8a0b34cc9316, type: 3}
-    itemPhantomPrefab: {fileID: 1607624589794493816, guid: 1273ad8cb9d9f0c43b9ad25c6c4ab4df, type: 3}
+    itemPhantomPrefab: {fileID: 6794183208863677722, guid: e92b84853df467a4f81332c683042f26, type: 3}
   - itemID: 1015
     itemName: Old Book
     itemNameKor: "\uC624\uB798\uB41C \uCC45"
@@ -136,28 +136,28 @@ MonoBehaviour:
     itemName: Metal
     itemNameKor: "\uAE08\uC18D"
     itemPrice: 0
-    itemImage: {fileID: 21300000, guid: b2344c06a76aa8b48a98aacddc50c49b, type: 2}
+    itemImage: {fileID: 21300000, guid: f3a2cd15bef47f04c8eda0a6d1315aaa, type: 2}
     itemPrefab: {fileID: 3834440550260598379, guid: ab16c26a182bc30408096f81e2c8cf56, type: 3}
     itemPhantomPrefab: {fileID: 7160971520942073017, guid: c23450565bf438342b4ba2bd197722f4, type: 3}
   - itemID: 2019
     itemName: Mineral
     itemNameKor: "\uD759"
     itemPrice: 0
-    itemImage: {fileID: 21300000, guid: b2344c06a76aa8b48a98aacddc50c49b, type: 2}
+    itemImage: {fileID: 21300000, guid: ca25d4e8e511ca640bfa7f8d67bcb3ab, type: 2}
     itemPrefab: {fileID: 1435399602068954842, guid: 8aae2ad97ac3b5b4c8089c1729ae3ec6, type: 3}
     itemPhantomPrefab: {fileID: 6098820065465701071, guid: 2d2de071490bd464b9d39143f6b8e928, type: 3}
   - itemID: 2025
     itemName: Air
     itemNameKor: "\uACF5\uAE30"
     itemPrice: 0
-    itemImage: {fileID: 21300000, guid: b2344c06a76aa8b48a98aacddc50c49b, type: 2}
+    itemImage: {fileID: 21300000, guid: ed964ffe9785a2540a1dd85d7f8cfa9e, type: 2}
     itemPrefab: {fileID: 7334314524214064590, guid: db036d6e6007d3c4daab95c104786cd9, type: 3}
     itemPhantomPrefab: {fileID: 6484553565966826107, guid: c251855ad48e1674fa6fce93a9ec762f, type: 3}
-  - itemID: 2025
+  - itemID: 2031
     itemName: Aether
     itemNameKor: "\uC5D0\uD14C\uB974"
     itemPrice: 0
-    itemImage: {fileID: 21300000, guid: b2344c06a76aa8b48a98aacddc50c49b, type: 2}
+    itemImage: {fileID: 21300000, guid: 27fb0ab404966d74aa783c8ed9d41ecf, type: 2}
     itemPrefab: {fileID: 7829798248644409142, guid: 56d9eb70392a20f4d95cb10f35401694, type: 3}
     itemPhantomPrefab: {fileID: 1493664844030360271, guid: 83bf2a2fbede8774cadfbcb7e4d2cb4e, type: 3}
   - itemID: 4028

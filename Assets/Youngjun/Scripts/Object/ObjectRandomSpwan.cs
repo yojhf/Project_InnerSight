@@ -48,7 +48,7 @@ public class ObjectRandomSpwan : MonoBehaviour
         {
             int randomIndex = Random.Range(0, objPrefabs.Count);
 
-            Instantiate(objPrefabs[randomIndex], RandomPos(), Quaternion.identity, randomSpwanObj.transform);
+            Instantiate(objPrefabs[randomIndex], RandomPos(), objPrefabs[randomIndex].transform.rotation, randomSpwanObj.transform);
         }
 
         AddSpwanObject();

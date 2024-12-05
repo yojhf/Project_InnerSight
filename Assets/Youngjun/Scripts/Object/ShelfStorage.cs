@@ -74,14 +74,19 @@ namespace Noah
             if (items[0].GetComponent<MeshRenderer>().enabled == false)
             {
                 isCanBuy = false;
+
+                Debug.Log(isCanBuy + "1");
             }
             else
             {
                 isCanBuy = true;
+                Debug.Log(isCanBuy + "2");
             }
 
             if (isCanBuy)
             {
+                Debug.Log(isCanBuy + "3");
+
                 for (int i = items.Count - 1; i >= 0; i--)
                 {
                     if (items[i].GetComponent<MeshRenderer>().enabled == false)
