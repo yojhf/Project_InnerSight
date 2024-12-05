@@ -32,6 +32,7 @@ namespace InnerSight_Seti
         [SerializeField]
         private Database_NPC npcDatabase;
         private ItemKey NPC_wannaItem;
+        private Animator animator;
 
         // NPC 기능
         private NavMeshAgent agent;
@@ -49,7 +50,7 @@ namespace InnerSight_Seti
         private int whichDir;           // 순회 방향: -1: 반시계, 0: 바로, 1: 시계
         private bool isThisItem = false;
         [SerializeField]
-        private float checkDelay = 3f;
+        private float checkDelay = 2f;
 
         // n차 순회 처리용 불리언
         private bool isFirst;
@@ -77,6 +78,7 @@ namespace InnerSight_Seti
         {
             npcManager = FindFirstObjectByType<NPC_Manager>();
             agent = GetComponent<NavMeshAgent>();
+            animator = GetComponent<Animator>();
         }
 
         private void OnEnable()
@@ -85,6 +87,8 @@ namespace InnerSight_Seti
             whichDir = Random.Range(-1, 2);
             currentIndex = 0;
             isFirst = true;
+            
+            Move(true);
         }
         #endregion
 
@@ -116,6 +120,7 @@ namespace InnerSight_Seti
                 case NPC_Behaviour.EXITING:
                     targetPoint = npcManager.points_Behaviour[2].position;
                     agent.SetDestination(targetPoint);
+                    Move(true);
                     break;
 
                 case NPC_Behaviour.OUTSIDE:
@@ -125,9 +130,11 @@ namespace InnerSight_Seti
 
                 case NPC_Behaviour.BROWSING:
                     BrowsingShop();
+                    Move(true);
                     break;
 
                 case NPC_Behaviour.CHECKING:
+                    Move(false);
                     StartCoroutine(CheckID());
                     break;
 
@@ -232,12 +239,6 @@ namespace InnerSight_Seti
 
             yield break;
         }
-
-        Vector3 FrontOfItem(Transform itemTransform)
-        {
-            Vector3 offset = (centerOfShop.position - itemTransform.position).normalized * 0.5f;
-            return itemTransform.position + offset;
-        }
         #endregion
 
         // 이벤트 메서드
@@ -247,7 +248,7 @@ namespace InnerSight_Seti
             if (other.CompareTag("Shop"))
             {
                 centerOfShop = other.transform.GetChild(0);
-                shopItems.AddRange(other.transform.GetChild(2).GetComponentsInChildren<ShelfStorage>());
+                shopItems.AddRange(other.transform.GetComponentsInChildren<ShelfStorage>());
             }
         }
 
@@ -257,6 +258,22 @@ namespace InnerSight_Seti
             {
                 shopItems.Clear();
             }
+        }
+        #endregion
+
+        // 기타 유틸리티
+        #region Utilities
+        private void Move(bool isMove)
+        {
+            if (animator.GetBool("IsMove") == isMove) return;
+            animator.SetBool("IsMove", isMove);
+        }
+
+        // 아이템 선반 앞 위치 계산
+        Vector3 FrontOfItem(Transform itemTransform)
+        {
+            Vector3 offset = (centerOfShop.position - itemTransform.position).normalized * 0.5f;
+            return itemTransform.position + offset;
         }
         #endregion
     }

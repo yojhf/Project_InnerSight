@@ -5,8 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
-using TMPro;
-using UnityEngine.InputSystem.XR;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 using UnityEngine.XR.Interaction.Toolkit.UI;
 
@@ -25,12 +23,6 @@ namespace InnerSight_Seti
         private IEnumerator phantomCor;
         private Vector3 cursorPosition = Vector3.zero;
 
-        // 단순 변수
-        private int? selectedSlotIndex = null;  // 슬롯 인덱스, 인벤토리나 퀵슬롯의 슬롯을 선택했다면 값이 존재하고 그렇지 않으면 null
-
-        // 불리언 변수
-        private bool isSelected = false;        // 아이템 선택 상태 판정
-
         // 컴포넌트
         private Button initialSlot;
         [SerializeField]
@@ -47,13 +39,9 @@ namespace InnerSight_Seti
 
         // 속성
         #region Properties
-        public float PhantomDepth { get; set; }
-        public int? SelectedSlotIndex => selectedSlotIndex;
-        public bool IsSelected
-        {
-            get { return isSelected; }
-            set { isSelected = value; }
-        }
+        public int? SelectedSlotIndex { get; private set; }
+        public float PhantomDepth { get; private set; }
+        public bool IsSelected { get; private set; }
         public bool IsOpenInventory { get; set; }
         public bool IsOnTrade { get; set; }
         public Button ThisSlot => thisSlot;
@@ -261,10 +249,10 @@ namespace InnerSight_Seti
                 // 슬롯이 인벤토리에 있는 경우
                 if (Array.Exists(inventory.invenSlots, slot => slot == initialSlot))
                 {
-                    selectedSlotIndex = Array.IndexOf(inventory.invenSlots, initialSlot);
-                    SelectInven((int)selectedSlotIndex);
+                    SelectedSlotIndex = Array.IndexOf(inventory.invenSlots, initialSlot);
+                    SelectInven((int)SelectedSlotIndex);
                 }
-                selectedSlotIndex = null;
+                SelectedSlotIndex = null;
             }
         }
 
