@@ -214,8 +214,6 @@ namespace InnerSight_Seti
                     currentIndex--;
                     break;
             }
-            Debug.Log(currentIndex);
-            Debug.Log(shopItems.Count);
             thisItem = shopItems[currentIndex % shopItems.Count];
             agent.SetDestination(FrontOfItem(thisItem.transform));
         }
