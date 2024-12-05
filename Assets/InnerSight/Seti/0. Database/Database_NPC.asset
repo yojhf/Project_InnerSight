@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 156b5052c5f641d439c875cf56db7fc1, type: 3}
+  m_Name: Database_NPC
+  m_EditorClassIdentifier: 
+  NPC_List:
+  - NPC_ID: 0
+    NPC_Name: "\uB9C8\uBC95\uC0AC"
+    NPC_Description: "\uC190\uB2D8 NPC"
+    NPC_Prefab: {fileID: 6262604352666771514, guid: 104d0c678cf2e4e4eb729b77b8abb421, type: 3}
+    NPC_Item_Want: {fileID: 4572603651608261006, guid: 0c876139cc979344f8a3e6192569c852, type: 3}
+  - NPC_ID: 1
+    NPC_Name: "\uAE30\uC0AC"
+    NPC_Description: "\uC190\uB2D8 NPC"
+    NPC_Prefab: {fileID: 4905470797800636855, guid: 4248195cb617738439277fa306e27a9c, type: 3}
+    NPC_Item_Want: {fileID: 8393993608532121644, guid: 87aba3225365ef84db2f13d6c3b6d6a9, type: 3}
+  - NPC_ID: 2
+    NPC_Name: "\uB3C4\uC801"
+    NPC_Description: "\uC190\uB2D8 NPC"
+    NPC_Prefab: {fileID: 3567010918828071724, guid: b600da52643c7344fad511bf328b56cb, type: 3}
+    NPC_Item_Want: {fileID: 1453821419900159809, guid: 2de10e22dbdb15f45b845748cc1dfb28, type: 3}
+  - NPC_ID: 3
+    NPC_Name: "\uACA9\uD22C\uAC00"
+    NPC_Description: "\uC190\uB2D8 NPC"
+    NPC_Prefab: {fileID: 6498761317265457568, guid: f5c760e8ff1bd21439ec2a78c8e98cae, type: 3}
+    NPC_Item_Want: {fileID: 8393993608532121644, guid: 87aba3225365ef84db2f13d6c3b6d6a9, type: 3}
+  - NPC_ID: 4
+    NPC_Name: "\uC545\uB9C8"
+    NPC_Description: "\uC190\uB2D8 NPC"
+    NPC_Prefab: {fileID: 1460361826946625858, guid: ac12f9e1545a66c4eb165a91e1c2c9ec, type: 3}
+    NPC_Item_Want: {fileID: 1453821419900159809, guid: 2de10e22dbdb15f45b845748cc1dfb28, type: 3}

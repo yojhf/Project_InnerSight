@@ -64,29 +64,24 @@ namespace InnerSight_Seti
         public void TakeSlot(ItemKey selectedItemKey)
         {
             // 타겟 슬롯을 먼저 비우고
+            int targetIndex = invenDict[selectedItemKey].itemIndex;
             ClearSlot(inventoryManager.ItemData(selectedItemKey));
+            invenDict.Remove(selectedItemKey);
 
             // 슬롯 자동 정렬 - Dictionary는 순서 보장 X, 그러므로
-                // 우선 비우고
+            // 우선 비우고
             foreach (KeyValuePair<ItemKey, ItemValue> pair in invenDict)
-                if (pair.Value.itemIndex > invenDict[selectedItemKey].itemIndex)
+                if (pair.Value.itemIndex > targetIndex)
                     ClearSlot(inventoryManager.ItemData(pair.Key));
                 // 다시 채운다
             foreach (KeyValuePair<ItemKey, ItemValue> pair in invenDict)
             {
-                if (pair.Value.itemIndex > invenDict[selectedItemKey].itemIndex)
+                if (pair.Value.itemIndex > targetIndex)
                 {
                     pair.Value.itemIndex--;
                     UpdateSlot(inventoryManager.ItemData(pair.Key), invenDict[pair.Key].itemIndex);
                 }
             }
-
-            // 해당 Element 제거
-            invenDict.Remove(selectedItemKey);
-
-            // 만약 아이템을 전부 다 썼다면 인벤토리를 자동으로 비활성화
-            //if (invenDict.Count == 0)
-            //    inventoryManager.EmptySignal();
         }
 
         // 두 아이템의 슬롯을 교환하는 메서드
