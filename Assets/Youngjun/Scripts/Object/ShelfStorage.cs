@@ -30,7 +30,7 @@ namespace Noah
             playerSetting = player.GetComponent<PlayerSetting>();
             charactorAction = player.GetComponent<CharactorAction>();
 
-            item = transform;
+            item = transform.GetChild(0);
             AddListItems();
 
             //StartCoroutine(Test());
@@ -74,19 +74,14 @@ namespace Noah
             if (items[0].GetComponent<MeshRenderer>().enabled == false)
             {
                 isCanBuy = false;
-
-                Debug.Log(isCanBuy + "1");
             }
             else
             {
                 isCanBuy = true;
-                Debug.Log(isCanBuy + "2");
             }
 
             if (isCanBuy)
             {
-                Debug.Log(isCanBuy + "3");
-
                 for (int i = items.Count - 1; i >= 0; i--)
                 {
                     if (items[i].GetComponent<MeshRenderer>().enabled == false)
@@ -123,9 +118,37 @@ namespace Noah
 
         }
 
-        private void OnTriggerStay(Collider other)
+        //private void OnTriggerStay(Collider other)
+        //{
+        //    Item item = other.transform.GetComponent<Item>();
+
+        //    if (item != null)
+        //    {
+        //        if (item.ItemId == keyId)
+        //        {
+        //            isStroage = true;
+
+        //            //grapItem = collision.gameObject;
+        //            AddObject(other.gameObject);
+
+        //        }
+        //    }
+        //}
+
+        //private void OnTriggerExit(Collider other)
+        //{
+        //    Item item = other.transform.GetComponent<Item>();
+
+        //    if (item != null)
+        //    {
+        //        isStroage = false;
+        //    }
+        //}
+
+
+        private void OnCollisionStay(Collision collision)
         {
-            Item item = other.transform.GetComponent<Item>();
+            Item item = collision.transform.GetComponent<Item>();
 
             if (item != null)
             {
@@ -134,20 +157,21 @@ namespace Noah
                     isStroage = true;
 
                     //grapItem = collision.gameObject;
-                    AddObject(other.gameObject);
+                    AddObject(collision.gameObject);
 
                 }
             }
         }
 
-        private void OnTriggerExit(Collider other)
+        private void OnCollisionExit(Collision collision)
         {
-            Item item = other.transform.GetComponent<Item>();
+            Item item = collision.transform.GetComponent<Item>();
 
             if (item != null)
             {
                 isStroage = false;
             }
         }
+
     }
 }

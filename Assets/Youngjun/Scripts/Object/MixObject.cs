@@ -71,10 +71,12 @@ public class MixObject : MonoBehaviour
 
         if (obj != null)
         {
-            if (!objects.Contains(obj))
-            {
-                objects.Add(obj);
-            }
+            //if (!objects.Contains(obj))
+            //{
+
+            //}
+
+            objects.Add(obj);
 
             if (objects.Count == mixCount)
             {
