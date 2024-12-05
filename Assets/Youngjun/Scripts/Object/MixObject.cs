@@ -78,7 +78,7 @@ public class MixObject : MonoBehaviour
 
             objects.Add(obj);
 
-            if (objects.Count == mixCount)
+            if (objects.Count >= mixCount)
             {
                 isCanMix = true;
 

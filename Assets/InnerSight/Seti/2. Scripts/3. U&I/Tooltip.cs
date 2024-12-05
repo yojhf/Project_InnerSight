@@ -24,7 +24,7 @@ namespace InnerSight_Seti
         #region Life Cycle
         private void Awake()
         {
-            itemSprite = transform.GetChild(1).GetComponent<SpriteRenderer>();
+            itemSprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
 
             itemStorage = GetComponentInParent<ShelfStorage>();
             itemID = itemStorage.keyId;
