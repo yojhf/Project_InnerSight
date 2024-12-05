@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Specialized;
 
 namespace InnerSight_Seti
 {
@@ -39,6 +40,18 @@ namespace InnerSight_Seti
             //invenPanel = transform.GetChild(0).gameObject;
             invenSlots = invenPanel.GetComponentsInChildren<Button>();
             invenSlotsCountTexts = GetComponentsInChildren<TextMeshProUGUI>();
+        }
+
+        private void Update()
+        {
+            int itemCount = 0;
+
+            // 슬롯 갱신
+            foreach (var item in invenDict)
+            {
+                //UpdateSlot(item, )
+                itemCount++;
+            }
         }
         #endregion
 

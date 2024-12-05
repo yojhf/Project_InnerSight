@@ -64,13 +64,6 @@ namespace InnerSight_Seti
 
         // 라이프 사이클
         #region Life Cycle
-        private void Start()
-        {
-            NPC_wannaItem_First = SetWantItem(0);
-            NPC_wannaItem_Second = SetWantItem(1);
-            NPC_wannaItem_Third = SetWantItem(2);
-        }
-
         private void Update()
         {
             AIStateChange();
@@ -81,6 +74,10 @@ namespace InnerSight_Seti
             npcManager = FindFirstObjectByType<NPC_Manager>();
             animator = GetComponent<Animator>();
             agent = GetComponent<NavMeshAgent>();
+
+            NPC_wannaItem_First = SetWantItem(0);
+            NPC_wannaItem_Second = SetWantItem(1);
+            NPC_wannaItem_Third = SetWantItem(2);
         }
 
         private void OnEnable()
@@ -139,7 +136,7 @@ namespace InnerSight_Seti
                     thisItem.RemoveObject();
                     if (!thisItem.IsCanBuy)
                     {
-                        SetWant(++currentOrder);
+                        SetNextWant(++currentOrder);
                         AIBehaviour(NPC_Behaviour.BROWSING);
                     }
                     else
@@ -217,7 +214,8 @@ namespace InnerSight_Seti
                     currentIndex--;
                     break;
             }
-
+            Debug.Log(currentIndex);
+            Debug.Log(shopItems.Count);
             thisItem = shopItems[currentIndex % shopItems.Count];
             agent.SetDestination(FrontOfItem(thisItem.transform));
         }
@@ -268,6 +266,7 @@ namespace InnerSight_Seti
             currentIndex = 0;
             currentOrder = 0;
             isFirst = true;
+            SetNextWant(0);
             Move(true);
         }
 
@@ -278,7 +277,7 @@ namespace InnerSight_Seti
         }
 
         // 현재 원하는 아이템 세팅
-        private void SetWant(int order)
+        private void SetNextWant(int order)
         {
             switch (order)
             {
@@ -320,9 +319,7 @@ namespace InnerSight_Seti
                                NPC_Item_Want_Third.GetComponent<Item>();
                     break;
             }
-
-            int wannaItemID = nullItem.ItemId;
-            return nullItem.itemDatabase.itemList.Find(key => key.itemID == wannaItemID);
+            return nullItem.itemDatabase.itemList.Find(key => key.itemID == nullItem.ItemId);
         }
 
         // 아이템 선반 앞 위치 계산
