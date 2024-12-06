@@ -107,12 +107,14 @@ public class DayOfTime : MonoBehaviour
     public void Pause()
     {
         Time.timeScale = timeScale;
-
-        Debug.Log(Time.timeScale);
     }
 
     public void ResetPause()
     {
+        //PlayerStats.Instance.
+
+
+
         //isPause = false;
         //pauseUI.gameObject.SetActive(false);
         // 일시정시 원복
