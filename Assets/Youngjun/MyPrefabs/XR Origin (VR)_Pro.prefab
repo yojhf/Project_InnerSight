@@ -8556,7 +8556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Mediator: {fileID: 224594342774393240}
   m_TransformationPriority: 0
-  m_MoveSpeed: 2.5
+  m_MoveSpeed: 7
   m_EnableStrafe: 1
   m_EnableFly: 0
   m_UseGravity: 1
@@ -9926,6 +9926,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4970075540488048279}
     m_Modifications:
+    - target: {fileID: 2792942242677173915, guid: 1968aa18161ebbb479ecc375cebb1d23, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5876483383284908388, guid: 1968aa18161ebbb479ecc375cebb1d23, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 400
