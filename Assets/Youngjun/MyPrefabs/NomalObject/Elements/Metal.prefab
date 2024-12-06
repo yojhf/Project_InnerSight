@@ -56,7 +56,13 @@ VisualEffect:
     m_Vector3f:
       m_Array: []
     m_Vector4f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 460.90292, y: 285.04227, z: 236.97366, w: 1}
+        m_Name: Fire_InsieColor
+        m_Overridden: 1
+      - m_Value: {x: 4.133731, y: 2.3650222, z: 2.0473666, w: 1}
+        m_Name: Fire_OutsideColor
+        m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:

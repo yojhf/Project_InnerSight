@@ -30,7 +30,7 @@ public class DayOfTime : MonoBehaviour
     {
         // 경과 시간 계산
         _timeElapsed = Time.deltaTime;
-        _timeAngle = Time.time;
+        _timeAngle = Time.deltaTime;
 
         //_timeAngle += Time.deltaTime;
         float dayProgress = (_timeElapsed / dayDuration) % 1; // 하루 진행 비율 (0~1)
