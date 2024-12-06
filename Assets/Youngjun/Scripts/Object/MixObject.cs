@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class MixObject : MonoBehaviour
 {
+    // 확률
+    [Range(0, 100)]
+    public float probability = 60f;
+
     public ItemDatabase itemDataBase;
     public PlayerSetting playerSetting;
     public int failItemKey;
@@ -41,13 +45,18 @@ public class MixObject : MonoBehaviour
             }
             else
             {
-                var failItem = itemDataBase.itemList.FirstOrDefault(item => item.itemID == failItemKey);
-
-                ResetMix();
-                Instantiate(failItem.GetPrefab(), spwanPos.position, Quaternion.identity);
+                FailMix();
             }
 
         }
+    }
+
+    void FailMix()
+    {
+        var failItem = itemDataBase.itemList.FirstOrDefault(item => item.itemID == failItemKey);
+
+        ResetMix();
+        Instantiate(failItem.GetPrefab(), spwanPos.position, Quaternion.identity);
     }
 
     void ResetMix()
@@ -65,6 +74,17 @@ public class MixObject : MonoBehaviour
         objects.Clear();
     }
 
+    bool IsTrueWithProbability(float chance)
+    {
+        // Random.Range(0f, 100f)는 0 이상 100 미만의 float 값을 반환
+        return Random.Range(0f, 100f) < chance;
+    }
+
+    bool RandomCheck(int index)
+    {
+        return index > 2000 && index < 4000;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         Item obj = collision.transform.GetComponent<Item>();
@@ -78,11 +98,31 @@ public class MixObject : MonoBehaviour
 
             objects.Add(obj);
 
+            
+
             if (objects.Count >= mixCount)
             {
-                isCanMix = true;
+                if (RandomCheck(objects[0].ItemId) && RandomCheck(objects[1].ItemId))
+                {
+                    bool isConform = IsTrueWithProbability(probability);
 
-                MixAble();
+                    Debug.Log($"{isConform}");
+
+                    if (isConform)
+                    {
+                        isCanMix = true;
+                        MixAble();
+                    }
+                    else
+                    {
+                        FailMix();
+                    }
+                }
+                else
+                {
+                    isCanMix = true;
+                    MixAble();
+                }
             }
         }
     }
