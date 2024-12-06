@@ -289,19 +289,7 @@ namespace InnerSight_Seti
         {
             NPC_currentWant = NPC_wants[currentOrder];
             NPC_wants.Remove(NPC_wants[currentOrder]);
-
-            switch (currentOrder)
-            {
-                case 0:
-                    currentOrder = 1;
-                    break;
-                case 1:
-                    currentOrder = 0;
-                    break;
-            }
-
-            if (!NPC_wants.Contains(NPC_wants[currentOrder]))
-                currentOrder = 2;
+            currentOrder = 0;
         }
 
         // 아이템 선반 앞 위치 계산
