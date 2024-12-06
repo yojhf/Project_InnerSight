@@ -48,3 +48,24 @@ MonoBehaviour:
     NPC_Item_Want_First: {fileID: 3075164133892350873, guid: 9d8a7366a6b05054fbeefe8daeb26904, type: 3}
     NPC_Item_Want_Second: {fileID: 6621646877869387850, guid: 8eea2347e4b781a4ea0d559692c01068, type: 3}
     NPC_Item_Want_Third: {fileID: 5518192576212542526, guid: 1b86c58f3df03164889a7c0368f7aa29, type: 3}
+  - NPC_ID: 5
+    NPC_Name: "\uC0C1\uAE09 \uB9C8\uBC95\uC0AC"
+    NPC_Description: "\uC190\uB2D8 NPC"
+    NPC_Prefab: {fileID: 2623032003970501255, guid: 2e73eff4370f0ed4ab155465100a4b9e, type: 3}
+    NPC_Item_Want_First: {fileID: 7137295551369274495, guid: 9f02de37fede5d34999b8d09ec91a23b, type: 3}
+    NPC_Item_Want_Second: {fileID: 8096169559649628995, guid: d2e7db2ec18289e45865e7d208507d04, type: 3}
+    NPC_Item_Want_Third: {fileID: 5518192576212542526, guid: 1b86c58f3df03164889a7c0368f7aa29, type: 3}
+  - NPC_ID: 6
+    NPC_Name: "\uC0C1\uAE09 \uAE30\uC0AC"
+    NPC_Description: "\uC190\uB2D8 NPC"
+    NPC_Prefab: {fileID: 288616302376651326, guid: da6b656a62855f549befa54536da09ab, type: 3}
+    NPC_Item_Want_First: {fileID: 8847306529542590959, guid: 008380d532c1fe843be85202882953d0, type: 3}
+    NPC_Item_Want_Second: {fileID: 8099526328240803452, guid: 835c36d626d566642be41ffa58284bbb, type: 3}
+    NPC_Item_Want_Third: {fileID: 5518192576212542526, guid: 1b86c58f3df03164889a7c0368f7aa29, type: 3}
+  - NPC_ID: 7
+    NPC_Name: "\uC0C1\uAE09 \uACA9\uD22C\uAC00"
+    NPC_Description: "\uC190\uB2D8 NPC"
+    NPC_Prefab: {fileID: 7645891483388007945, guid: 47bee06399f4f4c42a6f0276295e7b5b, type: 3}
+    NPC_Item_Want_First: {fileID: 6621646877869387850, guid: 8eea2347e4b781a4ea0d559692c01068, type: 3}
+    NPC_Item_Want_Second: {fileID: 8847306529542590959, guid: 008380d532c1fe843be85202882953d0, type: 3}
+    NPC_Item_Want_Third: {fileID: 5518192576212542526, guid: 1b86c58f3df03164889a7c0368f7aa29, type: 3}

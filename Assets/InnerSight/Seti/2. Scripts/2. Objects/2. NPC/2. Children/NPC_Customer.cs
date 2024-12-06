@@ -29,32 +29,33 @@ namespace InnerSight_Seti
         // NPC 존재 정의
         [SerializeField] private int NPC_ID;
         [SerializeField] private Database_NPC npcDatabase;
-        private Animator animator;
-
-
-        private ItemKey NPC_wannaItem;
-        private ItemKey[] NPC_wants;
+        private ItemKey NPC_currentWant;
+        private List<ItemKey> NPC_wants = new();
 
         // NPC 기능
+        private Animator animator;
         private NavMeshAgent agent;
         private NPC_Manager npcManager;
         private NPC_Behaviour npcState;
         private Vector3 targetPoint;    // 현재 이동 타겟 지점
 
         // 쇼핑
+        private int currentOrder;       // 쇼핑 우선순위
+        private int currentIndex;       // 아이템 선반 Index
+        private int whichDir;           // 순회 방향: -1: 반시계, 0: 바로, 1: 시계
+        private float checkDelay = 2f;
+        private bool isThisItem = false;
         private Transform centerOfShop;
         private List<ShelfStorage> shopItems = new();
         private ShelfStorage thisItem;
-        private bool isThisItem = false;
-        [SerializeField] private int whichDir;           // 순회 방향: -1: 반시계, 0: 바로, 1: 시계
-        [SerializeField] private int currentIndex;
-        [SerializeField] private float checkDelay = 2f;
 
         // n차 순회 처리용 불리언
         private bool isFirst;
+        #endregion
 
-        // 쇼핑 우선순위
-        private int currentOrder;
+        // 속성
+        #region Properties
+        public Key_NPC NPCKey { get; private set; }
         #endregion
 
         // 라이프 사이클
@@ -66,16 +67,23 @@ namespace InnerSight_Seti
 
         private void Awake()
         {
+            // 존재 정의
+            NPCKey = npcDatabase.NPC_List.Find(key => key.NPC_ID == NPC_ID);
+
+            // 초기화
             npcManager = FindFirstObjectByType<NPC_Manager>();
             animator = GetComponent<Animator>();
             agent = GetComponent<NavMeshAgent>();
-
-            NPC_wants = null;
         }
 
         private void OnEnable()
         {
             Initialize();
+        }
+
+        private void OnDisable()
+        {
+            NPC_wants.Clear();
         }
         #endregion
 
@@ -129,12 +137,12 @@ namespace InnerSight_Seti
                     thisItem.RemoveObject();
                     if (!thisItem.IsCanBuy)
                     {
-                        SetNextWant(++currentOrder);
+                        SetNextWant();
                         AIBehaviour(NPC_Behaviour.BROWSING);
                     }
                     else
                     {
-                        PlayerStats.Instance.EarnGold(NPC_wannaItem.itemPrice);
+                        PlayerStats.Instance.EarnGold(NPC_currentWant.itemPrice);
                         AIBehaviour(NPC_Behaviour.EXITING);
                     }
                     break;
@@ -187,7 +195,7 @@ namespace InnerSight_Seti
                     if (isFirst)
                     {
                         ShelfStorage isItem = CollectionUtility.FirstOrDefault(
-                                          shopItems, item => NPC_wannaItem.itemID == item.keyId);
+                                          shopItems, item => NPC_currentWant.itemID == item.keyId);
                         currentIndex = shopItems.IndexOf(isItem);
                         isFirst = false;
                         whichDir = (currentIndex <= shopItems.Count / 2f) ? 1 : -1;
@@ -219,7 +227,7 @@ namespace InnerSight_Seti
             {
                 yield return null;
             }
-            isThisItem = (NPC_wannaItem.itemID == thisItem.keyId);
+            isThisItem = (NPC_currentWant.itemID == thisItem.keyId);
 
             if (isThisItem) AIBehaviour(NPC_Behaviour.PURCHASING);
             else AIBehaviour(NPC_Behaviour.BROWSING);
@@ -252,12 +260,16 @@ namespace InnerSight_Seti
         #region Utilities
         private void Initialize()
         {
+            NPC_wants.Add(SetItem(NPCKey.NPC_Item_Want_First));
+            NPC_wants.Add(SetItem(NPCKey.NPC_Item_Want_Second));
+            NPC_wants.Add(SetItem(NPCKey.NPC_Item_Want_Third));
+
             AIBehaviour(NPC_Behaviour.SHOWING);
             whichDir = Random.Range(-1, 2);
+            currentOrder = Random.Range(0, 2);
             currentIndex = 0;
-            currentOrder = 0;
             isFirst = true;
-            SetNextWant(0);
+            SetNextWant();
             Move(true);
         }
 
@@ -267,42 +279,29 @@ namespace InnerSight_Seti
             animator.SetBool("IsMove", isMove);
         }
 
-        private int RemainOrder()
+        private ItemKey SetItem(GameObject item)
         {
-            return 0;
+            return item.GetComponent<Item>().itemDatabase.itemList.Find(key => key.itemID == item.GetComponent<Item>().ItemId);
         }
 
         // 현재 원하는 아이템 세팅
-        private void SetNextWant(int order)
+        private void SetNextWant()
         {
-            NPC_wannaItem = SetWantItem(order);
-        }
+            NPC_currentWant = NPC_wants[currentOrder];
+            NPC_wants.Remove(NPC_wants[currentOrder]);
 
-        // 원래 원하던 아이템 세팅
-        private ItemKey SetWantItem(int order)
-        {
-            Item nullItem = null;
-            switch (order)
+            switch (currentOrder)
             {
                 case 0:
-                    nullItem = npcDatabase.NPC_List.
-                               Find(key => key.NPC_ID == NPC_ID).
-                               NPC_Item_Want_First.GetComponent<Item>();
+                    currentOrder = 1;
                     break;
-
                 case 1:
-                    nullItem = npcDatabase.NPC_List.
-                               Find(key => key.NPC_ID == NPC_ID).
-                               NPC_Item_Want_Second.GetComponent<Item>();
-                    break;
-
-                case 2:
-                    nullItem = npcDatabase.NPC_List.
-                               Find(key => key.NPC_ID == NPC_ID).
-                               NPC_Item_Want_Third.GetComponent<Item>();
+                    currentOrder = 0;
                     break;
             }
-            return nullItem.itemDatabase.itemList.Find(key => key.itemID == nullItem.ItemId);
+
+            if (!NPC_wants.Contains(NPC_wants[currentOrder]))
+                currentOrder = 2;
         }
 
         // 아이템 선반 앞 위치 계산
