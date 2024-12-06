@@ -27,15 +27,13 @@ namespace InnerSight_Seti
         // 필드
         #region Variables
         // NPC 존재 정의
-        [SerializeField]
-        private int NPC_ID;
-        [SerializeField]
-        private Database_NPC npcDatabase;
-        private ItemKey NPC_wannaItem;
-        private ItemKey NPC_wannaItem_First;
-        private ItemKey NPC_wannaItem_Second;
-        private ItemKey NPC_wannaItem_Third;
+        [SerializeField] private int NPC_ID;
+        [SerializeField] private Database_NPC npcDatabase;
         private Animator animator;
+
+
+        private ItemKey NPC_wannaItem;
+        private ItemKey[] NPC_wants;
 
         // NPC 기능
         private NavMeshAgent agent;
@@ -47,13 +45,10 @@ namespace InnerSight_Seti
         private Transform centerOfShop;
         private List<ShelfStorage> shopItems = new();
         private ShelfStorage thisItem;
-        [SerializeField]
-        private int currentIndex;
-        [SerializeField]
-        private int whichDir;           // 순회 방향: -1: 반시계, 0: 바로, 1: 시계
         private bool isThisItem = false;
-        [SerializeField]
-        private float checkDelay = 2f;
+        [SerializeField] private int whichDir;           // 순회 방향: -1: 반시계, 0: 바로, 1: 시계
+        [SerializeField] private int currentIndex;
+        [SerializeField] private float checkDelay = 2f;
 
         // n차 순회 처리용 불리언
         private bool isFirst;
@@ -75,9 +70,7 @@ namespace InnerSight_Seti
             animator = GetComponent<Animator>();
             agent = GetComponent<NavMeshAgent>();
 
-            NPC_wannaItem_First = SetWantItem(0);
-            NPC_wannaItem_Second = SetWantItem(1);
-            NPC_wannaItem_Third = SetWantItem(2);
+            NPC_wants = null;
         }
 
         private void OnEnable()
@@ -274,23 +267,15 @@ namespace InnerSight_Seti
             animator.SetBool("IsMove", isMove);
         }
 
+        private int RemainOrder()
+        {
+            return 0;
+        }
+
         // 현재 원하는 아이템 세팅
         private void SetNextWant(int order)
         {
-            switch (order)
-            {
-                case 0:
-                    NPC_wannaItem = NPC_wannaItem_First;
-                    break;
-
-                case 1:
-                    NPC_wannaItem = NPC_wannaItem_Second;
-                    break;
-
-                case 2:
-                    NPC_wannaItem = NPC_wannaItem_Third;
-                    break;
-            }
+            NPC_wannaItem = SetWantItem(order);
         }
 
         // 원래 원하던 아이템 세팅
