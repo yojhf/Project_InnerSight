@@ -11,7 +11,7 @@ namespace InnerSight_Seti
 
         public int ItemId => itemID;
 
-        private void Start()
+        private void Awake()
         {
             // ID를 사용해서 ItemDatabase에서 아이템 데이터를 가져옴
             itemData = itemDatabase.itemList.Find(item => item.itemID == itemID);

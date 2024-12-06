@@ -1132,7 +1132,7 @@ GameObject:
   - component: {fileID: 328613819329169900}
   - component: {fileID: 862624922305745311}
   m_Layer: 0
-  m_Name: NPC_Knight
+  m_Name: NPC_Knight 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1236,6 +1236,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NPC_ID: 1
   npcDatabase: {fileID: 11400000, guid: 316908c012b294842a4f38e23ab9edf4, type: 2}
+  currentIndex: 0
+  whichDir: 0
+  checkDelay: 2
 --- !u!1 &5060403499402614392
 GameObject:
   m_ObjectHideFlags: 0
