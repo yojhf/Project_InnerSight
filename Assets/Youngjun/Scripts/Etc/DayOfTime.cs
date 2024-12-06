@@ -33,7 +33,6 @@ public class DayOfTime : MonoBehaviour
     {
         // 가상 시간을 초기화
         virtualDateTime = new System.DateTime(startYear, startMonth, startDay, startHour, startMinute, 0);
-       
     }
 
     void Update()
@@ -58,7 +57,7 @@ public class DayOfTime : MonoBehaviour
         UpdateTimeText();
 
         // 하루 사이클 끝 => 정산타임
-        ResetDate();
+        //ResetDate();
     }
 
     void UpdateVirtualDateTime(float dayProgress)
@@ -98,6 +97,7 @@ public class DayOfTime : MonoBehaviour
 
 
 
+
         SceneFade.instance.FadeOut(null);
 
 
@@ -107,6 +107,8 @@ public class DayOfTime : MonoBehaviour
     public void Pause()
     {
         Time.timeScale = timeScale;
+
+        Debug.Log(Time.timeScale);
     }
 
     public void ResetPause()
