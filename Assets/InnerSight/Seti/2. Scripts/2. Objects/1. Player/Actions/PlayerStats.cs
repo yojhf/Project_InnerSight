@@ -37,6 +37,12 @@ namespace InnerSight_Seti
             StatsUI.SetRevenueGold();
         }
 
+        // 돈 버는 메서드
+        public void SetGold(int amount)
+        {
+            CurrentGold = amount;
+        }
+
         // 돈 쓰는 메서드
         public bool SpendColl(int amount)
         {

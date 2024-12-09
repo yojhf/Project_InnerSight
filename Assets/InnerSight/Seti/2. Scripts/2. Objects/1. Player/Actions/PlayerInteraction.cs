@@ -49,12 +49,18 @@ namespace InnerSight_Seti
                     // 인터페이스로부터 itemData 가져오기
                     if (closestObject.TryGetComponent<IInteractable>(out var interactable))
                     {
-                        ItemKey itemData = interactable.GetItemData();
-
-                        Debug.Log(itemData);
-
-                        // 인벤토리에 더하는 메서드 호출
-                        player.PlayerUse.InventoryManager.AddItem(itemData, 1);
+                        if (player.PlayerUse.InventoryManager.Inventory.invenDict.Count >=
+                            player.PlayerUse.InventoryManager.Inventory.invenSlots.Length)
+                        {
+                            Debug.Log("인벤토리가 꽉찼어!");
+                            return;
+                        }
+                        else
+                        {
+                            // 인벤토리에 더하는 메서드 호출
+                            ItemKey itemData = interactable.GetItemData();
+                            player.PlayerUse.InventoryManager.AddItem(itemData, 1);
+                        }
                     }
 
                     // 해당 오브젝트 줍기
