@@ -5,16 +5,19 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
-namespace MyFPS
+namespace Noah
 {
     public class SceneFade : MonoBehaviour
     {
         public static SceneFade instance;   
 
         [SerializeField] private Image fadeImage;
+        [SerializeField] private DayOfTime dayOfTime;
         public AnimationCurve fadeCurve;
 
         public bool startFadeIn = true;
+
+
 
         private void Awake()
         {
@@ -31,6 +34,7 @@ namespace MyFPS
 
                 if (startFadeIn == true)
                 {
+
                     FadeIn(null);
                 }
 
@@ -39,7 +43,7 @@ namespace MyFPS
         }
 
         public void FadeIn(string name, float delay = 0f)
-        {
+        { 
             StartCoroutine(FadeIn_Co(name, delay));
         }
 
@@ -64,14 +68,21 @@ namespace MyFPS
                 yield return new WaitForSecondsRealtime(delay);
             }
 
-     
-
             while (ctime < time)
             {
                 float a = fadeCurve.Evaluate(time);
 
                 fadeImage.color = new Color(0f, 0f, 0f, a);
-                time -= Time.unscaledDeltaTime;
+
+                if (dayOfTime.IsReset)
+                {
+                    time -= Time.unscaledDeltaTime;
+                }
+                else 
+                {
+                    time -= Time.deltaTime;
+                }
+
                 yield return null;
             }
 
@@ -79,6 +90,8 @@ namespace MyFPS
             {
                 SceneManager.LoadScene(name);
             }
+
+
 
         }
 
@@ -97,7 +110,17 @@ namespace MyFPS
                 float a = fadeCurve.Evaluate(ctime);
 
                 fadeImage.color = new Color(0f, 0f, 0f, a);
-                ctime += Time.unscaledDeltaTime;
+
+                if (dayOfTime.IsReset)
+                {
+                    ctime += Time.unscaledDeltaTime;
+                }
+                else
+                {
+                    ctime += Time.deltaTime;
+
+                }
+
                 yield return null;
             }
 

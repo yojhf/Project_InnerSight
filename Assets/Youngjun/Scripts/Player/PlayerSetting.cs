@@ -28,4 +28,23 @@ public class PlayerSetting : MonoBehaviour
         playerInteraction = GetComponent<PlayerInteraction>();
     }
 
+    private void Start()
+    {
+
+    }
+
+    private void Update()
+    {
+        if (transform.GetChild(0).position.y <= 1.35f)
+        {
+            PlayerPos();
+        }
+    }
+
+    void PlayerPos()
+    {
+        transform.GetChild(0).position = new Vector3(0f, 1.36f, 0f);
+    }
+
+
 }

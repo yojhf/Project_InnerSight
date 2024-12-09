@@ -16,6 +16,7 @@ public class MixObject : MonoBehaviour
 
     [SerializeField] private int mixCount = 2;
     private Transform spwanPos;
+    private Transform spwanPos2;
     public List<Item> objects = new List<Item>();
 
     private bool isCanMix = false;
@@ -25,6 +26,7 @@ public class MixObject : MonoBehaviour
     void Start()
     {
         spwanPos = transform.GetChild(0);
+        spwanPos2 = transform.GetChild(1);
     }
 
 
@@ -42,6 +44,7 @@ public class MixObject : MonoBehaviour
             {
                 ResetMix();
                 Instantiate(itemKey.GetPrefab(), spwanPos.position, Quaternion.identity);
+                Instantiate(itemKey.GetPrefab(), spwanPos2.position, Quaternion.identity);
             }
             else
             {
@@ -57,6 +60,7 @@ public class MixObject : MonoBehaviour
 
         ResetMix();
         Instantiate(failItem.GetPrefab(), spwanPos.position, Quaternion.identity);
+        Instantiate(failItem.GetPrefab(), spwanPos2.position, Quaternion.identity);
     }
 
     void ResetMix()

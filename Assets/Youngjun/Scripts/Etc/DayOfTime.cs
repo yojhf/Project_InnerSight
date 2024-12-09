@@ -33,6 +33,7 @@ public class DayOfTime : MonoBehaviour
     [SerializeField] private InGameUI_DayCycle inGameUI_DayCycle;
 
     public System.DateTime VirtualDateTime => virtualDateTime;
+    public bool IsReset => isReset;
 
     void Start()
     {
@@ -112,9 +113,11 @@ public class DayOfTime : MonoBehaviour
 
         inGameUI_DayCycle.DayResetUI();
 
+        yield return new WaitForSecondsRealtime(5f);
+
         SceneFade.instance.FadeOut(null);
 
-        yield return new WaitForSecondsRealtime(5f);
+        yield return new WaitForSecondsRealtime(1f);
 
         SceneFade.instance.FadeIn(null);
 
@@ -132,7 +135,7 @@ public class DayOfTime : MonoBehaviour
 
         CheckDayTransition();
 
-        isReset = true;
+        isReset = false;
         //PlayerStats.Instance.
 
         //isPause = false;
