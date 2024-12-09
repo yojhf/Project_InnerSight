@@ -9,6 +9,8 @@ namespace InnerSight_Seti
         private ItemKey itemData;
         public ItemDatabase itemDatabase; // 데이터베이스 참조
 
+        public int testnum;
+
         public int ItemId => itemID;
 
         private void Awake()
@@ -20,6 +22,11 @@ namespace InnerSight_Seti
         public ItemKey GetItemData()
         {
             return itemData;
+        }
+
+        public int test()
+        { 
+            return testnum = Random.Range(GetItemData().itemPrice - 20, testnum);
         }
     }
 }
