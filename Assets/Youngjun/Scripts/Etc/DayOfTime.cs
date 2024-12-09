@@ -3,6 +3,8 @@ using MyFPS;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using Noah;
+using UnityEngine.UI;
 
 // 9시 출근 ~ 23시 퇴근 (대략 4분 이상)
 public class DayOfTime : MonoBehaviour
@@ -25,14 +27,16 @@ public class DayOfTime : MonoBehaviour
     // ResetTime
     public int resetTime = 11;
     private float timeScale = 0;
+    private bool isReset = false;
 
+    // Instance
+    [SerializeField] private InGameUI_DayCycle inGameUI_DayCycle;
 
     public System.DateTime VirtualDateTime => virtualDateTime;
 
     void Start()
     {
-        // 가상 시간을 초기화
-        virtualDateTime = new System.DateTime(startYear, startMonth, startDay, startHour, startMinute, 0);
+        InitDay();
     }
 
     void Update()
@@ -57,13 +61,19 @@ public class DayOfTime : MonoBehaviour
         UpdateTimeText();
 
         // 하루 사이클 끝 => 정산타임
-        //ResetDate();
+        ResetDate();
+    }
+
+    void InitDay()
+    {
+        // 가상 시간을 초기화
+        virtualDateTime = new System.DateTime(startYear, startMonth, startDay, startHour, startMinute, 0);
     }
 
     void UpdateVirtualDateTime(float dayProgress)
     {
         // 하루를 1440분(24시간)으로 변환, 가상 시간 진행
-        float minutesPassed = dayProgress * 1440f; // 하루에서 지난 시간(분)
+        float minutesPassed = dayProgress * 1380f; // 하루에서 지난 시간(분)
 
         virtualDateTime = virtualDateTime.AddMinutes(minutesPassed);
 
@@ -83,26 +93,32 @@ public class DayOfTime : MonoBehaviour
     // 하루 정산 기능
     void ResetDate()
     {
-        if (virtualDateTime.Hour == resetTime)
+        if (virtualDateTime.Hour >= resetTime)
         {
-            StartCoroutine(StartReset());
+            if (!isReset)
+            {
+                StartCoroutine(StartReset());
+            }     
         }
     }
 
     IEnumerator StartReset()
     {
+        isReset = true;
+
         // 리셋 순서
         // => 시간 멈춤 -> 정산 UI 켬 -> 정산 UI 끔 -> fadeout -> fadein -> 시간 정상화 -> 가상시간 리셋 -> 플레이 
         Pause();
 
-
-
-
+        inGameUI_DayCycle.DayResetUI();
 
         SceneFade.instance.FadeOut(null);
 
+        yield return new WaitForSecondsRealtime(5f);
 
-        yield return null;  
+        SceneFade.instance.FadeIn(null);
+
+        ResetPause();
     }
 
     public void Pause()
@@ -112,15 +128,33 @@ public class DayOfTime : MonoBehaviour
 
     public void ResetPause()
     {
+        Time.timeScale = 1.0f;
+
+        CheckDayTransition();
+
+        isReset = true;
         //PlayerStats.Instance.
-
-
 
         //isPause = false;
         //pauseUI.gameObject.SetActive(false);
         // 일시정시 원복
-        Time.timeScale = 1.0f;
+
+
         //Cursor.lockState = CursorLockMode.Locked;
         //player.GetComponent<FirstPersonController>().enabled = true;
+    }
+
+    void CheckDayTransition()
+    {      
+        // 다음 날로 전환
+        virtualDateTime = virtualDateTime.AddDays(1).Date; // 날짜 증가, 시간 00:00으로 초기화
+        virtualDateTime = virtualDateTime.AddHours(9); // 9시로 초기화
+
+        // 태양의 각도 초기화 (9시에 해당하는 각도)
+        sun.transform.rotation = Quaternion.Euler(-10f, 170f, 0f);
+
+        // 타임 초기화
+        _timeElapsed = 0f;
+        _timeAngle = 0f;   
     }
 }

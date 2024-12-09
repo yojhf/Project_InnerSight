@@ -1056,9 +1056,10 @@ MonoBehaviour:
   startYear: 357
   startMonth: 1
   startDay: 1
-  startHour: 9
-  startMinute: 0
-  resetTime: 11
+  startHour: 22
+  startMinute: 50
+  resetTime: 23
+  inGameUI_DayCycle: {fileID: 693207710}
 --- !u!4 &204149669
 Transform:
   m_ObjectHideFlags: 0
@@ -2841,7 +2842,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &651618894
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3137,6 +3138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 693207709}
+  - component: {fileID: 693207710}
   m_Layer: 0
   m_Name: ResetUI
   m_TagString: Untagged
@@ -3160,6 +3162,22 @@ Transform:
   - {fileID: 651618894}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &693207710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693207707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2649c4334c490e94db37fc08509a03bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myGold: {fileID: 781002644}
+  tax: {fileID: 726045767}
+  shopTax: {fileID: 1177492908}
+  totalGold: {fileID: 1709504709}
 --- !u!1 &726045765
 GameObject:
   m_ObjectHideFlags: 0
@@ -3177,7 +3195,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &726045766
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3637,7 +3655,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &781002643
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4575,6 +4593,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1032818372
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1032818373}
+  m_Layer: 0
+  m_Name: ====MANAGER====
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1032818373
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032818372}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &1066449914 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 6597970327118690283, guid: 930617953e4e9864a93b073accb28355, type: 3}
@@ -4878,7 +4927,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1177492907
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8063,7 +8112,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1709504708
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10647,7 +10696,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2672595858269071113 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7966825331983910383, guid: 23397e619b6e8de4e8bd14b3d31e77bb, type: 3}
@@ -12329,23 +12378,24 @@ SceneRoots:
   - {fileID: 1611702214}
   - {fileID: 229937931}
   - {fileID: 596940177}
-  - {fileID: 783917203}
-  - {fileID: 1836137972}
-  - {fileID: 1274465571}
   - {fileID: 2676242183836084808}
   - {fileID: 1019605356}
   - {fileID: 1982819201}
   - {fileID: 1903807635}
+  - {fileID: 66809602}
+  - {fileID: 476832149}
+  - {fileID: 737113413}
+  - {fileID: 783917203}
+  - {fileID: 860115319388025193}
+  - {fileID: 693207709}
+  - {fileID: 1836137972}
+  - {fileID: 1274465571}
+  - {fileID: 1032818373}
   - {fileID: 596201511}
   - {fileID: 204149669}
   - {fileID: 115734067}
   - {fileID: 136281346}
   - {fileID: 51892838}
-  - {fileID: 66809602}
-  - {fileID: 476832149}
-  - {fileID: 737113413}
   - {fileID: 212443471}
   - {fileID: 937234561}
   - {fileID: 424028878}
-  - {fileID: 860115319388025193}
-  - {fileID: 693207709}

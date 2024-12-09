@@ -61,7 +61,7 @@ namespace MyFPS
 
             if(delay > 0f)
             {
-                yield return new WaitForSeconds(delay);
+                yield return new WaitForSecondsRealtime(delay);
             }
 
      
@@ -71,7 +71,7 @@ namespace MyFPS
                 float a = fadeCurve.Evaluate(time);
 
                 fadeImage.color = new Color(0f, 0f, 0f, a);
-                time -= Time.deltaTime;
+                time -= Time.unscaledDeltaTime;
                 yield return null;
             }
 
@@ -89,7 +89,7 @@ namespace MyFPS
 
             if (delay > 0f)
             {
-                yield return new WaitForSeconds(delay);
+                yield return new WaitForSecondsRealtime(delay);
             }
 
             while (ctime < time)
@@ -97,7 +97,7 @@ namespace MyFPS
                 float a = fadeCurve.Evaluate(ctime);
 
                 fadeImage.color = new Color(0f, 0f, 0f, a);
-                ctime += Time.deltaTime;
+                ctime += Time.unscaledDeltaTime;
                 yield return null;
             }
 

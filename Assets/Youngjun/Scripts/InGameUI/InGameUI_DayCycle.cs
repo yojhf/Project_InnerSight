@@ -13,9 +13,9 @@ namespace Noah
         [SerializeField] private TMP_Text totalGold;
 
         private GameObject resetUI;
-        private float lerpTime = 1f;
+        private float speed = 5000f;
         private int dayTax = 10;
-        private int stopTax = 10;
+        private int stopTax = 1000;
 
         public int DayTax 
         {
@@ -46,17 +46,9 @@ namespace Noah
         void Start()
         {
             resetUI = transform.GetChild(0).gameObject;
-
-            // CurrentGold = shop
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
-        void DayResetUI()
+        public void DayResetUI()
         {
             resetUI.SetActive(true);
 
@@ -68,37 +60,39 @@ namespace Noah
         {
             int m_Gold = PlayerStats.Instance.CurrentGold + PlayerStats.Instance.RevenueGold;
             int m_Tax = PlayerStats.Instance.RevenueGold / dayTax;
-            int m_ShopTax = PlayerStats.Instance.RevenueGold / stopTax;
-            int m_TotalGold = m_Gold + m_Tax + m_ShopTax;
+            int m_ShopTax = stopTax;
+            int m_TotalGold = (m_Gold + (PlayerStats.Instance.RevenueGold - m_Tax)) - m_Tax - m_ShopTax;
 
 
             myGold.gameObject.SetActive(true);
 
-            myGold.text = "MyGold : " + Mathf.Lerp(0, m_Gold, lerpTime).ToString();
+            StartCoroutine(GoldCount(m_Gold, myGold, "MyGold : "));
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSecondsRealtime(1f);
 
             tax.gameObject.SetActive(true);
 
-            tax.text = "Tax : " + Mathf.Lerp(0, PlayerStats.Instance.CurrentGold, lerpTime).ToString();
+            StartCoroutine(GoldCount(m_Tax, tax, "Tax : "));
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSecondsRealtime(1f);
 
             shopTax.gameObject.SetActive(true);
 
-            shopTax.text = "ShopTax : " + Mathf.Lerp(0, PlayerStats.Instance.CurrentGold, lerpTime).ToString();
+            StartCoroutine(GoldCount(m_ShopTax, shopTax, "ShopTax : "));
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSecondsRealtime(1f);
 
             totalGold.gameObject.SetActive(true);
 
-            totalGold.text = "TotalGold : " + Mathf.Lerp(0, PlayerStats.Instance.CurrentGold, lerpTime).ToString();
+            StartCoroutine(GoldCount(m_TotalGold, totalGold, "TotalGold : "));
 
+            PlayerStats.Instance.SetGold(m_TotalGold);
 
-           yield return new WaitForSeconds(1f);
+            yield return new WaitForSecondsRealtime(1f);
 
             ActiveCon(false);
 
+            resetUI.gameObject.SetActive(false);
         }
 
         void ActiveCon(bool active)
@@ -107,6 +101,21 @@ namespace Noah
             tax.gameObject.SetActive(active);
             shopTax.gameObject.SetActive(active);
             totalGold.gameObject.SetActive(active);
+        }
+
+        IEnumerator GoldCount(int num, TMP_Text count, string text)
+        {
+            float ctime = 0;
+
+            while (ctime <= num)
+            {
+                ctime += Time.unscaledDeltaTime * speed;
+                count.text = text + ctime.ToString("F0");
+                yield return null;
+
+            }
+
+            count.text = text + num.ToString("F0");
         }
     }
 
