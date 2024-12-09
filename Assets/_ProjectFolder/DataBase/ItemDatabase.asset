@@ -163,63 +163,63 @@ MonoBehaviour:
   - itemID: 4022
     itemName: Energy Elixir
     itemNameKor: "\uC5D0\uB108\uC9C0 \uC5D8\uB9AD\uC11C"
-    itemPrice: 0
+    itemPrice: 100
     itemImage: {fileID: 21300000, guid: b9f675ca3d2deb64f845cf9a06116f01, type: 2}
     itemPrefab: {fileID: 5939675420386550228, guid: bfb4268fecbc29d4fad4716ca539101f, type: 3}
     itemPhantomPrefab: {fileID: 5939675420386550228, guid: bb2cb884f7af90545ba3454c5451a310, type: 3}
   - itemID: 4032
     itemName: Mana Elixir
     itemNameKor: "\uB9C8\uB098 \uC5D8\uB9AD\uC11C"
-    itemPrice: 0
+    itemPrice: 100
     itemImage: {fileID: 21300000, guid: ffd10146dad6fe04a96d76208d42c233, type: 2}
     itemPrefab: {fileID: 8096169559649628995, guid: d2e7db2ec18289e45865e7d208507d04, type: 3}
     itemPhantomPrefab: {fileID: 8096169559649628995, guid: 50116c08be947944c8691ad8aeb272c5, type: 3}
   - itemID: 4026
     itemName: Strength Elixir
     itemNameKor: "\uD798 \uC5D8\uB9AD\uC11C"
-    itemPrice: 0
+    itemPrice: 100
     itemImage: {fileID: 21300000, guid: cdc8bc7ca4d066a4187770e03b03ca55, type: 2}
     itemPrefab: {fileID: 2484048863127429011, guid: 0c899390115b44d45a7242f7f2a835ea, type: 3}
     itemPhantomPrefab: {fileID: 2484048863127429011, guid: 54db04d8fdc0ed54db2d7bc74439b914, type: 3}
   - itemID: 4062
     itemName: Speed Elixir
     itemNameKor: "\uBBFC\uCCA9 \uC5D8\uB9AD\uC11C"
-    itemPrice: 0
+    itemPrice: 100
     itemImage: {fileID: 21300000, guid: 677539d346b498348a290794a1a1997a, type: 2}
     itemPrefab: {fileID: 8099526328240803452, guid: 835c36d626d566642be41ffa58284bbb, type: 3}
     itemPhantomPrefab: {fileID: 8099526328240803452, guid: 7eff372eac164df4dbc5c2e014a33243, type: 3}
   - itemID: 8054
     itemName: 'Soul Elixir '
     itemNameKor: "\uC18C\uC6B8 \uC5D8\uB9AD\uC11C "
-    itemPrice: 0
+    itemPrice: 250
     itemImage: {fileID: 21300000, guid: 72eadbaabd0d99545ab07caa39b41f34, type: 2}
     itemPrefab: {fileID: 3075164133892350873, guid: 9d8a7366a6b05054fbeefe8daeb26904, type: 3}
     itemPhantomPrefab: {fileID: 3075164133892350873, guid: 871f51378b99dc040a82e545efead32a, type: 3}
   - itemID: 8088
     itemName: Detoxification Elixir
     itemNameKor: "\uD574\uB3C5 \uC5D8\uB9AD\uC11C"
-    itemPrice: 0
+    itemPrice: 250
     itemImage: {fileID: 21300000, guid: 092b880d9e3dfaa4bb23ef484393442f, type: 2}
     itemPrefab: {fileID: 6621646877869387850, guid: 8eea2347e4b781a4ea0d559692c01068, type: 3}
     itemPhantomPrefab: {fileID: 6621646877869387850, guid: aa42a93b00ec39e48bb116c80a0daf01, type: 3}
   - itemID: 8048
     itemName: Pure Elixir
     itemNameKor: "\uC815\uB828\uB41C \uC5D8\uB9AD\uC11C"
-    itemPrice: 0
+    itemPrice: 250
     itemImage: {fileID: 21300000, guid: b9f14a0e1fc20ff4dbcc359ba433bd21, type: 2}
     itemPrefab: {fileID: 7137295551369274495, guid: 9f02de37fede5d34999b8d09ec91a23b, type: 3}
     itemPhantomPrefab: {fileID: 7137295551369274495, guid: 149f70b87e85cca4d90e490df626b1f6, type: 3}
   - itemID: 8094
     itemName: Enchanted Elixir
     itemNameKor: "\uCD95\uBCF5 \uC5D8\uB9AD\uC11C"
-    itemPrice: 0
+    itemPrice: 250
     itemImage: {fileID: 21300000, guid: e00465fbfe6eccb4eb1350c8e55f3b38, type: 2}
     itemPrefab: {fileID: 8847306529542590959, guid: 008380d532c1fe843be85202882953d0, type: 3}
     itemPhantomPrefab: {fileID: 8847306529542590959, guid: 6c0e3085b32672a439099c4a80615f8b, type: 3}
   - itemID: 999
     itemName: Failed Elixir
     itemNameKor: "\uC2E4\uD328\uD55C \uC5D8\uB9AD\uC11C"
-    itemPrice: 0
+    itemPrice: 250
     itemImage: {fileID: 21300000, guid: f73c019689556c6469e4527b0f409f57, type: 2}
     itemPrefab: {fileID: 5518192576212542526, guid: 1b86c58f3df03164889a7c0368f7aa29, type: 3}
     itemPhantomPrefab: {fileID: 5518192576212542526, guid: 6c97884bccad2c340aecb7466f66882e, type: 3}

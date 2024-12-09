@@ -9097,7 +9097,7 @@ GameObject:
   - component: {fileID: 1955868416}
   - component: {fileID: 1955868415}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Reset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10647,7 +10647,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2672595858269071113 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7966825331983910383, guid: 23397e619b6e8de4e8bd14b3d31e77bb, type: 3}

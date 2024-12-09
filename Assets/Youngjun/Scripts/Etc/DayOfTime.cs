@@ -98,6 +98,7 @@ public class DayOfTime : MonoBehaviour
 
 
 
+
         SceneFade.instance.FadeOut(null);
 
 
