@@ -1,14 +1,13 @@
-using InnerSight_Seti;
-using MyFPS;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 using Noah;
-using UnityEngine.UI;
 
 // 9시 출근 ~ 23시 퇴근 (대략 4분 이상)
 public class DayOfTime : MonoBehaviour
 {
+    private Transform player;
+
     public Light sun; // Directional Light
     public float dayDuration = 300f; // 하루를 300초로 설정 (5분)
     public TextMeshProUGUI timeText; // TextMeshPro로 시간 표시
@@ -57,6 +56,7 @@ public class DayOfTime : MonoBehaviour
 
         // 가상 시간 업데이트
         UpdateVirtualDateTime(dayProgress);
+        UpdateVirtualDateTime(dayProgress);
 
         // 시간 텍스트 업데이트
         UpdateTimeText();
@@ -69,6 +69,8 @@ public class DayOfTime : MonoBehaviour
     {
         // 가상 시간을 초기화
         virtualDateTime = new System.DateTime(startYear, startMonth, startDay, startHour, startMinute, 0);
+
+        player = FindAnyObjectByType<PlayerSetting>().transform;
     }
 
     void UpdateVirtualDateTime(float dayProgress)
@@ -133,18 +135,17 @@ public class DayOfTime : MonoBehaviour
     {
         Time.timeScale = 1.0f;
 
+        // 리셋 해야될 시스템
+        // 날짜 업데이트
         CheckDayTransition();
+        // 쓰레기 오브젝트 리스폰
+        SpwanManager.Instance.SpwanCon();
+        // 월세 증가
+        PlayerCostManager.Instance.UpdateShopTax();
+        // 플레이어 위치 초기화
+        player.position = player.GetComponent<PlayerSetting>().StartPos;
 
         isReset = false;
-        //PlayerStats.Instance.
-
-        //isPause = false;
-        //pauseUI.gameObject.SetActive(false);
-        // 일시정시 원복
-
-
-        //Cursor.lockState = CursorLockMode.Locked;
-        //player.GetComponent<FirstPersonController>().enabled = true;
     }
 
     void CheckDayTransition()
@@ -160,4 +161,6 @@ public class DayOfTime : MonoBehaviour
         _timeElapsed = 0f;
         _timeAngle = 0f;   
     }
+
+
 }

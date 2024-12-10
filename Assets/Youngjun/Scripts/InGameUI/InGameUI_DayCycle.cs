@@ -7,39 +7,15 @@ namespace Noah
 {
     public class InGameUI_DayCycle : MonoBehaviour
     {
-        [SerializeField] private TMP_Text myGold;
+        [SerializeField] private TMP_Text curGold;
+        [SerializeField] private TMP_Text earnGold;
         [SerializeField] private TMP_Text tax;
         [SerializeField] private TMP_Text shopTax;
         [SerializeField] private TMP_Text totalGold;
 
         private GameObject resetUI;
         private float speed = 5000f;
-        private int dayTax = 10;
-        private int stopTax = 1000;
-
-        public int DayTax 
-        {
-            get
-            {
-                return dayTax;
-            }
-            set
-            { 
-                value = dayTax;
-            }
-        }
-
-        public int StopTax
-        {
-            get
-            {
-                return stopTax;
-            }
-            set
-            {
-                value = stopTax;
-            }
-        }
+     
 
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -58,29 +34,36 @@ namespace Noah
 
         IEnumerator StartReset_Co()
         {
-            int m_Gold = PlayerStats.Instance.CurrentGold + PlayerStats.Instance.RevenueGold;
-            int m_Tax = PlayerStats.Instance.RevenueGold / dayTax;
-            int m_ShopTax = stopTax;
-            int m_TotalGold = (m_Gold + (PlayerStats.Instance.RevenueGold - m_Tax)) - m_Tax - m_ShopTax;
+            int m_CurGold = PlayerStats.Instance.CurrentGold;
+            int m_RevenueGold = PlayerStats.Instance.RevenueGold;
+            int m_Tax = PlayerStats.Instance.RevenueGold / PlayerCostManager.Instance.DayTax;
+            int m_ShopTax = PlayerCostManager.Instance.ShopTax;
+            int m_TotalGold = (m_CurGold + m_RevenueGold) - m_Tax - m_ShopTax;
 
 
-            myGold.gameObject.SetActive(true);
+            curGold.gameObject.SetActive(true);
 
-            StartCoroutine(GoldCount(m_Gold, myGold, "MyGold : "));
+            StartCoroutine(GoldCount(m_CurGold, curGold, "MyGold : "));
 
-            yield return new WaitForSecondsRealtime(1f);
+            yield return new WaitForSecondsRealtime((m_CurGold / speed) + 1f);
+
+            earnGold.gameObject.SetActive(true);
+
+            StartCoroutine(GoldCount(m_RevenueGold, earnGold, "EarnGold : "));
+
+            yield return new WaitForSecondsRealtime((m_RevenueGold / speed) + 1f);
 
             tax.gameObject.SetActive(true);
 
             StartCoroutine(GoldCount(m_Tax, tax, "Tax : "));
 
-            yield return new WaitForSecondsRealtime(1f);
+            yield return new WaitForSecondsRealtime((m_Tax / speed) + 1f);
 
             shopTax.gameObject.SetActive(true);
 
             StartCoroutine(GoldCount(m_ShopTax, shopTax, "ShopTax : "));
 
-            yield return new WaitForSecondsRealtime(1f);
+            yield return new WaitForSecondsRealtime((m_ShopTax / speed) + 1f);
 
             totalGold.gameObject.SetActive(true);
 
@@ -88,7 +71,7 @@ namespace Noah
 
             PlayerStats.Instance.SetGold(m_TotalGold);
 
-            yield return new WaitForSecondsRealtime(1f);
+            yield return new WaitForSecondsRealtime((m_TotalGold / speed) + 1f);
 
             ActiveCon(false);
 
@@ -97,7 +80,8 @@ namespace Noah
 
         void ActiveCon(bool active)
         {
-            myGold.gameObject.SetActive(active);
+            curGold.gameObject.SetActive(active);
+            earnGold.gameObject.SetActive(active);
             tax.gameObject.SetActive(active);
             shopTax.gameObject.SetActive(active);
             totalGold.gameObject.SetActive(active);
@@ -110,6 +94,7 @@ namespace Noah
             while (ctime <= num)
             {
                 ctime += Time.unscaledDeltaTime * speed;
+
                 count.text = text + ctime.ToString("F0");
                 yield return null;
 
