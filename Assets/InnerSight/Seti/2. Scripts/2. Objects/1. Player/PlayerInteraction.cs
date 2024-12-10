@@ -113,13 +113,11 @@ namespace InnerSight_Seti
         private void OnTriggerEnter(Collider other)
         {
             WhatIsThat(other);
-            player.PlayerTrade.CheckInShop(other);
         }
 
         private void OnTriggerExit(Collider other)
         {
             Sucks(other);
-            player.PlayerTrade.CheckOutShop(other);
         }
         #endregion
     }

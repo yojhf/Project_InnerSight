@@ -42,7 +42,7 @@ namespace InnerSight_Seti
             this.inventoryManager = inventoryManager;
         }
 
-        // 아이템을 사용하는 메서드
+        /*// 아이템을 사용하는 메서드
         public void UseItem(KeyValuePair<ItemKey, ItemValue> pair)
         {
             Player player = GetComponent<Player>();
@@ -68,7 +68,7 @@ namespace InnerSight_Seti
 
             // 사용할 수 없는 아이템이라면 메서드 종료
             else return;
-        }
+        }*/
         #endregion
     }
 }
