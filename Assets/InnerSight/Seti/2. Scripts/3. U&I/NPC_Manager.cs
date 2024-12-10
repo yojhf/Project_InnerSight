@@ -17,15 +17,17 @@ namespace InnerSight_Seti
         public Transform[] points_Behaviour; 
 
         // NPC 생성 주기
+        bool isPlaying = false;
         bool isGenerating = false;
         [SerializeField] int NPC_GenMaxTime = 5;
+        List<GameObject> customers = new();
         #endregion
 
         // 라이프 사이클
         #region Life Cycle
         private void Update()
         {
-            if (isGenerating) return;
+            if (isGenerating || !isPlaying) return;
             StartCoroutine(GenNPC());
         }
 
@@ -39,10 +41,29 @@ namespace InnerSight_Seti
                     filteredPoints.Add(point);
             points_Behaviour = filteredPoints.ToArray();
         }
+
+        private void OnEnable()
+        {
+            Initialize();
+            isPlaying = true;
+        }
+
+        private void OnDisable()
+        {
+            isPlaying = false;
+        }
         #endregion
 
         // 메서드
         #region Methods
+        // NPC 초기화
+        public void Initialize()
+        {
+            foreach (var npc in customers)
+                Destroy(npc);
+            customers.Clear();
+        }
+
         // NPC 생성
         IEnumerator GenNPC()
         {
@@ -95,15 +116,18 @@ namespace InnerSight_Seti
             int popID = Random.Range(0, database_NPC.NPC_List.Count);
             GameObject popNPC = database_NPC.NPC_List[popID].NPC_Prefab;    // 프리팹
 
-            Instantiate(popNPC,
-                        point_Enable.position,
-                        Quaternion.identity,
-                        transform.Find("NPC_Pool"));       // 실제 오브젝트
+            GameObject thisNPC = Instantiate(popNPC,
+                                             point_Enable.position,
+                                             Quaternion.identity,
+                                             transform.Find("NPC_Pool"));   // 실제 오브젝트
+
+            customers.Add(thisNPC);
         }
 
         // NPC 파괴 메서드
         void NPC_Destroy(GameObject NPC)
         {
+            customers.Remove(NPC);
             Destroy(NPC);
         }
         #endregion

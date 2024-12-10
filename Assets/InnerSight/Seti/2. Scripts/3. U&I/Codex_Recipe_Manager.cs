@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace InnerSight_Seti
 {
@@ -16,18 +17,17 @@ namespace InnerSight_Seti
         // 필드
         #region Variables
         // 단순 필드
+        private int firstElement = 0;
+        private bool isFirstElement = false;
         private const int identifier = 2000;    // (itemID - identifier >= 0)인 아이템만 읽는다
 
         // 도감-레시피 UI
-        [SerializeField]
-        private GameObject UI_Codex_Recipe;
-        private List<GameObject> unIdentified_Elements = new();
-        private List<GameObject> unIdentified_Elixirs = new();
+        private List<Image> unIdentified = new();
 
         // 클래스
+        private PlayerInteraction player;
         [SerializeField]
         private ItemDatabase itemDatabase;
-        private InventoryManager inventoryManager;
         #endregion
 
         // 속성
@@ -37,15 +37,32 @@ namespace InnerSight_Seti
         #region Life Cycle
         private void Start()
         {
-            //unIdentified_Elements
+            player = FindFirstObjectByType<PlayerInteraction>();
+            player.SetCodex(this);
 
-            inventoryManager = GetComponentInParent<InventoryManager>();
+            unIdentified.AddRange(transform.GetChild(0).GetChild(0).GetChild(2).GetComponentsInChildren<Image>());
+            unIdentified.AddRange(transform.GetChild(0).GetChild(0).GetChild(3).GetComponentsInChildren<Image>());
+
             Initialize();
         }
         #endregion
 
         // 메서드
         #region Methods
+        // 아이템을 획득할 때마다 확인
+        public void IdentifyRecipe(ItemKey itemKey)
+        {
+            ItemKey elementOrElixir = CollectionUtility.FirstOrNull(CodexRecipe.Keys, key => key.itemID == itemKey.itemID);
+            if (elementOrElixir != null)
+            {
+                CodexRecipe[elementOrElixir].codexDefine = true;
+
+                int i = CodexRecipe[elementOrElixir].codexIndex;
+                Destroy(unIdentified[i]);
+            }
+            return;
+        }
+
         // 초기화 - 아이템DB로부터 원소와 엘릭서를 읽어와 도감 딕셔너리에 저장
         private void Initialize()
         {
@@ -53,9 +70,15 @@ namespace InnerSight_Seti
             {
                 if (itemDatabase.itemList[i].itemID - identifier > 0)
                 {
+                    if (!isFirstElement)
+                    {
+                        isFirstElement = true;
+                        firstElement = i;
+                    }
+
                     ItemValueRecipe valueRecipe = new()
                     {
-                        codexIndex = i,
+                        codexIndex = i - firstElement,
                         codexDefine = false
                     };
                     CodexRecipe.Add(itemDatabase.itemList[i], valueRecipe);

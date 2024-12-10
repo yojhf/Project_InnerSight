@@ -17,6 +17,7 @@ namespace InnerSight_Seti
 
         // 클래스 컴포넌트
         private PlayerSetting player;
+        private Codex_Recipe_Manager recipeManager;
         #endregion
 
         // 라이프 사이클
@@ -37,8 +38,6 @@ namespace InnerSight_Seti
         // 상호작용이 가능한 오브젝트 줍기, UI 제거 및 리스트 최신화
         public void ThisIsMine()
         {
-            Debug.Log("ThisIsMine");
-
             if (rightHand != null || interactables != null)
             {
                 GameObject closestObject = MathUtility.MinDisObject(rightHand, interactables);
@@ -60,6 +59,9 @@ namespace InnerSight_Seti
                             // 인벤토리에 더하는 메서드 호출
                             ItemKey itemData = interactable.GetItemData();
                             player.PlayerUse.InventoryManager.AddItem(itemData, 1);
+
+                            // 도감 갱신
+                            recipeManager.IdentifyRecipe(itemData);
                         }
                     }
 
@@ -98,6 +100,11 @@ namespace InnerSight_Seti
                 // List에서 해당 오브젝트 제거
                 interactables.Remove(other.gameObject);
             }
+        }
+
+        public void SetCodex(Codex_Recipe_Manager recipeManager)
+        {
+            this.recipeManager = recipeManager;
         }
         #endregion
 

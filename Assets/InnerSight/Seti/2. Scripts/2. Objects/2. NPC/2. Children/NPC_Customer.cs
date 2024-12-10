@@ -21,7 +21,6 @@ namespace InnerSight_Seti
     /// <summary>
     /// 손님 NPC의 행동논리를 정의하는 클래스
     /// </summary>
-    /// 미구현: 상품 인덱스 셔플
     public class NPC_Customer : NPC
     {
         // 필드
@@ -43,10 +42,10 @@ namespace InnerSight_Seti
         private int currentOrder;       // 쇼핑 우선순위
         private int currentIndex;       // 아이템 선반 Index
         private int whichDir;           // 순회 방향: -1: 반시계, 0: 바로, 1: 시계
-        private float checkDelay = 2f;
         private bool isThisItem = false;
+        private const float checkDelay = 2f;
+        private readonly List<ShelfStorage> shopItems = new();
         private Transform centerOfShop;
-        private List<ShelfStorage> shopItems = new();
         private ShelfStorage thisItem;
 
         // n차 순회 처리용 불리언

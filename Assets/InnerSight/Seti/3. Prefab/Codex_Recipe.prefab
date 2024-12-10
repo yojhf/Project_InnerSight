@@ -4663,8 +4663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f8f945d4defe846b68d9feece1b254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UI_Codex_Recipe: {fileID: 0}
-  itemDatabase: {fileID: 0}
+  itemDatabase: {fileID: 11400000, guid: 1df643c48d2bc2649b70fac068c72e27, type: 2}
 --- !u!1 &5486633151469643733
 GameObject:
   m_ObjectHideFlags: 0
