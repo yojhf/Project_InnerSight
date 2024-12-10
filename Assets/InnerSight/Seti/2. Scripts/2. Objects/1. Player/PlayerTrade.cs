@@ -1,16 +1,11 @@
 using UnityEngine;
 
-public class PlayerTrade : MonoBehaviour
+namespace InnerSight_Seti
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    /// <summary>
+    /// 상인 NPC를 통해 아이템을 구매하는 클래스
+    /// </summary>
+    public class PlayerTrade : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
