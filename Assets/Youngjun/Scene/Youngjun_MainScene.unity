@@ -4572,6 +4572,7 @@ MonoBehaviour:
   startMinute: 50
   resetTime: 23
   inGameUI_DayCycle: {fileID: 693207710}
+  npc_Manager: {fileID: 596201510}
 --- !u!4 &204149669
 Transform:
   m_ObjectHideFlags: 0

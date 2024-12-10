@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using Noah;
+using InnerSight_Seti;
 
 // 9시 출근 ~ 23시 퇴근 (대략 4분 이상)
 public class DayOfTime : MonoBehaviour
@@ -30,7 +31,8 @@ public class DayOfTime : MonoBehaviour
 
     // Instance
     [SerializeField] private InGameUI_DayCycle inGameUI_DayCycle;
-
+    [SerializeField] private NPC_Manager npc_Manager;
+ 
     public System.DateTime VirtualDateTime => virtualDateTime;
     public bool IsReset => isReset;
 
@@ -113,6 +115,8 @@ public class DayOfTime : MonoBehaviour
         // => 시간 멈춤 -> 정산 UI 켬 -> 정산 UI 끔 -> fadeout -> fadein -> 시간 정상화 -> 가상시간 리셋 -> 플레이 
         Pause();
 
+        npc_Manager.enabled = false;
+
         inGameUI_DayCycle.DayResetUI();
 
         yield return new WaitForSecondsRealtime(5f);
@@ -144,6 +148,10 @@ public class DayOfTime : MonoBehaviour
         PlayerCostManager.Instance.UpdateShopTax();
         // 플레이어 위치 초기화
         player.position = player.GetComponent<PlayerSetting>().StartPos;
+        // NPC 초기화
+        npc_Manager.enabled = true;
+        // 현재 금액 동기화 및 벌어들인 금액 초기화
+        PlayerStats.Instance.InitializeDays();
 
         isReset = false;
     }
