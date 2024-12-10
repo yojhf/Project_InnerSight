@@ -175,6 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 1007
   itemDatabase: {fileID: 11400000, guid: 1df643c48d2bc2649b70fac068c72e27, type: 2}
+  testnum: 0
 --- !u!114 &5856601472279784987
 MonoBehaviour:
   m_ObjectHideFlags: 0

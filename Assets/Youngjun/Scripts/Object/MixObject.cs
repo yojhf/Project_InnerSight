@@ -102,7 +102,10 @@ public class MixObject : MonoBehaviour
 
             objects.Add(obj);
 
-            
+
+            collision.gameObject.SetActive(false);
+
+
 
             if (objects.Count >= mixCount)
             {

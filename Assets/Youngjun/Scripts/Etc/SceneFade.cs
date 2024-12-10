@@ -12,12 +12,9 @@ namespace Noah
         public static SceneFade instance;   
 
         [SerializeField] private Image fadeImage;
-        [SerializeField] private DayOfTime dayOfTime;
         public AnimationCurve fadeCurve;
 
         public bool startFadeIn = true;
-
-
 
         private void Awake()
         {
@@ -74,7 +71,7 @@ namespace Noah
 
                 fadeImage.color = new Color(0f, 0f, 0f, a);
 
-                if (dayOfTime.IsReset)
+                if (ResetManager.Instance.IsReset)
                 {
                     time -= Time.unscaledDeltaTime;
                 }
@@ -111,7 +108,7 @@ namespace Noah
 
                 fadeImage.color = new Color(0f, 0f, 0f, a);
 
-                if (dayOfTime.IsReset)
+                if (ResetManager.Instance.IsReset)
                 {
                     ctime += Time.unscaledDeltaTime;
                 }
