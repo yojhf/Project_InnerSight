@@ -151,7 +151,7 @@ public class DayOfTime : MonoBehaviour
         // NPC 초기화
         npc_Manager.enabled = true;
         // 현재 금액 동기화 및 벌어들인 금액 초기화
-        PlayerStats.Instance.InitializeDays();
+        //PlayerStats.Instance.InitializeDays();
 
         isReset = false;
     }
