@@ -74,7 +74,7 @@ namespace InnerSight_Seti
 
         private void UpdateWon()
         {
-            collText.text = player.playerStates.CurrentColl.ToString() + " Gold";
+            //collText.text = player.playerStates.CurrentColl.ToString() + " Gold";
         }
         #endregion
     }

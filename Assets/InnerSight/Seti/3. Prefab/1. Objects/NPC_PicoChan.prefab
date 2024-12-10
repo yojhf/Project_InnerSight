@@ -890,7 +890,6 @@ GameObject:
   - component: {fileID: 2473808092535317161}
   - component: {fileID: 5534363411134605995}
   - component: {fileID: 4400307970904210792}
-  - component: {fileID: 1762029245623930964}
   m_Layer: 0
   m_Name: NPC_PicoChan
   m_TagString: Shop
@@ -961,20 +960,6 @@ CapsuleCollider:
   m_Height: 1.4
   m_Direction: 1
   m_Center: {x: 0, y: 0.7, z: 0}
---- !u!114 &1762029245623930964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 416573948787609936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d450e5759c94b64c80a66234e914e6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  head: {fileID: 1262407018050257191}
-  talkBubblePrefab: {fileID: 8050766185888217009, guid: 6f30299b33cda2e4a9cd68c227f9b7f9, type: 3}
 --- !u!1 &445622360788806571
 GameObject:
   m_ObjectHideFlags: 0
