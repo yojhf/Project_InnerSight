@@ -24,18 +24,18 @@ namespace InnerSight_Seti
         private void Start()
         {
             // ¼¼ÆÃ
-            PlayerStats.Instance.SetStatsUI(this);
+            //PlayerStats.Instance.SetStatsUI(this);
             dayCycle = FindFirstObjectByType<DayOfTime>();
             timeCount = transform.GetChild(0).Find("TimeCount").GetComponent<TextMeshProUGUI>();
             currentGold = transform.GetChild(0).Find("CurrentGold").GetComponent<TextMeshProUGUI>();
             revenueGold = transform.GetChild(0).Find("RevenueGold").GetComponent<TextMeshProUGUI>();
-            SetCurrentGold();
-            SetRevenueGold();
         }
 
         private void Update()
         {
             //SetTime();
+            SetCurrentGold();
+            SetRevenueGold();
         }
         #endregion
 

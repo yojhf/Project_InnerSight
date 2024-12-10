@@ -61,7 +61,7 @@ namespace InnerSight_Seti
                             player.PlayerUse.InventoryManager.AddItem(itemData, 1);
 
                             // 도감 갱신
-                            recipeManager.IdentifyRecipe(itemData);
+                            //recipeManager.IdentifyRecipe(itemData);
                         }
                     }
 

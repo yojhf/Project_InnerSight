@@ -23,24 +23,17 @@ namespace InnerSight_Seti
 
         // 메서드
         #region Methods
-        // 데이사이클 초기화
-        public void InitializeDays()
-        {
-            CurrentGold += RevenueGold;
-            RevenueGold = 0;
-        }
-
         // 돈 버는 메서드
         public void EarnGold(int amount)
         {
             RevenueGold += amount;
-            StatsUI.SetRevenueGold();
         }
 
         // 돈 버는 메서드
         public void SetGold(int amount)
         {
             CurrentGold = amount;
+            RevenueGold = 0;
         }
 
         // 돈 쓰는 메서드
@@ -53,15 +46,8 @@ namespace InnerSight_Seti
             else
             {
                 CurrentGold -= amount;
-                StatsUI.SetCurrentGold();
                 return true;
             }
-        }
-
-        public void SetStatsUI(StatsUI statsUI)
-        {
-            StatsUI = statsUI;
-            InitializeDays();
         }
         #endregion
     }
