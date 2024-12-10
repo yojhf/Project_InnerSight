@@ -5,15 +5,8 @@ using TMPro;
 
 namespace InnerSight_Seti
 {
-    public static class NPC_State
-    {
-        public static string IsEntered = "IsEntered";
-        public static string Distance = "Distance";
-        public static string SelfDistance = "SelfDistance";
-    }
-
     /// <summary>
-    /// NPC 상인의 부모 클래스
+    /// 상인 NPC의 부모 클래스
     /// </summary>
     /// 1. 상인에게 다가가면 UI 등장
     /// 2. UI 안내에 따라 키 입력을 하면 거래 시작 - 거래용 UI
@@ -25,6 +18,9 @@ namespace InnerSight_Seti
     {
         // 필드
         #region Variables
+        [SerializeField]
+        private ItemDatabase itemDatabase;  // 물약을 팔기 위한 참조
+        private int cost_Knowhow;           // 초기값
         #endregion
 
         // 라이프 사이클
