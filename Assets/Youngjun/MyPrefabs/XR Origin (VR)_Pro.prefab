@@ -1075,10 +1075,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.45
-  m_Height: 1.52
+  m_Radius: 0.5
+  m_Height: 2.3
   m_Direction: 1
-  m_Center: {x: 0, y: 0.84, z: 0}
+  m_Center: {x: 0, y: 1.4, z: 0}
 --- !u!1 &622592906607747112
 GameObject:
   m_ObjectHideFlags: 0
@@ -13439,7 +13439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Mediator: {fileID: 224594342774393240}
   m_TransformationPriority: 0
-  m_MoveSpeed: 7
+  m_MoveSpeed: 10
   m_EnableStrafe: 1
   m_EnableFly: 0
   m_UseGravity: 1
