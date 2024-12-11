@@ -221,8 +221,16 @@ namespace InnerSight_Seti
                     currentIndex--;
                     break;
             }
-            thisItem = shopItems[currentIndex % shopItems.Count];
-            agent.SetDestination(FrontOfItem(thisItem.transform));
+
+            try
+            {
+                thisItem = shopItems[currentIndex % shopItems.Count];
+                agent.SetDestination(FrontOfItem(thisItem.transform));
+            }
+            catch
+            {
+                AIBehaviour(NPC_Behaviour.OUTSIDE);
+            }
         }
 
         // ID »Æ¿Œ
