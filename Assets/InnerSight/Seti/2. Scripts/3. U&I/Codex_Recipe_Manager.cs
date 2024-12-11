@@ -12,7 +12,7 @@ namespace InnerSight_Seti
     /// 2. 아이템DB에서 원소와 엘릭서만 읽는 방법은? ID에서 2000을 뺐을 때 양수인 아이템
     /// 3. true = 레시피, false = ???
     /// 4. UI
-    public class Codex_Recipe_Manager : MonoBehaviour
+    public class Codex_Recipe_Manager : Singleton<Codex_Recipe_Manager>
     {
         // 필드
         #region Variables

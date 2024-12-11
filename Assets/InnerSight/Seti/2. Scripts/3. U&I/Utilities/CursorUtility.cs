@@ -9,14 +9,14 @@ namespace InnerSight_Seti
         // 필드
         #region Variables
         // 단순 변수
-        private bool isCursorOn = false;
+        //private bool isCursorOn = false;
 
         // 복합 변수
         private Vector2 cursorPosition;
         private PlayerSetting playerSetting;
 
         // 클래스 컴포넌트
-        private readonly Player player;
+        //private readonly Player player;
         #endregion
 
         // 속성
@@ -26,10 +26,10 @@ namespace InnerSight_Seti
 
         // 생성자
         #region Constructor
-        public CursorUtility(Player player)
+        /*public CursorUtility(Player player)
         {
             this.player = player;
-        }
+        }*/
 
         public CursorUtility(PlayerSetting playerSetting)
         {
@@ -39,7 +39,7 @@ namespace InnerSight_Seti
 
         // 이벤트 핸들러
         #region Event Handlers
-        public void OnCursorSwitchStarted(InputAction.CallbackContext _)
+        /*public void OnCursorSwitchStarted(InputAction.CallbackContext _)
         {
             if (player.PlayerUse.InventoryManager.IsOpenInventory) return;
             CursorSwitch(isCursorOn = !isCursorOn);
@@ -49,7 +49,7 @@ namespace InnerSight_Seti
         {
             if (player.PlayerUse.InventoryManager.IsOpenInventory || !isCursorOn) return;
             CursorSwitch(isCursorOn = !isCursorOn);
-        }
+        }*/
 
         public void OnCursorPositionPerformed(InputAction.CallbackContext context) => cursorPosition = context.ReadValue<Vector2>();
         #endregion
@@ -57,7 +57,7 @@ namespace InnerSight_Seti
         // 메서드
         #region Methods
         // 마우스 커서 토글 메서드
-        public void CursorSwitch(bool isOpen)
+        /*public void CursorSwitch(bool isOpen)
         {
             if (isOpen)
             {
@@ -90,7 +90,7 @@ namespace InnerSight_Seti
 
                 isCursorOn = false;
             }
-        }
+        }*/
 
         // 마우스 포인터 클릭으로 오브젝트를 감지하는 유틸리티
         public Transform CursorSelect()

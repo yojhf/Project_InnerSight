@@ -139,7 +139,7 @@ namespace InnerSight_Seti
         // NPC와의 거래 - 아이템 판매
         public void UseInven(KeyValuePair<ItemKey, ItemValue> pair)
         {
-            tradeNPC.TradeSetItem(pair.Key);
+            //tradeNPC.TradeSetItem(pair.Key);
             DecreaseItem(pair);
         }
 

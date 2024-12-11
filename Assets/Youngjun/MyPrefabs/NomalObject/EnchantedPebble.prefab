@@ -360,6 +360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 1016
   itemDatabase: {fileID: 11400000, guid: 1df643c48d2bc2649b70fac068c72e27, type: 2}
+  testnum: 0
 --- !u!114 &3683539139821866321
 MonoBehaviour:
   m_ObjectHideFlags: 0

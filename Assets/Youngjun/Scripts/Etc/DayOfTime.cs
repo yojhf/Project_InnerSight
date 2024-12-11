@@ -2,12 +2,11 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using Noah;
+using InnerSight_Seti;
 
 // 9시 출근 ~ 23시 퇴근 (대략 4분 이상)
 public class DayOfTime : MonoBehaviour
 {
-    private Transform player;
-
     public Light sun; // Directional Light
     public float dayDuration = 300f; // 하루를 300초로 설정 (5분)
     public TextMeshProUGUI timeText; // TextMeshPro로 시간 표시
@@ -25,14 +24,8 @@ public class DayOfTime : MonoBehaviour
 
     // ResetTime
     public int resetTime = 11;
-    private float timeScale = 0;
-    private bool isReset = false;
-
-    // Instance
-    [SerializeField] private InGameUI_DayCycle inGameUI_DayCycle;
 
     public System.DateTime VirtualDateTime => virtualDateTime;
-    public bool IsReset => isReset;
 
     void Start()
     {
@@ -69,8 +62,6 @@ public class DayOfTime : MonoBehaviour
     {
         // 가상 시간을 초기화
         virtualDateTime = new System.DateTime(startYear, startMonth, startDay, startHour, startMinute, 0);
-
-        player = FindAnyObjectByType<PlayerSetting>().transform;
     }
 
     void UpdateVirtualDateTime(float dayProgress)
@@ -98,54 +89,9 @@ public class DayOfTime : MonoBehaviour
     {
         if (virtualDateTime.Hour >= resetTime)
         {
-            if (!isReset)
-            {
-                StartCoroutine(StartReset());
-            }     
+            CheckDayTransition();
+            ResetManager.Instance.DailyReset();
         }
-    }
-
-    IEnumerator StartReset()
-    {
-        isReset = true;
-
-        // 리셋 순서
-        // => 시간 멈춤 -> 정산 UI 켬 -> 정산 UI 끔 -> fadeout -> fadein -> 시간 정상화 -> 가상시간 리셋 -> 플레이 
-        Pause();
-
-        inGameUI_DayCycle.DayResetUI();
-
-        yield return new WaitForSecondsRealtime(5f);
-
-        SceneFade.instance.FadeOut(null);
-
-        yield return new WaitForSecondsRealtime(1f);
-
-        SceneFade.instance.FadeIn(null);
-
-        ResetPause();
-    }
-
-    public void Pause()
-    {
-        Time.timeScale = timeScale;
-    }
-
-    public void ResetPause()
-    {
-        Time.timeScale = 1.0f;
-
-        // 리셋 해야될 시스템
-        // 날짜 업데이트
-        CheckDayTransition();
-        // 쓰레기 오브젝트 리스폰
-        SpwanManager.Instance.SpwanCon();
-        // 월세 증가
-        PlayerCostManager.Instance.UpdateShopTax();
-        // 플레이어 위치 초기화
-        player.position = player.GetComponent<PlayerSetting>().StartPos;
-
-        isReset = false;
     }
 
     void CheckDayTransition()
