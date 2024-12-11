@@ -22,7 +22,8 @@ namespace InnerSight_Seti
         private const int identifier = 2000;    // (itemID - identifier >= 0)인 아이템만 읽는다
 
         // 도감-레시피 UI
-        private List<Image> unIdentified = new();
+        private List<Outputs> outputs = new();
+        private List<GameObject> unIdentified = new();
 
         // 클래스
         private PlayerInteraction player;
@@ -40,8 +41,31 @@ namespace InnerSight_Seti
             player = FindFirstObjectByType<PlayerInteraction>();
             player.SetCodex(this);
 
-            unIdentified.AddRange(transform.GetChild(0).GetChild(0).GetChild(2).GetComponentsInChildren<Image>());
-            unIdentified.AddRange(transform.GetChild(0).GetChild(0).GetChild(3).GetComponentsInChildren<Image>());
+            outputs.AddRange(GetComponentsInChildren<Outputs>());
+            foreach (var output in outputs)
+            {
+                if (output != null)
+                    output.GetComponent<Image>().enabled = false;
+            }
+
+            Transform undefinedElements = transform.GetChild(0).GetChild(0).GetChild(2);
+            Transform undefinedElixirs = transform.GetChild(0).GetChild(0).GetChild(3);
+            for (int i = 0; i < 4; i++)
+            {
+                unIdentified.Add(undefinedElements.GetChild(0).GetChild(i).gameObject);
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                unIdentified.Add(undefinedElements.GetChild(1).GetChild(i).gameObject);
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                unIdentified.Add(undefinedElixirs.GetChild(0).GetChild(i).gameObject);
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                unIdentified.Add(undefinedElixirs.GetChild(1).GetChild(i).gameObject);
+            }
 
             Initialize();
         }
@@ -58,6 +82,7 @@ namespace InnerSight_Seti
                 CodexRecipe[elementOrElixir].codexDefine = true;
 
                 int i = CodexRecipe[elementOrElixir].codexIndex;
+                outputs[i].GetComponent<Image>().enabled = true;
                 Destroy(unIdentified[i]);
             }
             return;

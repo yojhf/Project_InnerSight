@@ -14,7 +14,8 @@ namespace InnerSight_Seti
         [SerializeField] private Database_NPC database_NPC;
         public Transform point_Disable;
         public Transform point_Enable;
-        public Transform[] points_Behaviour; 
+        public List<Transform> points_Showing;
+        public List<Transform> points_Behaviour;
 
         // NPC 생성 주기
         bool isPlaying = false;
@@ -33,13 +34,10 @@ namespace InnerSight_Seti
 
         private void Awake()
         {
-            // points만 빼고 자식 트랜스폼을 전부 배열로 가져오기
-            var allPoints = transform.Find("Points").GetComponentsInChildren<Transform>();
-            List<Transform> filteredPoints = new();
-            foreach (var point in allPoints)
-                if (point != transform.Find("Points").transform)
-                    filteredPoints.Add(point);
-            points_Behaviour = filteredPoints.ToArray();
+            points_Showing.AddRange(transform.Find("Points_Showing").GetComponentsInChildren<Transform>());
+            points_Showing.Remove(transform.Find("Points_Showing"));
+            points_Behaviour.AddRange(transform.Find("Points_Main").GetComponentsInChildren<Transform>());
+            points_Behaviour.Remove(transform.Find("Points_Main"));
         }
 
         private void OnEnable()

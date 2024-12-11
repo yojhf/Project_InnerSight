@@ -35,6 +35,7 @@ namespace InnerSight_Seti
         private Animator animator;
         private NavMeshAgent agent;
         private NPC_Manager npcManager;
+        [SerializeField]
         private NPC_Behaviour npcState;
         private Vector3 targetPoint;    // 현재 이동 타겟 지점
 
@@ -48,7 +49,11 @@ namespace InnerSight_Seti
         private Transform centerOfShop;
         private ShelfStorage thisItem;
 
-        // n차 순회 처리용 불리언
+        // 순회 처리
+        [SerializeField]
+        private int showingCount = 0;
+        [SerializeField]
+        private int currentShowing = 4;
         private bool isFirst;
         #endregion
 
@@ -102,8 +107,8 @@ namespace InnerSight_Seti
             switch (npcState)
             {
                 case NPC_Behaviour.SHOWING:
-                    targetPoint = npcManager.points_Behaviour[0].position;
-                    agent.SetDestination(targetPoint);
+                    if (showingCount < 2) Showing();
+                    else GoToShop();
                     break;
 
                 case NPC_Behaviour.ENTERING:
@@ -163,7 +168,9 @@ namespace InnerSight_Seti
                 switch (npcState)
                 {
                     case NPC_Behaviour.SHOWING:
-                        AIBehaviour(NPC_Behaviour.ENTERING);
+                        if (showingCount <= 4)
+                            AIBehaviour(NPC_Behaviour.SHOWING);
+                        else AIBehaviour(NPC_Behaviour.ENTERING);
                         break;
 
                     case NPC_Behaviour.ENTERING:
@@ -270,6 +277,9 @@ namespace InnerSight_Seti
             isFirst = true;
             SetNextWant();
             Move(true);
+
+            currentShowing = 4;
+            showingCount = 0;
         }
 
         private void Move(bool isMove)
@@ -296,6 +306,30 @@ namespace InnerSight_Seti
         {
             Vector3 offset = (centerOfShop.position - itemTransform.position).normalized * 0.5f;
             return itemTransform.position + offset;
+        }
+
+        void Showing()
+        {
+            showingCount++;
+            int showingIndex = Random.Range(0, 4);
+            targetPoint = npcManager.points_Showing[showingIndex].position;
+            agent.SetDestination(targetPoint);
+        }
+
+        void GoToShop()
+        {
+            if (showingCount == 2 || showingCount == 3)
+            {
+                showingCount++;
+                targetPoint = npcManager.points_Showing[currentShowing++].position;
+                agent.SetDestination(targetPoint);
+            }
+            else
+            {
+                showingCount++;
+                targetPoint = npcManager.points_Behaviour[0].position;
+                agent.SetDestination(targetPoint);
+            }
         }
         #endregion
     }
