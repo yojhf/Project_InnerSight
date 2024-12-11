@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/InnerSight/Yoon/Art/Mesh.meta
 guid: e5e5c1b25d55c67459c7e81bbf8b66fa
+========
+guid: 9b1e009398ff9df4da5b239ba4db9874
+>>>>>>>> 7d1d05c3f5c1cf383ab436a2b2d91badf0f98ae3:Assets/KYS/Image.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
