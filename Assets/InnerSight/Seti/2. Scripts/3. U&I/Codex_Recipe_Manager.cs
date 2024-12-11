@@ -77,7 +77,7 @@ namespace InnerSight_Seti
         public void IdentifyRecipe(ItemKey itemKey)
         {
             ItemKey elementOrElixir = CollectionUtility.FirstOrNull(CodexRecipe.Keys, key => key.itemID == itemKey.itemID);
-            if (elementOrElixir != null)
+            if (elementOrElixir != null && CodexRecipe[elementOrElixir].codexDefine == false)
             {
                 CodexRecipe[elementOrElixir].codexDefine = true;
 

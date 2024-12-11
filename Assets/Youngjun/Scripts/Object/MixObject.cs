@@ -45,6 +45,9 @@ public class MixObject : MonoBehaviour
                 ResetMix();
                 Instantiate(itemKey.GetPrefab(), spwanPos.position, Quaternion.identity);
                 Instantiate(itemKey.GetPrefab(), spwanPos2.position, Quaternion.identity);
+
+
+                Codex_Recipe_Manager.Instance.IdentifyRecipe(itemKey);
             }
             else
             {
@@ -67,6 +70,7 @@ public class MixObject : MonoBehaviour
     {
         for (int i = 0; i < objects.Count; i++)
         {
+            if (objects[i])
             Destroy(objects[i].gameObject);
         }
 
@@ -102,10 +106,7 @@ public class MixObject : MonoBehaviour
 
             objects.Add(obj);
 
-
             collision.gameObject.SetActive(false);
-
-
 
             if (objects.Count >= mixCount)
             {
@@ -113,20 +114,23 @@ public class MixObject : MonoBehaviour
                 {
                     bool isConform = IsTrueWithProbability(probability);
 
-                    Debug.Log($"{isConform}");
-
                     if (isConform)
                     {
+                        Debug.Log($"{isConform}");
+
                         isCanMix = true;
                         MixAble();
                     }
                     else
                     {
+                        Debug.Log($"{isConform}");
                         FailMix();
                     }
                 }
                 else
                 {
+                    Debug.Log("무조건 성공");
+
                     isCanMix = true;
                     MixAble();
                 }
