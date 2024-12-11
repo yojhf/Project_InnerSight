@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Specialized;
+using System.Linq;
 
 namespace InnerSight_Seti
 {
@@ -44,14 +45,17 @@ namespace InnerSight_Seti
 
         private void Update()
         {
-            int itemCount = 0;
-
-            // 슬롯 갱신
-            foreach (var item in invenDict)
+            /*for (int i = 0; i < invenSlots.Length; i++)
             {
-                //UpdateSlot(item, )
-                itemCount++;
+                invenSlotsCountTexts[i].text = "";
+                invenSlots[i].GetComponent<Image>().sprite = emptySlotSprite;
+                ColorUtility.SetAlpha(invenSlots[i].image, initialAlphaValue);
             }
+
+            foreach (var pair in invenDict)
+            {
+                UpdateSlot(pair, pair.Value.itemIndex);
+            }*/
         }
         #endregion
 
@@ -153,8 +157,8 @@ namespace InnerSight_Seti
             if (!invenDict.ContainsKey(pair.Key)) return;
 
             invenSlotsCountTexts[pair.Value.itemIndex].text = "";
-            invenSlots[pair.Value.itemIndex].image.overrideSprite = emptySlotSprite;
-            ColorUtility.SetAlpha(invenSlots[pair.Value.itemIndex].image, initialAlphaValue);
+            invenSlots[pair.Value.itemIndex].GetComponent<Image>().overrideSprite = emptySlotSprite;
+            ColorUtility.SetAlpha(invenSlots[pair.Value.itemIndex].GetComponent<Image>(), initialAlphaValue);
         }
 
         // 아이템 수량을 표기하는 메서드

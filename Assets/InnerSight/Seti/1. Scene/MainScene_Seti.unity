@@ -4688,7 +4688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sun: {fileID: 2139177530}
-  dayDuration: 300
+  dayDuration: 600
   timeText: {fileID: 1274465572}
   startYear: 357
   startMonth: 1
