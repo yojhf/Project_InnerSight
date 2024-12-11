@@ -4696,8 +4696,6 @@ MonoBehaviour:
   startHour: 9
   startMinute: 0
   resetTime: 23
-  inGameUI_DayCycle: {fileID: 693207710}
-  npc_Manager: {fileID: 0}
 --- !u!4 &204149669
 Transform:
   m_ObjectHideFlags: 0
@@ -69086,7 +69084,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2672595858269071113 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7966825331983910383, guid: 23397e619b6e8de4e8bd14b3d31e77bb, type: 3}
@@ -69467,8 +69465,8 @@ MonoBehaviour:
   m_TileSize: 256
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
-  m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 5633c086b81697044bc74c9ff840d0e2, type: 2}
+  m_MinRegionArea: 1
+  m_NavMeshData: {fileID: 23800000, guid: a79cb93956e052a4ca040f22dc6e2ffa, type: 2}
   m_BuildHeightMesh: 0
 --- !u!54 &3422257063657555364
 Rigidbody:
@@ -69551,7 +69549,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 1212472426103796558}
-  dayOfTime: {fileID: 204149668}
   fadeCurve:
     serializedVersion: 2
     m_Curve:
@@ -69905,6 +69902,22 @@ PrefabInstance:
     - target: {fileID: 2186168215500077562, guid: 48f8624ff5581604f98ccd27d7f66185, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203884166434239980, guid: 48f8624ff5581604f98ccd27d7f66185, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -38.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203884166434239980, guid: 48f8624ff5581604f98ccd27d7f66185, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -53.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7210475998864358668, guid: 48f8624ff5581604f98ccd27d7f66185, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7210475998864358668, guid: 48f8624ff5581604f98ccd27d7f66185, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.59
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
