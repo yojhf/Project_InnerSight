@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace InnerSight_Seti
 {
@@ -14,10 +15,13 @@ namespace InnerSight_Seti
         private const int identifier = 4000;    // 엘릭서만 읽는다
         private List<int> elixirsIndex = new(); // 엘릭서의 인덱스
         private List<int> elixirsPrice = new(); // 엘릭서의 원래 가격
+        private List<TextMeshProUGUI> elixirsText = new();
 
         // 아이템 데이터베이스
         [SerializeField]
         private ItemDatabase itemDatabase;
+        [SerializeField]
+        private GameObject priceUI;
         #endregion
 
         // 라이프 사이클
@@ -25,6 +29,7 @@ namespace InnerSight_Seti
         private void Start()
         {
             SetElixirs();
+            elixirsText.AddRange(priceUI.GetComponentsInChildren<TextMeshProUGUI>());
         }
 
         private void OnDisable()
@@ -43,6 +48,7 @@ namespace InnerSight_Seti
             {
                 int deviation = Random.Range(-20, 21);
                 itemDatabase.itemList[i + elixirsIndex[0]].itemPrice += deviation;
+                elixirsText[i].text = itemDatabase.itemList[i + elixirsIndex[0]].itemPrice.ToString() + "G";
             }
         }
         #endregion

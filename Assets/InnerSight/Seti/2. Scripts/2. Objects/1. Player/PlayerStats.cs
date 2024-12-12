@@ -29,7 +29,7 @@ namespace InnerSight_Seti
             RevenueGold += amount;
         }
 
-        // 돈 버는 메서드
+        // 정산
         public void SetGold(int amount)
         {
             CurrentGold = amount;
@@ -37,7 +37,7 @@ namespace InnerSight_Seti
         }
 
         // 돈 쓰는 메서드
-        public bool SpendColl(int amount)
+        public bool SpendGold(int amount)
         {
             if (CurrentGold < amount)
             {
