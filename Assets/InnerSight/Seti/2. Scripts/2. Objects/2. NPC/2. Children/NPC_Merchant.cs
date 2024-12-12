@@ -18,12 +18,21 @@ namespace InnerSight_Seti
     {
         // 필드
         #region Variables
+        private bool OnTrade = false;
+        private bool CanTrade = false;
         private const int identifier = 4000;
         private const int standardDis = 20;
-        [SerializeField] private PlayerSetting player;
         [SerializeField] private ItemDatabase itemDatabase;
-        [SerializeField] 
-        private Dictionary<ItemKey,ItemValueShop> shopDict = new();
+        [SerializeField] private PlayerSetting player;
+        [SerializeField] private ShopUI shopUI;
+
+        private int firstElixir;
+        private bool isFirstElixir = false;
+        public Dictionary<ItemKey,ItemValueShop> shopDict = new();
+
+
+
+        public float distance;
         #endregion
 
         // 라이프 사이클
@@ -31,14 +40,20 @@ namespace InnerSight_Seti
         private void Start()
         {
             Initialize();
+            shopUI.SetItemInfo(shopDict);
         }
 
         private void Update()
         {
-            if (DistanceToPlayer() < standardDis)
+            distance = DistanceToPlayer();
+            if (distance < standardDis)
             {
-
+                CanTrade = true;
             }
+            else CanTrade = false;
+
+            if (Input.GetKeyDown(KeyCode.K))
+                Interaction();
         }
         #endregion
 
@@ -46,7 +61,8 @@ namespace InnerSight_Seti
         #region Override
         public override void Interaction()
         {
-            throw new System.NotImplementedException();
+            if (!CanTrade) return;
+            shopUI.SwitchUI(OnTrade = !OnTrade);
         }
 
         protected override void AIBehaviour(NPC_Behaviour npcBehaviour)
@@ -57,7 +73,7 @@ namespace InnerSight_Seti
 
         // 메서드
         #region Methods
-        // 초기화 - 아이템DB로부터 원소와 엘릭서를 읽어와 도감 딕셔너리에 저장
+        // 초기화 - 아이템DB로부터 엘릭서를 읽어와 도감 딕셔너리에 저장
         private void Initialize()
         {
             // 데이터베이스를 순회하되
@@ -66,8 +82,12 @@ namespace InnerSight_Seti
                 // itemID > 4000인 아이템, 엘릭서만 읽고
                 if (itemDatabase.itemList[i].itemID - identifier > 0)
                 {
+                    if (!isFirstElixir)
+                    {
+                        isFirstElixir = true;
+                        firstElixir = i;
+                    }
                     // 딕셔너리에 저장
-                    int firstElixir = i;
                     ItemValueShop valueShop = new()
                     {
                         itemIndex = i - firstElixir,

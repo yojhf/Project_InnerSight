@@ -26,9 +26,10 @@ namespace InnerSight_Seti
         private List<GameObject> unIdentified = new();
 
         // 클래스
-        private PlayerInteraction player;
         [SerializeField]
         private ItemDatabase itemDatabase;
+        private PlayerInteraction player;
+        private ShopUI shopUI;
         #endregion
 
         // 속성
@@ -82,6 +83,7 @@ namespace InnerSight_Seti
             if (elementOrElixir != null && CodexRecipe[elementOrElixir].codexDefine == false)
             {
                 CodexRecipe[elementOrElixir].codexDefine = true;
+                shopUI.GetKnowhow(itemKey);
 
                 int i = CodexRecipe[elementOrElixir].codexIndex;
                 outputs[i].GetComponent<Image>().enabled = true;
@@ -111,6 +113,11 @@ namespace InnerSight_Seti
                     CodexRecipe.Add(itemDatabase.itemList[i], valueRecipe);
                 }
             }
+        }
+
+        public void SetCodexToShop(ShopUI shopUI)
+        {
+            this.shopUI = shopUI;
         }
         #endregion
     }
