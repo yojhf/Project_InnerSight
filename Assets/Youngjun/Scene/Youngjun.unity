@@ -4773,6 +4773,7 @@ MonoBehaviour:
   startDay: 1
   startHour: 9
   startMinute: 0
+  resetTime: 11
 --- !u!1 &654473256
 GameObject:
   m_ObjectHideFlags: 0
@@ -7360,6 +7361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ad7c4cf72398e34481b680aaf59588f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  probability: 60
   itemDataBase: {fileID: 11400000, guid: 1df643c48d2bc2649b70fac068c72e27, type: 2}
   playerSetting: {fileID: 767673269}
   failItemKey: 999
@@ -12972,7 +12974,6 @@ MonoBehaviour:
   point_Disable: {fileID: 5428481198667642225}
   point_Enable: {fileID: 5691307221147844771}
   points_Behaviour: []
-  NPCPoolSize: 100
   NPC_GenMaxTime: 5
 --- !u!4 &1811985479
 Transform:
