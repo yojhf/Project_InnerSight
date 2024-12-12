@@ -1666,7 +1666,11 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
+<<<<<<< HEAD
   m_HorizontalAlignment: 4
+=======
+  m_HorizontalAlignment: 1
+>>>>>>> b2bd8c8544da4da0c023bced987cba10b42745de
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -2224,7 +2228,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1381029755548492952}
+<<<<<<< HEAD
   - component: {fileID: 1248747452546985328}
+=======
+>>>>>>> b2bd8c8544da4da0c023bced987cba10b42745de
   m_Layer: 0
   m_Name: Shop
   m_TagString: Untagged
@@ -2248,6 +2255,7 @@ Transform:
   - {fileID: 5990044390756898299}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!114 &1248747452546985328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2260,6 +2268,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bcfa2055c263d142ab81924ce9fd883, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+=======
+>>>>>>> b2bd8c8544da4da0c023bced987cba10b42745de
 --- !u!1 &4356798289349031404
 GameObject:
   m_ObjectHideFlags: 0
