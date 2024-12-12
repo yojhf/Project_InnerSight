@@ -40,6 +40,7 @@ namespace Noah
             int m_ShopTax = PlayerCostManager.Instance.ShopTax;
             int m_TotalGold = (m_CurGold + m_RevenueGold) - m_Tax - m_ShopTax;
 
+            //time = 
 
             curGold.gameObject.SetActive(true);
 

@@ -55,11 +55,9 @@ namespace Noah
 
             inGameUI_DayCycle.DayResetUI();
 
-            yield return new WaitForSecondsRealtime(5f);
+            yield return new WaitForSecondsRealtime(6f);
 
             SceneFade.instance.FadeOut(null);
-
-            Debug.Log("ASD");
 
             yield return new WaitForSecondsRealtime(1f);
 
@@ -85,6 +83,8 @@ namespace Noah
             npc_Manager.enabled = true;
             // NPCCount 초기화
             npcCount.ResetNPCCount();
+            // 엘릭서 가격 랜덤 초기화
+            Cost_Random.Instance.RandomPrice();
 
             isReset = false;
         }
