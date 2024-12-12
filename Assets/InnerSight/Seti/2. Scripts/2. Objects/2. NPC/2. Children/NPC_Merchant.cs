@@ -14,25 +14,80 @@ namespace InnerSight_Seti
     /// 4. 물건을 선택하고 정산 버튼을 누르면 소비 및 아이템 구매 이력 적용
     /// 5. 물약 첫 거래는 비싸게(물약값+노하우), 선반
     /// 6. 거래 끝!
-    public abstract class NPC_Merchant : NPC
+    public class NPC_Merchant : NPC
     {
         // 필드
         #region Variables
-        [SerializeField]
-        private ItemDatabase itemDatabase;  // 물약을 팔기 위한 참조
-        private int cost_Knowhow;           // 초기값
+        private const int identifier = 4000;
+        private const int standardDis = 20;
+        [SerializeField] private PlayerSetting player;
+        [SerializeField] private ItemDatabase itemDatabase;
+        [SerializeField] 
+        private Dictionary<ItemKey,ItemValueShop> shopDict = new();
         #endregion
 
         // 라이프 사이클
         #region Life Cycle
+        private void Start()
+        {
+            Initialize();
+        }
+
+        private void Update()
+        {
+            if (DistanceToPlayer() < standardDis)
+            {
+
+            }
+        }
+        #endregion
+
+        // 오버라이드
+        #region Override
+        public override void Interaction()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override void AIBehaviour(NPC_Behaviour npcBehaviour)
+        {
+            throw new System.NotImplementedException();
+        }
         #endregion
 
         // 메서드
         #region Methods
+        // 초기화 - 아이템DB로부터 원소와 엘릭서를 읽어와 도감 딕셔너리에 저장
+        private void Initialize()
+        {
+            // 데이터베이스를 순회하되
+            for (int i = 0; i < itemDatabase.itemList.Count; i++)
+            {
+                // itemID > 4000인 아이템, 엘릭서만 읽고
+                if (itemDatabase.itemList[i].itemID - identifier > 0)
+                {
+                    // 딕셔너리에 저장
+                    int firstElixir = i;
+                    ItemValueShop valueShop = new()
+                    {
+                        itemIndex = i - firstElixir,
+                        itemCost = itemDatabase.itemList[i].itemPrice / 2,
+                        itemCost_Knowhow = itemDatabase.itemList[i].itemPrice * 20,
+                        itemKnowhow = false
+                    };
+                    shopDict.Add(itemDatabase.itemList[i], valueShop);
+                }
+            }
+        }
         #endregion
 
         // 이벤트 메서드
         #region Event Methods
+        #endregion
+
+        // 기타 유틸리티
+        #region Utilities
+        float DistanceToPlayer() => Vector3.Distance(transform.position, player.transform.position);
         #endregion
     }
 }

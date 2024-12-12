@@ -32,7 +32,9 @@ namespace InnerSight_Seti
         #endregion
 
         // 속성
+        #region Properties
         public Dictionary<ItemKey, ItemValueRecipe> CodexRecipe { get; private set; } = new();
+        #endregion
 
         // 라이프 사이클
         #region Life Cycle
