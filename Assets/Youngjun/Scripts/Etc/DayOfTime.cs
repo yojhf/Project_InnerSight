@@ -22,7 +22,8 @@ public class DayOfTime : MonoBehaviour
 
     // ResetTime
     public int resetTime = 11;
-
+    private Quaternion startRot;
+    private bool isTransitioning = false;
     public System.DateTime VirtualDateTime => virtualDateTime;
 
     void Start()
@@ -32,6 +33,9 @@ public class DayOfTime : MonoBehaviour
 
     void Update()
     {
+        if (ResetManager.Instance.IsReset || isTransitioning)
+            return;
+
         // 경과 시간 계산
         _timeElapsed = Time.deltaTime;
         _timeAngle = Time.time;
@@ -40,11 +44,10 @@ public class DayOfTime : MonoBehaviour
         float dayProgress = (_timeElapsed / dayDuration) % 1; // 하루 진행 비율 (0~1)
         float dayAngle = (_timeAngle / dayDuration) % 1;
 
-
         // 태양의 각도 업데이트
         float sunAngle = dayAngle * 360f; // 하루 동안 360도 회전
 
-        sun.transform.rotation = Quaternion.Euler(sunAngle + (-10f), 170f, 0f); // 태양 회전
+        sun.transform.rotation = Quaternion.Euler(sunAngle - 10f, 170f, 0f); // 태양 회전
 
         // 가상 시간 업데이트
         UpdateVirtualDateTime(dayProgress);
@@ -60,6 +63,8 @@ public class DayOfTime : MonoBehaviour
     {
         // 가상 시간을 초기화
         virtualDateTime = new System.DateTime(startYear, startMonth, startDay, startHour, startMinute, 0);
+
+        startRot = Quaternion.Euler(-10f, 170f, 0f);
     }
 
     void UpdateVirtualDateTime(float dayProgress)
@@ -87,23 +92,26 @@ public class DayOfTime : MonoBehaviour
     {
         if (virtualDateTime.Hour >= resetTime)
         {
-
             ResetManager.Instance.DailyReset();
         }
     }
 
     public void CheckDayTransition()
-    {      
+    {
+        isTransitioning = true;
+
         // 다음 날로 전환
         virtualDateTime = virtualDateTime.AddDays(1).Date; // 날짜 증가, 시간 00:00으로 초기화
         virtualDateTime = virtualDateTime.AddHours(9); // 9시로 초기화
 
         // 태양의 각도 초기화 (9시에 해당하는 각도)
-        sun.transform.rotation = Quaternion.Euler(-10f, 170f, 0f);
+        sun.transform.rotation = startRot;
 
         // 타임 초기화
         _timeElapsed = 0f;
-        _timeAngle = 0f;   
+        _timeAngle = 0f;
+
+        isTransitioning = false;
     }
 
 

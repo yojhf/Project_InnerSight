@@ -15,7 +15,10 @@ namespace Noah
 
         private GameObject resetUI;
         private float speed = 5000f;
-     
+
+        private float coolTime;
+
+        public float CoolTime => coolTime;
 
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -40,7 +43,8 @@ namespace Noah
             int m_ShopTax = PlayerCostManager.Instance.ShopTax;
             int m_TotalGold = (m_CurGold + m_RevenueGold) - m_Tax - m_ShopTax;
 
-            //time = 
+            coolTime = ((m_CurGold / speed) + 1f) + ((m_RevenueGold / speed) + 1f)
+                + ((m_Tax / speed) + 1f) + ((m_ShopTax / speed) + 1f) + ((m_TotalGold / speed) + 1f);
 
             curGold.gameObject.SetActive(true);
 

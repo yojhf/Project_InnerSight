@@ -55,7 +55,7 @@ namespace Noah
 
             inGameUI_DayCycle.DayResetUI();
 
-            yield return new WaitForSecondsRealtime(6f);
+            yield return new WaitForSecondsRealtime(inGameUI_DayCycle.CoolTime);
 
             SceneFade.instance.FadeOut(null);
 
