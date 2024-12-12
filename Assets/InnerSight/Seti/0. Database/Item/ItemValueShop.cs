@@ -1,11 +1,9 @@
-using UnityEngine;
-
 namespace InnerSight_Seti
 {
     /// <summary>
     /// 상인 NPC가 판매하는 아이템의 ItemValue
     /// </summary>
-    public class ItemValueShop : MonoBehaviour
+    public class ItemValueShop
     {
         public int itemIndex;
         public int itemCost;

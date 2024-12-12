@@ -30,6 +30,7 @@ namespace InnerSight_Seti
         {
             SetElixirs();
             elixirsText.AddRange(priceUI.GetComponentsInChildren<TextMeshProUGUI>());
+            RandomPrice();
         }
 
         private void OnDisable()
