@@ -1,8 +1,6 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using Noah;
-using InnerSight_Seti;
 
 // 9시 출근 ~ 23시 퇴근 (대략 4분 이상)
 public class DayOfTime : MonoBehaviour
@@ -42,13 +40,15 @@ public class DayOfTime : MonoBehaviour
         float dayProgress = (_timeElapsed / dayDuration) % 1; // 하루 진행 비율 (0~1)
         float dayAngle = (_timeAngle / dayDuration) % 1;
 
+
         // 태양의 각도 업데이트
         float sunAngle = dayAngle * 360f; // 하루 동안 360도 회전
 
-        sun.transform.rotation = Quaternion.Euler(sunAngle - 10f, 170f, 0f); // 태양 회전
+        Debug.Log(sunAngle);
+
+        sun.transform.rotation = Quaternion.Euler(sunAngle + (-10f), 170f, 0f); // 태양 회전
 
         // 가상 시간 업데이트
-        UpdateVirtualDateTime(dayProgress);
         UpdateVirtualDateTime(dayProgress);
 
         // 시간 텍스트 업데이트
@@ -89,12 +89,12 @@ public class DayOfTime : MonoBehaviour
     {
         if (virtualDateTime.Hour >= resetTime)
         {
-            CheckDayTransition();
+
             ResetManager.Instance.DailyReset();
         }
     }
 
-    void CheckDayTransition()
+    public void CheckDayTransition()
     {      
         // 다음 날로 전환
         virtualDateTime = virtualDateTime.AddDays(1).Date; // 날짜 증가, 시간 00:00으로 초기화

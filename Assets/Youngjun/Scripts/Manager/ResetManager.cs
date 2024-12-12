@@ -13,6 +13,7 @@ namespace Noah
         [SerializeField] private InGameUI_DayCycle inGameUI_DayCycle;
         [SerializeField] private NPC_Manager npc_Manager;
         [SerializeField] private NPCCount npcCount;
+        [SerializeField] private DayOfTime dayOfTime;
 
         private float timeScale = 0;
 
@@ -71,7 +72,7 @@ namespace Noah
         {
             // 리셋 해야될 시스템
             // 날짜 업데이트
-
+            dayOfTime.CheckDayTransition();
             // 쓰레기 오브젝트 리스폰
             SpwanManager.Instance.SpwanCon();
             // 월세 증가
