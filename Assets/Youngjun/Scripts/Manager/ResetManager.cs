@@ -59,6 +59,8 @@ namespace Noah
 
             SceneFade.instance.FadeOut(null);
 
+            Debug.Log("ASD");
+
             yield return new WaitForSecondsRealtime(1f);
 
             SceneFade.instance.FadeIn(null);

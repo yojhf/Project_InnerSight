@@ -44,8 +44,6 @@ public class DayOfTime : MonoBehaviour
         // 태양의 각도 업데이트
         float sunAngle = dayAngle * 360f; // 하루 동안 360도 회전
 
-        Debug.Log(sunAngle);
-
         sun.transform.rotation = Quaternion.Euler(sunAngle + (-10f), 170f, 0f); // 태양 회전
 
         // 가상 시간 업데이트
