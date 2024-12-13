@@ -43,10 +43,25 @@ namespace InnerSight_Seti
 
         private void Awake()
         {
+            // UI 묶음
             shopUI = transform.GetChild(0).GetChild(0).gameObject;
+            
+            // 골드
             goldText = shopUI.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
+            
+            // 선택 배열
             shopSlots = shopUI.transform.GetChild(1).GetComponentsInChildren<Button>();
             shopCosts = shopUI.transform.GetChild(1).GetComponentsInChildren<TextMeshProUGUI>();
+
+            // 카운트
+            countUI = shopUI.transform.GetChild(2).gameObject;
+            countText = countUI.transform.GetChild(0).GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
+
+            // 컨펌
+            confirmUI = shopUI.transform.GetChild(3).gameObject;
+
+            // 완료
+            completeUI = shopUI.transform.GetChild(4).gameObject;
         }
         #endregion
 
@@ -92,7 +107,15 @@ namespace InnerSight_Seti
         {
             countUI.SetActive(false);
             confirmUI.SetActive(true);
+        }
+
+        public void Confirm_Yes()
+        {
             Confirm();
+        }
+        public void Confirm_No()
+        {
+            confirmUI.SetActive(false);
         }
 
         // 정산 및 컨펌 UI
@@ -114,11 +137,11 @@ namespace InnerSight_Seti
                 {
                     GetKnowhow(selectItem.Key);
                 }
-                tradeCor = TradeComplete("구매가 완료되었습니다.");
+                tradeCor = TradeComplete("Purchase complete");
             }
             else
             {
-                tradeCor = TradeComplete("소지금이 부족합니다.");
+                tradeCor = TradeComplete("You don't have enough money");
             }
 
             StartCoroutine(tradeCor);
