@@ -118,34 +118,6 @@ namespace Noah
 
         }
 
-        //private void OnTriggerStay(Collider other)
-        //{
-        //    Item item = other.transform.GetComponent<Item>();
-
-        //    if (item != null)
-        //    {
-        //        if (item.ItemId == keyId)
-        //        {
-        //            isStroage = true;
-
-        //            //grapItem = collision.gameObject;
-        //            AddObject(other.gameObject);
-
-        //        }
-        //    }
-        //}
-
-        //private void OnTriggerExit(Collider other)
-        //{
-        //    Item item = other.transform.GetComponent<Item>();
-
-        //    if (item != null)
-        //    {
-        //        isStroage = false;
-        //    }
-        //}
-
-
         private void OnCollisionStay(Collision collision)
         {
             Item item = collision.transform.GetComponent<Item>();

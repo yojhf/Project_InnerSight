@@ -6,7 +6,11 @@ public class InGameUI_CatUIActive : MonoBehaviour
 
     private void Update()
     {
-        catUI.transform.LookAt(Camera.main.transform);
+        if (catUI.activeSelf)
+        {
+            catUI.transform.LookAt(Camera.main.transform);
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)

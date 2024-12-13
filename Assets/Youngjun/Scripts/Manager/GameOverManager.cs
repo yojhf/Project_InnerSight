@@ -5,6 +5,9 @@ namespace Noah
 {
     public class GameOverManager : Singleton<GameOverManager>
     {
+        [SerializeField] private GameObject gameOverUI;
+        [SerializeField] private string playScene = "PlayScene";
+
         public int fullCount = 30;
 
         private Transform house;
@@ -13,7 +16,8 @@ namespace Noah
         {
             if (count >= fullCount)
             {
-                Debug.Log("게임오버");
+                if(!gameOverUI.activeSelf)
+                    gameOverUI.SetActive(true);
             }
         }
 
@@ -21,8 +25,19 @@ namespace Noah
         {
             if (PlayerStats.Instance.CurrentGold < 0)
             {
-                Debug.Log("게임오버");
+                if (!gameOverUI.activeSelf)
+                    gameOverUI.SetActive(true);
             }
+        }
+
+        public void ReTry()
+        {
+            SceneFade.instance.FadeOut(playScene, 1f);
+        }
+
+        public void MainMenu()
+        {
+            Debug.Log("메인메뉴");
         }
     }
 
