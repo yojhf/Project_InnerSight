@@ -12,6 +12,8 @@ public class InputActManager : MonoBehaviour
     public InputActionProperty leftSelect;
     public InputActionProperty rightSelect;
     public InputActionProperty storage;
+    public InputActionProperty yBtn;
+    public InputActionProperty bBtn;
 
     private void Awake()
     {
@@ -114,5 +116,32 @@ public class InputActManager : MonoBehaviour
         return rightRl;
     }
 
+    public bool IsLeftYButtonDown()
+    {
+        bool isYBtn = yBtn.action.WasPressedThisFrame();
+
+        return isYBtn;
+    }
+
+    public bool IsLeftYButtonUp()
+    {
+        bool isYBtn = yBtn.action.WasReleasedThisFrame();
+
+        return isYBtn;
+    }
+
+    public bool IsRightBButtonDown()
+    {
+        bool isBBtn = bBtn.action.WasPressedThisFrame();
+
+        return isBBtn;
+    }
+
+    public bool IsRightBButtonUp()
+    {
+        bool isBBtn = bBtn.action.WasReleasedThisFrame();
+
+        return isBBtn;
+    }
 
 }

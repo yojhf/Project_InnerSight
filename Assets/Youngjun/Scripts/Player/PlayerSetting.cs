@@ -40,7 +40,7 @@ public class PlayerSetting : MonoBehaviour
 
     void PlayerPos()
     {
-        transform.GetChild(0).position = startPos;
+        transform.GetChild(0).position = new Vector3(transform.position.x, startPos.y, transform.position.z);
     }
 
 

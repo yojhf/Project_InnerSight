@@ -36,9 +36,25 @@ public class DayOfTime : MonoBehaviour
         if (ResetManager.Instance.IsReset || isTransitioning)
             return;
 
+        UpdateDayCycle();
+
+        // 하루 사이클 끝 => 정산타임
+        ResetDate();
+    }
+
+    void InitDay()
+    {
+        // 가상 시간을 초기화
+        virtualDateTime = new System.DateTime(startYear, startMonth, startDay, startHour, startMinute, 0);
+
+        startRot = Quaternion.Euler(-10f, 170f, 0f);
+    }
+
+    void UpdateDayCycle()
+    {
         // 경과 시간 계산
         _timeElapsed = Time.deltaTime;
-        _timeAngle = Time.time;
+        _timeAngle += Time.deltaTime;
 
         //_timeAngle += Time.deltaTime;
         float dayProgress = (_timeElapsed / dayDuration) % 1; // 하루 진행 비율 (0~1)
@@ -54,17 +70,6 @@ public class DayOfTime : MonoBehaviour
 
         // 시간 텍스트 업데이트
         UpdateTimeText();
-
-        // 하루 사이클 끝 => 정산타임
-        ResetDate();
-    }
-
-    void InitDay()
-    {
-        // 가상 시간을 초기화
-        virtualDateTime = new System.DateTime(startYear, startMonth, startDay, startHour, startMinute, 0);
-
-        startRot = Quaternion.Euler(-10f, 170f, 0f);
     }
 
     void UpdateVirtualDateTime(float dayProgress)

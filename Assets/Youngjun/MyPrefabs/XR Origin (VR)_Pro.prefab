@@ -873,7 +873,7 @@ GameObject:
   - component: {fileID: 3402675750306759063}
   m_Layer: 0
   m_Name: XR Origin (VR)_Pro
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1051,6 +1051,30 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: -6654893999365139837, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  yBtn:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Y Btn
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 36bc9daf-761e-43b9-bf1b-1940a83bcf93
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -1698592062125975975, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  bBtn:
+    m_UseReference: 1
+    m_Action:
+      m_Name: B Btn
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: a32092b1-3793-4781-acf8-3e34ffdf8d75
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -5566100983960505750, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!114 &8128192165730897832
 MonoBehaviour:
   m_ObjectHideFlags: 0

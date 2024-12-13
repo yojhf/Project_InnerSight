@@ -50,6 +50,10 @@ namespace Noah
             LeftSelectInputUp();
             RightSelectInputUp();
 
+            // 버튼 상호작용
+            LeftYButtonInputDown();
+            RightBButtonInputDown();
+
         }
 
         void OnStorage()
@@ -64,7 +68,7 @@ namespace Noah
         {
             if (inputActManager.IsLeftAct())
             {
-                //GetBackStoeage();
+                
             }
             else 
             {
@@ -157,6 +161,23 @@ namespace Noah
             }
         }
         #endregion
+        
+        // 왼쪽 Y 버튼
+        void LeftYButtonInputDown()
+        {
+            if (inputActManager.IsLeftYButtonDown())
+            {
+                Debug.Log("Y");
+            }
+        }
+        void RightBButtonInputDown()
+        {
+            if (inputActManager.IsRightBButtonDown())
+            {
+                Debug.Log("B");
+            }
+
+        }
     }
 }
 
