@@ -17,7 +17,10 @@ public class PlayerSetting : MonoBehaviour
     public Vector3 StartPos => startPos;    
 
     public XRRayInteractor rayInteractor;
-        
+
+    public NPC_Merchant Merchant { get; private set; }
+
+
     private void Awake()
     {
         playerUse = GetComponent<PlayerUse>();
@@ -43,5 +46,8 @@ public class PlayerSetting : MonoBehaviour
         transform.GetChild(0).position = new Vector3(transform.position.x, startPos.y, transform.position.z);
     }
 
-
+    public void SetMerchantNPC(NPC_Merchant merchant)
+    {
+        Merchant = merchant;
+    }
 }

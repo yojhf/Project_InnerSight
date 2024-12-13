@@ -53,6 +53,7 @@ namespace Noah
             // 버튼 상호작용
             LeftYButtonInputDown();
             RightBButtonInputDown();
+            RightXInputDown();
 
         }
 
@@ -61,6 +62,18 @@ namespace Noah
             if (inputActManager.IsStorage() && inputActManager.IsRightSelect())
             {
                 playerSetting.PlayerInteraction.ThisIsMine();
+            }
+        }
+
+        void RightXInputDown()
+        {
+            if (inputActManager.IsStorage())
+            {
+                if (playerSetting.Merchant != null)
+                {
+                    // 상인과의 거래 시작
+                    playerSetting.Merchant.Interaction();
+                }
             }
         }
 
@@ -168,6 +181,7 @@ namespace Noah
             if (inputActManager.IsLeftYButtonDown())
             {
                 Debug.Log("Y");
+                // 복수 거래 시 수량 내리기
             }
         }
         void RightBButtonInputDown()
@@ -175,8 +189,8 @@ namespace Noah
             if (inputActManager.IsRightBButtonDown())
             {
                 Debug.Log("B");
+                // 복수 거래 시 수량 올리기
             }
-
         }
     }
 }
