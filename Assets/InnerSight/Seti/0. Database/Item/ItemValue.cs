@@ -25,7 +25,7 @@ namespace InnerSight_Seti
         public void Count(int amount)
         {
             itemCount += amount;
-            itemCount = Mathf.Clamp(itemCount, 0, 99);  // 수량을 0에서 99 사이로 제한
+            itemCount = Mathf.Clamp(itemCount, 0, 999);  // 수량을 0에서 999 사이로 제한
         }
 
         // 아이템이 더 사용 가능한지 체크하는 메서드

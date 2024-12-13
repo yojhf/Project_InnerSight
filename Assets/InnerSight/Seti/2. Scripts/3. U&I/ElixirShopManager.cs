@@ -27,6 +27,9 @@ namespace InnerSight_Seti
         private TextMeshProUGUI[] shopCosts;
         private Dictionary<ItemKey, ItemValueShop> shopDict = new();
         private KeyValuePair<ItemKey, ItemValueShop> selectItem;
+
+        // 클래스
+        private PlayerSetting player;
         #endregion
 
         // 속성
@@ -61,7 +64,8 @@ namespace InnerSight_Seti
             confirmUI = shopUI.transform.GetChild(3).gameObject;
 
             // 완료
-            completeUI = shopUI.transform.GetChild(4).gameObject;
+            completeUI = transform.GetChild(0).GetChild(1).gameObject;
+            completeText = completeUI.GetComponentInChildren<TextMeshProUGUI>();
         }
         #endregion
 
@@ -121,6 +125,7 @@ namespace InnerSight_Seti
         // 정산 및 컨펌 UI
         public void Confirm()
         {
+            // 가격 결정
             int howMuch;
             if (selectItem.Value.itemKnowhow)
             {
@@ -131,21 +136,28 @@ namespace InnerSight_Seti
                 howMuch = selectItem.Value.itemCost_Knowhow;
             }
 
+            // 정산
             if (PlayerStats.Instance.SpendGold(howMuch))
             {
-                if (!selectItem.Value.itemKnowhow)
+                if (selectItem.Value.itemKnowhow)
                 {
+                    player.PlayerUse.inventoryManager.AddItem(selectItem.Key, itemCount);
+                }
+                else
+                {
+                    player.PlayerUse.inventoryManager.AddItem(selectItem.Key, 1);
                     GetKnowhow(selectItem.Key);
                 }
                 tradeCor = TradeComplete("Purchase complete");
+                SwitchUI(false);
             }
             else
             {
                 tradeCor = TradeComplete("You don't have enough money");
+                confirmUI.SetActive(false);
             }
 
             StartCoroutine(tradeCor);
-            SwitchUI(false);
             itemCount = 0;
         }
         #endregion
