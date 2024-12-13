@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VRTemplate;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,7 +30,7 @@ namespace InnerSight_Seti
         [SerializeField]
         private ItemDatabase itemDatabase;
         private PlayerInteraction player;
-        private ShopUI shopUI;
+        private ShopManager shopManager;
         #endregion
 
         // ¼Ó¼º
@@ -83,7 +84,7 @@ namespace InnerSight_Seti
             if (elementOrElixir != null && CodexRecipe[elementOrElixir].codexDefine == false)
             {
                 CodexRecipe[elementOrElixir].codexDefine = true;
-                shopUI.GetKnowhow(itemKey);
+                shopManager.GetKnowhow(itemKey);
 
                 int i = CodexRecipe[elementOrElixir].codexIndex;
                 outputs[i].GetComponent<Image>().enabled = true;
@@ -115,9 +116,9 @@ namespace InnerSight_Seti
             }
         }
 
-        public void SetCodexToShop(ShopUI shopUI)
+        public void SetCodexToShop(ShopManager shopManager)
         {
-            this.shopUI = shopUI;
+            this.shopManager = shopManager;
         }
         #endregion
     }

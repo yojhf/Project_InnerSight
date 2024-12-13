@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VRTemplate;
 
 namespace InnerSight_Seti
 {
@@ -24,7 +25,7 @@ namespace InnerSight_Seti
         private const int standardDis = 20;
         [SerializeField] private ItemDatabase itemDatabase;
         [SerializeField] private PlayerSetting player;
-        [SerializeField] private ShopUI shopUI;
+        [SerializeField] private ShopManager shopManager;
 
         private int firstElixir;
         private bool isFirstElixir = false;
@@ -40,7 +41,7 @@ namespace InnerSight_Seti
         private void Start()
         {
             Initialize();
-            shopUI.SetItemInfo(shopDict);
+            shopManager.SetItemInfo(shopDict);
         }
 
         private void Update()
@@ -62,7 +63,7 @@ namespace InnerSight_Seti
         public override void Interaction()
         {
             if (!CanTrade) return;
-            shopUI.SwitchUI(OnTrade = !OnTrade);
+            shopManager.SwitchUI(OnTrade = !OnTrade);
         }
 
         protected override void AIBehaviour(NPC_Behaviour npcBehaviour)

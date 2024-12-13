@@ -8,7 +8,7 @@ namespace InnerSight_Seti
     /// <summary>
     /// 상인 NPC 전용 UI
     /// </summary>
-    public class ShopUI : MonoBehaviour
+    public class ShopManager : MonoBehaviour
     {
         // 필드
         #region Variables
@@ -69,9 +69,12 @@ namespace InnerSight_Seti
             if (pair.Value.itemKnowhow)
             {
                 Debug.Log(pair.Key.itemName);
-
                 // 노하우가 알려진 아이템은 복수 거래
+                // 복수 거래 메서드
+
                 // 몇 개?
+                // 개수 선택 UI
+
                 // 일괄 구매
             }
             else
