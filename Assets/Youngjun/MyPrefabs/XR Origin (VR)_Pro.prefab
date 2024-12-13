@@ -1075,6 +1075,18 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: -5566100983960505750, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  pause:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Pause
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 5288d19d-1e75-4c6f-8120-64660ab9b674
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 3643085958215023720, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!114 &8128192165730897832
 MonoBehaviour:
   m_ObjectHideFlags: 0

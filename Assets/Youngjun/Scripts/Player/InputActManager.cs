@@ -14,6 +14,7 @@ public class InputActManager : MonoBehaviour
     public InputActionProperty storage;
     public InputActionProperty yBtn;
     public InputActionProperty bBtn;
+    public InputActionProperty pause;
 
     private void Awake()
     {
@@ -142,6 +143,20 @@ public class InputActManager : MonoBehaviour
         bool isBBtn = bBtn.action.WasReleasedThisFrame();
 
         return isBBtn;
+    }
+
+    public bool IsPauseButtonDown()
+    {
+        bool isPause = pause.action.WasPressedThisFrame();
+
+        return isPause;
+    }
+
+    public bool IsPauseButtonUp()
+    {
+        bool isPause = pause.action.WasReleasedThisFrame();
+
+        return isPause;
     }
 
 }
