@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using Unity.VRTemplate;
 
 namespace InnerSight_Seti
 {
@@ -50,11 +48,13 @@ namespace InnerSight_Seti
             if (distance < standardDis)
             {
                 CanTrade = true;
+                player.SetMerchantNPC(this);
             }
-            else CanTrade = false;
-
-            if (Input.GetKeyDown(KeyCode.K))
-                Interaction();
+            else
+            {
+                CanTrade = false;
+                player.SetMerchantNPC(null);
+            }
         }
         #endregion
 
