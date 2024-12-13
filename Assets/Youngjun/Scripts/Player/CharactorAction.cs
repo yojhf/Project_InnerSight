@@ -180,16 +180,32 @@ namespace Noah
         {
             if (inputActManager.IsLeftYButtonDown())
             {
-                Debug.Log("Y");
-                // 복수 거래 시 수량 내리기
+                if (playerSetting.Merchant is NPC_Merchant_Elixir)
+                {
+                    NPC_Merchant_Elixir merchant = playerSetting.Merchant as NPC_Merchant_Elixir;
+                    if (merchant.shopManager.OnTrade)
+                    {
+                        Debug.Log("Y");
+                        // 복수 거래 시 수량 내리기
+                        merchant.shopManager.CountDown();
+                    }
+                }
             }
         }
         void RightBButtonInputDown()
         {
             if (inputActManager.IsRightBButtonDown())
             {
-                Debug.Log("B");
-                // 복수 거래 시 수량 올리기
+                if (playerSetting.Merchant is NPC_Merchant_Elixir)
+                {
+                    NPC_Merchant_Elixir merchant = playerSetting.Merchant as NPC_Merchant_Elixir;
+                    if (merchant.shopManager.OnTrade)
+                    {
+                        Debug.Log("Y");
+                        // 복수 거래 시 수량 올리기
+                        merchant.shopManager.CountUp();
+                    }
+                }
             }
         }
     }
