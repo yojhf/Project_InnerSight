@@ -30,7 +30,7 @@ namespace InnerSight_Seti
         [SerializeField]
         private ItemDatabase itemDatabase;
         private PlayerInteraction player;
-        private ShopManager shopManager;
+        private ElixirShopManager shopManager;
         #endregion
 
         // ¼Ó¼º
@@ -84,7 +84,8 @@ namespace InnerSight_Seti
             if (elementOrElixir != null && CodexRecipe[elementOrElixir].codexDefine == false)
             {
                 CodexRecipe[elementOrElixir].codexDefine = true;
-                shopManager.GetKnowhow(itemKey);
+                if (itemKey.itemID > 4000)
+                    shopManager.GetKnowhow(itemKey);
 
                 int i = CodexRecipe[elementOrElixir].codexIndex;
                 outputs[i].GetComponent<Image>().enabled = true;
@@ -116,7 +117,7 @@ namespace InnerSight_Seti
             }
         }
 
-        public void SetCodexToShop(ShopManager shopManager)
+        public void SetCodexToShop(ElixirShopManager shopManager)
         {
             this.shopManager = shopManager;
         }
