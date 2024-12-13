@@ -15,6 +15,7 @@ namespace MyPet.AI
             stateMachine.AddState(new DrinkState());
             stateMachine.AddState(new AttackState());
             stateMachine.AddState(new BackSleepState());
+            stateMachine.AddState(new SleepState());
         }
 
         // Update is called once per frame
@@ -45,8 +46,10 @@ namespace MyPet.AI
         {
             ChangeState<BackSleepState>();
         }
-
-
+        public void Sleep()
+        {
+            ChangeState<SleepState>();
+        }
 
     }
 }
