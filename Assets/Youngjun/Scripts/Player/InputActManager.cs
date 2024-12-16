@@ -17,8 +17,8 @@ public class InputActManager : MonoBehaviour
     public InputActionProperty pause;
 
     // MainMenuUI Control
-    public InputActionProperty joyStickUp;
-    public InputActionProperty joyStickDown;
+    public InputActionProperty leftJoystick;
+    public InputActionProperty rightJoyStick;
 
 
     private void Awake()
@@ -164,20 +164,22 @@ public class InputActManager : MonoBehaviour
         return isPause;
     }
 
+    
+
     public bool JoystickButtonDown()
     {
-        float isJoyDown = joyStickDown.action.ReadValue<float>();
+        Vector2 leftIsJoyDown = leftJoystick.action.ReadValue<Vector2>();
+        Vector2 rightIsJoyDown = rightJoyStick.action.ReadValue<Vector2>();
 
-        Debug.Log(isJoyDown);
-
-        return isJoyDown > 0.1f;
+        return leftIsJoyDown.y < 0f || rightIsJoyDown.y < 0f;
     }
 
     public bool JoystickButtonUp()
     {
-        bool isJoyUp = joyStickUp.action.WasPressedThisFrame();
+        Vector2 leftIsJoyUp = leftJoystick.action.ReadValue<Vector2>();
+        Vector2 rightIsJoyUp = rightJoyStick.action.ReadValue<Vector2>();
 
-        return isJoyUp;
+        return leftIsJoyUp.y > 0f || rightIsJoyUp.y > 0f;
     }
 
 }
