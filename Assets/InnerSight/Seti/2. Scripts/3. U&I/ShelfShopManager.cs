@@ -26,6 +26,7 @@ namespace InnerSight_Seti
         private Dictionary<ItemKey, ItemValueShop> shopDict = new();
 
         private PlayerSetting player;
+        private Transform cameraOffset;
         #endregion
 
         // 속성
@@ -35,6 +36,16 @@ namespace InnerSight_Seti
 
         // 라이프 사이클
         #region Life Cycle
+        private void Start()
+        {
+            cameraOffset = player.transform.GetChild(0);
+        }
+
+        private void Update()
+        {
+            transform.LookAt(cameraOffset);
+        }
+
         private void Awake()
         {
             // UI
