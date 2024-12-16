@@ -16,8 +16,6 @@ namespace InnerSight_Seti
         public ElixirShopManager shopManager;
         public Dictionary<ItemKey, ItemValueShop> shopDict = new();
 
-        private bool OnTrade = false;
-
         // 라이프 사이클
         #region Life Cycle
         private void Start()

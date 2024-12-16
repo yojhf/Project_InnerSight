@@ -16,7 +16,7 @@ namespace InnerSight_Seti
         protected override void Awake()
         {
             base.Awake();
-            CurrentGold = 10000;
+            CurrentGold = 100000;
             RevenueGold = 0;
         }
         #endregion

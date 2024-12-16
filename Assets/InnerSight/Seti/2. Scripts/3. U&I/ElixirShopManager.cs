@@ -25,8 +25,8 @@ namespace InnerSight_Seti
 
         private Button[] shopSlots;
         private TextMeshProUGUI[] shopCosts;
-        private Dictionary<ItemKey, ItemValueShop> shopDict = new();
         private KeyValuePair<ItemKey, ItemValueShop> selectItem;
+        private Dictionary<ItemKey, ItemValueShop> shopDict = new();
 
         // 클래스
         private PlayerSetting player;
@@ -177,17 +177,6 @@ namespace InnerSight_Seti
             tradeCor = null;
             yield break;
         }
-
-        // 거래 성사 확인 버튼
-        /*public void ConfirmComplete()
-        {
-            if (tradeCor != null)
-            {
-                StopCoroutine(tradeCor);
-                tradeCor = null;
-            }
-            completeUI.SetActive(false);
-        }*/
 
         // 버튼 선택
         private void SelectSlot(KeyValuePair<ItemKey, ItemValueShop> pair)
