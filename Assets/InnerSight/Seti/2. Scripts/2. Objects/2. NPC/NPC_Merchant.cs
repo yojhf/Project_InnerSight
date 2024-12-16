@@ -21,6 +21,7 @@ namespace InnerSight_Seti
         [SerializeField] protected PlayerSetting player;
 
         public float distance;
+        protected bool OnTrade = false;
         #endregion
 
         // 라이프 사이클
