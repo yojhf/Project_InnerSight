@@ -31,7 +31,6 @@ namespace Noah
 
                 if (startFadeIn == true)
                 {
-
                     FadeIn(null);
                 }
 
@@ -71,14 +70,23 @@ namespace Noah
 
                 fadeImage.color = new Color(0f, 0f, 0f, a);
 
-                if (ResetManager.Instance.IsReset)
+
+                if (ResetManager.Instance != null)
                 {
-                    time -= Time.unscaledDeltaTime;
+                    if (ResetManager.Instance.IsReset)
+                    {
+                        time -= Time.unscaledDeltaTime;
+                    }
+                    else
+                    {
+                        time -= Time.deltaTime;
+                    }
                 }
                 else 
                 {
                     time -= Time.deltaTime;
                 }
+
 
                 yield return null;
             }
@@ -108,15 +116,24 @@ namespace Noah
 
                 fadeImage.color = new Color(0f, 0f, 0f, a);
 
-                if (ResetManager.Instance.IsReset)
+                if (ResetManager.Instance != null)
                 {
-                    ctime += Time.unscaledDeltaTime;
+                    if (ResetManager.Instance.IsReset)
+                    {
+                        ctime += Time.unscaledDeltaTime;
+                    }
+                    else
+                    {
+                        ctime += Time.deltaTime;
+
+                    }
                 }
-                else
+                else 
                 {
                     ctime += Time.deltaTime;
-
                 }
+
+
 
                 yield return null;
             }

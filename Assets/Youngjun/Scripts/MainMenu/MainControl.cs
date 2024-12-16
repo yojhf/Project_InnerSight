@@ -18,29 +18,26 @@ public class MainControl : MonoBehaviour
     private void Start()
     {
         Init();
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        //SelectMenu();
+        SelectMenu();
     }
 
     IEnumerator ButtonSelect()
     {
         while (true)
         {
-            if (isSelect)
-            {
-                JoysitckUp();
-                JoysitckDown();
+            JoysitckUp();
+            JoysitckDown();
 
-                yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
 
-                isSelect = false;
-            }
         }
+
+
     }
 
 
@@ -115,17 +112,20 @@ public class MainControl : MonoBehaviour
         }
     }
 
-    //void SelectMenu()
-    //{
-    //    if (InputActManager.Instance.JoystickButtonDown())
-    //    {
-    //        EventSystem.current.
-    //    }
-    //}
+    void SelectMenu()
+    {
+        if (InputActManager.Instance.IsStorage())
+        {
+            if (buttons[index].GetComponent<Button>() != null)
+            {
+                buttons[index].GetComponent<Button>().onClick.Invoke();
+            }
+        }
+    }
 
     public void NewGame()
     {
-        SceneFade.instance.FadeOut("PlayScene", 1f);
+        SceneFade.instance.FadeOut("PlayScene");
     }
     public void Credit()
     {
