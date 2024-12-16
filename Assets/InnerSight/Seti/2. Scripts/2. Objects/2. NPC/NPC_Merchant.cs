@@ -17,7 +17,7 @@ namespace InnerSight_Seti
         // ÇÊµå
         #region Variables
         protected bool CanTrade = false;
-        protected const int standardDis = 20;
+        protected const int standardDis = 15;
         [SerializeField] protected PlayerSetting player;
 
         public float distance;
