@@ -30,6 +30,7 @@ namespace InnerSight_Seti
 
         // 클래스
         private PlayerSetting player;
+        private Transform cameraOffset;
         #endregion
 
         // 속성
@@ -41,7 +42,13 @@ namespace InnerSight_Seti
         #region Life Cycle
         private void Start()
         {
+            cameraOffset = player.transform.GetChild(0);
             Codex_Recipe_Manager.Instance.SetCodexToShop(this);
+        }
+
+        private void Update()
+        {
+            transform.LookAt(cameraOffset);
         }
 
         private void Awake()
