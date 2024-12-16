@@ -16,6 +16,11 @@ public class InputActManager : MonoBehaviour
     public InputActionProperty bBtn;
     public InputActionProperty pause;
 
+    // MainMenuUI Control
+    public InputActionProperty joyStickUp;
+    public InputActionProperty joyStickDown;
+
+
     private void Awake()
     {
         if (Instance == null)
@@ -157,6 +162,22 @@ public class InputActManager : MonoBehaviour
         bool isPause = pause.action.WasReleasedThisFrame();
 
         return isPause;
+    }
+
+    public bool JoystickButtonDown()
+    {
+        float isJoyDown = joyStickDown.action.ReadValue<float>();
+
+        Debug.Log(isJoyDown);
+
+        return isJoyDown > 0.1f;
+    }
+
+    public bool JoystickButtonUp()
+    {
+        bool isJoyUp = joyStickUp.action.WasPressedThisFrame();
+
+        return isJoyUp;
     }
 
 }
