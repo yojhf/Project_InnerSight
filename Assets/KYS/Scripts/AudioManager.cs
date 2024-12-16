@@ -1,26 +1,47 @@
-using InnerSight_Seti;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace InnerSight_Kys
 {
+
     //오디오를 관리하는 클래스
-    public class AudioManager : Singleton<AudioManager>
+    public class AudioManager : SingleTons<AudioManager>
     {
         #region Variables
         public Sound[] sounds;
-        private string bgmSound = "";       //현재 플레이 되는 배경음 이름
+
+        // 기존 Sound 클래스 유지
+        [System.Serializable]
+        public class Sound
+        {
+            public string name;
+            public AudioClip clip;
+            public float volume;
+            public float pitch;
+            public bool loop;
+            [HideInInspector] public AudioSource source;
+        }
+
+        private string bgmSound = "";       //현재 플레이 되는 배경음 이름 
         public string BgmSound
         {
-            get { return bgmSound; }
+            get
+            {
+                return bgmSound;
+            }
         }
+        public AudioMixer audioMixer;
         #endregion
 
         protected override void Awake()
         {
-            //Singletone 구현부
+            //singletone 구현부
             base.Awake();
 
-            //AudioManager 초기화
+            //AudioMixerGroup 찾아오기
+            AudioMixerGroup[] audioMixerGroups = audioMixer.FindMatchingGroups("Master");
+
+            //audioManager 초기화
             foreach (var sound in sounds)
             {
                 sound.source = this.gameObject.AddComponent<AudioSource>();
@@ -29,9 +50,19 @@ namespace InnerSight_Kys
                 sound.source.volume = sound.volume;
                 sound.source.pitch = sound.pitch;
                 sound.source.loop = sound.loop;
+
+                if (sound.loop)
+                {
+                    sound.source.outputAudioMixerGroup = audioMixerGroups[1]; //BGM
+
+                }
+                else
+                {
+                    sound.source.outputAudioMixerGroup = audioMixerGroups[2]; //SFX
+
+                }
             }
         }
-
         public void Play(string name)
         {
             Sound sound = null;
@@ -45,17 +76,15 @@ namespace InnerSight_Kys
                     break;
                 }
             }
-
             //매개변수 이름과 같은 클립이 없으면
+
             if (sound == null)
             {
-                Debug.Log($"Cannot Find {name}");
+                Debug.Log($"Cannot find + {name}");
                 return;
             }
-
             sound.source.Play();
         }
-
         public void Stop(string name)
         {
             Sound sound = null;
@@ -66,8 +95,6 @@ namespace InnerSight_Kys
                 if (s.name == name)
                 {
                     sound = s;
-
-                    //
                     if (s.name == bgmSound)
                     {
                         bgmSound = "";
@@ -75,16 +102,16 @@ namespace InnerSight_Kys
                     break;
                 }
             }
-
             //매개변수 이름과 같은 클립이 없으면
+
             if (sound == null)
             {
-                Debug.Log($"Cannot Find {name}");
+                Debug.Log($"Cannot find + {name}");
                 return;
             }
-
             sound.source.Stop();
         }
+
 
         //배경음 재생
         public void PlayBgm(string name)
@@ -94,22 +121,20 @@ namespace InnerSight_Kys
             {
                 return;
             }
-
             //배경음 정지
             StopBgm();
 
             Sound sound = null;
-
             foreach (var s in sounds)
             {
                 if (s.name == name)
                 {
-                    bgmSound = s.name;
+
+                    bgmSound = name;
                     sound = s;
                     break;
                 }
             }
-
             //매개변수 이름과 같은 클립이 없으면
             if (sound == null)
             {
@@ -124,5 +149,10 @@ namespace InnerSight_Kys
         {
             Stop(bgmSound);
         }
+
     }
+
+
 }
+
+
