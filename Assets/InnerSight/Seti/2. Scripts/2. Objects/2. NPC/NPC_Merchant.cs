@@ -31,27 +31,21 @@ namespace InnerSight_Seti
             if (distance < standardDis)
             {
                 CanTrade = true;
-                player.SetMerchantNPC(this);
+                player.Merchant = this;
             }
             else
             {
                 CanTrade = false;
-                player.SetMerchantNPC(null);
+                player.Merchant = null;
             }
         }
         #endregion
 
         // 오버라이드
         #region Override
-        public override void Interaction()
-        {
+        public override void Interaction() { }
 
-        }
-
-        protected override void AIBehaviour(NPC_Behaviour npcBehaviour)
-        {
-            
-        }
+        protected override void AIBehaviour(NPC_Behaviour npcBehaviour) { }
         #endregion
 
         // 기타 유틸리티

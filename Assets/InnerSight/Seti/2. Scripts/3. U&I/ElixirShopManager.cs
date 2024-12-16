@@ -48,7 +48,7 @@ namespace InnerSight_Seti
         {
             // UI 묶음
             shopUI = transform.GetChild(0).GetChild(0).gameObject;
-            
+
             // 골드
             goldText = shopUI.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
             
@@ -74,6 +74,7 @@ namespace InnerSight_Seti
         // 도감 레시피 세팅
         public void GetKnowhow(ItemKey itemKey)
         {
+            Codex_Recipe_Manager.Instance.IdentifyRecipe(itemKey);
             shopDict[itemKey].itemKnowhow = true;
             AssignCosts();
         }
@@ -97,6 +98,7 @@ namespace InnerSight_Seti
         public void CountUp()
         {
             itemCount++;
+            if (itemCount > 99) itemCount -= 99;
             countText.text = itemCount.ToString();
         }
 
@@ -116,6 +118,7 @@ namespace InnerSight_Seti
         public void Confirm_Yes()
         {
             Confirm();
+            confirmUI.SetActive(false);
         }
         public void Confirm_No()
         {
@@ -141,11 +144,11 @@ namespace InnerSight_Seti
             {
                 if (selectItem.Value.itemKnowhow)
                 {
-                    player.PlayerUse.inventoryManager.AddItem(selectItem.Key, itemCount);
+                    player.PlayerUse.InventoryManager.AddItem(selectItem.Key, itemCount);
                 }
                 else
                 {
-                    player.PlayerUse.inventoryManager.AddItem(selectItem.Key, 1);
+                    player.PlayerUse.InventoryManager.AddItem(selectItem.Key, 1);
                     GetKnowhow(selectItem.Key);
                 }
                 tradeCor = TradeComplete("Purchase complete");
@@ -154,7 +157,6 @@ namespace InnerSight_Seti
             else
             {
                 tradeCor = TradeComplete("You don't have enough money");
-                confirmUI.SetActive(false);
             }
 
             StartCoroutine(tradeCor);
@@ -233,6 +235,11 @@ namespace InnerSight_Seti
             this.shopDict = shopDict;
             AssignSlots();
             AssignCosts();
+        }
+
+        public void SetPlayer(PlayerSetting player)
+        {
+            this.player = player;
         }
         #endregion
     }
