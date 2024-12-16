@@ -10,7 +10,8 @@ namespace InnerSight_Seti
         // 필드
         #region Variables
         // 인벤토리 클래스
-        public InventoryManager inventoryManager;
+        [SerializeField]
+        private InventoryManager inventoryManager;
 
         // 퀵슬롯
         private Button[] quickSlots;

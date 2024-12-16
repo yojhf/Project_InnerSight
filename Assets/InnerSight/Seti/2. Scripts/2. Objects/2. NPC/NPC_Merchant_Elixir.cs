@@ -11,9 +11,12 @@ namespace InnerSight_Seti
         private int firstElixir;
         private bool isFirstElixir = false;
         private const int identifier = 4000;
-        [SerializeField] private ItemDatabase itemDatabase;
+        [SerializeField]
+        private ItemDatabase itemDatabase;
         public ElixirShopManager shopManager;
         public Dictionary<ItemKey, ItemValueShop> shopDict = new();
+
+        private bool OnTrade = false;
 
         // 라이프 사이클
         #region Life Cycle
@@ -28,13 +31,15 @@ namespace InnerSight_Seti
         #region Methods
         public override void Interaction()
         {
+            base.Interaction();
             if (!CanTrade) return;
-            shopManager.SwitchUI(true);
+            shopManager.SwitchUI(OnTrade = !OnTrade);
+            shopManager.SetPlayer(player);
         }
 
         protected override void AIBehaviour(NPC_Behaviour npcBehaviour)
         {
-
+            base.AIBehaviour(npcBehaviour);
         }
 
         // 초기화 - 아이템DB로부터 엘릭서를 읽어와 도감 딕셔너리에 저장
