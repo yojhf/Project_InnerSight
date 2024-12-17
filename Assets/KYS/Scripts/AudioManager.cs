@@ -1,3 +1,4 @@
+using InnerSight_Seti;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -5,7 +6,7 @@ namespace InnerSight_Kys
 {
 
     //오디오를 관리하는 클래스
-    public class AudioManager : SingleTons<AudioManager>
+    public class AudioManager : Singleton<AudioManager>
     {
         #region Variables
         public Sound[] sounds;
