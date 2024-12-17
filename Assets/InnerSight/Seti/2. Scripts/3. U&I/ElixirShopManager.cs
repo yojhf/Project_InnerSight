@@ -42,13 +42,16 @@ namespace InnerSight_Seti
         #region Life Cycle
         private void Start()
         {
-            cameraOffset = player.transform.GetChild(0);
+            //cameraOffset = player.transform.GetChild(0);
             Codex_Recipe_Manager.Instance.SetCodexToShop(this);
         }
 
         private void Update()
         {
-            transform.LookAt(cameraOffset);
+            if (shopUI.activeSelf)
+            {
+                transform.GetChild(0).LookAt(Camera.main.transform);
+            }          
         }
 
         private void Awake()
