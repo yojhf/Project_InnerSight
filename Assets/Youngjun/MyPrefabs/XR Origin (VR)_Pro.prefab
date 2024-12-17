@@ -1090,7 +1090,7 @@ MonoBehaviour:
   leftJoystick:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Left Joystick
       m_Type: 0
       m_ExpectedControlType: 
       m_Id: 388c0c66-f026-4ec3-886b-39b8643e25c5
@@ -1102,7 +1102,7 @@ MonoBehaviour:
   rightJoyStick:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Right Joy Stick
       m_Type: 0
       m_ExpectedControlType: 
       m_Id: 206a6739-1dfa-4426-b972-5ea4ab85aa01
