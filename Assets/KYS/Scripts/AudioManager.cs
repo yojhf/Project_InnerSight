@@ -4,145 +4,70 @@ using UnityEngine.Audio;
 
 namespace InnerSight_Kys
 {
-
-    //오디오를 관리하는 클래스
     public class AudioManager : Singleton<AudioManager>
     {
-        #region Variables
-        public Sound[] sounds;
+        [SerializeField] private AudioMixer audioMixer;
+        [SerializeField] private AudioMixerGroup audioMixerGroupBgm;
+        [SerializeField] private AudioMixerGroup audioMixerGroupSfx;
+        public Sounds[] sounds;
 
-        // 기존 Sound 클래스 유지
-        [System.Serializable]
-        public class Sound
-        {
-            public string name;
-            public AudioClip clip;
-            public float volume;
-            public float pitch;
-            public bool loop;
-            [HideInInspector] public AudioSource source;
-        }
-
-        private string bgmSound = "";       //현재 플레이 되는 배경음 이름 
-        public string BgmSound
-        {
-            get
-            {
-                return bgmSound;
-            }
-        }
-        public AudioMixer audioMixer;
-        #endregion
+        private string bgmSound = ""; // Currently playing BGM
+        public string BgmSound => bgmSound;
 
         protected override void Awake()
         {
-            //singletone 구현부
             base.Awake();
 
-            //AudioMixerGroup 찾아오기
-            AudioMixerGroup[] audioMixerGroups = audioMixer.FindMatchingGroups("Master");
+            if (audioMixer == null)
+            {
+                return;
+            }
 
-            //audioManager 초기화
             foreach (var sound in sounds)
             {
-                sound.source = this.gameObject.AddComponent<AudioSource>();
-
-                sound.source.clip = sound.clip;
-                sound.source.volume = sound.volume;
-                sound.source.pitch = sound.pitch;
-                sound.source.loop = sound.loop;
-
-                if (sound.loop)
-                {
-                    sound.source.outputAudioMixerGroup = audioMixerGroups[1]; //BGM
-
-                }
-                else
-                {
-                    sound.source.outputAudioMixerGroup = audioMixerGroups[2]; //SFX
-
-                }
+                // Initialize the AudioSource for each sound
+                var outputGroup = sound.loop ? audioMixerGroupBgm : audioMixerGroupSfx;
+                sound.Initialize(this.gameObject, outputGroup);
             }
         }
+
         public void Play(string name)
         {
-            Sound sound = null;
-
-            //매개변수 이름과 같은 클립 찾기
-            foreach (var s in sounds)
-            {
-                if (s.name == name)
-                {
-                    sound = s;
-                    break;
-                }
-            }
-            //매개변수 이름과 같은 클립이 없으면
-
+            Sounds sound = System.Array.Find(sounds, s => s.name == name);
             if (sound == null)
             {
-                Debug.Log($"Cannot find + {name}");
                 return;
             }
             sound.source.Play();
         }
+
         public void Stop(string name)
         {
-            Sound sound = null;
-
-            //매개변수 이름과 같은 클립 찾기
-            foreach (var s in sounds)
-            {
-                if (s.name == name)
-                {
-                    sound = s;
-                    if (s.name == bgmSound)
-                    {
-                        bgmSound = "";
-                    }
-                    break;
-                }
-            }
-            //매개변수 이름과 같은 클립이 없으면
-
+            Sounds sound = System.Array.Find(sounds, s => s.name == name);
             if (sound == null)
             {
-                Debug.Log($"Cannot find + {name}");
                 return;
             }
             sound.source.Stop();
+            if (name == bgmSound)
+            {
+                bgmSound = "";
+            }
         }
 
-
-        //배경음 재생
         public void PlayBgm(string name)
         {
-            //배경음 이름 체크
-            if (bgmSound == name)
-            {
-                return;
-            }
-            //배경음 정지
+            if (bgmSound == name) return;
+
             StopBgm();
 
-            Sound sound = null;
-            foreach (var s in sounds)
-            {
-                if (s.name == name)
-                {
-
-                    bgmSound = name;
-                    sound = s;
-                    break;
-                }
-            }
-            //매개변수 이름과 같은 클립이 없으면
+            Sounds sound = System.Array.Find(sounds, s => s.name == name);
             if (sound == null)
             {
-                Debug.Log($"Cannot Find {name}");
                 return;
             }
 
+            bgmSound = name;
             sound.source.Play();
         }
 
@@ -150,10 +75,5 @@ namespace InnerSight_Kys
         {
             Stop(bgmSound);
         }
-
     }
-
-
 }
-
-
