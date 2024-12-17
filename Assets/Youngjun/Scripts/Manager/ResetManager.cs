@@ -85,6 +85,8 @@ namespace Noah
             npcCount.ResetNPCCount();
             // 엘릭서 가격 랜덤 초기화
             Cost_Random.Instance.RandomPrice();
+            // NPC 난이도 증가
+            NPCGenManager.Instance.NPCGenTimeUp();
 
             isReset = false;
         }

@@ -94,7 +94,7 @@ public class MixObject : MonoBehaviour
 
     bool RandomCheck(int index)
     {
-        return index > 4000 && index < 6000;
+        return index > 2000 && index < 6000;
     }
 
     private void OnCollisionEnter(Collision collision)
