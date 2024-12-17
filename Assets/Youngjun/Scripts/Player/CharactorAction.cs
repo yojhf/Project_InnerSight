@@ -183,11 +183,12 @@ namespace Noah
                 if (playerSetting.Merchant is NPC_Merchant_Elixir)
                 {
                     NPC_Merchant_Elixir merchant = playerSetting.Merchant as NPC_Merchant_Elixir;
-                    if (merchant.shopManager.OnTrade)
+                    ElixirShopManager elixirShopManager = merchant.shopManager as ElixirShopManager;
+                    if (elixirShopManager.OnTrade)
                     {
                         Debug.Log("Y");
                         // 복수 거래 시 수량 내리기
-                        merchant.shopManager.CountDown();
+                        elixirShopManager.CountDown();
                     }
                 }
             }
@@ -199,11 +200,12 @@ namespace Noah
                 if (playerSetting.Merchant is NPC_Merchant_Elixir)
                 {
                     NPC_Merchant_Elixir merchant = playerSetting.Merchant as NPC_Merchant_Elixir;
-                    if (merchant.shopManager.OnTrade)
+                    ElixirShopManager elixirShopManager = merchant.shopManager as ElixirShopManager;
+                    if (elixirShopManager.OnTrade)
                     {
                         Debug.Log("Y");
                         // 복수 거래 시 수량 올리기
-                        merchant.shopManager.CountUp();
+                        elixirShopManager.CountUp();
                     }
                 }
             }
