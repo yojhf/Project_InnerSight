@@ -41,70 +41,70 @@ MonoBehaviour:
     itemImage: {fileID: 21300000, guid: 7c03fc4974981b34eae1aeb148e63742, type: 2}
     itemPrefab: {fileID: 918413713887577757, guid: d2556d95ae9e5ab469d90e022e198a6f, type: 3}
     itemPhantomPrefab: {fileID: 918413713887577757, guid: 311d941c70d836248a0d1eb797422b81, type: 3}
-  - itemID: 1005
+  - itemID: 1111
     itemName: Branch
     itemNameKor: "\uB098\uBB47\uAC00\uC9C0"
     itemPrice: 0
     itemImage: {fileID: 21300000, guid: a97c624f39b0bdc40938b980ff632f4b, type: 2}
     itemPrefab: {fileID: 1444794783383922680, guid: 87730f497f9784143a93db90fc8ac6f7, type: 3}
     itemPhantomPrefab: {fileID: 1444794783383922680, guid: e3b1931ee08e8b746a42b8704ad1fdef, type: 3}
-  - itemID: 1006
+  - itemID: 1112
     itemName: Wooden Plank
     itemNameKor: "\uB098\uBB47\uD310\uC790"
     itemPrice: 0
     itemImage: {fileID: 21300000, guid: e082a3d8479472a4c9c1f64f07355b05, type: 2}
     itemPrefab: {fileID: 6112193725208354113, guid: 5718b2bd7ac9e7443baeabd024dfab09, type: 3}
     itemPhantomPrefab: {fileID: 6112193725208354113, guid: c5f115e46c7b3364e81f466b12c79c36, type: 3}
-  - itemID: 1007
+  - itemID: 1113
     itemName: Rusted Bowl
     itemNameKor: "\uB179\uC2A8 \uADF8\uB987"
     itemPrice: 0
     itemImage: {fileID: 21300000, guid: e0786caaa3cf05e4a83c2dbcfa09981d, type: 2}
     itemPrefab: {fileID: 1607624589794493816, guid: b059264fec2e0d24199a7081d48849fa, type: 3}
     itemPhantomPrefab: {fileID: 1607624589794493816, guid: 1273ad8cb9d9f0c43b9ad25c6c4ab4df, type: 3}
-  - itemID: 1008
+  - itemID: 1114
     itemName: Rusted Key
     itemNameKor: "\uB179\uC2A8 \uC5F4\uC1E0"
     itemPrice: 0
     itemImage: {fileID: 21300000, guid: af8b101e5e7544f49b27e0f11dd10581, type: 2}
     itemPrefab: {fileID: 6001797094119632475, guid: 84ff3bf8002ec9345b59d87b8db08f25, type: 3}
     itemPhantomPrefab: {fileID: 6001797094119632475, guid: d65912718bb4daf448e01aa7b11d0f93, type: 3}
-  - itemID: 1009
+  - itemID: 1211
     itemName: Stone
     itemNameKor: "\uB3CC"
     itemPrice: 0
     itemImage: {fileID: 21300000, guid: cba8674a6455cfe42998c720adae9498, type: 2}
     itemPrefab: {fileID: 7192328921751711113, guid: 6b717aded0c9b2944b38daf85c39a95e, type: 3}
     itemPhantomPrefab: {fileID: 7192328921751711113, guid: 07ad6b9f1089aed49b821fd7c3ae96f5, type: 3}
-  - itemID: 1010
+  - itemID: 1212
     itemName: Broken pottery piece
     itemNameKor: "\uAE68\uC9C4 \uB3C4\uC790\uAE30"
     itemPrice: 0
     itemImage: {fileID: 21300000, guid: b68f2ade2fbcdd1418938b6b74b488cb, type: 2}
     itemPrefab: {fileID: 7599987753003458943, guid: 0009692cddcd15144bc5cd523026f3ff, type: 3}
     itemPhantomPrefab: {fileID: 7599987753003458943, guid: 11dcbf915a88fa94fa5f855878b228d4, type: 3}
-  - itemID: 1012
+  - itemID: 1213
     itemName: Paper
     itemNameKor: "\uC885\uC774"
     itemPrice: 0
     itemImage: {fileID: 21300000, guid: f43ef329c2a417640bd5ae9d828f85e2, type: 2}
     itemPrefab: {fileID: 5867526532298733042, guid: 4a392e1e758574a47998d34c02d19dd3, type: 3}
     itemPhantomPrefab: {fileID: 5867526532298733042, guid: ac588410d9a65a746b3487c9dad24980, type: 3}
-  - itemID: 1013
+  - itemID: 1214
     itemName: Empty Bottle
     itemNameKor: "\uBE48 \uBCD1"
     itemPrice: 0
     itemImage: {fileID: 21300000, guid: f9eb7e73092ae2642abb6e7c123d3895, type: 2}
     itemPrefab: {fileID: 6794183208863677722, guid: a0226cd9dfbca0a4089a8a0b34cc9316, type: 3}
     itemPhantomPrefab: {fileID: 6794183208863677722, guid: e92b84853df467a4f81332c683042f26, type: 3}
-  - itemID: 1015
+  - itemID: 1311
     itemName: Old Book
     itemNameKor: "\uC624\uB798\uB41C \uCC45"
     itemPrice: 0
     itemImage: {fileID: 21300000, guid: 6078f3c0ff41505428b6cda66f700693, type: 2}
     itemPrefab: {fileID: 4133627554772659559, guid: 66404da321e731248a6057ca79e236ef, type: 3}
     itemPhantomPrefab: {fileID: 4133627554772659559, guid: 23b7c40394772d34fbe479e1ffecd8dd, type: 3}
-  - itemID: 1016
+  - itemID: 1312
     itemName: Enchanted pebble
     itemNameKor: "\uB9C8\uBC95\uC774 \uAE43\uB4E0 \uC870\uC57D\uB3CC"
     itemPrice: 0
@@ -125,91 +125,91 @@ MonoBehaviour:
     itemImage: {fileID: 21300000, guid: 0a79e8bc2535a7d4b92dc1d268e6f68c, type: 2}
     itemPrefab: {fileID: 9081615702143839379, guid: 81a0907e15ef6424ca19b30df1fd3f81, type: 3}
     itemPhantomPrefab: {fileID: 711688308215502907, guid: e4f6bdcced1b38c4ca6c5d717f7be168, type: 3}
-  - itemID: 2011
+  - itemID: 2223
     itemName: Wood
     itemNameKor: "\uB098\uBB34"
     itemPrice: 0
     itemImage: {fileID: 21300000, guid: b2344c06a76aa8b48a98aacddc50c49b, type: 2}
     itemPrefab: {fileID: 9065918581969377060, guid: f568ced1d809d7b4bb59280bfe98408b, type: 3}
     itemPhantomPrefab: {fileID: 4998888989069984587, guid: c58e7afddfb92ac4f8aeeae52d10c08e, type: 3}
-  - itemID: 2015
+  - itemID: 2227
     itemName: Metal
     itemNameKor: "\uAE08\uC18D"
     itemPrice: 0
     itemImage: {fileID: 21300000, guid: f3a2cd15bef47f04c8eda0a6d1315aaa, type: 2}
     itemPrefab: {fileID: 3834440550260598379, guid: ab16c26a182bc30408096f81e2c8cf56, type: 3}
     itemPhantomPrefab: {fileID: 7160971520942073017, guid: c23450565bf438342b4ba2bd197722f4, type: 3}
-  - itemID: 2019
+  - itemID: 2423
     itemName: Mineral
     itemNameKor: "\uD759"
     itemPrice: 0
     itemImage: {fileID: 21300000, guid: ca25d4e8e511ca640bfa7f8d67bcb3ab, type: 2}
     itemPrefab: {fileID: 1435399602068954842, guid: 8aae2ad97ac3b5b4c8089c1729ae3ec6, type: 3}
     itemPhantomPrefab: {fileID: 6098820065465701071, guid: 2d2de071490bd464b9d39143f6b8e928, type: 3}
-  - itemID: 2025
+  - itemID: 2427
     itemName: Air
     itemNameKor: "\uACF5\uAE30"
     itemPrice: 0
     itemImage: {fileID: 21300000, guid: ed964ffe9785a2540a1dd85d7f8cfa9e, type: 2}
     itemPrefab: {fileID: 7334314524214064590, guid: db036d6e6007d3c4daab95c104786cd9, type: 3}
     itemPhantomPrefab: {fileID: 6484553565966826107, guid: c251855ad48e1674fa6fce93a9ec762f, type: 3}
-  - itemID: 2031
+  - itemID: 2623
     itemName: Aether
     itemNameKor: "\uC5D0\uD14C\uB974"
     itemPrice: 0
     itemImage: {fileID: 21300000, guid: 27fb0ab404966d74aa783c8ed9d41ecf, type: 2}
     itemPrefab: {fileID: 7829798248644409142, guid: 56d9eb70392a20f4d95cb10f35401694, type: 3}
     itemPhantomPrefab: {fileID: 1493664844030360271, guid: 83bf2a2fbede8774cadfbcb7e4d2cb4e, type: 3}
-  - itemID: 4022
+  - itemID: 4426
     itemName: Energy Elixir
     itemNameKor: "\uC5D0\uB108\uC9C0 \uC5D8\uB9AD\uC11C"
     itemPrice: 100
     itemImage: {fileID: 21300000, guid: b9f675ca3d2deb64f845cf9a06116f01, type: 2}
     itemPrefab: {fileID: 5939675420386550228, guid: bfb4268fecbc29d4fad4716ca539101f, type: 3}
     itemPhantomPrefab: {fileID: 5939675420386550228, guid: bb2cb884f7af90545ba3454c5451a310, type: 3}
-  - itemID: 4032
+  - itemID: 4434
     itemName: Mana Elixir
     itemNameKor: "\uB9C8\uB098 \uC5D8\uB9AD\uC11C"
     itemPrice: 100
     itemImage: {fileID: 21300000, guid: ffd10146dad6fe04a96d76208d42c233, type: 2}
     itemPrefab: {fileID: 8096169559649628995, guid: d2e7db2ec18289e45865e7d208507d04, type: 3}
     itemPhantomPrefab: {fileID: 8096169559649628995, guid: 50116c08be947944c8691ad8aeb272c5, type: 3}
-  - itemID: 4026
+  - itemID: 4450
     itemName: Strength Elixir
     itemNameKor: "\uD798 \uC5D8\uB9AD\uC11C"
     itemPrice: 100
     itemImage: {fileID: 21300000, guid: cdc8bc7ca4d066a4187770e03b03ca55, type: 2}
     itemPrefab: {fileID: 2484048863127429011, guid: 0c899390115b44d45a7242f7f2a835ea, type: 3}
     itemPhantomPrefab: {fileID: 2484048863127429011, guid: 54db04d8fdc0ed54db2d7bc74439b914, type: 3}
-  - itemID: 4062
+  - itemID: 5246
     itemName: Speed Elixir
     itemNameKor: "\uBBFC\uCCA9 \uC5D8\uB9AD\uC11C"
     itemPrice: 100
     itemImage: {fileID: 21300000, guid: 677539d346b498348a290794a1a1997a, type: 2}
     itemPrefab: {fileID: 8099526328240803452, guid: 835c36d626d566642be41ffa58284bbb, type: 3}
     itemPhantomPrefab: {fileID: 8099526328240803452, guid: 7eff372eac164df4dbc5c2e014a33243, type: 3}
-  - itemID: 8054
+  - itemID: 8860
     itemName: 'Soul Elixir '
     itemNameKor: "\uC18C\uC6B8 \uC5D8\uB9AD\uC11C "
     itemPrice: 250
     itemImage: {fileID: 21300000, guid: 72eadbaabd0d99545ab07caa39b41f34, type: 2}
     itemPrefab: {fileID: 3075164133892350873, guid: 9d8a7366a6b05054fbeefe8daeb26904, type: 3}
     itemPhantomPrefab: {fileID: 3075164133892350873, guid: 871f51378b99dc040a82e545efead32a, type: 3}
-  - itemID: 8088
+  - itemID: 9696
     itemName: Detoxification Elixir
     itemNameKor: "\uD574\uB3C5 \uC5D8\uB9AD\uC11C"
     itemPrice: 250
     itemImage: {fileID: 21300000, guid: 092b880d9e3dfaa4bb23ef484393442f, type: 2}
     itemPrefab: {fileID: 6621646877869387850, guid: 8eea2347e4b781a4ea0d559692c01068, type: 3}
     itemPhantomPrefab: {fileID: 6621646877869387850, guid: aa42a93b00ec39e48bb116c80a0daf01, type: 3}
-  - itemID: 8048
+  - itemID: 8876
     itemName: Pure Elixir
     itemNameKor: "\uC815\uB828\uB41C \uC5D8\uB9AD\uC11C"
     itemPrice: 250
     itemImage: {fileID: 21300000, guid: b9f14a0e1fc20ff4dbcc359ba433bd21, type: 2}
     itemPrefab: {fileID: 7137295551369274495, guid: 9f02de37fede5d34999b8d09ec91a23b, type: 3}
     itemPhantomPrefab: {fileID: 7137295551369274495, guid: 149f70b87e85cca4d90e490df626b1f6, type: 3}
-  - itemID: 8094
+  - itemID: 9680
     itemName: Enchanted Elixir
     itemNameKor: "\uCD95\uBCF5 \uC5D8\uB9AD\uC11C"
     itemPrice: 250
