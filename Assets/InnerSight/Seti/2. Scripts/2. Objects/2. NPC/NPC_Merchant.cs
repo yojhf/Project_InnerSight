@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VRTemplate;
 using UnityEngine;
 
 namespace InnerSight_Seti
@@ -12,16 +11,28 @@ namespace InnerSight_Seti
     /// 3. 상인이 판매 중인 물품 목록, 선택한 구매 예정 물품 목록
     /// 4. 물건을 선택하고 정산 버튼을 누르면 소비 및 아이템 구매 이력 적용
     /// 5. 거래 끝!
-    public class NPC_Merchant : NPC
+    public abstract class NPC_Merchant : NPC
     {
         // 필드
         #region Variables
+        // 거래 조건
+        protected bool OnTrade = false;
         protected bool CanTrade = false;
         protected const int standardDis = 15;
         [SerializeField] protected PlayerSetting player;
 
+        // 엘릭서 검색 기준
+        protected int firstElixir;
+        protected bool isFirstElixir = false;
+        protected const int identifier = 4000;
+
+        [SerializeField]
+        protected ItemDatabase itemDatabase;
+        public ShopManager shopManager;
+        public Dictionary<ItemKey, ItemValueShop> shopDict = new();
+
+        // 임시 - 플레이어와의 거리 측정
         public float distance;
-        protected bool OnTrade = false;
         #endregion
 
         // 라이프 사이클
@@ -39,14 +50,25 @@ namespace InnerSight_Seti
                 CanTrade = false;
                 player.Merchant = null;
             }
+            shopManager.DistanceCheck(CanTrade);
         }
         #endregion
 
         // 오버라이드
         #region Override
-        public override void Interaction() { }
+        public override void Interaction()
+        {
+            if (!CanTrade) return;
+            shopManager.SwitchUI(OnTrade = !OnTrade);
+            shopManager.SetPlayer(player);
+        }
 
-        protected override void AIBehaviour(NPC_Behaviour npcBehaviour) { }
+        protected override void AIBehaviour(NPC_Behaviour npcBehaviour)
+        {
+            
+        }
+
+        protected abstract void Initialize();
         #endregion
 
         // 기타 유틸리티

@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 namespace InnerSight_Seti
@@ -9,73 +7,29 @@ namespace InnerSight_Seti
     /// <summary>
     /// 상인 NPC 전용 UI
     /// </summary>
-    public class ElixirShopManager : MonoBehaviour
+    public class ElixirShopManager : ShopManager
     {
         // 필드
         #region Variables
         private int itemCount;
-        private GameObject shopUI;
-        private GameObject countUI; //
-        private GameObject confirmUI;   //
-        private GameObject completeUI;   //
-        private TextMeshProUGUI goldText;
-        private TextMeshProUGUI countText;  //
-        private TextMeshProUGUI completeText;  //
-        private IEnumerator tradeCor;
-
-        private Button[] shopSlots;
-        private TextMeshProUGUI[] shopCosts;
-        private KeyValuePair<ItemKey, ItemValueShop> selectItem;
-        private Dictionary<ItemKey, ItemValueShop> shopDict = new();
-
-        // 클래스
-        private PlayerSetting player;
-        private Transform cameraOffset;
-        #endregion
-
-        // 속성
-        #region Properties
-        public bool OnTrade { get; protected set; }
+        private GameObject countUI;
+        private TextMeshProUGUI countText;
         #endregion
 
         // 라이프 사이클
         #region Life Cycle
         private void Start()
         {
-            //cameraOffset = player.transform.GetChild(0);
             Codex_Recipe_Manager.Instance.SetCodexToShop(this);
         }
 
-        private void Update()
+        protected override void Awake()
         {
-            if (shopUI.activeSelf)
-            {
-                transform.GetChild(0).LookAt(Camera.main.transform);
-            }          
-        }
-
-        private void Awake()
-        {
-            // UI 묶음
-            shopUI = transform.GetChild(0).GetChild(0).gameObject;
-
-            // 골드
-            goldText = shopUI.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
-            
-            // 선택 배열
-            shopSlots = shopUI.transform.GetChild(1).GetComponentsInChildren<Button>();
-            shopCosts = shopUI.transform.GetChild(1).GetComponentsInChildren<TextMeshProUGUI>();
+            base.Awake();
 
             // 카운트
             countUI = shopUI.transform.GetChild(2).gameObject;
             countText = countUI.transform.GetChild(0).GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
-
-            // 컨펌
-            confirmUI = shopUI.transform.GetChild(3).gameObject;
-
-            // 완료
-            completeUI = transform.GetChild(0).GetChild(1).gameObject;
-            completeText = completeUI.GetComponentInChildren<TextMeshProUGUI>();
         }
         #endregion
 
@@ -87,14 +41,6 @@ namespace InnerSight_Seti
             Codex_Recipe_Manager.Instance.IdentifyRecipe(itemKey);
             shopDict[itemKey].itemKnowhow = true;
             AssignCosts();
-        }
-
-        // 상점 UI 스위치
-        public void SwitchUI(bool isOpen)
-        {
-            OnTrade = isOpen;
-            shopUI.SetActive(isOpen);
-            goldText.text = PlayerStats.Instance.CurrentGold.ToString() + "G";
         }
 
         // 아이템 카운터 ON
@@ -125,18 +71,8 @@ namespace InnerSight_Seti
             confirmUI.SetActive(true);
         }
 
-        public void Confirm_Yes()
-        {
-            Confirm();
-            confirmUI.SetActive(false);
-        }
-        public void Confirm_No()
-        {
-            confirmUI.SetActive(false);
-        }
-
         // 정산 및 컨펌 UI
-        public void Confirm()
+        public override void Confirm()
         {
             // 가격 결정
             int howMuch;
@@ -172,24 +108,18 @@ namespace InnerSight_Seti
             StartCoroutine(tradeCor);
             itemCount = 0;
         }
+
+        protected override void UIReset()
+        {
+            SwitchCount(false);
+            base.UIReset();
+        }
         #endregion
 
         // 기타 유틸리티
         #region Utilities
-        // 컨펌 텍스트
-        IEnumerator TradeComplete(string text)
-        {
-            completeUI.SetActive(true);
-            completeText.text = text;
-            yield return new WaitForSeconds(2);
-
-            completeUI.SetActive(false);
-            tradeCor = null;
-            yield break;
-        }
-
         // 버튼 선택
-        private void SelectSlot(KeyValuePair<ItemKey, ItemValueShop> pair)
+        protected override void SelectSlot(KeyValuePair<ItemKey, ItemValueShop> pair)
         {
             selectItem = pair;
             if (pair.Value.itemKnowhow)
@@ -197,20 +127,8 @@ namespace InnerSight_Seti
             else Confirm();
         }
 
-        // 각 버튼의 인덱스에 맞는 리스너를 자동으로 할당하는 메서드
-        private void AssignSlots()
-        {
-            foreach (var pair in shopDict)
-            {
-                int index = pair.Value.itemIndex;  // 이 변수를 반드시 따로 선언해줘야 람다 함수 안에서 올바르게 작동
-
-                shopSlots[index].onClick.RemoveAllListeners();
-                shopSlots[index].onClick.AddListener(() => SelectSlot(pair));
-            }
-        }
-
         // 각 텍스트에 맞는 코스트를 자동으로 갱신하는 메서드
-        private void AssignCosts()
+        protected override void AssignCosts()
         {
             foreach (var pair in shopDict)
             {
@@ -226,19 +144,6 @@ namespace InnerSight_Seti
                 }
                 shopCosts[index].text = cost.ToString() + " G";
             }
-        }
-
-        // 아이템 정보 초기화
-        public void SetItemInfo(Dictionary<ItemKey, ItemValueShop> shopDict)
-        {
-            this.shopDict = shopDict;
-            AssignSlots();
-            AssignCosts();
-        }
-
-        public void SetPlayer(PlayerSetting player)
-        {
-            this.player = player;
         }
         #endregion
     }
