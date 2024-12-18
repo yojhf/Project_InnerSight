@@ -13,10 +13,14 @@ public class MixObject : MonoBehaviour
     public ItemDatabase itemDataBase;
     public PlayerSetting playerSetting;
     public int failItemKey;
+    public GameObject successEffect;
+    public GameObject failEffect;
+
 
     [SerializeField] private int mixCount = 2;
     private Transform spwanPos;
     private Transform spwanPos2;
+    private Transform effectPos;
     public List<Item> objects = new List<Item>();
 
     private bool isCanMix = false;
@@ -27,6 +31,7 @@ public class MixObject : MonoBehaviour
     {
         spwanPos = transform.GetChild(0);
         spwanPos2 = transform.GetChild(1);
+        effectPos = transform.GetChild(2);
     }
 
 
@@ -42,9 +47,13 @@ public class MixObject : MonoBehaviour
 
             if (itemKey != null)
             {
+                GameObject tmp_Effect = Instantiate(successEffect, effectPos.position, Quaternion.identity);
+
                 ResetMix();
                 Instantiate(itemKey.GetPrefab(), spwanPos.position, Quaternion.identity);
                 Instantiate(itemKey.GetPrefab(), spwanPos2.position, Quaternion.identity);
+
+                Destroy(tmp_Effect, 1f);
 
                 Codex_Recipe_Manager.Instance.IdentifyRecipe(itemKey);
             }
@@ -65,9 +74,13 @@ public class MixObject : MonoBehaviour
     {
         var failItem = itemDataBase.itemList.FirstOrDefault(item => item.itemID == failItemKey);
 
+        GameObject tmp_Effect = Instantiate(failEffect, effectPos.position, Quaternion.identity);
+
         ResetMix();
         Instantiate(failItem.GetPrefab(), spwanPos.position, Quaternion.identity);
         Instantiate(failItem.GetPrefab(), spwanPos2.position, Quaternion.identity);
+
+        Destroy(tmp_Effect, 1f);
     }
 
     void ResetMix()

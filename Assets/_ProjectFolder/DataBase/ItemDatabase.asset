@@ -136,7 +136,7 @@ MonoBehaviour:
     itemName: Metal
     itemNameKor: "\uAE08\uC18D"
     itemPrice: 0
-    itemImage: {fileID: 21300000, guid: f3a2cd15bef47f04c8eda0a6d1315aaa, type: 2}
+    itemImage: {fileID: 21300000, guid: 3358ad3d2ec5a0a4f8c4b507f75a3aa0, type: 2}
     itemPrefab: {fileID: 3834440550260598379, guid: ab16c26a182bc30408096f81e2c8cf56, type: 3}
     itemPhantomPrefab: {fileID: 7160971520942073017, guid: c23450565bf438342b4ba2bd197722f4, type: 3}
   - itemID: 2423

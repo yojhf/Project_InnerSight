@@ -9,7 +9,7 @@ namespace Noah
         private int addShopCost = 50;
 
         private int dayTax = 10;
-        private int shopTax = 300;
+        private int shopTax = 200;
 
         public int DayTax
         {
