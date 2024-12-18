@@ -88,7 +88,7 @@ public class DayOfTime : MonoBehaviour
         if (timeText != null)
         {
             // TextMeshPro에 표시할 텍스트 설정
-            timeText.text = virtualDateTime.ToString("yyyy년 MM월 dd일 HH시:mm분");
+            timeText.text = virtualDateTime.ToString("yyyy년 MM월 dd일 HH시 : mm분");
         }
     }
 

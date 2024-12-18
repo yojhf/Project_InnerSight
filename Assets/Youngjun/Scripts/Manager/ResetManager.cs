@@ -87,6 +87,8 @@ namespace Noah
             Cost_Random.Instance.RandomPrice();
             // NPC 난이도 증가
             NPCGenManager.Instance.NPCGenTimeUp();
+            // 금액 0원 이하 시 게임오버
+            GameOverManager.Instance.CurrentGoldCheck();
 
             isReset = false;
         }

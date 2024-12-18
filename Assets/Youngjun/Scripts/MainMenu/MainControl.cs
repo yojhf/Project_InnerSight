@@ -1,142 +1,140 @@
-using Noah;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class MainControl : MonoBehaviour
+namespace Noah
 {
-    [SerializeField] private Transform buttonPar;
-    private List<Transform> buttons = new List<Transform>();
-    private Button defaultBtn;
-    private int index;
-
-    private bool isSelect = false;
-
-    private void Start()
+    public class MainControl : MonoBehaviour
     {
-        Init();
-    }
+        [SerializeField] private Transform buttonPar;
+        private List<Transform> buttons = new List<Transform>();
+        private Button defaultBtn;
+        private int index;
 
-    // Update is called once per frame
-    void Update()
-    {
-        SelectMenu();
-    }
+        private bool isSelect = false;
 
-    IEnumerator ButtonSelect()
-    {
-        while (true)
+        private void Start()
         {
-            JoysitckUp();
-            JoysitckDown();
-
-            yield return new WaitForSeconds(0.2f);
-
+            Init();
         }
 
-
-    }
-
-
-    void Init()
-    {
-        for (int i = 0; i < buttonPar.childCount; i++)
+        // Update is called once per frame
+        void Update()
         {
-            buttons.Add(buttonPar.GetChild(i));
+            SelectMenu();
         }
 
-        index = 0;
-
-        defaultBtn = buttons[0].GetComponent<Button>();
-
-        EventSystem.current.SetSelectedGameObject(defaultBtn.gameObject);
-
-        StartCoroutine(ButtonSelect());
-    }
-
-    void JoysitckUp()
-    {
-        if (InputActManager.Instance.JoystickButtonUp())
+        IEnumerator ButtonSelect()
         {
-            isSelect = true;
-
-            Debug.Log("down");
-
-            index--;
-
-            Debug.Log(index);
-
-            if (index < 0)
+            while (true)
             {
-                index = buttons.Count - 1;
+                JoysitckUp();
+                JoysitckDown();
 
-                Debug.Log("down : " + index);
-
-                EventSystem.current.SetSelectedGameObject(buttons[index].gameObject);
-            }
-            else
-            {
-
-                EventSystem.current.SetSelectedGameObject(buttons[index].gameObject);
+                yield return new WaitForSeconds(0.15f);
             }
         }
-    }
 
-    void JoysitckDown()
-    {
-        if (InputActManager.Instance.JoystickButtonDown())
+
+        void Init()
         {
-            isSelect = true;
-
-            Debug.Log("up");
-
-            index++;
-
-            Debug.Log(index);
-            if (index >= buttons.Count)
+            for (int i = 0; i < buttonPar.childCount; i++)
             {
-                index = 0;
-                Debug.Log("as" + index);
-                EventSystem.current.SetSelectedGameObject(buttons[index].gameObject);
-            }
-            else
-            {
-
-                EventSystem.current.SetSelectedGameObject(buttons[index].gameObject);
+                buttons.Add(buttonPar.GetChild(i));
             }
 
+            index = 0;
 
+            defaultBtn = buttons[0].GetComponent<Button>();
+
+            EventSystem.current.SetSelectedGameObject(defaultBtn.gameObject);
+
+            StartCoroutine(ButtonSelect());
         }
-    }
 
-    void SelectMenu()
-    {
-        if (InputActManager.Instance.IsStorage())
+        void JoysitckUp()
         {
-            if (buttons[index].GetComponent<Button>() != null)
+            if (InputActManager.Instance.JoystickButtonUp())
             {
-                buttons[index].GetComponent<Button>().onClick.Invoke();
+                isSelect = true;
+
+                Debug.Log("11");
+
+                index--;
+
+                if (index < 0)
+                {
+                    index = buttons.Count - 1;
+
+                    EventSystem.current.SetSelectedGameObject(buttons[index].gameObject);
+                }
+                else
+                {
+
+                    EventSystem.current.SetSelectedGameObject(buttons[index].gameObject);
+                }
             }
         }
-    }
 
-    public void NewGame()
-    {
-        SceneFade.instance.FadeOut("PlayScene");
-    }
-    public void Credit()
-    {
-        Debug.Log("农饭调");
-    }
-    public void Quit()
-    {
+        void JoysitckDown()
+        {
+            if (InputActManager.Instance.JoystickButtonDown())
+            {
+                Debug.Log("22");
+
+                isSelect = true;
+
+                index++;
+
+                if (index >= buttons.Count)
+                {
+                    index = 0;
+
+                    EventSystem.current.SetSelectedGameObject(buttons[index].gameObject);
+                }
+                else
+                {
+
+                    EventSystem.current.SetSelectedGameObject(buttons[index].gameObject);
+                }
+
+
+            }
+        }
+
+        void SelectMenu()
+        {
+            if (InputActManager.Instance.IsStorage())
+            {
+                if (buttons[index].GetComponent<Button>() != null)
+                {
+                    buttons[index].GetComponent<Button>().onClick.Invoke();
+                }
+            }
+        }
+
+        public void Tutorial()
+        {
+            Debug.Log("譬配府倔");
+        }
+        public void NewGame()
+        {
+            SceneFade.instance.FadeOut("PlayScene");
+        }
+        public void Credit()
+        {
+            Debug.Log("农饭调");
+        }
+        public void Quit()
+        {
 #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
+            UnityEditor.EditorApplication.isPlaying = false;
 #else
             Application.Quit();
 #endif
+        }
     }
+
 }

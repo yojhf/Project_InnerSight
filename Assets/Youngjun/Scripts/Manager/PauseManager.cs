@@ -38,7 +38,7 @@ namespace Noah
             pauseUI.SetActive(false);
             ResetManager.Instance.ResetPause();
 
-            Debug.Log("메인메뉴");
+            SceneFade.instance.FadeOut("MainMenu");
         }
 
 

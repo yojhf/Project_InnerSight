@@ -32,8 +32,6 @@ namespace Noah
 
             item = transform.GetChild(0);
             AddListItems();
-
-            //StartCoroutine(Test());
         }
 
         void AddListItems()
@@ -50,10 +48,6 @@ namespace Noah
             {
                 isStroage = false;
 
-                playerSetting.PlayerInteraction.interactables.Clear();
-
-                Destroy(colItem);
-
                 foreach (var item in items)
                 {
                     if (item.GetComponent<MeshRenderer>().enabled == true)
@@ -66,7 +60,24 @@ namespace Noah
                         break;
                     }
                 }
+
+                playerSetting.PlayerInteraction.interactables.Clear();
+
+                Destroy(colItem);
             }
+        }
+
+        bool IsFull()
+        {
+            foreach (var item in items)
+            {
+                if (item.GetComponent<MeshRenderer>().enabled == false)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public void RemoveObject()
@@ -104,27 +115,13 @@ namespace Noah
             
         }
 
-
-        // Test
-        IEnumerator Test()
-        { 
-            while (true)
-            {
-                RemoveObject();
-
-                yield return new WaitForSeconds(1f);
-            }
-
-
-        }
-
         private void OnCollisionStay(Collision collision)
         {
             Item item = collision.transform.GetComponent<Item>();
 
             if (item != null)
             {
-                if (item.ItemId == keyId)
+                if (item.ItemId == keyId && !IsFull())
                 {
                     isStroage = true;
 
