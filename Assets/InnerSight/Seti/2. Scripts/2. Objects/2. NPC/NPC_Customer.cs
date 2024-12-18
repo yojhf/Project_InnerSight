@@ -46,9 +46,9 @@ namespace InnerSight_Seti
         private int whichDir;           // 순회 방향: -1: 반시계, 0: 바로, 1: 시계
         private bool isThisItem = false;
         private const float checkDelay = 2f;
-        private readonly List<ShelfStorage> shopItems = new();
         private Transform centerOfShop;
         private ShelfStorage thisItem;
+        private List<ShelfStorage> shopItems = new();
 
         // 마당 순회 처리
         [SerializeField]
@@ -197,8 +197,14 @@ namespace InnerSight_Seti
         void BrowsingShop()
         {
             if (currentCount < shopItems.Count)
+            {
                 currentCount++;
-            else SetNextWant();
+            }
+            else
+            {
+                SetNextWant();
+                currentCount = 0;
+            }
 
             switch (whichDir)
             {
@@ -310,9 +316,11 @@ namespace InnerSight_Seti
         // 현재 원하는 아이템 세팅
         private void SetNextWant()
         {
-            NPC_currentWant = NPC_wants[currentOrder];
+            Debug.Log(NPC_wants.Count);
             NPC_wants.Remove(NPC_wants[currentOrder]);
+            Debug.Log(NPC_wants.Count);
             currentOrder = 0;
+            NPC_currentWant = NPC_wants[currentOrder];
         }
 
         // 아이템 선반 앞 위치 계산
