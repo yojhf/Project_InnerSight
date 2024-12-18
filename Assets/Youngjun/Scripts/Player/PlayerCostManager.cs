@@ -6,7 +6,7 @@ namespace Noah
     public class PlayerCostManager : Singleton<PlayerCostManager>
     {
         [SerializeField] private int addDayCost;
-        private int addShopCost = 50;
+        private int addShopCost = 20;
 
         private int dayTax = 10;
         private int shopTax = 200;

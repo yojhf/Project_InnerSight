@@ -113,7 +113,7 @@ namespace Noah
 
         public void Tutorial()
         {
-            Debug.Log("Æ©Åä¸®¾ó");
+            SceneFade.instance.FadeOut("TutorialScene");
         }
         public void NewGame()
         {
