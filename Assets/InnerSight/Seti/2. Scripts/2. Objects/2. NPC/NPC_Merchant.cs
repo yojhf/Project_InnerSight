@@ -16,7 +16,6 @@ namespace InnerSight_Seti
         // 필드
         #region Variables
         // 거래 조건
-        protected bool OnTrade = false;
         protected bool CanTrade = false;
         protected const int standardDis = 15;
         [SerializeField] protected PlayerSetting player;
@@ -59,7 +58,7 @@ namespace InnerSight_Seti
         public override void Interaction()
         {
             if (!CanTrade) return;
-            shopManager.SwitchUI(OnTrade = !OnTrade);
+            shopManager.SwitchUI(shopManager.OnTrade = !shopManager.OnTrade);
             shopManager.SetPlayer(player);
         }
 

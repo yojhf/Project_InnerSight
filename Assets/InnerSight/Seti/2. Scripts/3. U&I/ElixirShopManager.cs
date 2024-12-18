@@ -30,6 +30,9 @@ namespace InnerSight_Seti
             // 카운트
             countUI = shopUI.transform.GetChild(2).gameObject;
             countText = countUI.transform.GetChild(0).GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
+
+            // 컨펌
+            confirmUI = shopUI.transform.GetChild(3).gameObject;
         }
         #endregion
 
