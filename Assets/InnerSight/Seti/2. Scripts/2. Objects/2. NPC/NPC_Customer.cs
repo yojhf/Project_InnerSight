@@ -240,7 +240,7 @@ namespace InnerSight_Seti
             }
             catch
             {
-                AIBehaviour(NPC_Behaviour.OUTSIDE);
+                AIBehaviour(NPC_Behaviour.EXITING);
             }
         }
 
