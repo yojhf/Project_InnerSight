@@ -13,8 +13,8 @@ namespace InnerSight_Seti
         #region Variables
         // 일반 필드
         private const int identifier = 4000;    // 엘릭서만 읽는다
+        public List<int> elixirsPrice = new();  // 엘릭서의 원래 가격
         private List<int> elixirsIndex = new(); // 엘릭서의 인덱스
-        private List<int> elixirsPrice = new(); // 엘릭서의 원래 가격
         private List<TextMeshProUGUI> elixirsText = new();
 
         // 아이템 데이터베이스

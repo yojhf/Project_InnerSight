@@ -32,7 +32,8 @@ namespace InnerSight_Seti
         public Dictionary<ItemKey, ItemValueShop> shopDict = new();
 
         // 임시 - 플레이어와의 거리 측정
-        public float distance;
+        [SerializeField]
+        protected float distance;
         #endregion
 
         // 라이프 사이클
@@ -48,7 +49,6 @@ namespace InnerSight_Seti
             else
             {
                 CanTrade = false;
-                player.Merchant = null;
             }
             shopManager.DistanceCheck(CanTrade);
         }

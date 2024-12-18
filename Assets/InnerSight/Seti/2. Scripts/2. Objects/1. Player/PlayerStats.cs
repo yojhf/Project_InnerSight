@@ -6,6 +6,8 @@ namespace InnerSight_Seti
     {
         // 속성
         #region Properties
+        [SerializeField]
+        private int initialGold = 1000;
         public int CurrentGold { get; private set; }    // 현재 소지금
         public int RevenueGold { get; private set; }    // 당일 매상
         public StatsUI StatsUI { get; private set; }    // 소지금 및 매상 표시
@@ -16,7 +18,7 @@ namespace InnerSight_Seti
         protected override void Awake()
         {
             base.Awake();
-            CurrentGold = 1000;
+            CurrentGold = initialGold;
             RevenueGold = 0;
         }
         #endregion

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace InnerSight_Seti
 {
     /// <summary>
@@ -15,6 +17,9 @@ namespace InnerSight_Seti
     /// 구매 완료
     public class NPC_Merchant_Shelf : NPC_Merchant
     {
+        [SerializeField]
+        private int costFactor = 40;
+
         // 라이프 사이클
         #region Life Cycle
         private void Start()
@@ -39,14 +44,14 @@ namespace InnerSight_Seti
                         isFirstElixir = true;
                         firstElixir = i;
                     }
-                    if (i - firstElixir < 2) continue;
+                    if (i - firstElixir < 2) continue; 
                     int thirdElixir = firstElixir + 2;
 
                     // 딕셔너리에 저장
                     ItemValueShop valueShop = new()
                     {
                         itemIndex = i - thirdElixir,
-                        itemCost = itemDatabase.itemList[i].itemPrice * 80
+                        itemCost = Cost_Random.Instance.elixirsPrice[i - thirdElixir] * costFactor
                     };
                     shopDict.Add(itemDatabase.itemList[i], valueShop);
                 }
