@@ -21,7 +21,7 @@ public class MixObject : MonoBehaviour
 
     private bool isCanMix = false;
 
-    ItemKey itemKey;
+    //ItemKey itemKey;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -46,7 +46,6 @@ public class MixObject : MonoBehaviour
                 Instantiate(itemKey.GetPrefab(), spwanPos.position, Quaternion.identity);
                 Instantiate(itemKey.GetPrefab(), spwanPos2.position, Quaternion.identity);
 
-
                 Codex_Recipe_Manager.Instance.IdentifyRecipe(itemKey);
             }
             else
@@ -55,6 +54,11 @@ public class MixObject : MonoBehaviour
             }
 
         }
+    }
+
+    void FindItemKey()
+    { 
+
     }
 
     void FailMix()
@@ -90,7 +94,7 @@ public class MixObject : MonoBehaviour
 
     bool RandomCheck(int index)
     {
-        return index > 2000 && index < 4000;
+        return index > 2000 && index < 6000;
     }
 
     private void OnCollisionEnter(Collision collision)
