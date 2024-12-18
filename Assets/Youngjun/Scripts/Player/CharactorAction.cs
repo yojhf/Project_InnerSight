@@ -18,16 +18,12 @@ namespace Noah
 
         }
 
-        InputActManager inputActManager;
         InventoryManager inventoryManager;
-
-
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
             playerSetting = GetComponent<PlayerSetting>();
-            inputActManager = GetComponent<InputActManager>();
             inventoryManager = transform.GetChild(0).GetChild(0).GetComponent<InventoryManager>();
         }
 
@@ -59,7 +55,7 @@ namespace Noah
 
         void OnStorage()
         {
-            if (inputActManager.IsStorage() && inputActManager.IsRightSelect())
+            if (InputActManager.Instance.IsStorage() && InputActManager.Instance.IsRightSelect())
             {
                 playerSetting.PlayerInteraction.ThisIsMine();
             }
@@ -67,7 +63,7 @@ namespace Noah
 
         void RightXInputDown()
         {
-            if (inputActManager.IsStorage())
+            if (InputActManager.Instance.IsStorage())
             {
                 if (playerSetting.Merchant != null)
                 {
@@ -79,7 +75,7 @@ namespace Noah
 
         void LeftAct()
         {
-            if (inputActManager.IsLeftAct())
+            if (InputActManager.Instance.IsLeftAct())
             {
                 
             }
@@ -91,7 +87,7 @@ namespace Noah
 
         void LeftSelect()
         {
-            if (inputActManager.IsLeftSelect())
+            if (InputActManager.Instance.IsLeftSelect())
             {
 
             }
@@ -100,14 +96,14 @@ namespace Noah
 
         void RightAct()
         {
-            if (inputActManager.IsRightAct())
+            if (InputActManager.Instance.IsRightAct())
             {
 
             }
         }
         void RightSelect()
         {
-            if (inputActManager.IsRightSelect())
+            if (InputActManager.Instance.IsRightSelect())
             {
 
                 
@@ -116,12 +112,12 @@ namespace Noah
 
         void LeftStorageAct()
         {
-            if (inputActManager.IsLeftStorage())
+            if (InputActManager.Instance.IsLeftStorage())
             {
                 // 오브젝트 필드로 꺼냄
                 GetBackStoeage();
             }
-            if (inputActManager.IsLeftStorageRl())
+            if (InputActManager.Instance.IsLeftStorageRl())
             {
                 // 인벤토리에서 오브젝트 꺼낸 후 데이터 리셋
                 inventoryManager.ResetData();
@@ -132,7 +128,7 @@ namespace Noah
         // 왼쪽 Select ButtonDown
         void LeftSelectInputDown()
         {
-            if (inputActManager.IsLeftSelectPress())
+            if (InputActManager.Instance.IsLeftSelectPress())
             {
                 IsGrap = true;
             }
@@ -141,7 +137,7 @@ namespace Noah
         // 오른쪽 Select ButtonDown
         void RightSelectInputDown()
         {
-            if (inputActManager.IsRightSelectPress())
+            if (InputActManager.Instance.IsRightSelectPress())
             {
                 IsGrap = true;
             }
@@ -150,7 +146,7 @@ namespace Noah
         // 왼쪽 Select ButtonUp
         void LeftSelectInputUp()
         {
-            if (inputActManager.IsLeftSelectReleased())
+            if (InputActManager.Instance.IsLeftSelectReleased())
             {
                 IsGrap = false;
             }
@@ -159,7 +155,7 @@ namespace Noah
         // 오른쪽 Select ButtonUp
         void RightSelectInputUp()
         {
-            if (inputActManager.IsRightSelectReleased())
+            if (InputActManager.Instance.IsRightSelectReleased())
             {
                 IsGrap = false;
             }
@@ -178,7 +174,7 @@ namespace Noah
         // 왼쪽 Y 버튼
         void LeftYButtonInputDown()
         {
-            if (inputActManager.IsLeftYButtonDown())
+            if (InputActManager.Instance.IsLeftYButtonDown())
             {
                 if (playerSetting.Merchant is NPC_Merchant_Elixir)
                 {
@@ -195,7 +191,7 @@ namespace Noah
         }
         void RightBButtonInputDown()
         {
-            if (inputActManager.IsRightBButtonDown())
+            if (InputActManager.Instance.IsRightBButtonDown())
             {
                 if (playerSetting.Merchant is NPC_Merchant_Elixir)
                 {

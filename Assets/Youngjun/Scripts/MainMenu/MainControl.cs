@@ -30,6 +30,8 @@ namespace Noah
         {
             while (true)
             {
+                Debug.Log("aaa");
+
                 JoysitckUp();
                 JoysitckDown();
 
@@ -56,6 +58,8 @@ namespace Noah
 
         void JoysitckUp()
         {
+            Debug.Log(InputActManager.Instance.JoystickButtonUp());
+
             if (InputActManager.Instance.JoystickButtonUp())
             {
                 isSelect = true;
@@ -80,6 +84,8 @@ namespace Noah
 
         void JoysitckDown()
         {
+
+            Debug.Log(InputActManager.Instance.JoystickButtonDown());
             if (InputActManager.Instance.JoystickButtonDown())
             {
                 Debug.Log("22");
@@ -125,6 +131,7 @@ namespace Noah
         }
         public void Credit()
         {
+            SceneFade.instance.FadeOut("MainMenu");
             Debug.Log("Å©·¹µ÷");
         }
         public void Quit()

@@ -32,6 +32,8 @@ public class InputActManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        DontDestroyOnLoad(gameObject);
+
 
     }
     public bool IsLeftAct()

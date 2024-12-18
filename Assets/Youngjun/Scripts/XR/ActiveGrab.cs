@@ -10,13 +10,6 @@ public class ActiveGrab : MonoBehaviour
     public XRRayInteractor leftGrab;
     public XRRayInteractor rightGrab;
 
-    InputActManager inputActManager;
-
-
-    private void Start()
-    {
-        inputActManager = GetComponent<InputActManager>();
-    }
     // Update is called once per frame
     void Update()
     {
@@ -29,7 +22,7 @@ public class ActiveGrab : MonoBehaviour
         bool isRightHover = rightGrab.TryGetHitInfo(out Vector3 rightPos, out Vector3 rightNomal, out int rightNum, out bool rightValid);
 
 
-        if (inputActManager.IsLeftAct() /*&& !isLeftHover*/)
+        if (InputActManager.Instance.IsLeftAct() /*&& !isLeftHover*/)
         {
             leftRay.SetActive(true);
         }
@@ -37,7 +30,7 @@ public class ActiveGrab : MonoBehaviour
         {
             leftRay.SetActive(false);
         }
-        if (inputActManager.IsRightAct()/* && !isRightHover*/)
+        if (InputActManager.Instance.IsRightAct()/* && !isRightHover*/)
         {
             rightRay.SetActive(true);
         }
