@@ -316,9 +316,7 @@ namespace InnerSight_Seti
         // 현재 원하는 아이템 세팅
         private void SetNextWant()
         {
-            Debug.Log(NPC_wants.Count);
             NPC_wants.Remove(NPC_wants[currentOrder]);
-            Debug.Log(NPC_wants.Count);
             currentOrder = 0;
             NPC_currentWant = NPC_wants[currentOrder];
         }
