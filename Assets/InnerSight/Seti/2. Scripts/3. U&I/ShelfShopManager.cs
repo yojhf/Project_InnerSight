@@ -7,6 +7,17 @@ namespace InnerSight_Seti
     /// </summary>
     public class ShelfShopManager : ShopManager
     {
+        // 라이프 사이클
+        #region Life Cycle
+        protected override void Awake()
+        {
+            base.Awake();
+
+            // 컨펌
+            confirmUI = shopUI.transform.GetChild(2).gameObject;
+        }
+        #endregion
+
         // 메서드
         #region Methods
         public void DefineTrade()

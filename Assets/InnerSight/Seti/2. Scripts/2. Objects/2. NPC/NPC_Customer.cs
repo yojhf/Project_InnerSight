@@ -40,6 +40,7 @@ namespace InnerSight_Seti
         private Vector3 targetPoint;    // 현재 이동 타겟 지점
 
         // 쇼핑
+        private int currentCount;       // CheckID 횟수
         private int currentOrder;       // 쇼핑 우선순위
         private int currentIndex;       // 아이템 선반 Index
         private int whichDir;           // 순회 방향: -1: 반시계, 0: 바로, 1: 시계
@@ -49,7 +50,7 @@ namespace InnerSight_Seti
         private Transform centerOfShop;
         private ShelfStorage thisItem;
 
-        // 순회 처리
+        // 마당 순회 처리
         [SerializeField]
         private int showingCount = 0;
         [SerializeField]
@@ -195,6 +196,10 @@ namespace InnerSight_Seti
         // 상점 둘러보기
         void BrowsingShop()
         {
+            if (currentCount < shopItems.Count)
+                currentCount++;
+            else SetNextWant();
+
             switch (whichDir)
             {
                 case 0:
@@ -282,6 +287,7 @@ namespace InnerSight_Seti
             whichDir = Random.Range(-1, 2);
             currentOrder = Random.Range(0, 2);
             currentIndex = 0;
+            currentCount = 0;
             isFirst = true;
             SetNextWant();
             Move(true);

@@ -33,7 +33,7 @@ namespace InnerSight_Seti
 
         // 속성
         #region
-        public bool OnTrade { get; protected set; }
+        public bool OnTrade { get; set; }
         #endregion
 
         // 라이프 사이클
@@ -49,9 +49,6 @@ namespace InnerSight_Seti
             // 버튼
             shopSlots = shopUI.transform.GetChild(1).GetComponentsInChildren<Button>();
             shopCosts = shopUI.transform.GetChild(1).GetComponentsInChildren<TextMeshProUGUI>();
-
-            // 컨펌
-            confirmUI = shopUI.transform.GetChild(2).gameObject;
 
             // 완료
             completeUI = transform.GetChild(0).GetChild(1).gameObject;
@@ -97,6 +94,7 @@ namespace InnerSight_Seti
         {
             confirmUI.SetActive(false);
             shopUI.SetActive(false);
+            OnTrade = false;
         }
         #endregion
 
