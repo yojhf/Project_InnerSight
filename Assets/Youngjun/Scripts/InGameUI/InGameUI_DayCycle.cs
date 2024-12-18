@@ -48,8 +48,6 @@ namespace Noah
 
             curGold.gameObject.SetActive(true);
 
-            Debug.Log(m_CurGold);
-
             StartCoroutine(GoldCount(m_CurGold, curGold, "MyGold : "));
 
             yield return new WaitForSecondsRealtime((m_CurGold / speed) + 1f);

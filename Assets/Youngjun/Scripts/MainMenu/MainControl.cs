@@ -30,8 +30,6 @@ namespace Noah
         {
             while (true)
             {
-                Debug.Log("aaa");
-
                 JoysitckUp();
                 JoysitckDown();
 
@@ -58,13 +56,9 @@ namespace Noah
 
         void JoysitckUp()
         {
-            Debug.Log(InputActManager.Instance.JoystickButtonUp());
-
             if (InputActManager.Instance.JoystickButtonUp())
             {
                 isSelect = true;
-
-                Debug.Log("11");
 
                 index--;
 
@@ -84,12 +78,8 @@ namespace Noah
 
         void JoysitckDown()
         {
-
-            Debug.Log(InputActManager.Instance.JoystickButtonDown());
             if (InputActManager.Instance.JoystickButtonDown())
             {
-                Debug.Log("22");
-
                 isSelect = true;
 
                 index++;
