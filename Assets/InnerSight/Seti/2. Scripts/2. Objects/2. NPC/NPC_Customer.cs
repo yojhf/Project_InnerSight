@@ -164,7 +164,7 @@ namespace InnerSight_Seti
         // 상태 전환
         void AIStateChange()
         {
-            if (agent.remainingDistance < 0.5f)
+            if (agent.remainingDistance < 1f)
             {
                 switch (npcState)
                 {
@@ -316,7 +316,10 @@ namespace InnerSight_Seti
         // 현재 원하는 아이템 세팅
         private void SetNextWant()
         {
-            NPC_wants.Remove(NPC_wants[currentOrder]);
+            if (NPC_wants.Count > 1)
+            {
+                NPC_wants.Remove(NPC_wants[currentOrder]);
+            }
             currentOrder = 0;
             NPC_currentWant = NPC_wants[currentOrder];
         }
