@@ -3,11 +3,15 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit.Locomotion.Turning;
 using InnerSight_Seti;
+using InnerSight_Kys;
 
 namespace MyVRSample
 {
     public class InGameUIManager : MonoBehaviour
     {
+        [SerializeField] private GameObject left_rayObject;
+        [SerializeField] private GameObject right_rayObject;
+
         public static InGameUIManager instance;
 
         //public GameObject gameMenu;
@@ -49,6 +53,12 @@ namespace MyVRSample
             {
                 Toggle_Inven();
             }
+            if (InventoryManager.IsOpenInventory)
+            {
+                left_rayObject.SetActive(true);
+                right_rayObject.SetActive(true);
+            }
+
         }
 
         //void Toggle()
@@ -68,12 +78,19 @@ namespace MyVRSample
 
         void Toggle_Inven()
         {
+            AudioManager.Instance.Play("Throw");
+
             //inventory.SetActive(!inventory.activeSelf);
             InventoryManager.ShowItem(InventoryManager.IsOpenInventory = !InventoryManager.IsOpenInventory);
+
 
             // show set
             if (inventory.activeSelf)
             {
+
+                left_rayObject.SetActive(false);
+                right_rayObject.SetActive(false);
+
                 inventory.transform.position = head.position + new Vector3(head.forward.x + xOffset, yOffset, head.forward.z).normalized * distance;
 
                 inventory.transform.LookAt(new Vector3(head.position.x, inventory.transform.position.y, head.position.z));
@@ -101,6 +118,8 @@ namespace MyVRSample
 
         public void QuitBtn(GameObject ui)
         {
+            AudioManager.Instance.Play("Throw");
+
             ui.SetActive(false);
         }
     }

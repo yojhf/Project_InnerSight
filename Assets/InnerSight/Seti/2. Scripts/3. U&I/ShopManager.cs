@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using InnerSight_Kys;
 
 namespace InnerSight_Seti
 {
@@ -82,11 +83,13 @@ namespace InnerSight_Seti
 
         public void Confirm_Yes()
         {
+            AudioManager.Instance.Play("BtnClick");
             Confirm();
             confirmUI.SetActive(false);
         }
         public void Confirm_No()
         {
+            AudioManager.Instance.Play("BtnClick");
             confirmUI.SetActive(false);
         }
 

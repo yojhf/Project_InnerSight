@@ -1,11 +1,16 @@
+using InnerSight_Kys;
 using Noah;
 using UnityEngine;
-using UnityEngine.SceneManagement; // 씬 전환에 필요
 
 public class TutorialExit : MonoBehaviour
 {
     [SerializeField]
     private string targetSceneName = "PlayScene"; // 전환할 씬 이름
+
+    private void Awake()
+    {
+        AudioManager.Instance.PlayBgm("MapBgm");
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,6 +19,8 @@ public class TutorialExit : MonoBehaviour
     }
     private void ChangeScene()
     {
+
+        AudioManager.Instance.Play("GameStart");
         SceneFade.instance.FadeOut(targetSceneName);
     }
 }

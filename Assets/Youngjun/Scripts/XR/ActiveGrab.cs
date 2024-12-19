@@ -1,9 +1,12 @@
+using InnerSight_Seti;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 public class ActiveGrab : MonoBehaviour
 {
+    public InventoryManager inventoryManager;
+
     public GameObject leftRay;
     public GameObject rightRay;
 
@@ -28,7 +31,12 @@ public class ActiveGrab : MonoBehaviour
         }
         else
         {
-            leftRay.SetActive(false);
+            if (!inventoryManager.IsOpenInventory)
+            {
+                leftRay.SetActive(false);
+            }
+
+
         }
         if (InputActManager.Instance.IsRightAct()/* && !isRightHover*/)
         {
@@ -36,7 +44,10 @@ public class ActiveGrab : MonoBehaviour
         }
         else
         {
-            rightRay.SetActive(false);
+            if (!inventoryManager.IsOpenInventory)
+            {
+                rightRay.SetActive(false);
+            }
         }
 
     }

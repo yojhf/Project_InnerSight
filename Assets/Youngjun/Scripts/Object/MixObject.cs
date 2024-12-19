@@ -1,3 +1,4 @@
+using InnerSight_Kys;
 using InnerSight_Seti;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +46,8 @@ public class MixObject : MonoBehaviour
 
             if (itemKey != null)
             {
+                AudioManager.Instance.Play("ElixerSucceed");
+
                 GameObject tmp_Effect = Instantiate(successEffect, effectPos.position, Quaternion.identity);
 
                 ResetMix();
@@ -70,6 +73,8 @@ public class MixObject : MonoBehaviour
 
     void FailMix()
     {
+        AudioManager.Instance.Play("Fail");
+
         var failItem = itemDataBase.itemList.FirstOrDefault(item => item.itemID == failItemKey);
 
         GameObject tmp_Effect = Instantiate(failEffect, effectPos.position, Quaternion.identity);

@@ -1,3 +1,4 @@
+using InnerSight_Kys;
 using InnerSight_Seti;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
@@ -17,6 +18,7 @@ public class PlayerSetting : MonoBehaviour
     public Vector3 StartPos => startPos;    
 
     public XRRayInteractor rayInteractor;
+    public XRRayInteractor right_rayInteractor;
 
     public NPC_Merchant Merchant { get; set; }
 
@@ -26,6 +28,8 @@ public class PlayerSetting : MonoBehaviour
         playerUse = GetComponent<PlayerUse>();
         playerTrade = GetComponent<PlayerTrade>();
         playerInteraction = GetComponent<PlayerInteraction>();
+
+        AudioManager.Instance.PlayBgm("MapBgm");
     }
 
     private void Start()
