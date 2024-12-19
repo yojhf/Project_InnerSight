@@ -18,8 +18,8 @@ public class MixObject : MonoBehaviour
 
 
     [SerializeField] private int mixCount = 2;
-    private Transform spwanPos;
-    private Transform spwanPos2;
+    [SerializeField] private Transform spwanPos;
+    [SerializeField] private Transform spwanPos2;
     private Transform effectPos;
     public List<Item> objects = new List<Item>();
 
@@ -29,9 +29,7 @@ public class MixObject : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        spwanPos = transform.GetChild(0);
-        spwanPos2 = transform.GetChild(1);
-        effectPos = transform.GetChild(2);
+        effectPos = transform.GetChild(0);
     }
 
 
@@ -123,7 +121,7 @@ public class MixObject : MonoBehaviour
 
             objects.Add(obj);
 
-            collision.gameObject.SetActive(false);
+            //collision.gameObject.SetActive(false);
 
             if (objects.Count >= mixCount)
             {
