@@ -1,5 +1,6 @@
-using InnerSight_Kys;
 using System.Collections.Generic;
+using UnityEngine;
+using InnerSight_Kys;
 
 namespace InnerSight_Seti
 {
@@ -8,6 +9,12 @@ namespace InnerSight_Seti
     /// </summary>
     public class ShelfShopManager : ShopManager
     {
+        [SerializeField]
+        private GameObject AutoLoot;
+        [SerializeField]
+        private int cost_AutoLoot = 5000;
+        private int thisIndex;
+
         // 라이프 사이클
         #region Life Cycle
         protected override void Awake()
@@ -30,20 +37,33 @@ namespace InnerSight_Seti
         public override void Confirm()
         {
             // 가격 결정
-            int howMuch = selectItem.Value.itemCost;
+            int howMuch;
+            if (thisIndex < shopDict.Count)
+                howMuch = selectItem.Value.itemCost;
+            else howMuch = cost_AutoLoot;
 
             // 정산
             if (PlayerStats.Instance.SpendGold(howMuch))
             {
-                AudioManager.Instance.Play("ElementSucceed"); 
+                AudioManager.Instance.Play("ElementSucceed");
+                if (thisIndex < shopDict.Count)
+                {
+                    // 선반 활성화
+                    Item thisShelf = selectItem.Key.itemPrefab.GetComponent<Item>();
+                    Noah.ShelfManager.Instance.ActiveShelf(thisShelf);
 
-                // 선반 활성화
-                Item thisShelf = selectItem.Key.itemPrefab.GetComponent<Item>();
-                Noah.ShelfManager.Instance.ActiveShelf(thisShelf);
-
-                shopSlots[selectItem.Value.itemIndex].interactable = false;
-                tradeCor = TradeComplete("Purchase complete");
-                SwitchUI(false);
+                    shopSlots[selectItem.Value.itemIndex].interactable = false;
+                    tradeCor = TradeComplete("Purchase complete");
+                    SwitchUI(false);
+                }
+                else
+                {
+                    shopSlots[shopDict.Count].interactable = false;
+                    tradeCor = TradeComplete("Purchase complete");
+                    PlayerStats.Instance.OnAuto();
+                    AutoLoot.SetActive(true);
+                    SwitchUI(false);
+                }
             }
             else
             {
@@ -51,6 +71,7 @@ namespace InnerSight_Seti
             }
 
             StartCoroutine(tradeCor);
+            selectItem = default;
         }
         #endregion
 
@@ -60,6 +81,13 @@ namespace InnerSight_Seti
         protected override void SelectSlot(KeyValuePair<ItemKey, ItemValueShop> pair)
         {
             selectItem = pair;
+            thisIndex = pair.Value.itemIndex;
+            DefineTrade();
+        }
+
+        public void SelectSlot()
+        {
+            thisIndex = shopDict.Count;
             DefineTrade();
         }
 
@@ -72,6 +100,8 @@ namespace InnerSight_Seti
                 int index = pair.Value.itemIndex;
                 shopCosts[index].text = cost.ToString() + "G";
             }
+
+            shopCosts[shopDict.Count].text = cost_AutoLoot.ToString() + "G";
         }
         #endregion
     }

@@ -77,6 +77,13 @@ namespace InnerSight_Seti
 
         // 메서드
         #region Methods
+        // 첫 합성 100% 확인
+        public bool IsFirstReaction(Item item)
+        {
+            ItemKey elementOrElixir = CollectionUtility.FirstOrNull(CodexRecipe.Keys, key => key.itemID == item.ItemId);
+            return CodexRecipe[elementOrElixir].codexDefine;
+        }
+
         // 아이템을 획득할 때마다 확인
         public void IdentifyRecipe(ItemKey itemKey)
         {
@@ -97,6 +104,8 @@ namespace InnerSight_Seti
         // 초기화 - 아이템DB로부터 원소와 엘릭서를 읽어와 도감 딕셔너리에 저장
         private void Initialize()
         {
+            int count = 0;
+
             for (int i = 0; i < itemDatabase.itemList.Count; i++)
             {
                 if (itemDatabase.itemList[i].itemID - identifier > 0)
@@ -113,6 +122,13 @@ namespace InnerSight_Seti
                         codexDefine = false
                     };
                     CodexRecipe.Add(itemDatabase.itemList[i], valueRecipe);
+
+                    if (itemDatabase.itemList[i].itemID - 4000 > 0)
+                    {
+                        if (count < 2)
+                            IdentifyRecipe(itemDatabase.itemList[i]);
+                        count++;
+                    }
                 }
             }
         }

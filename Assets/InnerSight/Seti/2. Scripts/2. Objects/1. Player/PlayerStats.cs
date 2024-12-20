@@ -11,6 +11,7 @@ namespace InnerSight_Seti
         public int CurrentGold { get; private set; }    // 현재 소지금
         public int RevenueGold { get; private set; }    // 당일 매상
         public StatsUI StatsUI { get; private set; }    // 소지금 및 매상 표시
+        public bool OnAutoLoot { get; private set; }    // 일괄 줍기 활성화 여부
         #endregion
 
         // 라이프 사이클
@@ -51,6 +52,8 @@ namespace InnerSight_Seti
                 return true;
             }
         }
+
+        public void OnAuto() => OnAutoLoot = true;
         #endregion
     }
 }

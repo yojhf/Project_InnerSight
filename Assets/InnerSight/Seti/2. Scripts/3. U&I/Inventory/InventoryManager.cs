@@ -385,6 +385,153 @@ namespace InnerSight_Seti
         #endregion
 
 
+
+
+
+
+
+
+
+
+
+
+
+        #region Right_Hand
+        public void Right_XR_WhichSelect()
+        {
+            StartCoroutine(Right_WhichSelect());
+        }
+
+        void Right_XR_Detect()
+        {
+
+            if (player.right_rayInteractor == null || eventSystem == null)
+            {
+                Debug.LogWarning("XR_Right_RayInteractor 또는 EventSystem이 설정되지 않았습니다.");
+                return;
+            }
+
+            StartCoroutine(Detect(player.right_rayInteractor));
+        }
+
+        // 어떤 슬롯을 선택했는지 확인하는 메서드
+        private IEnumerator Right_WhichSelect()
+        {
+            if (!player.right_rayInteractor.gameObject.activeSelf)
+                yield break;
+
+            if (IsOnTrade) yield break;
+
+            // 아이템 선택 플래그를 true
+            //IsSelected = true;
+
+            StartCoroutine(FindInitialSlot(player.right_rayInteractor));
+            while (initialSlot == null) yield return null;
+            Right_XR_Detect();
+
+            if (initialSlot != null)
+            {
+                // 슬롯이 인벤토리에 있는 경우
+                if (Array.Exists(inventory.invenSlots, slot => slot == initialSlot))
+                {
+                    SelectedSlotIndex = Array.IndexOf(inventory.invenSlots, initialSlot);
+                    Right_SelectInven((int)SelectedSlotIndex);
+                }
+                SelectedSlotIndex = null;
+            }
+        }
+
+        // WhichSelect에서 인벤토리로 확인했을 때 호출되는 메서드
+        private void Right_SelectInven(int invenIndex)
+        {
+            // 선택한 아이템의 키를 읽을 변수
+            ItemKey selectedItemKey = null;
+
+            // 선택한 아이템과 일치하는 키를 찾고
+            selectedItemKey = CollectionUtility.FirstOrNull(inventory.invenDict.Keys, key => inventory.invenDict[key].itemIndex == invenIndex);
+            if (selectedItemKey != null)
+                // 허상 아이템 생성
+                Right_GenItemPhantom(selectedItemKey);
+        }
+
+        // 허상 아이템을 생성하는 메서드
+        private void Right_GenItemPhantom(ItemKey selectedItemKey)
+        {
+            // 해당 키가 존재할 때에만
+            if (selectedItemKey == null) return;
+            if (itemPhantom != null) return;
+
+            // 허상 아이템을 생성하여 드랍할 위치를 선정하는 반복기 호출
+            itemPhantom = Instantiate(selectedItemKey.itemPhantomPrefab, player.right_rayInteractor.transform.position, Quaternion.identity);
+            phantomCor = Right_PhantomUpdate(selectedItemKey);
+            StartCoroutine(phantomCor);
+        }
+
+        // 허상 아이템을 잡아두는 반복기
+        public IEnumerator Right_PhantomUpdate(ItemKey selectedItemKey)
+        {
+            while (IsSelected)
+            {
+                // cursorUtility의 이벤트 핸들러를 통해 Vector2 CursorPosition을 Vector3 변수에 입력
+                Vector3 mousePosition = player.right_rayInteractor.transform.position;
+
+                // 허상 아이템의 transform.position을 해당 좌표와 동기화
+                itemPhantom.transform.position = mousePosition;
+
+                // 본 반복기를 매 프레임 실행
+                yield return null;
+            }
+
+            // 다른 슬롯에 두었다면 종료
+            if (thisSlot != null)
+            {
+                if (initialSlot == thisSlot)
+                {
+                    SameSelect(thisSlot);
+                }
+                else
+                {
+                    int firstIndex = Array.IndexOf(inventory.invenSlots, initialSlot);
+                    int secondIndex = Array.IndexOf(inventory.invenSlots, thisSlot);
+                    ItemKey secondItem = CollectionUtility.FirstOrNull(inventory.invenDict.Keys,
+                                                                       key => inventory.invenDict[key].itemIndex == secondIndex);
+                    if (secondItem != null)
+                        inventory.SwapInvenSlots(firstIndex, secondIndex, secondItem);
+                }
+
+                Destroy(itemPhantom);
+                initialSlot = null;
+                phantomCor = null;
+                yield break;
+            }
+
+            // 플레이어가 적절한 위치에서 드래그를 해제하면 해당 아이템을 실체화
+            DropItem(ItemData(selectedItemKey));
+
+            // 변수 초기화
+            initialSlot = null;
+            phantomCor = null;
+
+            // 작동 중인 코루틴 정지
+            yield break;
+        }
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         #region VR
 
         // VR
