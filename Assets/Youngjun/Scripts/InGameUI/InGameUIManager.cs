@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit.Locomotion.Turning;
 using InnerSight_Seti;
 using InnerSight_Kys;
+using Noah;
 
 namespace MyVRSample
 {
@@ -49,7 +50,7 @@ namespace MyVRSample
             //{
             //    Toggle();
             //}
-            if (invenBtn.action.WasPressedThisFrame() && inventory != null)
+            if (invenBtn.action.WasPressedThisFrame() && inventory != null && !ResetManager.Instance.IsReset)
             {
                 Toggle_Inven();
             }

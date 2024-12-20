@@ -958,7 +958,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1562749458
+--- !u!1 &1862578608
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -966,8 +966,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1562749460}
-  - component: {fileID: 1562749459}
+  - component: {fileID: 1862578610}
+  - component: {fileID: 1862578609}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -975,31 +975,31 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1562749459
+--- !u!114 &1862578609
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1562749458}
+  m_GameObject: {fileID: 1862578608}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf094156010b9d449837609ba957dc75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 8002b66799e7428498a9b4c4beb013a2, type: 2}
-  audioMixerGroupBgm: {fileID: -8101169084953861992, guid: 8002b66799e7428498a9b4c4beb013a2, type: 2}
-  audioMixerGroupSfx: {fileID: 3089201788368978836, guid: 8002b66799e7428498a9b4c4beb013a2, type: 2}
+  audioMixer: {fileID: 24100000, guid: c24f22847f2fdbd438a5e53fe127ec9b, type: 2}
+  audioMixerGroupBgm: {fileID: -8101169084953861992, guid: c24f22847f2fdbd438a5e53fe127ec9b, type: 2}
+  audioMixerGroupSfx: {fileID: 3089201788368978836, guid: c24f22847f2fdbd438a5e53fe127ec9b, type: 2}
   sounds:
   - name: MapBgm
     clip: {fileID: 8300000, guid: 6a00d824d16022b4885424f8fc7a0174, type: 3}
-    volume: 0.7
+    volume: 1
     pitch: 0.1
     loop: 1
     source: {fileID: 0}
   - name: BtnClick
     clip: {fileID: 8300000, guid: d77141bd174394c4092421f88654a2fe, type: 3}
-    volume: 0.7
+    volume: 1
     pitch: 0.1
     loop: 0
     source: {fileID: 0}
@@ -1041,13 +1041,13 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Notification
     clip: {fileID: 8300000, guid: af9c2a92fa16e4b0cb9b375d462a9f3f, type: 3}
-    volume: 0.7
+    volume: 1
     pitch: 0
     loop: 0
     source: {fileID: 0}
   - name: PickUP
     clip: {fileID: 8300000, guid: 6e8772b49f34d402a90016ed445d8a2f, type: 3}
-    volume: 0.7
+    volume: 1
     pitch: 0
     loop: 0
     source: {fileID: 0}
@@ -1063,13 +1063,37 @@ MonoBehaviour:
     pitch: 0
     loop: 0
     source: {fileID: 0}
---- !u!4 &1562749460
+  - name: Drop
+    clip: {fileID: 8300000, guid: d8d04c6f80a1140db85ede568dab1f51, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Explosion
+    clip: {fileID: 8300000, guid: 1fd31868d68903d4f9e2c4a3b7ef98f3, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: beep_5
+    clip: {fileID: 8300000, guid: b30abfff4b00a4f8f9037473d8dbf895, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: coin_6
+    clip: {fileID: 8300000, guid: 23ab272e3ba25450ea31f566494ac12b, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+--- !u!4 &1862578610
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1562749458}
+  m_GameObject: {fileID: 1862578608}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -6820,5 +6844,5 @@ SceneRoots:
   - {fileID: 1890433219}
   - {fileID: 833930948}
   - {fileID: 8925441064279304559}
-  - {fileID: 1562749460}
   - {fileID: 737458954}
+  - {fileID: 1862578610}

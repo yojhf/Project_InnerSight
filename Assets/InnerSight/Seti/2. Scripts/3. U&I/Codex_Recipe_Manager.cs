@@ -78,10 +78,18 @@ namespace InnerSight_Seti
         // 메서드
         #region Methods
         // 첫 합성 100% 확인
-        public bool IsFirstReaction(int itemId)
+        public bool? IsFirstReaction(int itemId)
         {
-            ItemKey elementOrElixir = CollectionUtility.FirstOrNull(CodexRecipe.Keys, key => key.itemID == itemId);
-            return CodexRecipe[elementOrElixir].codexDefine;
+            if (itemId > 4000)
+            {
+                ItemKey elementOrElixir = CollectionUtility.FirstOrNull(CodexRecipe.Keys, key => key.itemID == itemId);
+                return CodexRecipe[elementOrElixir].codexDefine;
+            }
+            else
+            {
+                return null;
+            }
+
         }
 
         // 아이템을 획득할 때마다 확인

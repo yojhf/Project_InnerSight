@@ -67,6 +67,8 @@ namespace InnerSight_Seti
             }
             else
             {
+                AudioManager.Instance.Play("beep_5");
+
                 tradeCor = TradeComplete("You don't have enough money");
             }
 

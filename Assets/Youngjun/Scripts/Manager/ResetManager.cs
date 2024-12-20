@@ -35,18 +35,18 @@ namespace Noah
         }
         public void Pause()
         {
+            isReset = true;
             Time.timeScale = timeScale;
         }
 
         public void ResetPause()
         {
+            isReset = false;
             Time.timeScale = 1.0f;
         }
 
         IEnumerator StartReset()
         {
-            isReset = true;
-
             // 리셋 순서
             // => 시간 멈춤 -> 정산 UI 켬 -> 정산 UI 끔 -> fadeout -> fadein -> 시간 정상화 -> 가상시간 리셋 -> 플레이 
             Pause();
@@ -89,8 +89,6 @@ namespace Noah
             NPCGenManager.Instance.NPCGenTimeUp();
             // 금액 0원 이하 시 게임오버
             GameOverManager.Instance.CurrentGoldCheck();
-
-            isReset = false;
         }
     }
 }

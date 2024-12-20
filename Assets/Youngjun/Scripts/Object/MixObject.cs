@@ -68,7 +68,7 @@ public class MixObject : MonoBehaviour
 
     void FailMix()
     {
-        AudioManager.Instance.Play("Fail");
+        AudioManager.Instance.Play("Explosion");
 
         var failItem = itemDataBase.itemList.FirstOrDefault(item => item.itemID == failItemKey);
 
@@ -125,7 +125,7 @@ public class MixObject : MonoBehaviour
 
             if (objects.Count >= mixCount)
             {
-                if (Codex_Recipe_Manager.Instance.IsFirstReaction((objects[0].ItemId + objects[1].ItemId)) &&
+                if (!Codex_Recipe_Manager.Instance.IsFirstReaction((objects[0].ItemId + objects[1].ItemId)) != null &&
                     RandomCheck(objects[0].ItemId) && RandomCheck(objects[1].ItemId))
                 {
                     bool isConform = IsTrueWithProbability(probability);

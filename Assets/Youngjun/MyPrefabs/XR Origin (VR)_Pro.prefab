@@ -2970,7 +2970,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6134731457221355040
 Transform:
   m_ObjectHideFlags: 0
@@ -15378,7 +15378,7 @@ MonoBehaviour:
   sounds:
   - name: MapBgm
     clip: {fileID: 8300000, guid: 6a00d824d16022b4885424f8fc7a0174, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 0.1
     loop: 1
     source: {fileID: 0}
@@ -15450,6 +15450,24 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Drop
     clip: {fileID: 8300000, guid: d8d04c6f80a1140db85ede568dab1f51, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Explosion
+    clip: {fileID: 8300000, guid: 1fd31868d68903d4f9e2c4a3b7ef98f3, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: beep_5
+    clip: {fileID: 8300000, guid: b30abfff4b00a4f8f9037473d8dbf895, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: coin_6
+    clip: {fileID: 8300000, guid: 23ab272e3ba25450ea31f566494ac12b, type: 3}
     volume: 1
     pitch: 0
     loop: 0

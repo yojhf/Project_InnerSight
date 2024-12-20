@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using InnerSight_Kys;
 
 namespace InnerSight_Seti
 {
@@ -105,6 +106,7 @@ namespace InnerSight_Seti
             }
             else
             {
+                AudioManager.Instance.Play("beep_5");
                 tradeCor = TradeComplete("You don't have enough money");
             }
 

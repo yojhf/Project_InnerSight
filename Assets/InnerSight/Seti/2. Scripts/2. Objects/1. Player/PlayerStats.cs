@@ -1,3 +1,4 @@
+using InnerSight_Kys;
 using UnityEngine;
 
 namespace InnerSight_Seti
@@ -21,8 +22,6 @@ namespace InnerSight_Seti
             base.Awake();
             CurrentGold = initialGold;
             RevenueGold = 0;
-
-            OnAutoLoot = true;
         }
         #endregion
 
@@ -31,6 +30,7 @@ namespace InnerSight_Seti
         // 돈 버는 메서드
         public void EarnGold(int amount)
         {
+            AudioManager.Instance.Play("coin_6");
             RevenueGold += amount;
         }
 
