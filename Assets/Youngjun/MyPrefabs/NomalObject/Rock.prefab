@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4886305203959044344}
   - component: {fileID: 6165573897655383206}
   - component: {fileID: -1788624035338757955}
+  - component: {fileID: -5564881866766212705}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Untagged
@@ -275,3 +276,15 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+--- !u!75 &-5564881866766212705
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7192328921751711113}
+  m_Enabled: 1
+  m_Force: {x: 0, y: -10, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}

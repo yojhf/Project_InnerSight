@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4370573582928629957}
   - component: {fileID: -8946185677897893643}
   - component: {fileID: 5396178585516655060}
+  - component: {fileID: 8503365220788414339}
   m_Layer: 0
   m_Name: OldBook
   m_TagString: Untagged
@@ -275,3 +276,15 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+--- !u!75 &8503365220788414339
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4133627554772659559}
+  m_Enabled: 1
+  m_Force: {x: 0, y: -10, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}

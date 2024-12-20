@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8413586128057163326}
   - component: {fileID: 1900509511628870483}
   - component: {fileID: 8773954570037661428}
+  - component: {fileID: -5166889395451848665}
   m_Layer: 0
   m_Name: LeakBucket
   m_TagString: Untagged
@@ -222,6 +223,18 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+--- !u!75 &-5166889395451848665
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918413713887577757}
+  m_Enabled: 1
+  m_Force: {x: 0, y: -10, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!1 &5826669480943448237
 GameObject:
   m_ObjectHideFlags: 0

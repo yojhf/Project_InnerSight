@@ -74,6 +74,7 @@ namespace InnerSight_Seti
             }
         }
 
+
         // "저게 뭐지?" 상호작용 화살표 생성 메서드
         private void WhatIsThat(Collider other)
         {
@@ -112,11 +113,13 @@ namespace InnerSight_Seti
         #region Event Methods
         private void OnTriggerEnter(Collider other)
         {
+            //WhatIsThat(other);
             WhatIsThat(other);
         }
 
         private void OnTriggerExit(Collider other)
         {
+            //Sucks(other);
             Sucks(other);
         }
         #endregion

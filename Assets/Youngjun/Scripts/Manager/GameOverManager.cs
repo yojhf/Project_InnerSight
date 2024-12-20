@@ -6,6 +6,7 @@ namespace Noah
 {
     public class GameOverManager : Singleton<GameOverManager>
     {
+        [SerializeField] private GameObject dayInfo;
         [SerializeField] private GameObject playerMove;
         [SerializeField] private GameObject gameOverUI;
         [SerializeField] private string playScene = "PlayScene";
@@ -23,6 +24,7 @@ namespace Noah
                     AudioManager.Instance.Play("GameOver");
                     gameOverUI.SetActive(true);
                     playerMove.SetActive(false);
+                    dayInfo.SetActive(false);
                 }
  
             }
@@ -36,7 +38,8 @@ namespace Noah
                 {
                     AudioManager.Instance.Play("GameOver");
                     playerMove.SetActive(false);
-                    gameOverUI.SetActive(true);              
+                    gameOverUI.SetActive(true);
+                    dayInfo.SetActive(false);
                 }
 
             }
@@ -46,12 +49,14 @@ namespace Noah
         {
             AudioManager.Instance.Play("BtnClick");
             playerMove.SetActive(false);
+            dayInfo.SetActive(true);
             SceneFade.instance.FadeOut(playScene);
         }
 
         public void MainMenu()
         {
             AudioManager.Instance.Play("BtnClick");
+            dayInfo.SetActive(true);
             SceneFade.instance.FadeOut("MainMenu");
         }
     }

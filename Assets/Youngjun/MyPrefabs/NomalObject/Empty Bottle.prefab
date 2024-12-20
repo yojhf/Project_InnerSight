@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6145779740279809834}
   - component: {fileID: 4694061038860598854}
   - component: {fileID: -1928521487899079173}
+  - component: {fileID: 7430321140657075930}
   m_Layer: 0
   m_Name: Empty Bottle
   m_TagString: Untagged
@@ -221,6 +222,18 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+--- !u!75 &7430321140657075930
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6794183208863677722}
+  m_Enabled: 1
+  m_Force: {x: 0, y: -10, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!1001 &6177457000352894545
 PrefabInstance:
   m_ObjectHideFlags: 0

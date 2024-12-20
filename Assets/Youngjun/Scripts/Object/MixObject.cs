@@ -66,9 +66,9 @@ public class MixObject : MonoBehaviour
         }
     }
 
-    void FindItemKey()
+    bool IsFirstMixAble(Item item)
     { 
-
+        return item.ItemId > 2000 && item.ItemId < 6000;
     }
 
     void FailMix()

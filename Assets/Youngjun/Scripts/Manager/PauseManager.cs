@@ -6,6 +6,7 @@ namespace Noah
     public class PauseManager : MonoBehaviour
     {
         [SerializeField] private GameObject pauseUI;
+        [SerializeField] private GameObject dayInfo;
 
         private void Update()
         {
@@ -19,6 +20,7 @@ namespace Noah
                 AudioManager.Instance.Play("Throw");
 
                 pauseUI.SetActive(true);
+                dayInfo.SetActive(false);
 
                 ResetManager.Instance.Pause();
             }
@@ -27,6 +29,7 @@ namespace Noah
                 AudioManager.Instance.Play("Throw");
 
                 pauseUI.SetActive(false);
+                dayInfo.SetActive(true);
 
                 ResetManager.Instance.ResetPause();
             }
@@ -35,12 +38,14 @@ namespace Noah
         public void Resume()
         {
             pauseUI.SetActive(false);
+            dayInfo.SetActive(true);
             ResetManager.Instance.ResetPause();
         }
 
         public void MainMenu()
         {
             pauseUI.SetActive(false);
+            dayInfo.SetActive(true);
             ResetManager.Instance.ResetPause();
 
             SceneFade.instance.FadeOut("MainMenu");

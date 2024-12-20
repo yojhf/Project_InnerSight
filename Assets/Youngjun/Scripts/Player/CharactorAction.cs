@@ -9,6 +9,7 @@ namespace Noah
 {
     public class CharactorAction : MonoBehaviour
     {
+        private GameObject autoGet;
         private PlayerSetting playerSetting;
         private bool isGrap = false;
 
@@ -20,19 +21,21 @@ namespace Noah
         }
 
         InventoryManager inventoryManager;
+        GetAutoItem autoItem;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
             playerSetting = GetComponent<PlayerSetting>();
             inventoryManager = transform.GetChild(0).GetChild(0).GetComponent<InventoryManager>();
+
+            //autoGet = transform.GetChild(3).gameObject;
+            //autoItem = autoGet.GetComponent<GetAutoItem>();
         }
 
         // Update is called once per frame
         void Update()
         {
-
-
             // Button 업데이트 
             OnStorage();
             LeftAct();
@@ -67,6 +70,7 @@ namespace Noah
         }
 
         void RightXInputDown()
+
         {
             if (InputActManager.Instance.IsStorage())
             {
@@ -84,17 +88,21 @@ namespace Noah
         {
             if (InputActManager.Instance.IsLeftAct())
             {
-                
+
             }
             else 
             {
-      
+
             }
         }
 
         void LeftSelect()
         {
             if (InputActManager.Instance.IsLeftSelect())
+            {
+
+            }
+            else
             {
 
             }
@@ -107,13 +115,20 @@ namespace Noah
             {
 
             }
+            else
+            {
+
+            }
         }
         void RightSelect()
         {
             if (InputActManager.Instance.IsRightSelect())
             {
 
-                
+            }
+            else
+            {
+
             }
         }
 
@@ -196,7 +211,6 @@ namespace Noah
 
                 inventoryManager.XR_WhichSelect();
             }
-
         }
         #endregion
         

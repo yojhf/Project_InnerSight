@@ -185,6 +185,7 @@ GameObject:
   - component: {fileID: 1325767140533271631}
   - component: {fileID: -7069536425108298036}
   - component: {fileID: 6120359013047746956}
+  - component: {fileID: -6198850569837370896}
   m_Layer: 0
   m_Name: BrokenPotteryPiece
   m_TagString: Untagged
@@ -393,6 +394,18 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+--- !u!75 &-6198850569837370896
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7599987753003458943}
+  m_Enabled: 1
+  m_Force: {x: 0, y: -10, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!1 &7671156638049959183
 GameObject:
   m_ObjectHideFlags: 0

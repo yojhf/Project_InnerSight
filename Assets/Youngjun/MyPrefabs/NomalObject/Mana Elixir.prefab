@@ -9773,6 +9773,7 @@ GameObject:
   - component: {fileID: 455982434025190805}
   - component: {fileID: 9046068581976839920}
   - component: {fileID: 4963629298726838067}
+  - component: {fileID: 105017976719817381}
   m_Layer: 0
   m_Name: Mana Elixir
   m_TagString: Untagged
@@ -9982,3 +9983,15 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+--- !u!75 &105017976719817381
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8096169559649628995}
+  m_Enabled: 1
+  m_Force: {x: 0, y: -10, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}

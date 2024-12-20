@@ -9773,6 +9773,7 @@ GameObject:
   - component: {fileID: -5422144421856559888}
   - component: {fileID: -3646577071572580430}
   - component: {fileID: -2386976561985916077}
+  - component: {fileID: 6636071106969112510}
   m_Layer: 0
   m_Name: Detoxification Elixir
   m_TagString: Untagged
@@ -9982,3 +9983,15 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+--- !u!75 &6636071106969112510
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6621646877869387850}
+  m_Enabled: 1
+  m_Force: {x: 0, y: -10, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}

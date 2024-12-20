@@ -4964,6 +4964,7 @@ GameObject:
   - component: {fileID: 6231254557100199655}
   - component: {fileID: 7319624303240198714}
   - component: {fileID: -4003378883769508325}
+  - component: {fileID: 7722688555769698424}
   m_Layer: 0
   m_Name: Pure Elixir
   m_TagString: Untagged
@@ -5173,6 +5174,18 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+--- !u!75 &7722688555769698424
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7137295551369274495}
+  m_Enabled: 1
+  m_Force: {x: 0, y: -10, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!1 &8103823299606574775
 GameObject:
   m_ObjectHideFlags: 0

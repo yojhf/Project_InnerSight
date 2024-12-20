@@ -9773,6 +9773,7 @@ GameObject:
   - component: {fileID: -3677900288454993329}
   - component: {fileID: 6185611477226770657}
   - component: {fileID: 7207042387898190316}
+  - component: {fileID: 4965545484540999102}
   m_Layer: 0
   m_Name: Enchanted Elixir
   m_TagString: Untagged
@@ -9982,3 +9983,15 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+--- !u!75 &4965545484540999102
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8847306529542590959}
+  m_Enabled: 1
+  m_Force: {x: 0, y: -10, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}

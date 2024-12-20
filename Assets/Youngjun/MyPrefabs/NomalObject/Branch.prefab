@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5952690847466468334}
   - component: {fileID: -2750886061539507857}
   - component: {fileID: -444098536809750994}
+  - component: {fileID: -4708731596213053821}
   m_Layer: 0
   m_Name: Branch
   m_TagString: Untagged
@@ -275,3 +276,15 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+--- !u!75 &-4708731596213053821
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444794783383922680}
+  m_Enabled: 1
+  m_Force: {x: 0, y: -10, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}

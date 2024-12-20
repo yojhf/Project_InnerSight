@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 9042764280171981795}
   - component: {fileID: -4857958879964316933}
   - component: {fileID: -2126307496460436658}
+  - component: {fileID: 285502580166189924}
   m_Layer: 0
   m_Name: FencePost
   m_TagString: Untagged
@@ -275,3 +276,15 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+--- !u!75 &285502580166189924
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6112193725208354113}
+  m_Enabled: 1
+  m_Force: {x: 0, y: -10, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}

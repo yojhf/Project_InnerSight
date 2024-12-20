@@ -4822,6 +4822,7 @@ GameObject:
   - component: {fileID: 5654053994391698675}
   - component: {fileID: 5653561534614910315}
   - component: {fileID: 2389643482236034600}
+  - component: {fileID: -3452718226509486945}
   m_Layer: 0
   m_Name: Strength Elixir
   m_TagString: Untagged
@@ -5031,6 +5032,18 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+--- !u!75 &-3452718226509486945
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2484048863127429011}
+  m_Enabled: 1
+  m_Force: {x: 0, y: -10, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!1 &3209586683992789004
 GameObject:
   m_ObjectHideFlags: 0

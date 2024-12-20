@@ -4964,6 +4964,7 @@ GameObject:
   - component: {fileID: -6414325252890449443}
   - component: {fileID: 8711347084033840593}
   - component: {fileID: 8233807646819583705}
+  - component: {fileID: -2815702527678109475}
   m_Layer: 0
   m_Name: Failed Elixir
   m_TagString: Untagged
@@ -5173,6 +5174,18 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+--- !u!75 &-2815702527678109475
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5518192576212542526}
+  m_Enabled: 1
+  m_Force: {x: 0, y: -10, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!1 &6276396671746429182
 GameObject:
   m_ObjectHideFlags: 0

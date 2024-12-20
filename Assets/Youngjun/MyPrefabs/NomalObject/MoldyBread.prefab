@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2988899033156886853}
   - component: {fileID: -8450590939392287707}
   - component: {fileID: 1149791722580937787}
+  - component: {fileID: -2960580969782840231}
   m_Layer: 0
   m_Name: MoldyBread
   m_TagString: Untagged
@@ -221,6 +222,18 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+--- !u!75 &-2960580969782840231
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506883322925213008}
+  m_Enabled: 1
+  m_Force: {x: 0, y: -10, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!1001 &7793528016223749925
 PrefabInstance:
   m_ObjectHideFlags: 0
