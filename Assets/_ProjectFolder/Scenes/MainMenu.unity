@@ -958,6 +958,126 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1562749458
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1562749460}
+  - component: {fileID: 1562749459}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1562749459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562749458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf094156010b9d449837609ba957dc75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 8002b66799e7428498a9b4c4beb013a2, type: 2}
+  audioMixerGroupBgm: {fileID: -8101169084953861992, guid: 8002b66799e7428498a9b4c4beb013a2, type: 2}
+  audioMixerGroupSfx: {fileID: 3089201788368978836, guid: 8002b66799e7428498a9b4c4beb013a2, type: 2}
+  sounds:
+  - name: MapBgm
+    clip: {fileID: 8300000, guid: 6a00d824d16022b4885424f8fc7a0174, type: 3}
+    volume: 0.7
+    pitch: 0.1
+    loop: 1
+    source: {fileID: 0}
+  - name: BtnClick
+    clip: {fileID: 8300000, guid: d77141bd174394c4092421f88654a2fe, type: 3}
+    volume: 0.7
+    pitch: 0.1
+    loop: 0
+    source: {fileID: 0}
+  - name: ElementSucceedd
+    clip: {fileID: 8300000, guid: dff8046012e094b4ba40806fc5f32089, type: 3}
+    volume: 0.7
+    pitch: 0.1
+    loop: 0
+    source: {fileID: 0}
+  - name: ElixerSucceed
+    clip: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
+    volume: 0.7
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Fail
+    clip: {fileID: 8300000, guid: c1f47c4aad5f14a138bf7c0467396b25, type: 3}
+    volume: 0.7
+    pitch: 0.1
+    loop: 0
+    source: {fileID: 0}
+  - name: GameOver
+    clip: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
+    volume: 0.7
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: GameStart
+    clip: {fileID: 8300000, guid: 468f662ba85278c419ef967f7c33907b, type: 3}
+    volume: 0.7
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: GenericNotification5
+    clip: {fileID: 8300000, guid: 566e0209e31ec4cb8827e35b769035e1, type: 3}
+    volume: 0.7
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Notification
+    clip: {fileID: 8300000, guid: af9c2a92fa16e4b0cb9b375d462a9f3f, type: 3}
+    volume: 0.7
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: PickUP
+    clip: {fileID: 8300000, guid: 6e8772b49f34d402a90016ed445d8a2f, type: 3}
+    volume: 0.7
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: SoldOutAlert
+    clip: {fileID: 8300000, guid: ea0b1606831ec45888682da700fa2156, type: 3}
+    volume: 0.7
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Throw
+    clip: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
+    volume: 0.7
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+--- !u!4 &1562749460
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562749458}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1890433218
 GameObject:
   m_ObjectHideFlags: 0
@@ -2129,7 +2249,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1489610817404470076
 GameObject:
   m_ObjectHideFlags: 0
@@ -4148,7 +4268,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5260481252496267749
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6699,5 +6819,6 @@ SceneRoots:
   - {fileID: 1134786163}
   - {fileID: 1890433219}
   - {fileID: 833930948}
-  - {fileID: 737458954}
   - {fileID: 8925441064279304559}
+  - {fileID: 1562749460}
+  - {fileID: 737458954}

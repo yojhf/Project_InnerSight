@@ -1,3 +1,4 @@
+using InnerSight_Kys;
 using InnerSight_Seti;
 using MyVRSample;
 using UnityEditor;
@@ -30,6 +31,8 @@ namespace Noah
         // Update is called once per frame
         void Update()
         {
+
+
             // Button 업데이트 
             OnStorage();
             LeftAct();
@@ -39,6 +42,8 @@ namespace Noah
 
             // Active Button 한번만 반응(왼쪽)
             LeftStorageAct();
+            // Active Button 한번만 반응(오른쪽)
+            RightStorageAct();
 
             // Select Button 한번만 반응
             LeftSelectInputDown();
@@ -50,13 +55,13 @@ namespace Noah
             LeftYButtonInputDown();
             RightBButtonInputDown();
             RightXInputDown();
-
         }
 
         void OnStorage()
         {
             if (InputActManager.Instance.IsStorage() && InputActManager.Instance.IsRightSelect())
             {
+                AudioManager.Instance.Play("PickUP");
                 playerSetting.PlayerInteraction.ThisIsMine();
             }
         }
@@ -67,6 +72,8 @@ namespace Noah
             {
                 if (playerSetting.Merchant != null)
                 {
+                    AudioManager.Instance.Play("Throw");
+
                     // 상인과의 거래 시작
                     playerSetting.Merchant.Interaction();
                 }
@@ -114,10 +121,29 @@ namespace Noah
         {
             if (InputActManager.Instance.IsLeftStorage())
             {
+                AudioManager.Instance.Play("Drop");
+
                 // 오브젝트 필드로 꺼냄
                 GetBackStoeage();
             }
             if (InputActManager.Instance.IsLeftStorageRl())
+            {
+                // 인벤토리에서 오브젝트 꺼낸 후 데이터 리셋
+                inventoryManager.ResetData();
+
+            }
+        }
+
+        void RightStorageAct()
+        {
+            if (InputActManager.Instance.IsRightStorage())
+            {
+                AudioManager.Instance.Play("Drop");
+
+                // 오브젝트 필드로 꺼냄
+                GetBackStoeage();
+            }
+            if (InputActManager.Instance.IsRightStorageRl())
             {
                 // 인벤토리에서 오브젝트 꺼낸 후 데이터 리셋
                 inventoryManager.ResetData();
@@ -166,8 +192,11 @@ namespace Noah
         {
             if (InGameUIManager.instance.inventory.activeSelf)
             {
+                AudioManager.Instance.Play("Throw");
+
                 inventoryManager.XR_WhichSelect();
             }
+
         }
         #endregion
         
@@ -178,6 +207,8 @@ namespace Noah
             {
                 if (playerSetting.Merchant is NPC_Merchant_Elixir)
                 {
+                    AudioManager.Instance.Play("BtnClick");
+
                     NPC_Merchant_Elixir merchant = playerSetting.Merchant as NPC_Merchant_Elixir;
                     ElixirShopManager elixirShopManager = merchant.shopManager as ElixirShopManager;
                     if (elixirShopManager.OnTrade)
@@ -195,6 +226,8 @@ namespace Noah
             {
                 if (playerSetting.Merchant is NPC_Merchant_Elixir)
                 {
+                    AudioManager.Instance.Play("BtnClick");
+
                     NPC_Merchant_Elixir merchant = playerSetting.Merchant as NPC_Merchant_Elixir;
                     ElixirShopManager elixirShopManager = merchant.shopManager as ElixirShopManager;
                     if (elixirShopManager.OnTrade)

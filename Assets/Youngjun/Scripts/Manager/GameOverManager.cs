@@ -1,3 +1,4 @@
+using InnerSight_Kys;
 using InnerSight_Seti;
 using UnityEngine;
 
@@ -19,7 +20,9 @@ namespace Noah
             {
                 if (!gameOverUI.activeSelf)
                 {
+                    AudioManager.Instance.Play("GameOver");
                     gameOverUI.SetActive(true);
+                    playerMove.SetActive(false);
                 }
  
             }
@@ -31,6 +34,7 @@ namespace Noah
             {
                 if (!gameOverUI.activeSelf)
                 {
+                    AudioManager.Instance.Play("GameOver");
                     playerMove.SetActive(false);
                     gameOverUI.SetActive(true);              
                 }
@@ -40,12 +44,14 @@ namespace Noah
 
         public void ReTry()
         {
+            AudioManager.Instance.Play("BtnClick");
             playerMove.SetActive(false);
-            SceneFade.instance.FadeOut(playScene, 1f);
+            SceneFade.instance.FadeOut(playScene);
         }
 
         public void MainMenu()
         {
+            AudioManager.Instance.Play("BtnClick");
             SceneFade.instance.FadeOut("MainMenu");
         }
     }

@@ -48,9 +48,6 @@ namespace InnerSight_Kys
             {
                 source.outputAudioMixerGroup = outputGroup;
             }
-
-            Debug.Log("");
-            Debug.Log("");
         }
     }
 }

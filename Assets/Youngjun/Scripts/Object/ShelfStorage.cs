@@ -1,3 +1,4 @@
+using InnerSight_Kys;
 using InnerSight_Seti;
 using NUnit.Framework;
 using System.Collections;
@@ -108,6 +109,8 @@ namespace Noah
             }
             else
             {
+
+                AudioManager.Instance.Play("SoldOutAlert");
                 Debug.Log("재고부족");
                 return;
             }

@@ -1,3 +1,4 @@
+using InnerSight_Kys;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -52,12 +53,16 @@ namespace Noah
             EventSystem.current.SetSelectedGameObject(defaultBtn.gameObject);
 
             StartCoroutine(ButtonSelect());
+
+            AudioManager.Instance.PlayBgm("MapBgm");
         }
 
         void JoysitckUp()
         {
             if (InputActManager.Instance.JoystickButtonUp())
             {
+                AudioManager.Instance.Play("Notification");
+
                 isSelect = true;
 
                 index--;
@@ -80,6 +85,8 @@ namespace Noah
         {
             if (InputActManager.Instance.JoystickButtonDown())
             {
+                AudioManager.Instance.Play("Notification");
+
                 isSelect = true;
 
                 index++;
@@ -106,6 +113,8 @@ namespace Noah
             {
                 if (buttons[index].GetComponent<Button>() != null)
                 {
+                    AudioManager.Instance.Play("BtnClick");
+
                     buttons[index].GetComponent<Button>().onClick.Invoke();
                 }
             }

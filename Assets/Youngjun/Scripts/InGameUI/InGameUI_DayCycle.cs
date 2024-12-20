@@ -66,7 +66,7 @@ namespace Noah
 
             shopTax.gameObject.SetActive(true);
 
-            StartCoroutine(GoldCount(m_ShopTax, shopTax, "ShopTax : "));
+            StartCoroutine(GoldCount(m_ShopTax, shopTax, "RentFee : "));
 
             yield return new WaitForSecondsRealtime((m_ShopTax / speed) + 1f);
 

@@ -1,3 +1,4 @@
+using InnerSight_Kys;
 using System.Collections.Generic;
 
 namespace InnerSight_Seti
@@ -34,6 +35,8 @@ namespace InnerSight_Seti
             // 정산
             if (PlayerStats.Instance.SpendGold(howMuch))
             {
+                AudioManager.Instance.Play("ElementSucceed"); 
+
                 // 선반 활성화
                 Item thisShelf = selectItem.Key.itemPrefab.GetComponent<Item>();
                 Noah.ShelfManager.Instance.ActiveShelf(thisShelf);
