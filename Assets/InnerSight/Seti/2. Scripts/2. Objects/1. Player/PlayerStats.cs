@@ -21,6 +21,8 @@ namespace InnerSight_Seti
             base.Awake();
             CurrentGold = initialGold;
             RevenueGold = 0;
+
+            OnAutoLoot = true;
         }
         #endregion
 

@@ -65,7 +65,12 @@ namespace Noah
             if (InputActManager.Instance.IsStorage() && InputActManager.Instance.IsRightSelect())
             {
                 AudioManager.Instance.Play("PickUP");
-                playerSetting.PlayerInteraction.ThisIsMine();
+
+                if (!PlayerStats.Instance.OnAutoLoot)
+                {
+                    playerSetting.PlayerInteraction.ThisIsMine();
+                }
+
             }
         }
 
@@ -156,7 +161,7 @@ namespace Noah
                 AudioManager.Instance.Play("Drop");
 
                 // ¿ÀºêÁ§Æ® ÇÊµå·Î ²¨³¿
-                GetBackStoeage();
+                Right_GetBackStoeage();
             }
             if (InputActManager.Instance.IsRightStorageRl())
             {
@@ -212,8 +217,18 @@ namespace Noah
                 inventoryManager.XR_WhichSelect();
             }
         }
+
+        void Right_GetBackStoeage()
+        {
+            if (InGameUIManager.instance.inventory.activeSelf)
+            {
+                AudioManager.Instance.Play("Throw");
+
+                inventoryManager.Right_XR_WhichSelect();
+            }
+        }
         #endregion
-        
+
         // ¿ÞÂÊ Y ¹öÆ°
         void LeftYButtonInputDown()
         {

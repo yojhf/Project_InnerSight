@@ -66,11 +66,6 @@ public class MixObject : MonoBehaviour
         }
     }
 
-    //bool IsFirstMixAble(Item item)
-    //{ 
-    //    return item.ItemId > 2000 && item.ItemId < 6000;
-    //}
-
     void FailMix()
     {
         AudioManager.Instance.Play("Fail");
@@ -130,7 +125,8 @@ public class MixObject : MonoBehaviour
 
             if (objects.Count >= mixCount)
             {
-                if (RandomCheck(objects[0].ItemId) && RandomCheck(objects[1].ItemId))
+                if (Codex_Recipe_Manager.Instance.IsFirstReaction((objects[0].ItemId + objects[1].ItemId)) &&
+                    RandomCheck(objects[0].ItemId) && RandomCheck(objects[1].ItemId))
                 {
                     bool isConform = IsTrueWithProbability(probability);
 

@@ -14,7 +14,7 @@ namespace Noah
         private void Start()
         {
             player = transform.parent;
-            playerSetting = player.GetComponent<PlayerSetting>();   
+            playerSetting = player.GetComponent<PlayerSetting>();
 
         }
 
@@ -22,7 +22,7 @@ namespace Noah
         {
             if (gameObject != null)
             {
-                if (InputActManager.Instance.IsStorage())
+                if (InputActManager.Instance.IsStorage() && PlayerStats.Instance.OnAutoLoot)
                 {
                     ThisIsMineAuto();
                 }
