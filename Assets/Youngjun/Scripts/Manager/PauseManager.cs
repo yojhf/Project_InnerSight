@@ -7,7 +7,6 @@ namespace Noah
     {
         [SerializeField] private GameObject pauseUI;
         [SerializeField] private GameObject dayInfo;
-        [SerializeField] private Camera UIcamera;
 
         private void Update()
         {

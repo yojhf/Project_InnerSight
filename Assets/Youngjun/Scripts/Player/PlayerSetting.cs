@@ -39,7 +39,7 @@ public class PlayerSetting : MonoBehaviour
 
     private void Update()
     {
-        if (transform.GetChild(0).position.y <= 1.35f)
+        if (transform.GetChild(0).position.y <= 1.35f || transform.GetChild(0).position.y > 1.36f)
         {
             PlayerPos();
         }
