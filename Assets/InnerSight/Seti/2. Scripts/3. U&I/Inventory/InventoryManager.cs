@@ -193,6 +193,10 @@ namespace InnerSight_Seti
             {
                 // 새 슬롯을 생성해서 아이템 할당
                 inventory.MakeSlot(itemKey);
+
+                // 개수를 늘린다
+                inventory.invenDict[itemKey].Count(count - 1);
+                inventory.CountItem(ItemData(itemKey), inventory.invenDict[itemKey].itemIndex);
             }
         }
 
