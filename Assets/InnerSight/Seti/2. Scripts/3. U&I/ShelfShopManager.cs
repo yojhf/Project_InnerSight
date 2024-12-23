@@ -92,7 +92,7 @@ namespace InnerSight_Seti
             tooltip.SetActive(true);
             yield return new WaitForSeconds(3);
 
-            completeUI.SetActive(false);
+            tooltip.SetActive(false);
             yield break;
         }
 
