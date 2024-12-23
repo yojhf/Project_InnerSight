@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using InnerSight_Kys;
+using System.Collections;
 
 namespace InnerSight_Seti
 {
@@ -15,6 +16,8 @@ namespace InnerSight_Seti
         private int cost_AutoLoot = 5000;
         private int thisIndex;
 
+        private GameObject tooltip;
+
         // 라이프 사이클
         #region Life Cycle
         protected override void Awake()
@@ -23,6 +26,9 @@ namespace InnerSight_Seti
 
             // 컨펌
             confirmUI = shopUI.transform.GetChild(2).gameObject;
+
+            // 오토루팅 툴팁
+            tooltip = transform.GetChild(0).GetChild(2).gameObject;
         }
         #endregion
 
@@ -61,6 +67,7 @@ namespace InnerSight_Seti
                     shopSlots[shopDict.Count].interactable = false;
                     tradeCor = TradeComplete("Purchase complete");
                     PlayerStats.Instance.OnAuto();
+                    StartCoroutine(Tooltip());
                     AutoLoot.SetActive(true);
                     SwitchUI(false);
                 }
@@ -77,6 +84,16 @@ namespace InnerSight_Seti
 
         // 기타 유틸리티
         #region Utilities
+        // 툴팁 텍스트
+        private IEnumerator Tooltip()
+        {
+            tooltip.SetActive(true);
+            yield return new WaitForSeconds(3);
+
+            completeUI.SetActive(false);
+            yield break;
+        }
+
         // 버튼 선택
         protected override void SelectSlot(KeyValuePair<ItemKey, ItemValueShop> pair)
         {
