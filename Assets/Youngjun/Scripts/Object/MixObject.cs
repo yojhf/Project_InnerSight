@@ -21,7 +21,7 @@ public class MixObject : MonoBehaviour
     [SerializeField] private int mixCount = 2;
     [SerializeField] private Transform spwanPos;
     [SerializeField] private Transform spwanPos2;
-    private Transform effectPos;
+    [SerializeField] private Transform effectPos;
     public List<Item> objects = new List<Item>();
 
     private bool isCanMix = false;
@@ -30,7 +30,7 @@ public class MixObject : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        effectPos = transform.GetChild(0);
+        //effectPos = transform.GetChild(0);
     }
 
 
@@ -120,6 +120,9 @@ public class MixObject : MonoBehaviour
             //}
 
             objects.Add(obj);
+
+            collision.transform.GetComponent<Collider>().enabled = false;
+            collision.transform.GetComponent<Rigidbody>().isKinematic = true;
 
             //collision.gameObject.SetActive(false);
 

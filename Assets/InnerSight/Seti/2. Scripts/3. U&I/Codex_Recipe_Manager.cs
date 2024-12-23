@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System.Collections.Generic;
 using Unity.VRTemplate;
 using UnityEngine;
@@ -80,9 +81,10 @@ namespace InnerSight_Seti
         // 첫 합성 100% 확인
         public bool? IsFirstReaction(int itemId)
         {
-            if (itemId > 4000)
-            {
-                ItemKey elementOrElixir = CollectionUtility.FirstOrNull(CodexRecipe.Keys, key => key.itemID == itemId);
+            ItemKey elementOrElixir = CollectionUtility.FirstOrNull(CodexRecipe.Keys, key => key.itemID == itemId);
+
+            if (itemId > 4000 && elementOrElixir != null)
+            { 
                 return CodexRecipe[elementOrElixir].codexDefine;
             }
             else
