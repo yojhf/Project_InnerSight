@@ -20,7 +20,7 @@ namespace InnerSight_Seti
         // NPC 생성 주기
         bool isPlaying = false;
         bool isGenerating = false;
-        public int NPC_GenMaxTime = 5;
+        public float NPC_GenMaxTime = 5;
         List<GameObject> customers = new();
         #endregion
 

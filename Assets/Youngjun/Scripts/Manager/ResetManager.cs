@@ -1,4 +1,5 @@
 using InnerSight_Seti;
+using MyVRSample;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
@@ -7,7 +8,6 @@ namespace Noah
 {
     public class ResetManager : Singleton<ResetManager>
     {
-        [SerializeField] private Camera UIcamera;
         private Transform player;
 
         // Instance
@@ -37,14 +37,13 @@ namespace Noah
         public void Pause()
         {
             isReset = true;
-            UIcamera.gameObject.SetActive(false);
+            InGameUIManager.instance.InventoryManager.ShowItem(false);
             Time.timeScale = timeScale;
         }
 
         public void ResetPause()
         {
             isReset = false;
-            UIcamera.gameObject.SetActive(true);
             Time.timeScale = 1.0f;
         }
 

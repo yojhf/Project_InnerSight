@@ -38,6 +38,7 @@ namespace Noah
         {
             // Button 업데이트 
             OnStorage();
+            OnStorageLeft();
             LeftAct();
             LeftSelect();
             RightAct();
@@ -63,6 +64,20 @@ namespace Noah
         void OnStorage()
         {
             if (InputActManager.Instance.IsStorage() && InputActManager.Instance.IsRightSelect())
+            {
+                AudioManager.Instance.Play("PickUP");
+
+                if (!PlayerStats.Instance.OnAutoLoot)
+                {
+                    playerSetting.PlayerInteraction.ThisIsMine();
+                }
+
+            }
+        }
+
+        void OnStorageLeft()
+        {
+            if (InputActManager.Instance.IsStorage() && InputActManager.Instance.IsLeftSelect())
             {
                 AudioManager.Instance.Play("PickUP");
 

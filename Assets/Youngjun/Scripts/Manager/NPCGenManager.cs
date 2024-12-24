@@ -9,9 +9,9 @@ namespace Noah
 
         public void NPCGenTimeUp()
         {
-            if (_manager.NPC_GenMaxTime > 5)
+            if (_manager.NPC_GenMaxTime >= 5)
             {
-                _manager.NPC_GenMaxTime -= 5;
+                _manager.NPC_GenMaxTime *= 0.85f;
             }
             else
             {
