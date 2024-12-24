@@ -34,7 +34,6 @@ namespace InnerSight_Seti
 
         private void LateUpdate()
         {
-            Dialogue("Ω√¿€");
             transform.LookAt(Camera.main.transform);
         }
         #endregion

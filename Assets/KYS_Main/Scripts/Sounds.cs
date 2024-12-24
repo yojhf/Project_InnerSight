@@ -43,6 +43,7 @@ namespace InnerSight_Kys
             source.volume = volume;
             source.pitch = pitch;
             source.loop = loop;
+            source.playOnAwake = false;
 
             if (outputGroup != null)
             {
