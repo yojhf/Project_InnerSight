@@ -51,7 +51,7 @@ namespace InnerSight_Seti
                     ItemValueShop valueShop = new()
                     {
                         itemIndex = i - thirdElixir,
-                        itemCost = Cost_Random.Instance.elixirsPrice[i - thirdElixir] * costFactor
+                        itemCost = Cost_Random.Instance.elixirsPrice[i - thirdElixir + 2] * costFactor
                     };
                     shopDict.Add(itemDatabase.itemList[i], valueShop);
                 }

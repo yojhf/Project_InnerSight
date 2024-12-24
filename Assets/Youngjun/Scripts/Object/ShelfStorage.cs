@@ -111,7 +111,7 @@ namespace Noah
             {
 
                 AudioManager.Instance.Play("SoldOutAlert");
-                Debug.Log("재고부족");
+                UI_Dialogue.Instance.Dialogue("재고부족");
                 return;
             }
 
