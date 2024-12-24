@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 using UnityEngine.XR.Interaction.Toolkit.UI;
+using InnerSight_Kys;
 
 namespace InnerSight_Seti
 {
@@ -191,6 +192,8 @@ namespace InnerSight_Seti
         // 아이템을 떨어뜨리는 메서드
         public void DropItem(KeyValuePair<ItemKey, ItemValue> selectedItem)
         {
+            AudioManager.Instance.Play("Drop");
+
             // 먼저 허상 아이템을 제거한 뒤
             Destroy(itemPhantom);
 

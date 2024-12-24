@@ -156,8 +156,6 @@ namespace Noah
         {
             if (InputActManager.Instance.IsLeftStorage())
             {
-                AudioManager.Instance.Play("Drop");
-
                 // ø¿∫Í¡ß∆Æ « µÂ∑Œ ≤®≥ø
                 GetBackStoeage();
             }
@@ -173,8 +171,6 @@ namespace Noah
         {
             if (InputActManager.Instance.IsRightStorage())
             {
-                AudioManager.Instance.Play("Drop");
-
                 // ø¿∫Í¡ß∆Æ « µÂ∑Œ ≤®≥ø
                 Right_GetBackStoeage();
             }
@@ -227,8 +223,6 @@ namespace Noah
         {
             if (InGameUIManager.instance.inventory.activeSelf)
             {
-                AudioManager.Instance.Play("Throw");
-
                 inventoryManager.XR_WhichSelect();
             }
         }
@@ -237,8 +231,6 @@ namespace Noah
         {
             if (InGameUIManager.instance.inventory.activeSelf)
             {
-                AudioManager.Instance.Play("Throw");
-
                 inventoryManager.Right_XR_WhichSelect();
             }
         }
