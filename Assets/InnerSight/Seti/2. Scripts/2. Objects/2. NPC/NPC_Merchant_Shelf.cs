@@ -53,6 +53,10 @@ namespace InnerSight_Seti
                         itemIndex = i - thirdElixir,
                         itemCost = Cost_Random.Instance.elixirsPrice[i - thirdElixir + 2] * costFactor
                     };
+                    if (valueShop.itemIndex > 1)
+                    {
+                        valueShop.itemCost -= 2000;
+                    }
                     shopDict.Add(itemDatabase.itemList[i], valueShop);
                 }
             }

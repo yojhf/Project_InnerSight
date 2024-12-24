@@ -361,7 +361,7 @@ namespace InnerSight_Seti
                 if (rayInteractor.TryGetCurrentUIRaycastResult(out var re))
                 {
                     //Button UI 획득을 시도해보고 잡히면 선택
-                    if (ComponentUtility.TryGetComponentInChildren<Button>(re.gameObject.transform, out var slot))
+                    if (re.gameObject.transform.TryGetComponent<Button>(out var slot))
                     {
                         initialSlot = slot;
                         yield break;
