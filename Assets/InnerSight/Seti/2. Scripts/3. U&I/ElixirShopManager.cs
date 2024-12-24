@@ -103,6 +103,7 @@ namespace InnerSight_Seti
                 }
                 tradeCor = TradeComplete("Purchase complete");
                 SwitchUI(false);
+                AudioManager.Instance.Play("BtnClick");
             }
             else
             {
