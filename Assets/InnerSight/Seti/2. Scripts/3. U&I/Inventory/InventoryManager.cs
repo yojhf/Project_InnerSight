@@ -158,23 +158,11 @@ namespace InnerSight_Seti
             float scaleX = isOpen? 1.3f : 0;
             inventory.invenRect.localScale = new(scaleX, 1.3f, 1.3f);
 
-            // NPC와 거래 중일 때만 실행하는 로직
-            if (IsOnTrade)
-            {
-                if (isOpen)
-                {
-                    inventory.AssignInvenSlots();
-                }
-                else
-                {
-                    inventory.EraseInvenSlots();
-                }
-            }
-
             foreach (var pair in inventory.invenDict)
                 inventory.CountItem(pair, pair.Value.itemIndex);
 
-            //player.CursorUtility.CursorSwitch(isOpen);
+            if (!isOpen)
+                Initialize();
         }
 
         // PlayerInteraction 클래스로부터 획득한 아이템을 인벤토리에 저장하는 메서드
@@ -385,6 +373,25 @@ namespace InnerSight_Seti
             }
             // 역할이 끝나면 종료
             yield break;
+        }
+
+        private void Initialize()
+        {
+            if (phantomCor != null)
+            {
+                StopAllCoroutines();
+                phantomCor = null;
+            }
+
+            if (itemPhantom)
+            {
+                Destroy(itemPhantom);
+                itemPhantom = null;
+            }
+            
+            thisSlot = null;
+            initialSlot = null;
+            IsSelected = false;
         }
         #endregion
 

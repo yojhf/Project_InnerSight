@@ -169,27 +169,6 @@ namespace InnerSight_Seti
             // 1개라면 표기 안 함
             else itemCount.text = "";
         }
-
-        // NPC와의 거래 - 리스너 등록
-        public void AssignInvenSlots()
-        {
-            foreach (var pair in invenDict)
-            {
-                int index = pair.Value.itemIndex;
-                invenSlots[index].GetComponent<Button>().onClick.RemoveAllListeners();
-                invenSlots[index].GetComponent<Button>().onClick.AddListener(() => inventoryManager.UseInven(pair));
-            }
-        }
-
-        // NPC와의 거래 - 리스너 해제
-        public void EraseInvenSlots()
-        {
-            foreach (var pair in invenDict)
-            {
-                int index = pair.Value.itemIndex;
-                invenSlots[index].GetComponent<Button>().onClick.RemoveAllListeners();
-            }
-        }
         #endregion
     }
 }
