@@ -90,7 +90,7 @@ namespace InnerSight_Seti
         private IEnumerator Tooltip()
         {
             tooltip.SetActive(true);
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(8);
 
             tooltip.SetActive(false);
             yield break;
