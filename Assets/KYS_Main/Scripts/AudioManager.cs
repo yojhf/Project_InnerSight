@@ -16,46 +16,19 @@ namespace InnerSight_Kys
 
         protected override void Awake()
         {
-            //Singletone 구현부
             base.Awake();
 
-            //AudioMixer 그룹 찾아오기
-            AudioMixerGroup[] audioMixerGroups = audioMixer.FindMatchingGroups("Master");
-
-            //AudioManager 초기화
-            foreach (var sound in sounds)
+            if (audioMixer == null)
             {
-                sound.source = this.gameObject.AddComponent<AudioSource>();
-
-                sound.source.clip = sound.clip;
-                sound.source.volume = sound.volume;
-                sound.source.pitch = sound.pitch;
-                sound.source.loop = sound.loop;
-
-                if (sound.loop)
-                {
-                    sound.source.outputAudioMixerGroup = audioMixerGroups[1];   //BGM
-                }
-                else
-                {
-                    sound.source.outputAudioMixerGroup = audioMixerGroups[2];   //SFX
-                }
+                return;
             }
 
-
-            //base.Awake();
-
-            //if (audioMixer == null)
-            //{
-            //    return;
-            //}
-
-            //foreach (var sound in sounds)
-            //{
-            //    // Initialize the AudioSource for each sound
-            //    var outputGroup = sound.loop ? audioMixerGroupBgm : audioMixerGroupSfx;
-            //    sound.Initialize(this.gameObject, outputGroup);
-            //}
+            foreach (var sound in sounds)
+            {
+                // Initialize the AudioSource for each sound
+                var outputGroup = sound.loop ? audioMixerGroupBgm : audioMixerGroupSfx;
+                sound.Initialize(this.gameObject, outputGroup);
+            }
         }
 
         public void Play(string name)

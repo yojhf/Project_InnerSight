@@ -911,7 +911,7 @@ MonoBehaviour:
   m_Camera: {fileID: 3382150366853909802}
   m_OriginBaseGameObject: {fileID: 578730659060604946}
   m_CameraFloorOffsetObject: {fileID: 3408693723226532655}
-  m_RequestedTrackingOriginMode: 1
+  m_RequestedTrackingOriginMode: 2
   m_CameraYOffset: 1.36
 --- !u!114 &3499390536595351597
 MonoBehaviour:
@@ -15379,7 +15379,7 @@ MonoBehaviour:
   sounds:
   - name: MapBgm
     clip: {fileID: 8300000, guid: 6a00d824d16022b4885424f8fc7a0174, type: 3}
-    volume: 0.3
+    volume: 0.1
     pitch: 0.1
     loop: 1
     source: {fileID: 0}
