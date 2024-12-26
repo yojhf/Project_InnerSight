@@ -130,8 +130,7 @@ namespace Noah
         }
         public void TestMode()
         {
-            SceneFade.instance.FadeOut("TestScene");
-            Debug.Log("Å©·¹µ÷");
+            SceneFade.instance.FadeOut("TestTutorialScene");
         }
         public void Quit()
         {
