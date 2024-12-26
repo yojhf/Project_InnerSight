@@ -128,9 +128,9 @@ namespace Noah
         {
             SceneFade.instance.FadeOut("PlayScene");
         }
-        public void Credit()
+        public void TestMode()
         {
-            SceneFade.instance.FadeOut("MainMenu");
+            SceneFade.instance.FadeOut("TestScene");
             Debug.Log("Å©·¹µ÷");
         }
         public void Quit()
