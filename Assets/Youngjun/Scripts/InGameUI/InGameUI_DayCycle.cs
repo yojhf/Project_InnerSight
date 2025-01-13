@@ -14,7 +14,7 @@ namespace Noah
         [SerializeField] private TMP_Text totalGold;
 
         private GameObject resetUI;
-        private float speed = 5000f;
+        private float speed = 10000f;
 
         private float coolTime;
 
